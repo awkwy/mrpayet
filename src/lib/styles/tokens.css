@@ -1,0 +1,17 @@
+:root {
+  --bg: #04120a;
+  --bg-deep: #020705;
+  --panel: #0a1a12;
+  --line: #16362a;
+  --mint: #7ef2b0;
+  --mint-dim: #46c288;
+  --mint-deep: #2b7d57;
+  --sage: #63776d;
+  --sage-light: #8fa79b;
+  --text: #e7efe9;
+  --warn: #ffd166;
+  --accent-blue: #7ec8f2;
+  --accent-coral: #e2725b;
+  --accent-purple: #b79cf2;
+  --accent-pink: #e79ac0;
+}
