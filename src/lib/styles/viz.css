@@ -13,7 +13,10 @@
   margin: 26px 0;
   overflow: hidden;
 }
-.viz canvas {
+/* `svg.d3viz` : rendu des manipulations portées sur D3 (pilote moyenne/médiane,
+   voir $lib/visualizations/d3.js) — même cadre visuel que le canvas. */
+.viz canvas,
+.viz svg.d3viz {
   display: block;
   width: 100%;
   height: auto;
