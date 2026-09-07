@@ -21,6 +21,16 @@
   touch-action: none;
   background: rgba(0, 0, 0, 0.22);
 }
+/* Rendu SVG des manipulations portées sur D3 (pilote moyenne/médiane) :
+   même cadre visuel que le canvas ci-dessus — voir $lib/visualizations/d3.js. */
+.viz svg.d3viz {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  touch-action: none;
+  background: rgba(0, 0, 0, 0.22);
+}
 .vctl {
   display: flex;
   flex-wrap: wrap;

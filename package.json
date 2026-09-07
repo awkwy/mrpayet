@@ -13,9 +13,15 @@
     "@sveltejs/adapter-static": "latest",
     "@sveltejs/kit": "latest",
     "@sveltejs/vite-plugin-svelte": "latest",
+    "jsdom": "latest",
     "svelte": "latest",
     "vite": "latest",
-    "vitest": "latest",
-    "jsdom": "latest"
+    "vitest": "latest"
+  },
+  "dependencies": {
+    "d3-drag": "^3.0.0",
+    "d3-ease": "^3.0.1",
+    "d3-selection": "^3.0.0",
+    "d3-transition": "^3.0.1"
   }
 }
