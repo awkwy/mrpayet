@@ -57,7 +57,7 @@
     const sum = () => vals.reduce((s, v) => s + v, 0);
     const mean = () => sum() / vals.length;
     const clampV = (v) => Math.max(10, Math.min(100, v));
-    const pivotX = () => Math.max(56, Math.min(W - 56, x(mean())));
+    const labelX = (px) => Math.max(56, Math.min(W - 56, px));
 
     const dragBehavior = drag()
       .container(function () {
@@ -113,12 +113,15 @@
         }
       });
 
-      const px = pivotX();
+      const px = x(m);
       (animate ? tri.transition('p').duration(760).ease(spring) : tri.interrupt('p')).attr(
         'transform',
         `translate(${px},${AX + 24})`
       );
-      (animate ? label.transition('p').duration(760).ease(spring) : label.interrupt('p')).attr('x', px);
+      (animate ? label.transition('p').duration(760).ease(spring) : label.interrupt('p')).attr(
+        'x',
+        labelX(px)
+      );
       label.text('moyenne ' + fr(m.toFixed(1)));
 
       host.querySelector('#yM').textContent = fr(m.toFixed(2));
