@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from 'svelte';
   import { base } from '$app/paths';
   import { blocOfCourse, bslug, chapterKey } from '$lib/utils/course-helpers.js';
   import { VIZ } from '$lib/visualizations/registry.js';
@@ -88,6 +87,23 @@
 
   {#if se.prob}
     <div class="prob">{se.prob}</div>
+  {/if}
+
+  {#if se.pdf?.length && c.pdf}
+    <div class="dl">
+      <span class="dllbl">Télécharger la fiche</span>
+      <div class="dllinks">
+        {#each se.pdf as stem}
+          <a class="dlbtn" href="{base}/fiches/{c.pdf}/{stem}.pdf" target="_blank" rel="noopener">
+            {stem.endsWith('-accessible')
+              ? 'Version en langue accessible (PDF)'
+              : stem.endsWith('-standard')
+                ? 'Version standard (PDF)'
+                : 'Télécharger (PDF)'}
+          </a>
+        {/each}
+      </div>
+    </div>
   {/if}
 
   <div class="body">
@@ -240,6 +256,36 @@
     border-radius: var(--r);
     background: var(--surf2);
     color: var(--tx);
+  }
+  .dl {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .dllbl {
+    font-family: var(--sm);
+    font-size: 11px;
+    color: var(--dim2);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .dllinks {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .dlbtn {
+    font-family: var(--sm);
+    font-size: 12px;
+    color: var(--g);
+    border: 1px solid var(--g3);
+    border-radius: 6px;
+    padding: 6px 12px;
+  }
+  .dlbtn:hover {
+    background: var(--surf2);
   }
   .body {
     margin-top: 28px;
