@@ -59,8 +59,8 @@
     font-family: 'Press Start 2P', 'Atkinson Hyperlegible', monospace;
     font-size: 10px;
     letter-spacing: 0.12em;
-    color: var(--mint-dim);
-    background: var(--panel);
+    color: var(--g2);
+    background: var(--surf2);
     border: 1px solid var(--line);
     padding: 8px 14px;
     border-radius: 2px;
@@ -69,7 +69,7 @@
   .invader {
     width: 132px;
     height: 96px;
-    color: var(--mint);
+    color: var(--g);
     filter: drop-shadow(0 0 14px rgba(126, 242, 176, 0.35));
     animation: bob 2.4s ease-in-out infinite;
   }
@@ -92,7 +92,7 @@
     font-size: clamp(40px, 12vw, 64px);
     line-height: 1;
     margin: 0;
-    color: var(--mint);
+    color: var(--g);
     text-shadow: 0 0 24px rgba(126, 242, 176, 0.3);
   }
 
@@ -104,18 +104,18 @@
   }
   p.sub {
     font-size: 14px;
-    color: var(--sage);
+    color: var(--dim2);
   }
 
   a.retour {
     font-family: 'Press Start 2P', monospace;
     font-size: 11px;
-    color: var(--bg-deep);
-    background: var(--mint);
+    color: var(--bg);
+    background: var(--g);
     text-decoration: none;
     padding: 14px 22px;
     border-radius: 3px;
-    border: 1px solid var(--mint);
+    border: 1px solid var(--g);
     transition:
       background 0.15s ease,
       box-shadow 0.15s ease;
@@ -127,7 +127,7 @@
     box-shadow: 0 0 0 4px rgba(255, 209, 102, 0.2);
   }
   a.retour:focus-visible {
-    outline: 2px solid var(--text);
+    outline: 2px solid var(--tx);
     outline-offset: 3px;
   }
 

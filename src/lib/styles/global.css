@@ -1,31 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap');
 
-*,
-*::before,
-*::after {
+* {
   box-sizing: border-box;
 }
-
-html,
-body {
-  margin: 0;
-  padding: 0;
+html {
+  -webkit-text-size-adjust: 100%;
 }
-
 body {
   background: var(--bg);
-  color: var(--text);
-  font-family: 'Atkinson Hyperlegible', 'Helvetica Neue', Arial, sans-serif;
-  line-height: 1.5;
+  color: var(--tx);
+  font-family: var(--sa);
+  font-size: 15.5px;
+  line-height: 1.62;
+  margin: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img {
+  max-width: 100%;
+}
+a {
+  color: var(--g);
+  text-decoration: none;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+:focus-visible {
+  outline: 2px solid var(--g);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
-h1,
-h2,
-h3 {
-  font-family: 'Space Mono', ui-monospace, monospace;
+h1 {
+  font-family: var(--sm);
+  font-size: 29px;
+  line-height: 1.16;
+  letter-spacing: -1px;
+  margin: 10px 0 10px;
   text-wrap: balance;
 }
-
-a {
-  color: var(--mint);
+h2 {
+  font-family: var(--sm);
+  font-size: 20px;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+  margin: 34px 0 10px;
+  text-wrap: balance;
 }

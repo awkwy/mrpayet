@@ -1,17 +1,28 @@
+/* Port fidèle des variables CSS de site-mrpayet/index.html (:root, lignes 5-13).
+   Mêmes noms, mêmes valeurs — pour que tout code généré par les visualisations
+   portées qui référence directement var(--g), var(--sm), etc. (ex. VIZ.experience)
+   continue de fonctionner sans traduction, et pour rester la seule source de
+   vérité des couleurs du site plutôt que d'en inventer une seconde. */
 :root {
-  --bg: #04120a;
-  --bg-deep: #020705;
-  --panel: #0a1a12;
-  --line: #16362a;
-  --mint: #7ef2b0;
-  --mint-dim: #46c288;
-  --mint-deep: #2b7d57;
-  --sage: #63776d;
-  --sage-light: #8fa79b;
-  --text: #e7efe9;
+  --bg: #0a0e0c;
+  --surf: #111815;
+  --surf2: #16211d;
+  --surf3: #1c2a24;
+  --line: #24352e;
+  --line2: #31473d;
+  --g: #7ef2b0;
+  --g2: #46c288;
+  --g3: #2b7d57;
   --warn: #ffd166;
-  --accent-blue: #7ec8f2;
-  --accent-coral: #e2725b;
-  --accent-purple: #b79cf2;
-  --accent-pink: #e79ac0;
+  --red: #e2725b;
+  --blue: #7ec8f2;
+  --tx: #e7efe9;
+  --dim: #8fa79b;
+  --dim2: #63776d;
+  --sm:
+    'Space Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sa:
+    'Atkinson Hyperlegible', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --r: 10px;
+  --w: 720px;
 }
