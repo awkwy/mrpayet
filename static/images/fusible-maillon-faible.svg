@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 260" font-family="Arial, Helvetica, sans-serif">
+  <rect width="620" height="260" fill="#ffffff"/>
+  <text x="20" y="28" font-size="17" font-weight="bold" fill="#111111">Le fusible : le point le plus fin du circuit</text>
+
+  <!-- batterie -->
+  <g stroke="#111111" stroke-width="2.4" fill="none" stroke-linecap="round">
+    <path d="M70 90 V150"/>
+    <path d="M56 105 H84" stroke-width="5"/>
+    <path d="M60 132 H80"/>
+  </g>
+  <text x="70" y="180" text-anchor="middle" font-size="13" fill="#111111">batterie 12 V</text>
+
+  <!-- fil fin = fusible -->
+  <path d="M80 120 H210" stroke="#111111" stroke-width="2" fill="none"/>
+  <rect x="150" y="112" width="40" height="16" fill="none" stroke="#111" stroke-width="1.5"/>
+  <text x="170" y="100" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#c0392b">fusible</text>
+  <text x="170" y="150" text-anchor="middle" font-size="12" fill="#111111">fil très fin (10 A)</text>
+
+  <!-- faisceau epais -->
+  <path d="M190 120 H430" stroke="#111111" stroke-width="8" fill="none"/>
+  <text x="310" y="100" text-anchor="middle" font-size="12.5" fill="#111111">faisceau</text>
+  <text x="310" y="150" text-anchor="middle" font-size="12" fill="#111111">gros fil, prévu pour 10 A</text>
+
+  <!-- consommateur : lampe -->
+  <circle cx="460" cy="120" r="20" stroke="#111111" stroke-width="2.4" fill="none"/>
+  <path d="M446 106 L474 134 M474 106 L446 134" stroke="#111111" stroke-width="2.4"/>
+  <path d="M480 120 H540 V200 H70 V150" stroke="#111111" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <text x="460" y="165" text-anchor="middle" font-size="12" fill="#111111">phare</text>
+
+  <text x="20" y="235" font-size="13" fill="#111111">Quand l'intensité devient trop grande, c'est le point le plus fin qui chauffe et fond en premier : le fusible.</text>
+</svg>

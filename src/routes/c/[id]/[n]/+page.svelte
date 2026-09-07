@@ -113,6 +113,18 @@
         {#if st.txt}
           <p class="txt">{st.txt}</p>
         {/if}
+        {#if st.img}
+          <figure class="img">
+            {#each (Array.isArray(st.img) ? st.img : [st.img]) as im}
+              <span class="imwrap">
+                <img src="{base}{im.src}" alt={im.alt} loading="lazy" />
+              </span>
+            {/each}
+            {#if !Array.isArray(st.img) && st.img.credit}
+              <figcaption>{st.img.credit}</figcaption>
+            {/if}
+          </figure>
+        {/if}
         {#if st.doc}
           <div class="tblwrap">
             <table>
@@ -160,6 +172,17 @@
     <div class="trace">
       <p class="tracelbl">Trace écrite</p>
       <p>{@html se.trace}</p>
+    </div>
+  {/if}
+
+  {#if se.devoirs?.length}
+    <div class="devoirs">
+      <p class="tracelbl">Travail à la maison</p>
+      <ol>
+        {#each se.devoirs as d}
+          <li>{d}</li>
+        {/each}
+      </ol>
     </div>
   {/if}
 
@@ -314,6 +337,7 @@
   .txt {
     margin-top: 10px;
     color: var(--dim);
+    white-space: pre-line;
   }
   .tblwrap {
     margin-top: 12px;
@@ -354,12 +378,45 @@
   .questions {
     margin-top: 14px;
   }
+  .img {
+    margin: 14px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .imwrap {
+    display: block;
+    flex: 1 1 220px;
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    background: var(--surf);
+    padding: 8px;
+  }
+  .imwrap img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+  .img figcaption {
+    flex-basis: 100%;
+    font-family: var(--sm);
+    font-size: 11px;
+    color: var(--dim2);
+  }
   .trace,
   .comm,
-  .quizsect {
+  .quizsect,
+  .devoirs {
     margin-top: 36px;
     padding-top: 24px;
     border-top: 1px solid var(--line);
+  }
+  .devoirs ol {
+    padding-left: 20px;
+    color: var(--tx);
+    display: grid;
+    gap: 8px;
   }
   .tracelbl {
     font-family: var(--sm);

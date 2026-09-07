@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 300" font-family="Arial, Helvetica, sans-serif">
+  <rect width="560" height="300" fill="#ffffff"/>
+  <text x="20" y="28" font-size="17" font-weight="bold" fill="#111111">Un fusible neuf et un fusible fondu</text>
+
+  <!-- FUSIBLE NEUF -->
+  <g>
+    <!-- lames -->
+    <rect x="120" y="180" width="12" height="55" fill="#9a9a9a" stroke="#555" stroke-width="1"/>
+    <rect x="168" y="180" width="12" height="55" fill="#9a9a9a" stroke="#555" stroke-width="1"/>
+    <!-- corps -->
+    <path d="M100 90 h100 v70 q0 20 -20 20 h-60 q-20 0 -20 -20 z" fill="#c0392b" stroke="#111" stroke-width="1.5"/>
+    <!-- fenetre + filament intact -->
+    <rect x="118" y="104" width="64" height="46" fill="#ffffff" opacity="0.85" stroke="#111" stroke-width="0.8"/>
+    <path d="M128 106 v22 q0 14 22 14 q22 0 22 -14 v-22" fill="none" stroke="#111" stroke-width="2.4"/>
+    <text x="150" y="80" text-anchor="middle" font-size="13" fill="#111111">10 A</text>
+    <text x="150" y="262" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#111111">NEUF</text>
+    <text x="150" y="280" text-anchor="middle" font-size="12" fill="#111111">le fil est entier, le courant passe</text>
+  </g>
+
+  <!-- FUSIBLE FONDU -->
+  <g>
+    <rect x="370" y="180" width="12" height="55" fill="#9a9a9a" stroke="#555" stroke-width="1"/>
+    <rect x="418" y="180" width="12" height="55" fill="#9a9a9a" stroke="#555" stroke-width="1"/>
+    <path d="M350 90 h100 v70 q0 20 -20 20 h-60 q-20 0 -20 -20 z" fill="#c0392b" stroke="#111" stroke-width="1.5"/>
+    <rect x="368" y="104" width="64" height="46" fill="#ffffff" opacity="0.85" stroke="#111" stroke-width="0.8"/>
+    <!-- filament coupe -->
+    <path d="M378 106 v22 q0 8 8 12" fill="none" stroke="#111" stroke-width="2.4"/>
+    <path d="M422 106 v22 q0 8 -8 12" fill="none" stroke="#111" stroke-width="2.4"/>
+    <circle cx="400" cy="140" r="2.5" fill="#c0392b"/>
+    <text x="400" y="80" text-anchor="middle" font-size="13" fill="#111111">10 A</text>
+    <text x="400" y="262" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#111111">FONDU</text>
+    <text x="400" y="280" text-anchor="middle" font-size="12" fill="#111111">le fil est coupé, le courant s'arrête</text>
+  </g>
+</svg>
