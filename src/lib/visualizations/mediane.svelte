@@ -138,6 +138,16 @@
     });
 
     render(false);
+    // entrée animée : les points montent de l'axe vers leur pile
+    // (même révélation décalée que moyenne.svelte, pour deux vues sœurs cohérentes)
+    dotsG
+      .selectAll('g.dot')
+      .attr('transform', (d) => `translate(${d.cx},${AX})`)
+      .transition('move')
+      .duration(700)
+      .delay((d, i) => i * 22)
+      .ease(spring)
+      .attr('transform', (d) => `translate(${d.cx},${d.cy})`);
 
     cleanup = () => {
       svg.selectAll('*').interrupt('b').interrupt('l').interrupt('move');

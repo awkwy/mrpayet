@@ -12,10 +12,12 @@ This file is the project's committed home for project-intrinsic agent knowledge:
   `createLoop`).
 - `moyenne.svelte` et `mediane.svelte` sont un **pilote D3** : rendu `<svg>` animé
   par les transitions D3 (imports modulaires `d3-selection`/`d3-transition`/
-  `d3-drag`/`d3-ease`, pas le bundle `d3` ni `d3-scale`, pour le poids). Socle
+  `d3-drag`, pas le bundle `d3` ni `d3-scale`, pour le poids). Socle
   partagé : `d3.js` (`dotPlot`, `stackDots`, `linScale`, easing ressort
-  `springEase`/`spring`). CSS du cadre SVG : `.viz svg.d3viz` dans
-  `src/lib/styles/viz.css`. Les autres fiches n'ont pas été migrées.
+  `springEase`/`spring` ; `VB_W` = largeur logique du canvas historique, pour
+  rendre à la même échelle que les autres fiches). CSS du cadre SVG :
+  `.viz svg.d3viz` mutualisé avec `.viz canvas` dans `src/lib/styles/viz.css`.
+  Les autres fiches n'ont pas été migrées.
 - Contrainte tenue : mobile d'abord / poids léger (voir `src/lib/styles/tokens.css`).
   Animations : jamais de saut instantané — easing amorti obligatoire.
 - Pas de tests de visualisation dans la suite (`vitest` couvre `src/lib/stores/`).

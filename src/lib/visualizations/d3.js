@@ -4,7 +4,7 @@ import { SM } from './shared.js';
 
 /* Socle D3 partagé — pilote pour moyenne/médiane.
  *
- * Choix : imports modulaires (d3-selection, d3-transition, d3-drag, d3-ease)
+ * Choix : imports modulaires (d3-selection, d3-transition, d3-drag)
  * plutôt que le bundle `d3` complet, pour tenir la contrainte « mobile
  * d'abord / poids léger » du site (voir src/lib/styles/). d3-scale est
  * volontairement écarté : une échelle linéaire tient en trois lignes ici et
@@ -18,8 +18,11 @@ import { SM } from './shared.js';
 
 /** Largeur de la zone de dessin en unités viewBox. Le SVG est mis à
  * l'échelle en largeur:100 % par la CSS, donc ces unités sont indépendantes
- * de la résolution (bonus du SVG sur le canvas). */
-export const VB_W = 340;
+ * de la résolution (bonus du SVG sur le canvas). On garde la largeur logique
+ * du canvas historique (`cvs()` plafonne à 620) : traits, polices, rayons et
+ * l'empilement des points (`stackDots`, pas de 9 u) rendent alors à la même
+ * échelle visuelle que les ~22 autres manipulations canvas du même écran. */
+export const VB_W = 620;
 
 /** Easing « ressort » : intègre un oscillateur masse-ressort-amortisseur puis
  * le normalise sur [0, 1]. Donne un léger dépassement + stabilisation
