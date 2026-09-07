@@ -1,5 +1,6 @@
-// Progression annuelle prévue, par classe — pour l'affichage « cette semaine »
-// des pages de programme. Source : les 6 documents de progression du dépôt
+// Progression annuelle prévue, par classe — pilote l'affichage « cette semaine »
+// des pages de programme et le contrôle d'accès « pas encore au programme »
+// (voir « Contrôle d'accès » plus bas). Source : les 6 documents de progression du dépôt
 // cours (maths/Progression_*.md, sciences/physique/Progression_*.md et
 // Physique_2PMV2_progression_BO2019.md), croisés avec le calendrier réel
 // (calendrier-pronote-2026-2027.ics — vacances, stages) pour convertir les
