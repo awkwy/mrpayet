@@ -1,6 +1,7 @@
 import { COURSES, courseById } from '$lib/data/courses/index.js';
 import { BLOCS } from '$lib/data/blocs.js';
 import { isDone } from '$lib/stores/progress.js';
+import { PROGRESSION, futureLock } from '$lib/data/progression.js';
 
 export const CLASSES = [
   { n: '2P MV2', d: '2de bac pro Maintenance des véhicules', m: 'Maths · Physique-chimie' },
@@ -59,6 +60,54 @@ export function blocChapters(bloc, classe) {
     });
   });
   return out;
+}
+
+// ---------- contrôle d'accès « pas encore au programme » ----------
+// Un contenu est verrouillé tant qu'aucune de ses fenêtres de progression
+// n'a commencé (voir futureLock dans progression.js). Le calcul se fait
+// toujours côté client, à partir de la semaine réelle d'aujourd'hui —
+// l'heure du build n'est pas celle de l'élève.
+
+/** Entrées de progression qui pilotent l'accès à un bloc pour une classe. */
+export function blocProgression(blocId, classe) {
+  return PROGRESSION.filter((p) => p.blocId === blocId && p.classe === classe);
+}
+
+/** Verrou d'un bloc pour une classe : `null` si accessible, sinon
+ * `{ from, monday }` de la fenêtre la plus proche. */
+export function blocLock(bloc, classe, week) {
+  return futureLock(blocProgression(bloc.id, classe), week);
+}
+
+/** Toutes les classes servies par un cours (`classes` ou `classe` seul). */
+function courseClasses(course) {
+  return course.classes && course.classes.length ? course.classes : [course.classe];
+}
+
+/** Entrées de progression concernant un cours (tous blocs / classes qui le
+ * portent). Si `n` est fourni, on restreint aux blocs qui couvrent ce
+ * chapitre (`bloc.ch`) quand une telle découpe existe. */
+function courseProgression(course, n) {
+  const entries = [];
+  for (const cl of courseClasses(course)) {
+    for (const b of BLOCS) {
+      if (!blocCours(b, cl).includes(course.id)) continue;
+      if (Number.isInteger(n) && b.ch && !b.ch.includes(n)) continue;
+      entries.push(...blocProgression(b.id, cl));
+    }
+  }
+  return entries;
+}
+
+/** Verrou d'un cours : `null` si accessible pour au moins une de ses
+ * classes (ou s'il n'a aucune entrée de progression). */
+export function courseLock(course, week) {
+  return futureLock(courseProgression(course), week);
+}
+
+/** Verrou d'un chapitre précis d'un cours. */
+export function chapterLock(course, n, week) {
+  return futureLock(courseProgression(course, n), week);
 }
 
 export function blocState(bloc, classe) {

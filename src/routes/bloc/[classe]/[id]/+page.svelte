@@ -1,11 +1,16 @@
 <script>
   import { base } from '$app/paths';
-  import { blocChapters } from '$lib/utils/course-helpers.js';
+  import { blocChapters, blocLock } from '$lib/utils/course-helpers.js';
   import { done } from '$lib/stores/progress.js';
+  import LockedNotice from '$lib/components/LockedNotice.svelte';
 
   let { data } = $props();
 
-  let chapters = $derived(blocChapters(data.bloc, data.classe));
+  // Verrou « pas encore au programme » — calculé côté client sur la semaine
+  // réelle. Si verrouillé, on n'affiche rien du contenu, même en lien direct.
+  let lock = $derived(blocLock(data.bloc, data.classe));
+
+  let chapters = $derived(lock ? [] : blocChapters(data.bloc, data.classe));
   // touching $done keeps this reactive to progress changes
   let doneSet = $derived($done);
 </script>
@@ -20,6 +25,9 @@
   </p>
   <h1>{data.bloc.t}</h1>
 
+  {#if lock}
+    <LockedNotice {lock} quoi="Ce module" />
+  {:else}
   {#if data.bloc.integre}
     <p class="note">{data.bloc.integre}</p>
   {/if}
@@ -54,6 +62,7 @@
         <a href="{base}/flash/{data.slug}/{f}">Flash · {f}</a>
       {/each}
     </div>
+  {/if}
   {/if}
 </div>
 

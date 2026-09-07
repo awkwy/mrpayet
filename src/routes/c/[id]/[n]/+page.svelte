@@ -1,16 +1,20 @@
 <script>
   import { base } from '$app/paths';
-  import { blocOfCourse, bslug, chapterKey } from '$lib/utils/course-helpers.js';
+  import { blocOfCourse, bslug, chapterKey, chapterLock } from '$lib/utils/course-helpers.js';
   import { VIZ } from '$lib/visualizations/registry.js';
   import { markDone, setLast, done } from '$lib/stores/progress.js';
   import ChapterDrawer from '$lib/components/ChapterDrawer.svelte';
   import QuizInput from '$lib/components/QuizInput.svelte';
   import QuizMCQ from '$lib/components/QuizMCQ.svelte';
+  import LockedNotice from '$lib/components/LockedNotice.svelte';
 
   let { data } = $props();
   let c = $derived(data.course);
   let n = $derived(data.n);
   let se = $derived(data.seance);
+  // Verrou « pas encore au programme » — semaine réelle, côté client. Bloque
+  // aussi l'arrivée par lien direct ou QR code imprimé à l'avance.
+  let lock = $derived(chapterLock(c, n));
   let bloc = $derived(blocOfCourse(c.id, c.classe));
   let doneSet = $derived($done);
 
@@ -31,10 +35,12 @@
   });
 
   $effect(() => {
+    if (lock) return;
     setLast(chapterKey(c, n));
   });
 
   $effect(() => {
+    if (lock) return;
     if (totalQ === 0) {
       markDone(chapterKey(c, n));
       return;
@@ -60,6 +66,16 @@
   <title>{se.t} — {c.titre} — MrPayet</title>
 </svelte:head>
 
+{#if lock}
+  <div class="wrap">
+    <p class="crumb">
+      <a href="{base}/p/{bslug(c.classe)}">{c.classe}</a>
+      / <a href="{base}/c/{c.id}">{c.titre}</a>
+    </p>
+    <h1>{se.t}</h1>
+    <LockedNotice {lock} quoi="Ce chapitre" />
+  </div>
+{:else}
 <div class="chbar">
   <ChapterDrawer course={c} current={n} {doneSet} />
   <span class="chprog">Chapitre {n + 1}/{c.seances.length}</span>
@@ -219,6 +235,7 @@
     {/if}
   </div>
 </div>
+{/if}
 
 <style>
   .chbar {

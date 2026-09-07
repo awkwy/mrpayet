@@ -14,11 +14,19 @@ export const WEEK1_MONDAY = '2026-08-24';
 
 // {classe, blocId, from: semaine, to: semaine, note?}
 // `note` documente une période qui ne correspond à aucun bloc du programme
-// affiché (ex. consolidation de rentrée à partir des résultats d'une
-// évaluation nationale) — affichée telle quelle si aucun blocId ne convient.
+// affiché (ex. consolidation de rentrée) — affichée telle quelle si aucun
+// blocId ne convient.
+//
+// Contrôle d'accès : un contenu dont une entrée (repérée par `blocId`) a un
+// `from` strictement supérieur à la semaine réelle d'aujourd'hui n'est pas
+// encore accessible (ni listé, ni ouvrable en lien direct / QR). Une fois la
+// fenêtre ouverte (`from <= semaine`), le contenu reste accessible
+// définitivement — on ne reverrouille jamais sur `to`. Un contenu sans
+// aucune entrée (automatismes, révisions, flash, aide-mémoire, AP…) n'est
+// jamais verrouillé. Voir futureLock() ci-dessous.
 export const PROGRESSION = [
   // ---------- 2P MV2 — maths (Progression_2PMV2_maths.md) ----------
-  { classe: '2P MV2', from: 2, to: 3, note: 'Consolidation de rentrée (à partir des résultats de l’évaluation nationale)' },
+  { classe: '2P MV2', from: 2, to: 3, note: 'Consolidation de rentrée' },
   { classe: '2P MV2', blocId: 'mv-stat', from: 4, to: 9 },
   { classe: '2P MV2', blocId: 'mv-proba', from: 10, to: 16 },
   { classe: '2P MV2', blocId: 'mv-degre1', from: 21, to: 23 },
@@ -78,4 +86,32 @@ export function weekOf(date = new Date()) {
  * (généralement 0 ou 1, parfois 2 quand maths et sciences se recouvrent). */
 export function progressionAt(classe, week) {
   return PROGRESSION.filter((p) => p.classe === classe && week >= p.from && week <= p.to);
+}
+
+/** Lundi (Date) du début de la semaine n (convention calendrier-annee).
+ * Arithmétique en UTC pour rester juste au passage heure d'été/hiver. */
+export function weekMonday(week) {
+  const [y, m, d] = WEEK1_MONDAY.split('-').map(Number);
+  return new Date(Date.UTC(y, m - 1, d) + 7 * (week - 1) * 86400000);
+}
+
+/**
+ * Étant donné les entrées de progression qui pilotent l'accès à un contenu
+ * (déjà filtrées par classe + blocId par l'appelant), indique si ce contenu
+ * est encore verrouillé parce qu'aucune de ses fenêtres n'a commencé.
+ *
+ *  - aucune entrée               -> `null` (contenu transversal, sans
+ *                                   semaine attachée : jamais verrouillé)
+ *  - au moins un `from <= week`  -> `null` (fenêtre ouverte : accessible
+ *                                   définitivement, même une fois passée —
+ *                                   on ne verrouille jamais sur `to`)
+ *  - toutes les fenêtres futures -> `{ from, monday }` de la plus proche
+ *
+ * `week` par défaut = semaine réelle d'aujourd'hui.
+ */
+export function futureLock(entries, week = weekOf()) {
+  if (!entries || !entries.length) return null;
+  if (entries.some((e) => e.from <= week)) return null;
+  const soonest = entries.reduce((a, b) => (b.from < a.from ? b : a));
+  return { from: soonest.from, monday: weekMonday(soonest.from) };
 }
