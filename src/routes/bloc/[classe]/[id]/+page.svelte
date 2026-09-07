@@ -10,7 +10,7 @@
   // réelle. Si verrouillé, on n'affiche rien du contenu, même en lien direct.
   let lock = $derived(blocLock(data.bloc, data.classe));
 
-  let chapters = $derived(lock ? [] : blocChapters(data.bloc, data.classe));
+  let chapters = $derived(blocChapters(data.bloc, data.classe));
   // touching $done keeps this reactive to progress changes
   let doneSet = $derived($done);
 </script>

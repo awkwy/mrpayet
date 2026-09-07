@@ -18,12 +18,18 @@ export const WEEK1_MONDAY = '2026-08-24';
 // blocId ne convient.
 //
 // Contrôle d'accès : un contenu dont une entrée (repérée par `blocId`) a un
-// `from` strictement supérieur à la semaine réelle d'aujourd'hui n'est pas
-// encore accessible (ni listé, ni ouvrable en lien direct / QR). Une fois la
-// fenêtre ouverte (`from <= semaine`), le contenu reste accessible
-// définitivement — on ne reverrouille jamais sur `to`. Un contenu sans
-// aucune entrée (automatismes, révisions, flash, aide-mémoire, AP…) n'est
-// jamais verrouillé. Voir futureLock() ci-dessous.
+// `from` situé à plus de LOOKAHEAD_WEEKS semaines de la semaine réelle
+// d'aujourd'hui n'est pas encore accessible (ni listé, ni ouvrable en lien
+// direct / QR). Dès que `from <= semaine + LOOKAHEAD_WEEKS`, le contenu
+// devient accessible et le reste définitivement — on ne reverrouille jamais
+// sur `to`. Un contenu sans aucune entrée (automatismes, révisions, flash,
+// aide-mémoire, AP…) n'est jamais verrouillé. Voir futureLock() ci-dessous.
+
+// Fenêtre d'anticipation : un contenu s'ouvre ce nombre de semaines avant sa
+// semaine `from` prévue. Ajustable facilement. Rationale du capitaine : deux
+// semaines d'avance visible évitent une page programme vide sans réexposer
+// toute l'année.
+export const LOOKAHEAD_WEEKS = 2;
 export const PROGRESSION = [
   // ---------- 2P MV2 — maths (Progression_2PMV2_maths.md) ----------
   { classe: '2P MV2', from: 2, to: 3, note: 'Consolidation de rentrée' },
@@ -100,18 +106,25 @@ export function weekMonday(week) {
  * (déjà filtrées par classe + blocId par l'appelant), indique si ce contenu
  * est encore verrouillé parce qu'aucune de ses fenêtres n'a commencé.
  *
- *  - aucune entrée               -> `null` (contenu transversal, sans
- *                                   semaine attachée : jamais verrouillé)
- *  - au moins un `from <= week`  -> `null` (fenêtre ouverte : accessible
- *                                   définitivement, même une fois passée —
- *                                   on ne verrouille jamais sur `to`)
- *  - toutes les fenêtres futures -> `{ from, monday }` de la plus proche
+ *  - aucune entrée                          -> `null` (contenu transversal,
+ *                                              sans semaine attachée : jamais
+ *                                              verrouillé)
+ *  - au moins un `from <= week + LOOKAHEAD_WEEKS` -> `null` (fenêtre ouverte
+ *                                              ou à portée d'anticipation :
+ *                                              accessible définitivement,
+ *                                              même une fois passée — on ne
+ *                                              verrouille jamais sur `to`)
+ *  - toutes les fenêtres au-delà            -> `{ from, monday }` de la plus
+ *                                              proche ; `from`/`monday`
+ *                                              restent la vraie semaine
+ *                                              prévue, non décalée par
+ *                                              l'anticipation
  *
  * `week` par défaut = semaine réelle d'aujourd'hui.
  */
 export function futureLock(entries, week = weekOf()) {
   if (!entries || !entries.length) return null;
-  if (entries.some((e) => e.from <= week)) return null;
+  if (entries.some((e) => e.from <= week + LOOKAHEAD_WEEKS)) return null;
   const soonest = entries.reduce((a, b) => (b.from < a.from ? b : a));
   return { from: soonest.from, monday: weekMonday(soonest.from) };
 }

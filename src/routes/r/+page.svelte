@@ -2,12 +2,16 @@
   import { base } from '$app/paths';
   import { COURSES } from '$lib/data/courses/index.js';
   import { RECAP } from '$lib/data/recap.js';
-  import { CLASSES } from '$lib/utils/course-helpers.js';
+  import { CLASSES, courseLock } from '$lib/utils/course-helpers.js';
 
+  // Verrou « pas encore au programme » — calculé côté client sur la semaine
+  // réelle. Un cours verrouillé n'est pas listé (comme sur /p, /c, /bloc).
   let groups = $derived(
     CLASSES.map((c) => ({
       classe: c.n,
-      courses: COURSES.filter((co) => (co.classe === c.n || co.classes?.includes(c.n)) && RECAP[co.id])
+      courses: COURSES.filter(
+        (co) => (co.classe === c.n || co.classes?.includes(c.n)) && RECAP[co.id] && !courseLock(co)
+      )
     })).filter((g) => g.courses.length)
   );
 </script>
