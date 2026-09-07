@@ -26,7 +26,15 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          BASE_PATH: '/mrpayet'
+          # Le site est servi depuis le domaine personnalisé mrpayet.com
+          # (racine, pas de sous-chemin) — voir static/CNAME. BASE_PATH doit
+          # rester vide : avec un préfixe, la coquille de secours 404.html
+          # d'adapter-static référence ses scripts en chemin absolu
+          # (/mrpayet/_app/...) plutôt qu'en relatif comme les autres pages
+          # prérendues, et ces chemins n'existent pas à la racine du domaine
+          # — la page de secours arrivait blanche (JS jamais chargé) pour
+          # toute URL non reconnue, dont les QR codes /i/<id> des fiches.
+          BASE_PATH: ''
       - uses: actions/upload-pages-artifact@v3
         with:
           path: build
