@@ -1,21 +1,21 @@
 <script>
-  import Bascule from '$lib/visualizations/bascule.svelte';
-  import Budget from '$lib/visualizations/budget.svelte';
-  import Remise from '$lib/visualizations/remise.svelte';
-  import Partage from '$lib/visualizations/partage.svelte';
-  import Division from '$lib/visualizations/division.svelte';
-  import Multiplication from '$lib/visualizations/multiplication.svelte';
+  import Moyenne from '$lib/visualizations/moyenne.svelte';
+  import Mediane from '$lib/visualizations/mediane.svelte';
+  import Experience from '$lib/visualizations/experience.svelte';
+  import Arbre from '$lib/visualizations/arbre.svelte';
+  import Fluctuation from '$lib/visualizations/fluctuation.svelte';
+  import Stabilisation from '$lib/visualizations/stabilisation.svelte';
 </script>
 
-<h2>bascule</h2>
-<Bascule />
-<h2>budget</h2>
-<Budget />
-<h2>remise</h2>
-<Remise />
-<h2>partage</h2>
-<Partage />
-<h2>division</h2>
-<Division />
-<h2>multiplication</h2>
-<Multiplication />
+<h2>moyenne</h2>
+<Moyenne />
+<h2>mediane</h2>
+<Mediane />
+<h2>experience</h2>
+<Experience />
+<h2>arbre</h2>
+<Arbre />
+<h2>fluctuation</h2>
+<Fluctuation />
+<h2>stabilisation</h2>
+<Stabilisation />
