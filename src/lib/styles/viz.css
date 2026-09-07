@@ -1,0 +1,158 @@
+/* Chrome partagé des 35 manipulations interactives (canvas + contrôles).
+   Port exact de site-mrpayet/index.html, lignes 165-196 (+ le bump de
+   padding en @media(min-width:640px), ligne 378) : ces éléments (.vctl
+   button, .vsl, .read, .say) sont créés en DOM impératif par
+   $lib/visualizations/shared.js (box/slider/readout), donc en dehors du
+   scope des <style> Svelte de chaque composant — d'où ce fichier global. */
+
+.viz {
+  background: linear-gradient(180deg, var(--surf2), var(--surf));
+  border: 1px solid var(--line2);
+  border-radius: 14px;
+  padding: 14px;
+  margin: 26px 0;
+  overflow: hidden;
+}
+.viz canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  touch-action: none;
+  background: rgba(0, 0, 0, 0.22);
+}
+.vctl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 12px 0 0;
+}
+.vctl button {
+  background: var(--surf3);
+  border: 1px solid var(--line2);
+  color: var(--tx);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: var(--sm);
+  font-size: 12.5px;
+  transition: 0.14s;
+}
+.vctl button:active {
+  transform: scale(0.97);
+}
+.vctl button.on,
+.vctl button.p {
+  background: var(--g);
+  border-color: var(--g);
+  color: #04120a;
+  font-weight: 700;
+}
+.vctl button.gh {
+  background: transparent;
+  color: var(--dim);
+}
+.vsl {
+  margin: 13px 0 0;
+}
+.vsl label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--sm);
+  font-size: 11.5px;
+  color: var(--dim);
+  margin-bottom: 5px;
+}
+.vsl label b {
+  color: var(--g);
+  font-size: 13px;
+}
+.viz input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 26px;
+  background: transparent;
+  margin: 0;
+}
+.viz input[type='range']::-webkit-slider-runnable-track {
+  height: 5px;
+  background: var(--surf3);
+  border-radius: 999px;
+}
+.viz input[type='range']::-moz-range-track {
+  height: 5px;
+  background: var(--surf3);
+  border-radius: 999px;
+}
+.viz input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background: var(--g);
+  border: 3px solid var(--bg);
+  margin-top: -9px;
+  box-shadow: 0 0 0 1px var(--g3);
+}
+.viz input[type='range']::-moz-range-thumb {
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background: var(--g);
+  border: 3px solid var(--bg);
+}
+.read {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin: 13px 0 0;
+}
+.read > div {
+  display: flex;
+  flex-direction: column;
+}
+.read .v {
+  font-family: var(--sm);
+  font-size: 23px;
+  font-weight: 700;
+  color: var(--g);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.read .v.w {
+  color: var(--warn);
+}
+.read .v.r {
+  color: var(--red);
+}
+.read .v.d {
+  color: var(--dim);
+  font-size: 19px;
+}
+.read .k {
+  font-family: var(--sm);
+  font-size: 10px;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  color: var(--dim2);
+  margin-top: 2px;
+}
+.say {
+  background: rgba(126, 242, 176, 0.06);
+  border-left: 2.5px solid var(--g3);
+  border-radius: 0 7px 7px 0;
+  padding: 10px 13px;
+  margin: 13px 0 0;
+  font-size: 14px;
+  color: var(--dim);
+  line-height: 1.5;
+}
+.say b {
+  color: var(--tx);
+}
+
+@media (min-width: 640px) {
+  .viz {
+    padding: 18px;
+  }
+}
