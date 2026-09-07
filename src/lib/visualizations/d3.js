@@ -69,8 +69,8 @@ export function linScale([d0, d1], [r0, r1]) {
 }
 
 /** Échafaudage d'un nuage de points sur axe gradué (équivalent SVG du
- * `dotplot` canvas de shared.js). Retourne le <svg>, l'échelle horizontale
- * et la géométrie. */
+ * `dotplot` canvas d'origine, site-mrpayet/index.html lignes 3075-3099).
+ * Retourne le <svg>, l'échelle horizontale et la géométrie. */
 export function dotPlot(host, { height, min, max, step, bot }) {
   const W = VB_W;
   const L = 30;
@@ -116,7 +116,8 @@ export function dotPlot(host, { height, min, max, step, bot }) {
 }
 
 /** Empile les points qui tombent dans la même colonne (port fidèle du
- * binning de `dots` dans shared.js) et renvoie leurs positions. */
+ * binning `dots` du canvas d'origine, site-mrpayet/index.html) et renvoie
+ * leurs positions. */
 export function stackDots(vals, x, AX) {
   const bucket = {};
   return vals.map((v, i) => {

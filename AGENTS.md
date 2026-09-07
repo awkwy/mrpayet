@@ -8,7 +8,7 @@ This file is the project's committed home for project-intrinsic agent knowledge:
 
 - Les ~24 manipulations interactives vivent dans `src/lib/visualizations/` et sont
   enregistrées dans `registry.js`. Socle historique : `shared.js` (rendu `<canvas>`
-  2D + `requestAnimationFrame`, helpers `box`/`slider`/`readout`/`dotplot`/`Spring`/
+  2D + `requestAnimationFrame`, helpers `box`/`slider`/`readout`/`Spring`/
   `createLoop`).
 - `moyenne.svelte` et `mediane.svelte` sont un **pilote D3** : rendu `<svg>` animé
   par les transitions D3 (imports modulaires `d3-selection`/`d3-transition`/
