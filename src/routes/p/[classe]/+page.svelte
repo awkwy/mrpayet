@@ -1,6 +1,6 @@
 <script>
   import { base } from '$app/paths';
-  import { blocsOf, blocState, blocById } from '$lib/utils/course-helpers.js';
+  import { blocsOf, blocState, blocById, blocLock } from '$lib/utils/course-helpers.js';
   import { weekOf, progressionAt } from '$lib/data/progression.js';
 
   let { data } = $props();
@@ -16,7 +16,10 @@
   );
 
   let domaines = $derived.by(() => {
-    const blocs = blocsOf(data.classe);
+    // Un bloc dont la fenêtre de progression n'a pas encore commencé est
+    // masqué du programme (invisible ET inaccessible) — recalculé sur la
+    // semaine réelle d'aujourd'hui.
+    const blocs = blocsOf(data.classe).filter((b) => !blocLock(b, data.classe, semaine));
     const byDom = new Map();
     blocs.forEach((b) => {
       if (!byDom.has(b.dom)) byDom.set(b.dom, []);

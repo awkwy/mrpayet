@@ -2,8 +2,14 @@
   import { base } from '$app/paths';
   import { RECAP } from '$lib/data/recap.js';
   import RecapCard from '$lib/components/RecapCard.svelte';
+  import { courseLock } from '$lib/utils/course-helpers.js';
 
   let { data } = $props();
+
+  // Verrou « pas encore au programme » — calculé côté client sur la semaine
+  // réelle. Un cours verrouillé n'affiche pas ses fiches et n'est pas listé.
+  let courseLocked = $derived(data.mode === 'course' && !!courseLock(data.course));
+  let openCourses = $derived(data.mode === 'classe' ? data.courses.filter((co) => !courseLock(co)) : []);
 </script>
 
 <svelte:head>
@@ -20,25 +26,33 @@
 
   {#if data.mode === 'course'}
     <h1>{data.course.titre}</h1>
-    <button type="button" class="print no-print" onclick={() => window.print()}>Imprimer</button>
-    <div class="cards">
-      {#each data.cards as r}
-        <RecapCard {r} />
-      {/each}
-    </div>
+    {#if courseLocked}
+      <p class="soon">Les fiches récap s'afficheront à mesure que les chapitres s'ouvrent.</p>
+    {:else}
+      <button type="button" class="print no-print" onclick={() => window.print()}>Imprimer</button>
+      <div class="cards">
+        {#each data.cards as r}
+          <RecapCard {r} />
+        {/each}
+      </div>
+    {/if}
   {:else}
     <h1>{data.classe} — aide-mémoire complet</h1>
-    <button type="button" class="print no-print" onclick={() => window.print()}>Imprimer</button>
-    {#each data.courses as co}
-      <section class="csect">
-        <h2>{co.titre}</h2>
-        <div class="cards">
-          {#each RECAP[co.id] as r}
-            <RecapCard {r} />
-          {/each}
-        </div>
-      </section>
-    {/each}
+    {#if !openCourses.length}
+      <p class="soon">Les fiches récap s'afficheront à mesure que les chapitres s'ouvrent.</p>
+    {:else}
+      <button type="button" class="print no-print" onclick={() => window.print()}>Imprimer</button>
+      {#each openCourses as co}
+        <section class="csect">
+          <h2>{co.titre}</h2>
+          <div class="cards">
+            {#each RECAP[co.id] as r}
+              <RecapCard {r} />
+            {/each}
+          </div>
+        </section>
+      {/each}
+    {/if}
   {/if}
 </div>
 
@@ -69,6 +83,12 @@
   .cards {
     display: grid;
     gap: 10px;
+  }
+  .soon {
+    margin-top: 14px;
+    color: var(--dim);
+    font-family: var(--sm);
+    font-size: 13px;
   }
   .csect {
     margin-top: 28px;

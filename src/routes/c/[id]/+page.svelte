@@ -1,12 +1,16 @@
 <script>
   import { base } from '$app/paths';
-  import { blocOfCourse, bslug } from '$lib/utils/course-helpers.js';
+  import { blocOfCourse, bslug, courseLock } from '$lib/utils/course-helpers.js';
   import { RECAP } from '$lib/data/recap.js';
   import ProgressBar from '$lib/components/ProgressBar.svelte';
   import { done } from '$lib/stores/progress.js';
+  import LockedNotice from '$lib/components/LockedNotice.svelte';
 
   let { data } = $props();
   let c = $derived(data.course);
+  // Verrou « pas encore au programme » — semaine réelle, côté client. Bloque
+  // aussi l'arrivée par lien direct ou QR code (via /i/<id> qui redirige ici).
+  let lock = $derived(courseLock(c));
   let bloc = $derived(blocOfCourse(c.id, c.classe));
   let doneSet = $derived($done);
   let nDone = $derived(c.seances.filter((_, i) => doneSet.has(c.id + '/' + i)).length);
@@ -29,6 +33,10 @@
     <span class="pill">{c.mat}</span>
   </div>
   <h1>{c.titre}</h1>
+
+  {#if lock}
+    <LockedNotice {lock} quoi="Ce cours" />
+  {:else}
   <p class="desc">{c.desc}</p>
 
   <ProgressBar done={nDone} total={c.seances.length} />
@@ -58,6 +66,7 @@
       </a>
     {/each}
   </div>
+  {/if}
 </div>
 
 <style>
