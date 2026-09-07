@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { PROGRESSION, weekOf, weekMonday, futureLock } from './progression.js';
+import { weekMonday, futureLock, progressionAt } from './progression.js';
 import {
   blocLock,
   courseLock,
@@ -79,9 +79,19 @@ describe('gating sur les données réelles (semaine 3)', () => {
 });
 
 describe('la note de rentrée 2P MV2 ne référence plus l’évaluation nationale', () => {
-  it('aucune note ne mentionne « nationale »', () => {
-    for (const p of PROGRESSION) {
-      if (p.note) expect(p.note.toLowerCase()).not.toContain('national');
-    }
-  });
+  // /p/[classe]/+page.svelte affiche telle quelle la `note` de l'entrée
+  // renvoyée par progressionAt(classe, semaine). Pour 2P MV2, la fenêtre de
+  // rentrée (semaines 2-3) doit afficher exactement « Consolidation de
+  // rentrée » — pas de renvoi au test national de positionnement.
+  for (const week of [2, 3]) {
+    it(`semaine ${week} : la note affichée est « Consolidation de rentrée »`, () => {
+      const notes = progressionAt('2P MV2', week)
+        .map((p) => p.note)
+        .filter(Boolean);
+      expect(notes).toContain('Consolidation de rentrée');
+      for (const note of notes) {
+        expect(note).not.toMatch(/national|positionnement|évaluation nationale/i);
+      }
+    });
+  }
 });
