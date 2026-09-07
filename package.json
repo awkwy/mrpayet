@@ -1,0 +1,21 @@
+{
+  "name": "mrpayet",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-static": "latest",
+    "@sveltejs/kit": "latest",
+    "@sveltejs/vite-plugin-svelte": "latest",
+    "svelte": "latest",
+    "vite": "latest",
+    "vitest": "latest",
+    "jsdom": "latest"
+  }
+}
