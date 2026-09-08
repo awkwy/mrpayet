@@ -2,7 +2,7 @@ import { select } from 'd3-selection';
 import 'd3-transition';
 import { SM, fr } from './shared.js';
 
-/* Socle D3 partagé — pilote pour moyenne/médiane.
+/* Socle D3 partagé de la migration canvas → SVG (fiches portées : AGENTS.md).
  *
  * Choix : imports modulaires (d3-selection, d3-transition, d3-drag)
  * plutôt que le bundle `d3` complet, pour tenir la contrainte « mobile
@@ -13,15 +13,16 @@ import { SM, fr } from './shared.js';
  * transitions D3, dont l'assouplissement (`springEase`) est le vrai but de la
  * bascule : des changements de valeur amortis, jamais des sauts mécaniques.
  *
- * Volontairement minimal : juste ce dont les deux fiches ont besoin en commun
- * (échafaudage SVG, axe gradué, empilement des points, easing ressort,
- * infobulle survol/focus).
+ * Volontairement minimal : juste ce dont les fiches portées ont besoin en
+ * commun (échafaudage SVG, axe gradué, empilement des points, diagramme en
+ * bâtons, easing ressort, infobulle survol/focus).
  *
  * Couleurs : tout est tiré de src/lib/styles/tokens.css via var(--…) — jamais
- * de hex en dur ici. Suivi de la procédure « dataviz » : les onze durées sont
- * une série unique (pas de légende) peinte dans la teinte séquentielle du site
- * (rampe verte --g/--g2/--g3) ; la valeur dérivée (moyenne / médiane) est un
- * accent neutre --blue — surtout pas --warn, qui est un jeton d'état réservé.
+ * de hex en dur ici. Suivi de la procédure « dataviz » : une série de données
+ * est peinte dans la teinte séquentielle unique du site (rampe verte
+ * --g/--g2/--g3, pas de légende) ; la valeur dérivée (moyenne, médiane, âge
+ * moyen) ou le repère théorique (proportion p) est un accent neutre --blue —
+ * surtout pas --warn/--red, jetons d'état réservés.
  * Axe et graduations : filet 1 px --line2, discret. */
 
 /** Largeur de la zone de dessin en unités viewBox. Le SVG est mis à
@@ -188,8 +189,9 @@ export function stackDots(vals, x, AX) {
   });
 }
 
-/** Échafaudage d'un diagramme en bâtons sur axe catégoriel (équivalent SVG des
- * bâtons canvas de `batons`/`moypond`). `cats` = nombre de catégories.
+/** Échafaudage d'un diagramme en bâtons sur axe catégoriel (équivalent SVG du
+ * tracé bâtons canvas de `batons`, consommé ici par `moypond`). `cats` = nombre
+ * de catégories.
  * Retourne le <svg>, la géométrie, `band(i)` → { x, w, cx } (position et
  * largeur du i-ᵉ bâton) et `yScale(frac)` qui mappe une fraction [0, 1] de la
  * hauteur utile vers une ordonnée viewBox. Les bâtons sont dessinés par la
