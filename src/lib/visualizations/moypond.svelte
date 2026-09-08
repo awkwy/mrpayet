@@ -38,7 +38,6 @@
   onMount(() => {
     host.style.position = 'relative';
     const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const DUR_PIVOT = RM ? 0 : 720;
 
     const AGES = (vd && vd.ages) || [1, 2, 3];
     const UNIT = (vd && vd.unit) || 'ans';
@@ -107,7 +106,7 @@
         (v) => `${Math.round(v)} enfants`,
         (v) => {
           eff[i] = v;
-          if (ready) render(false);
+          if (ready) render();
         }
       );
     });
@@ -134,7 +133,7 @@
       bulle.show(p.x, p.y, `${E} enfants`, `${AGES[i]} ${AGES[i] > 1 ? UNIT : UNIT.replace(/s$/, '')}`);
     }
 
-    function render(animate) {
+    function render() {
       const E = eff.map((v) => Math.round(v));
       const tot = E.reduce((s, v) => s + v, 0) || 1;
       const somme = E.reduce((s, v, i) => s + v * AGES[i], 0);
@@ -171,12 +170,12 @@
           .attr('aria-label', `${AGES[i]} ${AGES[i] > 1 ? UNIT : UNIT.replace(/s$/, '')} : ${d} enfants`)
           .on('mouseenter focus', () => showTip(i, d, b.cx, topY))
           .on('mouseleave blur', () => bulle.hide());
-        const r = g.select('rect.mark').attr('x', b.x + 1).attr('width', Math.max(0, b.w - 2));
-        if (animate && !RM) {
-          r.transition('h').duration(560).ease(spring).attr('y', topY).attr('height', AX - topY);
-        } else {
-          r.interrupt('h').attr('y', topY).attr('height', AX - topY);
-        }
+        g.select('rect.mark')
+          .attr('x', b.x + 1)
+          .attr('width', Math.max(0, b.w - 2))
+          .interrupt('h')
+          .attr('y', topY)
+          .attr('height', AX - topY);
       });
 
       // libellé de valeur : dans le bâton près du sommet s'il est assez haut
@@ -203,11 +202,9 @@
         });
 
       const px = xForAge(moy);
-      const pv = (sel, name) =>
-        animate && !RM ? sel.transition(name).duration(DUR_PIVOT).ease(spring) : sel.interrupt(name);
-      pv(stem, 'p').attr('x1', px).attr('x2', px);
-      pv(tri, 'p').attr('transform', `translate(${px},${AX + 1})`);
-      pv(plabel, 'p').attr('x', Math.max(50, Math.min(W - 50, px)));
+      stem.interrupt('p').attr('x1', px).attr('x2', px);
+      tri.interrupt('p').attr('transform', `translate(${px},${AX + 1})`);
+      plabel.interrupt('p').attr('x', Math.max(50, Math.min(W - 50, px)));
       plabel.text(`moyenne ${fr(moy.toFixed(2))} ${UNIT}`);
 
       host.querySelector('#pT').textContent = tot;
@@ -236,7 +233,7 @@
     }
 
     ready = true;
-    render(false);
+    render();
     // révélation : les bâtons montent de l'axe, décalés (même identité de
     // mouvement que l'entrée décalée des points sur `moyenne`/`mediane`)
     if (!RM) {

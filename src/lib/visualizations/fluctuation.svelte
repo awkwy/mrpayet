@@ -132,21 +132,25 @@
     }
 
     function drawGrid() {
-      gridG.selectAll('*').remove();
-      if (!anim) return;
+      if (!anim) {
+        gridG.selectAll('rect').remove();
+        return;
+      }
       const { done, tot, bad } = anim;
       const cols = Math.min(tot, 40);
       const s = Math.min(10, (R - L) / cols - 2);
-      for (let i = 0; i < done; i++) {
-        gridG
-          .append('rect')
-          .attr('x', L + (i % cols) * (s + 2))
-          .attr('y', 16 + Math.floor(i / cols) * (s + 2))
-          .attr('width', s)
-          .attr('height', s)
-          .attr('rx', 1.5)
-          .attr('fill', i < bad ? 'var(--g)' : 'var(--surf3)');
-      }
+      const rows = Math.max(1, Math.floor((H - 16) / (s + 2)));
+      const visible = Math.min(done, cols * rows);
+      const cells = Array.from({ length: visible }, (_, i) => i);
+      gridG
+        .selectAll('rect')
+        .data(cells, (i) => i)
+        .join((enter) => enter.append('rect').attr('rx', 1.5))
+        .attr('x', (i) => L + (i % cols) * (s + 2))
+        .attr('y', (i) => 16 + Math.floor(i / cols) * (s + 2))
+        .attr('width', s)
+        .attr('height', s)
+        .attr('fill', (i) => (i < bad ? 'var(--g)' : 'var(--surf3)'));
     }
 
     function render(animate) {

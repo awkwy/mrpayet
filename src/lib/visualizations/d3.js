@@ -1,6 +1,6 @@
 import { select } from 'd3-selection';
 import 'd3-transition';
-import { SM } from './shared.js';
+import { SM, fr } from './shared.js';
 
 /* Socle D3 partagé — pilote pour moyenne/médiane.
  *
@@ -120,7 +120,7 @@ export function dotPlot(host, { height, min, max, step, bot }) {
       .attr('fill', 'var(--dim2)')
       .attr('font-family', SM)
       .attr('font-size', 11)
-      .text(String(v));
+      .text(fr(String(v)));
   }
 
   return { svg, x, W, H: height, L, R, AX };

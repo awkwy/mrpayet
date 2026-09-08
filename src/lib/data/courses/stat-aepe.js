@@ -30,7 +30,7 @@ export default {id:"stat-aepe",classe:"TC AEPE",mat:"Maths",titre:"Décrire un g
    {t:"La situation",txt:"La crèche Arc-en-ciel et la crèche Coquelicot annoncent toutes les deux un âge moyen de 2 ans. Pourtant l'une accueille surtout des moyens, l'autre surtout des bébés et des grands. L'âge moyen suffit-il à les décrire ?"},
    {t:"Calculer une moyenne quand les valeurs se répètent",apport:"Quand une valeur revient plusieurs fois, on multiplie la valeur par son effectif, on additionne tout, et on divise par l'effectif total."},
    {t:"Fais bouger les effectifs",viz:"moypond",
-    apport:"Le repère jaune est l'âge moyen. Déplace les effectifs : la moyenne peut rester la même alors que le groupe change complètement."},
+    apport:"Le repère bleu est l'âge moyen. Déplace les effectifs : la moyenne peut rester la même alors que le groupe change complètement."},
    {t:"Arc-en-ciel",doc:{h:["Âge","Effectif"],r:[["1 an","10"],["2 ans","20"],["3 ans","10"]]},
     q:[{q:"Somme pondérée : 1×10 + 2×20 + 3×10 = ?",a:80,tol:0},
        {q:"Âge moyen : 80 ÷ 40 = ? (en ans)",a:2,tol:0}]},
