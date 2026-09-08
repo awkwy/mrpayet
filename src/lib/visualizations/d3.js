@@ -188,4 +188,44 @@ export function stackDots(vals, x, AX) {
   });
 }
 
+/** Échafaudage d'un diagramme en bâtons sur axe catégoriel (équivalent SVG des
+ * bâtons canvas de `batons`/`moypond`). `cats` = nombre de catégories.
+ * Retourne le <svg>, la géométrie, `band(i)` → { x, w, cx } (position et
+ * largeur du i-ᵉ bâton) et `yScale(frac)` qui mappe une fraction [0, 1] de la
+ * hauteur utile vers une ordonnée viewBox. Les bâtons sont dessinés par la
+ * fiche (hauteur animée au ressort) ; garder 2 u d'écart couleur surface entre
+ * voisins (marks-and-anatomy.md « 2px surface gap between adjacent bars »). */
+export function barField(host, { height, cats, bot = 44, top = 22, fill = 0.62 }) {
+  const W = VB_W;
+  const L = 34;
+  const R = W - 16;
+  const AX = height - bot;
+  const gap = (R - L) / cats;
+  const bw = gap * fill;
+
+  const svg = select(host)
+    .append('svg')
+    .attr('class', 'd3viz')
+    .attr('viewBox', `0 0 ${W} ${height}`)
+    .attr('role', 'img')
+    .attr('preserveAspectRatio', 'xMidYMid meet');
+
+  const ax = svg.append('g').attr('class', 'ax');
+  ax.append('line')
+    .attr('x1', L)
+    .attr('x2', R)
+    .attr('y1', AX)
+    .attr('y2', AX)
+    .attr('stroke', 'var(--line2)')
+    .attr('stroke-width', 1);
+
+  const band = (i) => {
+    const x = L + i * gap + (gap - bw) / 2;
+    return { x, w: bw, cx: x + bw / 2 };
+  };
+  const yScale = (frac) => AX - Math.max(0, Math.min(1, frac)) * (AX - top);
+
+  return { svg, ax, W, H: height, L, R, AX, top, band, yScale, gap, bw };
+}
+
 export { select };
