@@ -47,6 +47,7 @@
 
     function stopFill() {
       gen++;
+      loop.stop();
       sampFill.interrupt('fill');
       sampG.interrupt().attr('opacity', 0);
       anim = null;
@@ -287,8 +288,10 @@
 
     function prelever(k) {
       if (anim) return;
+      const g = gen;
       let i = 0;
       const step = () => {
+        if (g !== gen) return;
         fs.push(sample() / n);
         render(true);
         if (++i < k) loop.raf(step);
