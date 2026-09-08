@@ -14,14 +14,23 @@ import { SM } from './shared.js';
  * bascule : des changements de valeur amortis, jamais des sauts mécaniques.
  *
  * Volontairement minimal : juste ce dont les deux fiches ont besoin en commun
- * (échafaudage SVG, axe gradué, empilement des points, easing ressort). */
+ * (échafaudage SVG, axe gradué, empilement des points, easing ressort,
+ * infobulle survol/focus).
+ *
+ * Couleurs : tout est tiré de src/lib/styles/tokens.css via var(--…) — jamais
+ * de hex en dur ici. Suivi de la procédure « dataviz » : les onze durées sont
+ * une série unique (pas de légende) peinte dans la teinte séquentielle du site
+ * (rampe verte --g/--g2/--g3) ; la valeur dérivée (moyenne / médiane) est un
+ * accent neutre --blue — surtout pas --warn, qui est un jeton d'état réservé.
+ * Axe et graduations : filet 1 px --line2, discret. */
 
 /** Largeur de la zone de dessin en unités viewBox. Le SVG est mis à
  * l'échelle en largeur:100 % par la CSS, donc ces unités sont indépendantes
  * de la résolution (bonus du SVG sur le canvas). On garde la largeur logique
  * du canvas historique (`cvs()` plafonne à 620) : traits, polices, rayons et
  * l'empilement des points (`stackDots`, pas de 9 u) rendent alors à la même
- * échelle visuelle que les ~22 autres manipulations canvas du même écran. */
+ * échelle visuelle que les autres manipulations canvas du même écran
+ * (liste dans `registry.js`). */
 export const VB_W = 620;
 
 /** Easing « ressort » : intègre un oscillateur masse-ressort-amortisseur puis
@@ -86,12 +95,14 @@ export function dotPlot(host, { height, min, max, step, bot }) {
     .attr('preserveAspectRatio', 'xMidYMid meet');
 
   const ax = svg.append('g').attr('class', 'ax');
+  // Ligne de base : filet plein discret, une marche au-dessus de la surface
+  // (marks-and-anatomy.md « gridlines/axes : hairline 1px solid, recessive »).
   ax.append('line')
     .attr('x1', L)
     .attr('x2', R)
     .attr('y1', AX)
     .attr('y2', AX)
-    .attr('stroke', 'rgba(255,255,255,.2)')
+    .attr('stroke', 'var(--line2)')
     .attr('stroke-width', 1);
 
   for (let v = min; v <= max + 1e-9; v += step) {
@@ -100,19 +111,68 @@ export function dotPlot(host, { height, min, max, step, bot }) {
       .attr('x2', x(v))
       .attr('y1', AX)
       .attr('y2', AX + 5)
-      .attr('stroke', 'rgba(255,255,255,.2)')
+      .attr('stroke', 'var(--line2)')
       .attr('stroke-width', 1);
     ax.append('text')
       .attr('x', x(v))
       .attr('y', AX + 15)
       .attr('text-anchor', 'middle')
-      .attr('fill', '#63776d')
+      .attr('fill', 'var(--dim2)')
       .attr('font-family', SM)
       .attr('font-size', 11)
       .text(String(v));
   }
 
   return { svg, x, W, H: height, L, R, AX };
+}
+
+/** Infobulle survol/focus partagée (interaction.md : « an HTML chart is
+ * interactive by default »). Un <div> positionné en pixels CSS auprès du
+ * point visé ; la valeur mène, le libellé suit. Insertion par `textContent`
+ * uniquement. `host` doit être `position: relative`. Par défaut au-dessus de
+ * la marque ; bascule en dessous (classe `.below`) quand elle serait rognée
+ * par le `overflow: hidden` du conteneur près du bord haut. */
+export function tip(host) {
+  const el = document.createElement('div');
+  el.className = 'vtip';
+  el.hidden = true;
+  const v = document.createElement('span');
+  v.className = 'tv';
+  const k = document.createElement('span');
+  k.className = 'tk';
+  el.append(v, k);
+  host.appendChild(el);
+
+  const GAP = 12;
+
+  return {
+    /** `cx`,`cy` = centre de la marque, en pixels CSS relatifs à `host`. */
+    show(cx, cy, value, key) {
+      v.textContent = value;
+      k.textContent = key || '';
+      el.style.left = cx + 'px';
+      el.hidden = false;
+      const below = cy - GAP - el.offsetHeight < 0;
+      el.classList.toggle('below', below);
+      el.style.top = (below ? cy + GAP : cy - GAP) + 'px';
+    },
+    hide() {
+      el.hidden = true;
+    },
+    remove() {
+      el.remove();
+    }
+  };
+}
+
+/** Convertit un point du repère viewBox (`vx`,`vy`) en pixels CSS relatifs au
+ * conteneur `host`, en tenant compte de la mise à l'échelle largeur:100 % du
+ * <svg>. */
+export function vbToCss(host, svgNode, vx, vy) {
+  const r = svgNode.getBoundingClientRect();
+  const hr = host.getBoundingClientRect();
+  const s = r.width / VB_W;
+  return { x: r.left - hr.left + vx * s, y: r.top - hr.top + vy * s };
 }
 
 /** Empile les points qui tombent dans la même colonne (port fidèle du
