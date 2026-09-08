@@ -11,15 +11,16 @@
    *    un repère fixe ; l'étendue observée est le message.
    * 2. Couleur : une seule série (les fréquences observées) → teinte
    *    séquentielle unique `--g`. Le repère p et le crochet d'étendue sont des
-   *    accents neutres `--blue` — jamais `--warn` (jeton d'état réservé). La
-   *    grille de tirage (succès / échecs d'un échantillon) reste en `--g` /
-   *    `--surf3`, aucune couleur d'état.
+   *    accents neutres `--blue` — jamais `--warn` (jeton d'état réservé). Lors
+   *    d'un « Prélever 1 », la barre de proportion de l'échantillon (part
+   *    défectueuse) est en `--g` sur fond `--surf3`, aucune couleur d'état ;
+   *    sa fraction verte s'aligne sur l'abscisse où le point va se poser.
    * 3. Validation : node scripts/validate_palette.js "#7ef2b0,#7ec8f2"
    *    --mode dark --surface "#0f1512" → série/accent CVD ΔE 15,5 (deutan) /
    *    17,1 (normal), contraste ≥ 3:1 : PASS. FAIL band/chroma = thème néon du
    *    site.
    * 4. Marques : disques r 3,4, axe filet 1 u, repère p filet 2 u pointillé,
-   *    crochet d'étendue 2 u à bouts arrondis.
+   *    crochet d'étendue 2 u à bouts arrondis, barre d'échantillon sous l'axe.
    * 5. Interaction : boutons de taille d'échantillon et de prélèvement
    *    conservés + infobulle survol/focus sur les points.
    * 6. Accessibilité : vue tableau repliable (nombre d'échantillons, étendue,
@@ -43,12 +44,12 @@
     let fs = [];
     let anim = null;
 
-    const { svg, x, W, H, L, R, AX } = dotPlot(host, {
-      height: 162,
+    const { svg, x, L, R, AX } = dotPlot(host, {
+      height: 190,
       min: 0,
       max: 1,
       step: 0.25,
-      bot: 44
+      bot: 66
     });
     svg.attr('aria-label', `Nuage des fréquences d'échantillons et repère de la proportion p = ${fr(P.toFixed(2))}`);
     const svgNode = svg.node();
@@ -87,7 +88,34 @@
     const capR = rangeG.append('line').attr('stroke', 'var(--blue)').attr('stroke-width', 2).attr('stroke-linecap', 'round');
 
     const dotsG = svg.append('g').attr('class', 'dots');
-    const gridG = svg.append('g').attr('class', 'grid');
+
+    // barre de proportion d'un échantillon (mode « Prélever 1 ») : sous l'axe,
+    // jamais par-dessus le nuage. Sa fraction verte = part défectueuse de
+    // l'échantillon, alignée horizontalement sur l'abscisse du futur point.
+    const SB_Y = AX + 36;
+    const sampG = svg.append('g').attr('class', 'samp').attr('opacity', 0);
+    sampG
+      .append('rect')
+      .attr('x', L)
+      .attr('y', SB_Y)
+      .attr('width', R - L)
+      .attr('height', 9)
+      .attr('rx', 4)
+      .attr('fill', 'var(--surf3)');
+    const sampFill = sampG
+      .append('rect')
+      .attr('x', L)
+      .attr('y', SB_Y)
+      .attr('height', 9)
+      .attr('rx', 4)
+      .attr('fill', 'var(--g)');
+    const sampTxt = sampG
+      .append('text')
+      .attr('x', L)
+      .attr('y', SB_Y - 5)
+      .attr('fill', 'var(--dim)')
+      .attr('font-family', SM)
+      .attr('font-size', 10.5);
 
     const nb = box(
       host,
@@ -131,28 +159,6 @@
       bulle.show(p.x, p.y, fr(d.v.toFixed(2)), `échantillon n°${d.i + 1}`);
     }
 
-    function drawGrid() {
-      if (!anim) {
-        gridG.selectAll('rect').remove();
-        return;
-      }
-      const { done, tot, bad } = anim;
-      const cols = Math.min(tot, 40);
-      const s = Math.min(10, (R - L) / cols - 2);
-      const rows = Math.max(1, Math.floor((H - 16) / (s + 2)));
-      const visible = Math.min(done, cols * rows);
-      const cells = Array.from({ length: visible }, (_, i) => i);
-      gridG
-        .selectAll('rect')
-        .data(cells, (i) => i)
-        .join((enter) => enter.append('rect').attr('rx', 1.5))
-        .attr('x', (i) => L + (i % cols) * (s + 2))
-        .attr('y', (i) => 16 + Math.floor(i / cols) * (s + 2))
-        .attr('width', s)
-        .attr('height', s)
-        .attr('fill', (i) => (i < bad ? 'var(--g)' : 'var(--surf3)'));
-    }
-
     function render(animate) {
       const layout = stack(fs);
       const join = dotsG.selectAll('circle.mark').data(layout, (d) => d.i);
@@ -194,8 +200,6 @@
       } else {
         rangeG.attr('opacity', 0);
       }
-
-      drawGrid();
 
       host.querySelector('#fN').textContent = fs.length;
       if (fs.length > 1) {
@@ -246,21 +250,29 @@
 
     function prelever1() {
       if (anim) return;
+      anim = true;
       const bad = sample();
-      anim = { done: 0, tot: n, bad };
-      const per = Math.max(1, Math.ceil(n / 14));
-      const step = () => {
-        anim.done = Math.min(anim.tot, anim.done + per);
-        drawGrid();
-        if (anim.done < anim.tot) {
-          loop.raf(step);
-        } else {
-          fs.push(bad / n);
-          anim = null;
-          render(true);
-        }
+      const frac = bad / n;
+      sampTxt.text(`cet échantillon : ${bad} défectueux sur ${n} → ${fr(frac.toFixed(2))}`);
+      sampG.interrupt().attr('opacity', 1);
+      const land = () => {
+        fs.push(frac);
+        render(true);
+        sampG.transition().delay(500).duration(300).attr('opacity', 0);
+        anim = null;
       };
-      step();
+      if (RM) {
+        sampFill.attr('width', frac * (R - L));
+        land();
+      } else {
+        sampFill
+          .attr('width', 0)
+          .transition()
+          .duration(700)
+          .ease(spring)
+          .attr('width', frac * (R - L))
+          .on('end', land);
+      }
     }
 
     function prelever(k) {

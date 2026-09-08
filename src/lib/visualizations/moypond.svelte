@@ -19,8 +19,10 @@
    *    chroma floor » sont une propriété du thème néon-sur-noir du site, pas
    *    corrigeables sans hex hors tokens.css.
    * 4. Marques : bâtons à bout arrondi 4 u, 2 u d'écart couleur surface entre
-   *    voisins ; pivot filet 2 u + triangle. Axe : filet 1 u. Libellé direct
-   *    sélectif : les effectifs au-dessus des bâtons, le pivot.
+   *    voisins ; pivot = filet pointillé 2 u + pastille à l'axe + libellé sur sa
+   *    propre ligne sous les âges (pas de flèche qui chevauche les libellés).
+   *    Axe : filet 1 u. Libellé direct sélectif : les effectifs sur les bâtons,
+   *    le pivot.
    * 5. Interaction : trois curseurs (un par âge) conservés + infobulle
    *    survol/focus sur les bâtons ; cible de survol > la marque.
    * 6. Accessibilité : vue tableau repliable, focus clavier = survol, mouvement
@@ -44,10 +46,10 @@
     const eff = (vd && vd.eff && vd.eff.slice()) || [10, 20, 10];
     const MAXE = (vd && vd.maxEff) || 30;
 
-    const { svg, W, H, band, yScale, AX } = barField(host, {
-      height: 200,
+    const { svg, W, band, yScale, AX } = barField(host, {
+      height: 214,
       cats: AGES.length,
-      bot: 46,
+      bot: 60,
       top: 24
     });
     svg.attr('aria-label', `Diagramme en bâtons des effectifs par âge et pivot de l'âge moyen`);
@@ -63,13 +65,14 @@
       .attr('stroke', 'var(--blue)')
       .attr('stroke-width', 2)
       .attr('stroke-dasharray', '5 4');
-    const tri = pivotG
-      .append('path')
-      .attr('d', 'M0,0 L-6,10 L6,10 Z')
+    const knob = pivotG
+      .append('circle')
+      .attr('cy', AX)
+      .attr('r', 3.5)
       .attr('fill', 'var(--blue)');
     const plabel = pivotG
       .append('text')
-      .attr('y', H - 6)
+      .attr('y', AX + 42)
       .attr('text-anchor', 'middle')
       .attr('fill', 'var(--blue)')
       .attr('font-family', SM)
@@ -202,9 +205,9 @@
         });
 
       const px = xForAge(moy);
-      stem.interrupt('p').attr('x1', px).attr('x2', px);
-      tri.interrupt('p').attr('transform', `translate(${px},${AX + 1})`);
-      plabel.interrupt('p').attr('x', Math.max(50, Math.min(W - 50, px)));
+      stem.attr('x1', px).attr('x2', px);
+      knob.attr('cx', px);
+      plabel.attr('x', Math.max(54, Math.min(W - 54, px)));
       plabel.text(`moyenne ${fr(moy.toFixed(2))} ${UNIT}`);
 
       host.querySelector('#pT').textContent = tot;
