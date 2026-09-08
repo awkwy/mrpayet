@@ -41,10 +41,10 @@
     host.style.position = 'relative';
     const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const AGES = (vd && vd.ages) || [1, 2, 3];
-    const UNIT = (vd && vd.unit) || 'ans';
-    const eff = (vd && vd.eff && vd.eff.slice()) || [10, 20, 10];
-    const MAXE = (vd && vd.maxEff) || 30;
+    const AGES = [1, 2, 3];
+    const UNIT = 'ans';
+    const eff = [10, 20, 10];
+    const MAXE = 30;
 
     const { svg, W, band, yScale, AX } = barField(host, {
       height: 214,

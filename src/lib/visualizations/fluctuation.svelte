@@ -39,10 +39,18 @@
     host.style.position = 'relative';
     const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const P = (vd && vd.p) || 0.2;
+    const P = 0.2;
     let n = 10;
     let fs = [];
     let anim = null;
+    let gen = 0;
+
+    function stopFill() {
+      gen++;
+      sampFill.interrupt('fill');
+      sampG.interrupt().attr('opacity', 0);
+      anim = null;
+    }
 
     const { svg, x, L, R, AX } = dotPlot(host, {
       height: 190,
@@ -255,7 +263,9 @@
       const frac = bad / n;
       sampTxt.text(`cet échantillon : ${bad} défectueux sur ${n} → ${fr(frac.toFixed(2))}`);
       sampG.interrupt().attr('opacity', 1);
+      const g = gen;
       const land = () => {
+        if (g !== gen) return;
         fs.push(frac);
         render(true);
         sampG.transition().delay(500).duration(300).attr('opacity', 0);
@@ -267,7 +277,7 @@
       } else {
         sampFill
           .attr('width', 0)
-          .transition()
+          .transition('fill')
           .duration(700)
           .ease(spring)
           .attr('width', frac * (R - L))
@@ -290,14 +300,14 @@
     ctl.querySelector('#o20').onclick = () => prelever(20);
     ctl.querySelector('#rz').onclick = () => {
       fs = [];
-      anim = null;
+      stopFill();
       render(false);
     };
     nb.querySelectorAll('[data-n]').forEach((b) => {
       b.onclick = () => {
         n = +b.dataset.n;
         fs = [];
-        anim = null;
+        stopFill();
         nb.querySelectorAll('button').forEach((z) => z.classList.remove('on'));
         b.classList.add('on');
         render(false);
@@ -320,6 +330,7 @@
 
     cleanup = () => {
       loop.stop();
+      stopFill();
       svg.selectAll('*').interrupt('in');
       bulle.remove();
       select(host).selectAll('*').remove();
