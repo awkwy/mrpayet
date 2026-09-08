@@ -29,7 +29,8 @@ import { SM } from './shared.js';
  * de la résolution (bonus du SVG sur le canvas). On garde la largeur logique
  * du canvas historique (`cvs()` plafonne à 620) : traits, polices, rayons et
  * l'empilement des points (`stackDots`, pas de 9 u) rendent alors à la même
- * échelle visuelle que les ~22 autres manipulations canvas du même écran. */
+ * échelle visuelle que les autres manipulations canvas du même écran
+ * (liste dans `registry.js`). */
 export const VB_W = 620;
 
 /** Easing « ressort » : intègre un oscillateur masse-ressort-amortisseur puis
