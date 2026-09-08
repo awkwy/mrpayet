@@ -129,7 +129,7 @@
     const cap = dataView.querySelector('#zCap');
 
     function showTip(d) {
-      const p = vbToCss(host, svgNode, d.cx, d.cy - 9);
+      const p = vbToCss(host, svgNode, d.cx, d.cy);
       bulle.show(p.x, p.y, fr(d.v) + ' min', d.i === 10 ? 'valeur extrême' : 'durée n°' + (d.i + 1));
     }
 
@@ -161,10 +161,9 @@
         .attr('r', 15)
         .attr('fill', 'transparent')
         .attr('tabindex', 0)
-        .attr('role', 'button')
         .on('mouseenter focus', (event, d) => showTip(d))
         .on('mouseleave blur', () => bulle.hide());
-      enter.append('circle').attr('class', 'mark');
+      enter.append('circle').attr('class', 'mark').style('pointer-events', 'none');
       const all = enter.merge(join);
       all.select('circle.hit').attr('aria-label', (d) => `Durée n°${d.i + 1} : ${d.v} minutes`);
       all

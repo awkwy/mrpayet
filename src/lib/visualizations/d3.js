@@ -126,9 +126,11 @@ export function dotPlot(host, { height, min, max, step, bot }) {
 }
 
 /** Infobulle survol/focus partagée (interaction.md : « an HTML chart is
- * interactive by default »). Un <div> positionné en pixels CSS au-dessus du
+ * interactive by default »). Un <div> positionné en pixels CSS auprès du
  * point visé ; la valeur mène, le libellé suit. Insertion par `textContent`
- * uniquement. `host` doit être `position: relative`. */
+ * uniquement. `host` doit être `position: relative`. Par défaut au-dessus de
+ * la marque ; bascule en dessous (classe `.below`) quand elle serait rognée
+ * par le `overflow: hidden` du conteneur près du bord haut. */
 export function tip(host) {
   const el = document.createElement('div');
   el.className = 'vtip';
@@ -140,14 +142,18 @@ export function tip(host) {
   el.append(v, k);
   host.appendChild(el);
 
+  const GAP = 12;
+
   return {
-    /** `cx`,`cy` en pixels CSS relatifs à `host` (haut-gauche). */
+    /** `cx`,`cy` = centre de la marque, en pixels CSS relatifs à `host`. */
     show(cx, cy, value, key) {
       v.textContent = value;
       k.textContent = key || '';
       el.style.left = cx + 'px';
-      el.style.top = cy + 'px';
       el.hidden = false;
+      const below = cy - GAP - el.offsetHeight < 0;
+      el.classList.toggle('below', below);
+      el.style.top = (below ? cy + GAP : cy - GAP) + 'px';
     },
     hide() {
       el.hidden = true;

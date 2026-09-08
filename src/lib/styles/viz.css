@@ -175,6 +175,9 @@
   border: 1px solid var(--line2);
   border-radius: 7px;
 }
+.vtip.below {
+  transform: translate(-50%, 0);
+}
 .vtip[hidden] {
   display: none;
 }
