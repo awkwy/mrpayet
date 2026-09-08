@@ -14,7 +14,15 @@ import { SM } from './shared.js';
  * bascule : des changements de valeur amortis, jamais des sauts mécaniques.
  *
  * Volontairement minimal : juste ce dont les deux fiches ont besoin en commun
- * (échafaudage SVG, axe gradué, empilement des points, easing ressort). */
+ * (échafaudage SVG, axe gradué, empilement des points, easing ressort,
+ * infobulle survol/focus).
+ *
+ * Couleurs : tout est tiré de src/lib/styles/tokens.css via var(--…) — jamais
+ * de hex en dur ici. Suivi de la procédure « dataviz » : les onze durées sont
+ * une série unique (pas de légende) peinte dans la teinte séquentielle du site
+ * (rampe verte --g/--g2/--g3) ; la valeur dérivée (moyenne / médiane) est un
+ * accent neutre --blue — surtout pas --warn, qui est un jeton d'état réservé.
+ * Axe et graduations : filet 1 px --line2, discret. */
 
 /** Largeur de la zone de dessin en unités viewBox. Le SVG est mis à
  * l'échelle en largeur:100 % par la CSS, donc ces unités sont indépendantes
@@ -86,12 +94,14 @@ export function dotPlot(host, { height, min, max, step, bot }) {
     .attr('preserveAspectRatio', 'xMidYMid meet');
 
   const ax = svg.append('g').attr('class', 'ax');
+  // Ligne de base : filet plein discret, une marche au-dessus de la surface
+  // (marks-and-anatomy.md « gridlines/axes : hairline 1px solid, recessive »).
   ax.append('line')
     .attr('x1', L)
     .attr('x2', R)
     .attr('y1', AX)
     .attr('y2', AX)
-    .attr('stroke', 'rgba(255,255,255,.2)')
+    .attr('stroke', 'var(--line2)')
     .attr('stroke-width', 1);
 
   for (let v = min; v <= max + 1e-9; v += step) {
@@ -100,19 +110,62 @@ export function dotPlot(host, { height, min, max, step, bot }) {
       .attr('x2', x(v))
       .attr('y1', AX)
       .attr('y2', AX + 5)
-      .attr('stroke', 'rgba(255,255,255,.2)')
+      .attr('stroke', 'var(--line2)')
       .attr('stroke-width', 1);
     ax.append('text')
       .attr('x', x(v))
       .attr('y', AX + 15)
       .attr('text-anchor', 'middle')
-      .attr('fill', '#63776d')
+      .attr('fill', 'var(--dim2)')
       .attr('font-family', SM)
       .attr('font-size', 11)
       .text(String(v));
   }
 
   return { svg, x, W, H: height, L, R, AX };
+}
+
+/** Infobulle survol/focus partagée (interaction.md : « an HTML chart is
+ * interactive by default »). Un <div> positionné en pixels CSS au-dessus du
+ * point visé ; la valeur mène, le libellé suit. Insertion par `textContent`
+ * uniquement. `host` doit être `position: relative`. */
+export function tip(host) {
+  const el = document.createElement('div');
+  el.className = 'vtip';
+  el.hidden = true;
+  const v = document.createElement('span');
+  v.className = 'tv';
+  const k = document.createElement('span');
+  k.className = 'tk';
+  el.append(v, k);
+  host.appendChild(el);
+
+  return {
+    /** `cx`,`cy` en pixels CSS relatifs à `host` (haut-gauche). */
+    show(cx, cy, value, key) {
+      v.textContent = value;
+      k.textContent = key || '';
+      el.style.left = cx + 'px';
+      el.style.top = cy + 'px';
+      el.hidden = false;
+    },
+    hide() {
+      el.hidden = true;
+    },
+    remove() {
+      el.remove();
+    }
+  };
+}
+
+/** Convertit un point du repère viewBox (`vx`,`vy`) en pixels CSS relatifs au
+ * conteneur `host`, en tenant compte de la mise à l'échelle largeur:100 % du
+ * <svg>. */
+export function vbToCss(host, svgNode, vx, vy) {
+  const r = svgNode.getBoundingClientRect();
+  const hr = host.getBoundingClientRect();
+  const s = r.width / VB_W;
+  return { x: r.left - hr.left + vx * s, y: r.top - hr.top + vy * s };
 }
 
 /** Empile les points qui tombent dans la même colonne (port fidèle du
