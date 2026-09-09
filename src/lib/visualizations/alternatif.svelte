@@ -84,8 +84,8 @@
     let phase = 0;
 
     // Disposition VERTICALE (jamais côte à côte) : le circuit en grand en haut,
-    // la trace tension/temps pleine largeur en dessous — lisible sur un
-    // téléphone tenu à la verticale.
+    // l'écran d'oscilloscope en dessous, aligné sur la largeur du circuit —
+    // lisible sur un téléphone tenu à la verticale.
     const W = 620;
     const H = 430;
     const svg = select(host)
@@ -195,7 +195,7 @@
     hvBadge.append('text').attr('x', 0).attr('y', 5).attr('text-anchor', 'middle').attr('font-family', SM).attr('font-size', 11).attr('font-weight', 'bold').attr('fill', 'var(--warn)').text('!');
     hvBadge.append('text').attr('x', 16).attr('y', 5).attr('font-family', SM).attr('font-size', 10.5).attr('fill', 'var(--warn)').text('HAUTE TENSION');
 
-    // ---- trace tension / temps (bandeau plein, en bas) ----
+    // ---- trace tension / temps (écran d'oscilloscope, en bas) ----
     // Écran d'oscilloscope aligné sur la largeur du circuit : jamais plus large
     // que le schéma au-dessus (bord droit et bord gauche communs).
     const TL = X0;
