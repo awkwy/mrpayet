@@ -126,6 +126,8 @@
 
     const val = (e) =>
       mode === 'eff' ? String(e) : mode === 'freq' ? fr((e / TOT).toFixed(2)) : Math.round((e / TOT) * 100) + ' %';
+    const tipFor = (e) => (mode === 'eff' ? `${e} ${UNIT}` : `${val(e)} (${e} ${UNIT})`);
+    const ariaFor = (c) => `${c[0]} : ${tipFor(c[1])}`;
 
     // ---- bâtons ----
     const mxE = Math.max(...CATS.map((c) => c[1]), 1);
@@ -140,11 +142,11 @@
         .attr('height', AX)
         .attr('fill', 'transparent')
         .attr('tabindex', 0)
-        .attr('aria-label', `${c[0]} : ${c[1]} ${UNIT}`)
+        .attr('aria-label', ariaFor(c))
         .on('mouseenter focus', () => {
           const topY = yScale(c[1] / mxE);
           const p = vbToCss(host, svgNode, b.cx, topY);
-          bulle.show(p.x, p.y, `${c[1]} ${UNIT}`, c[0]);
+          bulle.show(p.x, p.y, tipFor(c[1]), c[0]);
         })
         .on('mouseleave blur', () => bulle.hide());
       g.append('rect')
@@ -180,12 +182,12 @@
         .attr('stroke', 'var(--bg)')
         .attr('stroke-width', 2.5)
         .attr('tabindex', 0)
-        .attr('aria-label', `${c[0]} : ${Math.round((c[1] / TOT) * 100)} %`)
+        .attr('aria-label', ariaFor(c))
         .on('mouseenter focus', () => {
           const lx = PCX + Math.cos(s.am) * PR * 0.6;
           const ly = PCY + Math.sin(s.am) * PR * 0.6;
           const p = vbToCss(host, svgNode, lx, ly);
-          bulle.show(p.x, p.y, `${Math.round((c[1] / TOT) * 100)} %`, c[0]);
+          bulle.show(p.x, p.y, tipFor(c[1]), c[0]);
         })
         .on('mouseleave blur', () => bulle.hide());
       return s;
@@ -245,6 +247,12 @@
       pieG.selectAll('text.plab').each(function () {
         const i = +select(this).attr('data-i');
         select(this).text(val(CATS[i][1]));
+      });
+      barsG.selectAll('rect.hit').each(function (_, i) {
+        select(this).attr('aria-label', ariaFor(CATS[i]));
+      });
+      pieG.selectAll('path.sect').each(function (_, i) {
+        select(this).attr('aria-label', ariaFor(CATS[i]));
       });
     }
 
