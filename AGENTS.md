@@ -14,8 +14,9 @@ This file is the project's committed home for project-intrinsic agent knowledge:
 - **Migration D3 en cours** (canvas → `<svg>` animé par les transitions D3 ;
   imports modulaires `d3-selection`/`d3-transition`/`d3-drag`, pas le bundle
   `d3` ni `d3-scale`, pour le poids). Fiches déjà portées : `moyenne`,
-  `mediane`, `moypond`, `fluctuation`. Les autres restent sur `shared.js`
-  (canvas) en attendant leur lot.
+  `mediane`, `moypond`, `fluctuation` (+ `alternatif`, refonte — voir
+  ci-dessous). Les autres restent sur `shared.js` (canvas) en attendant leur
+  lot.
 - `alternatif` est une **refonte** (pas une simple migration de graphe) :
   schéma de circuit avec symboles normalisés (source pile/générateur,
   interrupteur, lampe ⊗), animation de « remplissage » des fils à la fermeture
