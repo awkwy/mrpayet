@@ -1,8 +1,8 @@
 import { select } from 'd3-selection';
 import 'd3-transition';
-import { SM } from './shared.js';
+import { SM, fr } from './shared.js';
 
-/* Socle D3 partagé — pilote pour moyenne/médiane.
+/* Socle D3 partagé de la migration canvas → SVG (fiches portées : AGENTS.md).
  *
  * Choix : imports modulaires (d3-selection, d3-transition, d3-drag)
  * plutôt que le bundle `d3` complet, pour tenir la contrainte « mobile
@@ -13,15 +13,16 @@ import { SM } from './shared.js';
  * transitions D3, dont l'assouplissement (`springEase`) est le vrai but de la
  * bascule : des changements de valeur amortis, jamais des sauts mécaniques.
  *
- * Volontairement minimal : juste ce dont les deux fiches ont besoin en commun
- * (échafaudage SVG, axe gradué, empilement des points, easing ressort,
- * infobulle survol/focus).
+ * Volontairement minimal : juste ce dont les fiches portées ont besoin en
+ * commun (échafaudage SVG, axe gradué, empilement des points, diagramme en
+ * bâtons, easing ressort, infobulle survol/focus).
  *
  * Couleurs : tout est tiré de src/lib/styles/tokens.css via var(--…) — jamais
- * de hex en dur ici. Suivi de la procédure « dataviz » : les onze durées sont
- * une série unique (pas de légende) peinte dans la teinte séquentielle du site
- * (rampe verte --g/--g2/--g3) ; la valeur dérivée (moyenne / médiane) est un
- * accent neutre --blue — surtout pas --warn, qui est un jeton d'état réservé.
+ * de hex en dur ici. Suivi de la procédure « dataviz » : une série de données
+ * est peinte dans la teinte séquentielle unique du site (rampe verte
+ * --g/--g2/--g3, pas de légende) ; la valeur dérivée (moyenne, médiane, âge
+ * moyen) ou le repère théorique (proportion p) est un accent neutre --blue —
+ * surtout pas --warn/--red, jetons d'état réservés.
  * Axe et graduations : filet 1 px --line2, discret. */
 
 /** Largeur de la zone de dessin en unités viewBox. Le SVG est mis à
@@ -120,7 +121,7 @@ export function dotPlot(host, { height, min, max, step, bot }) {
       .attr('fill', 'var(--dim2)')
       .attr('font-family', SM)
       .attr('font-size', 11)
-      .text(String(v));
+      .text(fr(String(v)));
   }
 
   return { svg, x, W, H: height, L, R, AX };
@@ -186,6 +187,47 @@ export function stackDots(vals, x, AX) {
     const cy = Math.max(12, AX - 11 - (bucket[key] - 1) * 11);
     return { i, v, cx: x(v), cy };
   });
+}
+
+/** Échafaudage d'un diagramme en bâtons sur axe catégoriel (équivalent SVG du
+ * tracé bâtons canvas de `batons`, consommé ici par `moypond`). `cats` = nombre
+ * de catégories.
+ * Retourne le <svg>, la géométrie, `band(i)` → { x, w, cx } (position et
+ * largeur du i-ᵉ bâton) et `yScale(frac)` qui mappe une fraction [0, 1] de la
+ * hauteur utile vers une ordonnée viewBox. Les bâtons sont dessinés par la
+ * fiche (hauteur animée au ressort) ; garder 2 u d'écart couleur surface entre
+ * voisins (marks-and-anatomy.md « 2px surface gap between adjacent bars »). */
+export function barField(host, { height, cats, bot = 44, top = 22, fill = 0.62 }) {
+  const W = VB_W;
+  const L = 34;
+  const R = W - 16;
+  const AX = height - bot;
+  const gap = (R - L) / cats;
+  const bw = gap * fill;
+
+  const svg = select(host)
+    .append('svg')
+    .attr('class', 'd3viz')
+    .attr('viewBox', `0 0 ${W} ${height}`)
+    .attr('role', 'img')
+    .attr('preserveAspectRatio', 'xMidYMid meet');
+
+  const ax = svg.append('g').attr('class', 'ax');
+  ax.append('line')
+    .attr('x1', L)
+    .attr('x2', R)
+    .attr('y1', AX)
+    .attr('y2', AX)
+    .attr('stroke', 'var(--line2)')
+    .attr('stroke-width', 1);
+
+  const band = (i) => {
+    const x = L + i * gap + (gap - bw) / 2;
+    return { x, w: bw, cx: x + bw / 2 };
+  };
+  const yScale = (frac) => AX - Math.max(0, Math.min(1, frac)) * (AX - top);
+
+  return { svg, ax, W, H: height, L, R, AX, top, band, yScale, gap, bw };
 }
 
 export { select };

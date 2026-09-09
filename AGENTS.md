@@ -11,23 +11,28 @@ This file is the project's committed home for project-intrinsic agent knowledge:
   Socle historique : `shared.js` (rendu `<canvas>`
   2D + `requestAnimationFrame`, helpers `box`/`slider`/`readout`/`Spring`/
   `createLoop`).
-- `moyenne.svelte` et `mediane.svelte` sont un **pilote D3** : rendu `<svg>` animé
-  par les transitions D3 (imports modulaires `d3-selection`/`d3-transition`/
-  `d3-drag`, pas le bundle `d3` ni `d3-scale`, pour le poids). Socle
-  partagé : `d3.js` (`dotPlot`, `stackDots`, `linScale`, easing ressort
-  `springEase`/`spring`, infobulle `tip` + conversion `vbToCss` ; `VB_W` =
-  largeur logique du canvas historique, pour rendre à la même échelle que les
-  autres fiches). CSS du cadre SVG : `.viz svg.d3viz` mutualisé avec
-  `.viz canvas` dans `src/lib/styles/viz.css` (+ classes additives `.vtip`,
-  `.viz-data`, `.read .v.b`, sans effet sur les autres fiches).
-- Les deux fiches suivent la procédure `dataviz` (voir en-tête de chaque
-  fichier) : couleurs **exclusivement** via `var(--…)` de `tokens.css` — points =
-  série unique teinte séquentielle `--g` ; valeur dérivée (moyenne/médiane) =
-  accent `--blue` (jamais `--warn`, jeton d'état réservé) ; validées
+- **Migration D3 en cours** (canvas → `<svg>` animé par les transitions D3 ;
+  imports modulaires `d3-selection`/`d3-transition`/`d3-drag`, pas le bundle
+  `d3` ni `d3-scale`, pour le poids). Fiches déjà portées : `moyenne`,
+  `mediane`, `moypond`, `fluctuation`. Les autres restent sur `shared.js`
+  (canvas) en attendant leur lot.
+- Socle partagé : `d3.js` — `dotPlot` + `stackDots` (nuage de points sur axe
+  gradué), `barField` (diagramme en bâtons sur axe catégoriel : `band(i)`,
+  `yScale(frac)`), `linScale`, easing ressort `springEase`/`spring`, infobulle
+  `tip` + conversion `vbToCss` ; `VB_W` = largeur logique du canvas historique,
+  pour rendre à la même échelle que les fiches canvas voisines. CSS du cadre
+  SVG : `.viz svg.d3viz` mutualisé avec `.viz canvas` dans
+  `src/lib/styles/viz.css` (+ classes additives `.vtip`, `.viz-data`,
+  `.read .v.b`, sans effet sur les fiches canvas).
+- Toutes les fiches portées suivent la procédure `dataviz` (voir en-tête de
+  chaque fichier) : couleurs **exclusivement** via `var(--…)` de `tokens.css` —
+  série de données = teinte séquentielle unique `--g` ; valeur dérivée
+  (moyenne, médiane, âge moyen) ou repère théorique (proportion `p`) = accent
+  `--blue` ; jamais `--warn`/`--red`, jetons d'état réservés. Palettes validées
   `--mode dark` avec `scripts/validate_palette.js` (les FAIL band/chroma sont la
   propriété du thème néon du site, pas corrigeables sans hex hors tokens).
   Accessibilité : vue tableau repliable, focus clavier = survol,
-  `prefers-reduced-motion` respecté. Les autres fiches n'ont pas été migrées.
+  `prefers-reduced-motion` respecté.
 - Contrainte tenue : mobile d'abord / poids léger (voir `src/lib/styles/tokens.css`).
   Animations : jamais de saut instantané — easing amorti obligatoire.
 - Pas de tests de visualisation dans la suite (`vitest` couvre `src/lib/stores/`).
