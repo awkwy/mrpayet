@@ -275,12 +275,12 @@
             : `Hauteur = <b>pourcentage</b> (fréquence × 100). La somme fait 100 %.`;
     }
 
-    function layoutBars(animate) {
+    function layoutBars() {
       barsG.selectAll('g.bar').each(function (_, i) {
         const b = band(i);
         const topY = yScale(CATS[i][1] / mxE);
         const r = select(this).select('rect.mark');
-        if (animate && !RM) {
+        if (!RM) {
           r.transition('t').duration(DUR).delay(i * 70).ease(spring).attr('y', topY).attr('height', AX - topY);
         } else {
           r.interrupt('t').attr('y', topY).attr('height', AX - topY);
@@ -288,7 +288,7 @@
       });
     }
 
-    function setView(animate) {
+    function setView() {
       const myGen = ++gen;
       updateReadouts();
       paintLabels();
@@ -297,6 +297,9 @@
         : '▸ Voir en diagramme circulaire';
       md.style.opacity = circ ? '.4' : '1';
       md.querySelectorAll('button').forEach((b) => (b.disabled = circ));
+
+      barsG.selectAll('rect.hit').attr('tabindex', circ ? null : 0);
+      pieG.selectAll('path.sect').attr('tabindex', circ ? 0 : null);
 
       if (!circ) {
         pieG.interrupt('f').transition('f').duration(RM ? 0 : 220).attr('opacity', 0).on('end', () => {
@@ -309,7 +312,7 @@
           .attr('opacity', 1);
         svg.selectAll('.catlab').transition('f').duration(RM ? 0 : 200).attr('opacity', 1);
         svg.select('.ax line').attr('opacity', 1);
-        layoutBars(animate);
+        layoutBars();
       } else {
         barsG.selectAll('rect.mark').interrupt('t').attr('y', AX).attr('height', 0);
         barsG.transition('f').duration(RM ? 0 : 200).attr('opacity', 0);
@@ -318,7 +321,7 @@
         svg.select('.ax line').attr('opacity', 0);
         pieG.attr('pointer-events', null);
         pieG.interrupt('f').transition('f').duration(RM ? 0 : 260).attr('opacity', 1);
-        if (animate && !RM) {
+        if (!RM) {
           pieG.selectAll('path.sect').each(function (_, i) {
             const s = sectors[i];
             select(this)
@@ -357,11 +360,11 @@
     });
     tg.querySelector('#tg').onclick = () => {
       circ = !circ;
-      setView(true);
+      setView();
     };
 
     // état initial : bâtons, révélation décalée
-    setView(true);
+    setView();
 
     cleanup = () => {
       svg.selectAll('*').interrupt('t').interrupt('f').interrupt('sweep');
