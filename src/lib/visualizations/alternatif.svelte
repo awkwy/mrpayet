@@ -9,7 +9,9 @@
    * milieux électriques d'un atelier et lire un schéma normalisé.
    *
    * 1. Forme  : un circuit dessiné avec les SYMBOLES NORMALISÉS (source, pile,
-   *    interrupteur, lampe ⊗) + une trace tension/temps compacte. Un bouton
+   *    interrupteur, lampe ⊗) au-dessus d'une trace tension/temps pleine
+   *    largeur — disposition verticale imposée (jamais côte à côte), lisible
+   *    sur un téléphone tenu à la verticale. Un bouton
    *    fait glisser l'image réaliste (batterie de voiture, prise, connecteur de
    *    traction) vers son symbole — l'élève apprend à lire le schéma à partir
    *    de ce qu'il voit sous le capot. Le courant est montré par un tracé qui
@@ -79,8 +81,11 @@
     let f = 50;
     let phase = 0;
 
+    // Disposition VERTICALE (jamais côte à côte) : le circuit en grand en haut,
+    // la trace tension/temps pleine largeur en dessous — lisible sur un
+    // téléphone tenu à la verticale.
     const W = 620;
-    const H = 250;
+    const H = 430;
     const svg = select(host)
       .append('svg')
       .attr('class', 'd3viz')
@@ -88,12 +93,12 @@
       .attr('role', 'img')
       .attr('preserveAspectRatio', 'xMidYMid meet');
 
-    // ---- géométrie du circuit (boucle rectangulaire) ----
-    const X0 = 56;
-    const X1 = 316;
-    const Y0 = 34;
-    const Y1 = 150;
-    const SW = { hinge: [150, Y0], contact: [196, Y0] }; // interrupteur (haut)
+    // ---- géométrie du circuit (boucle rectangulaire, pleine largeur, en haut) ----
+    const X0 = 74;
+    const X1 = 546;
+    const Y0 = 44;
+    const Y1 = 228;
+    const SW = { hinge: [282, Y0], contact: [338, Y0] }; // interrupteur (haut)
     const SRC = [X0, (Y0 + Y1) / 2]; // source (gauche)
     const LAMP = [X1, (Y0 + Y1) / 2]; // lampe (droite)
 
@@ -176,7 +181,7 @@
     const hvBadge = svg
       .append('g')
       .attr('class', 'hv')
-      .attr('transform', `translate(${X0 - 4},${Y1 + 6})`)
+      .attr('transform', `translate(${X0 + 8},${Y1 + 14})`)
       .attr('opacity', 0);
     hvBadge
       .append('path')
@@ -188,13 +193,31 @@
     hvBadge.append('text').attr('x', 0).attr('y', 5).attr('text-anchor', 'middle').attr('font-family', SM).attr('font-size', 11).attr('font-weight', 'bold').attr('fill', 'var(--warn)').text('!');
     hvBadge.append('text').attr('x', 16).attr('y', 5).attr('font-family', SM).attr('font-size', 10.5).attr('fill', 'var(--warn)').text('HAUTE TENSION');
 
-    // ---- trace tension / temps (bandeau droite) ----
-    const TL = 360;
-    const TR = W - 16;
-    const TY0 = 34;
-    const TY1 = 150;
+    // ---- trace tension / temps (bandeau plein, en bas) ----
+    const TL = 74;
+    const TR = W - 24;
+    const TY0 = 284;
+    const TY1 = 404;
     const TCY = (TY0 + TY1) / 2;
+    // séparateur entre le circuit et la trace
+    svg
+      .append('line')
+      .attr('x1', X0)
+      .attr('x2', X1)
+      .attr('y1', 258)
+      .attr('y2', 258)
+      .attr('stroke', 'var(--line)')
+      .attr('stroke-width', 1);
     const traceG = svg.append('g').attr('class', 'trace');
+    traceG
+      .append('text')
+      .attr('x', TL)
+      .attr('y', TY0 - 8)
+      .attr('font-family', SM)
+      .attr('font-size', 10)
+      .attr('fill', 'var(--dim2)')
+      .attr('letter-spacing', '0.5')
+      .text('LA TENSION AU FIL DU TEMPS');
     traceG.append('line').attr('x1', TL).attr('x2', TL).attr('y1', TY0).attr('y2', TY1).attr('stroke', 'var(--line2)').attr('stroke-width', 1);
     traceG.append('line').attr('x1', TL).attr('x2', TR).attr('y1', TY1).attr('y2', TY1).attr('stroke', 'var(--line2)').attr('stroke-width', 1);
     traceG
@@ -355,7 +378,7 @@
     function drawTrace() {
       const N = 120;
       const win = ctx.ac ? 1 / f : 0.04;
-      const amp = (TY1 - TY0) / 2 - 16;
+      const amp = (TY1 - TY0) / 2 - 22;
       const dcY = TCY - amp * 0.62;
       let d = '';
       for (let i = 0; i <= N; i++) {

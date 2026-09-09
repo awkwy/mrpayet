@@ -14,7 +14,7 @@ This file is the project's committed home for project-intrinsic agent knowledge:
 - **Migration D3 en cours** (canvas → `<svg>` animé par les transitions D3 ;
   imports modulaires `d3-selection`/`d3-transition`/`d3-drag`, pas le bundle
   `d3` ni `d3-scale`, pour le poids). Fiches déjà portées : `moyenne`,
-  `mediane`, `moypond`, `fluctuation` (+ `alternatif`, refonte — voir
+  `mediane`, `moypond`, `fluctuation`, `batons` (+ `alternatif`, refonte — voir
   ci-dessous). Les autres restent sur `shared.js` (canvas) en attendant leur
   lot.
 - `alternatif` est une **refonte** (pas une simple migration de graphe) :
@@ -24,10 +24,10 @@ This file is the project's committed home for project-intrinsic agent knowledge:
   contextes (12 V continu / 230 V ~ / 400 V haute tension). Le contexte haute
   tension peint les fils en `--warn` (orange) avec un pictogramme ⚠ — usage
   légitime du jeton d'état (le câble orange EST une alerte normalisée métier),
-  jamais comme série de données. Bascule image réaliste ↔ symbole. Même
-  contrat `d3.js` (imports modulaires, `springEase`, `prefers-reduced-motion`).
-  `mediane`, `moypond`, `fluctuation`, `batons`. Les autres restent sur
-  `shared.js` (canvas) en attendant leur lot.
+  jamais comme série de données. Bascule image réaliste ↔ symbole. Disposition
+  **verticale imposée** (circuit en haut, trace tension/temps en dessous — jamais
+  côte à côte) pour rester lisible sur un téléphone. Même contrat `d3.js`
+  (imports modulaires, `springEase`, `prefers-reduced-motion`).
 - Socle partagé : `d3.js` — `dotPlot` + `stackDots` (nuage de points sur axe
   gradué), `barField` (diagramme en bâtons sur axe catégoriel : `band(i)`,
   `yScale(frac)` ; `batons` y ajoute un tracé de secteurs local `arcPath` pour

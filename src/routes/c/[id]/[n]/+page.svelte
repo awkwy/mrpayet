@@ -330,7 +330,15 @@
   .body {
     margin-top: 28px;
     display: grid;
+    /* minmax(0, 1fr) + min-width sur les enfants : sans ça, une étape qui
+       contient un tableau large (`white-space: nowrap`) prend sa largeur de
+       contenu minimale, élargit la piste de grille, et fait déborder la page
+       en largeur sur mobile au lieu de laisser `.tblwrap` défiler. */
+    grid-template-columns: minmax(0, 1fr);
     gap: 32px;
+  }
+  .body > * {
+    min-width: 0;
   }
   .st-t {
     display: flex;
