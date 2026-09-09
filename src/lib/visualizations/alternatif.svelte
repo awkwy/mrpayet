@@ -160,9 +160,7 @@
       .attr('y', SW.hinge[1] - 26)
       .attr('width', SW.contact[0] - SW.hinge[0] + 12)
       .attr('height', 34)
-      .attr('fill', 'transparent')
-      .attr('tabindex', 0)
-      .attr('role', 'switch');
+      .attr('fill', 'transparent');
 
     // ---- lampe (⊗) ----
     const lampG = svg.append('g').attr('class', 'lamp').attr('transform', `translate(${LAMP[0]},${LAMP[1]})`);
@@ -356,7 +354,7 @@
 
     function drawTrace() {
       const N = 120;
-      const win = ctx.ac ? Math.max(0.04, 3 / f) : 0.04;
+      const win = ctx.ac ? 1 / f : 0.04;
       const amp = (TY1 - TY0) / 2 - 16;
       const dcY = TCY - amp * 0.62;
       let d = '';
@@ -367,7 +365,7 @@
         d += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1) + ' ';
       }
       traceLine.attr('d', d);
-      traceLine.attr('stroke', ctx.hv ? 'var(--warn)' : 'var(--g)');
+      traceLine.attr('stroke', 'var(--g)');
 
       if (ctx.ac) {
         const peak = ctx.volts * Math.SQRT2;
@@ -377,7 +375,7 @@
         traceCap.text(`une période T = ${fr((1000 / f).toFixed(1))} ms`);
       } else {
         effLine.attr('opacity', 0);
-        effTxt.attr('y', dcY - 5).attr('opacity', 1).attr('fill', ctx.hv ? 'var(--warn)' : 'var(--g)').text(`${ctx.volts} V constants`);
+        effTxt.attr('y', dcY - 5).attr('opacity', 1).attr('fill', 'var(--g)').text(`${ctx.volts} V constants`);
         traceCap.text('la tension ne change pas');
       }
     }
@@ -396,8 +394,11 @@
       slWrap.style.opacity = ctx.ac ? '1' : '.35';
       slInput.disabled = !ctx.ac;
       ctlRow.querySelector('#tgpic').textContent = showPic ? '▸ Voir le symbole' : "▸ Voir l'objet réel";
-      ctlRow.querySelector('#pw').textContent = on ? 'Éteindre' : 'Allumer';
-      ctlRow.querySelector('#pw').classList.toggle('on', on);
+      const pw = ctlRow.querySelector('#pw');
+      pw.textContent = on ? 'Éteindre' : 'Allumer';
+      pw.classList.toggle('on', on);
+      pw.setAttribute('aria-pressed', on ? 'true' : 'false');
+      pw.setAttribute('aria-label', on ? 'Éteindre le circuit' : 'Allumer le circuit');
     }
 
     function refresh(animate) {
@@ -431,12 +432,7 @@
       refresh(true);
     };
     ctlRow.querySelector('#pw').onclick = toggleOn;
-    swHit.on('click', toggleOn).on('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleOn();
-      }
-    });
+    swHit.on('click', toggleOn);
     ctlRow.querySelector('#tgpic').onclick = () => {
       showPic = !showPic;
       symG.transition('p').duration(RM ? 0 : 200).attr('opacity', showPic ? 0 : 1);
