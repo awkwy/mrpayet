@@ -16,6 +16,15 @@ This file is the project's committed home for project-intrinsic agent knowledge:
   `d3` ni `d3-scale`, pour le poids). Fiches déjà portées : `moyenne`,
   `mediane`, `moypond`, `fluctuation`. Les autres restent sur `shared.js`
   (canvas) en attendant leur lot.
+- `alternatif` est une **refonte** (pas une simple migration de graphe) :
+  schéma de circuit avec symboles normalisés (source pile/générateur,
+  interrupteur, lampe ⊗), animation de « remplissage » des fils à la fermeture
+  du circuit (`stroke-dashoffset`) + paquets de courant en circulation, trois
+  contextes (12 V continu / 230 V ~ / 400 V haute tension). Le contexte haute
+  tension peint les fils en `--warn` (orange) avec un pictogramme ⚠ — usage
+  légitime du jeton d'état (le câble orange EST une alerte normalisée métier),
+  jamais comme série de données. Bascule image réaliste ↔ symbole. Même
+  contrat `d3.js` (imports modulaires, `springEase`, `prefers-reduced-motion`).
 - Socle partagé : `d3.js` — `dotPlot` + `stackDots` (nuage de points sur axe
   gradué), `barField` (diagramme en bâtons sur axe catégoriel : `band(i)`,
   `yScale(frac)`), `linScale`, easing ressort `springEase`/`spring`, infobulle
