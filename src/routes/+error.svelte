@@ -172,6 +172,12 @@
   main :global(.typed-char.is-visible) {
     opacity: 1;
   }
+  main :global(.typed-char.typed-glitch) {
+    display: inline-block;
+    width: 1ch;
+    text-align: center;
+    overflow: hidden;
+  }
   main :global(.typed-caret) {
     display: inline-block;
     width: 0;
