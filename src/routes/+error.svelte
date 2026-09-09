@@ -1,8 +1,17 @@
 <script>
   import { base } from '$app/paths';
+  import { typed } from '$lib/actions/typed.js';
   // Page d'erreur volontairement mono-thème (sombre) : identité visuelle fixe
   // du site ("Tornado Cash" - vert, fond sombre, sobriété), pas un choix
   // clair/sombre à faire pencher selon le visiteur.
+  //
+  // Le texte se compose à la machine à écrire (action `typed`, adaptée du
+  // CodePen shubniggurath/WbGyRKO) : le tag puis le "404" en glitch de blocs
+  // puis les deux phrases, échelonnés. `prefers-reduced-motion` = tout affiché
+  // d'emblée ; le rendu serveur affiche déjà le texte brut.
+
+  const BLOCKS = '█▓▒░▄▀■▚▞';
+  const DIGITS = '0123456789';
 </script>
 
 <svelte:head>
@@ -15,7 +24,7 @@
 </svelte:head>
 
 <main>
-  <span class="tag">ERREUR 404</span>
+  <span class="tag" use:typed={{ delay: 200, speed: 40 }}>ERREUR 404</span>
 
   <svg
     class="invader"
@@ -35,10 +44,23 @@
     </g>
   </svg>
 
-  <h1>404</h1>
+  <h1
+    use:typed={{
+      delay: 650,
+      speed: 90,
+      glitch: true,
+      glitchChance: 1,
+      glitchCycles: 12,
+      glitchInterval: 55,
+      symbolsStart: BLOCKS,
+      symbolsEnd: DIGITS
+    }}
+  >404</h1>
 
-  <p>Cette page est introuvable.</p>
-  <p class="sub">L'envahisseur l'a peut-être emportée avant l'atterrissage.</p>
+  <p use:typed={{ delay: 1500, speed: 28 }}>Cette page est introuvable.</p>
+  <p class="sub" use:typed={{ delay: 2350, speed: 22 }}>
+    L'envahisseur l'a peut-être emportée avant l'atterrissage.
+  </p>
 
   <a class="retour" href="{base}/">Retour à l'accueil</a>
 </main>
@@ -131,9 +153,50 @@
     outline-offset: 3px;
   }
 
+  /* Éléments créés par l'action `typed` (hors scope Svelte). */
+  main :global(.typed-sr) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  main :global(.typed-char) {
+    opacity: 0;
+    transition: opacity 0.18s ease-in;
+  }
+  main :global(.typed-char.is-visible) {
+    opacity: 1;
+  }
+  main :global(.typed-caret) {
+    display: inline-block;
+    width: 0;
+    height: 1em;
+    vertical-align: baseline;
+    border-right: 0.14em solid currentColor;
+    margin-right: -0.14em;
+    animation: typed-blink 0.75s step-end infinite;
+  }
+  @keyframes typed-blink {
+    from,
+    to {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .invader {
       animation: none;
+    }
+    main :global(.typed-caret) {
+      display: none;
     }
   }
 </style>
