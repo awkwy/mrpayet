@@ -14,11 +14,12 @@ This file is the project's committed home for project-intrinsic agent knowledge:
 - **Migration D3 en cours** (canvas → `<svg>` animé par les transitions D3 ;
   imports modulaires `d3-selection`/`d3-transition`/`d3-drag`, pas le bundle
   `d3` ni `d3-scale`, pour le poids). Fiches déjà portées : `moyenne`,
-  `mediane`, `moypond`, `fluctuation`. Les autres restent sur `shared.js`
-  (canvas) en attendant leur lot.
+  `mediane`, `moypond`, `fluctuation`, `batons`. Les autres restent sur
+  `shared.js` (canvas) en attendant leur lot.
 - Socle partagé : `d3.js` — `dotPlot` + `stackDots` (nuage de points sur axe
   gradué), `barField` (diagramme en bâtons sur axe catégoriel : `band(i)`,
-  `yScale(frac)`), `linScale`, easing ressort `springEase`/`spring`, infobulle
+  `yScale(frac)` ; `batons` y ajoute un tracé de secteurs local `arcPath` pour
+  le mode circulaire), `linScale`, easing ressort `springEase`/`spring`, infobulle
   `tip` + conversion `vbToCss` ; `VB_W` = largeur logique du canvas historique,
   pour rendre à la même échelle que les fiches canvas voisines. CSS du cadre
   SVG : `.viz svg.d3viz` mutualisé avec `.viz canvas` dans
