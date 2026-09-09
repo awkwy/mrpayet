@@ -62,7 +62,6 @@ export function typed(node, opts = {}) {
     const s = document.createElement('span');
     s.textContent = ch;
     s.className = 'typed-char';
-    if (ch === ' ') s.style.whiteSpace = 'pre';
     anim.appendChild(s);
     return s;
   });
