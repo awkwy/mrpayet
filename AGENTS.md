@@ -26,9 +26,12 @@ This file is the project's committed home for project-intrinsic agent knowledge:
   légitime du jeton d'état (le câble orange EST une alerte normalisée métier),
   jamais comme série de données. Bascule image réaliste ↔ symbole. Même
   contrat `d3.js` (imports modulaires, `springEase`, `prefers-reduced-motion`).
+  `mediane`, `moypond`, `fluctuation`, `batons`. Les autres restent sur
+  `shared.js` (canvas) en attendant leur lot.
 - Socle partagé : `d3.js` — `dotPlot` + `stackDots` (nuage de points sur axe
   gradué), `barField` (diagramme en bâtons sur axe catégoriel : `band(i)`,
-  `yScale(frac)`), `linScale`, easing ressort `springEase`/`spring`, infobulle
+  `yScale(frac)` ; `batons` y ajoute un tracé de secteurs local `arcPath` pour
+  le mode circulaire), `linScale`, easing ressort `springEase`/`spring`, infobulle
   `tip` + conversion `vbToCss` ; `VB_W` = largeur logique du canvas historique,
   pour rendre à la même échelle que les fiches canvas voisines. CSS du cadre
   SVG : `.viz svg.d3viz` mutualisé avec `.viz canvas` dans
@@ -45,7 +48,8 @@ This file is the project's committed home for project-intrinsic agent knowledge:
   `prefers-reduced-motion` respecté.
 - Contrainte tenue : mobile d'abord / poids léger (voir `src/lib/styles/tokens.css`).
   Animations : jamais de saut instantané — easing amorti obligatoire.
-- Pas de tests de visualisation dans la suite (`vitest` couvre `src/lib/stores/`).
+- Pas de tests de visualisation dans la suite (`vitest` couvre `src/lib/stores/`
+  et `src/lib/data/`).
 
 ## Maintaining this file
 
