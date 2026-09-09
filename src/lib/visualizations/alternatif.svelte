@@ -9,7 +9,9 @@
    * milieux électriques d'un atelier et lire un schéma normalisé.
    *
    * 1. Forme  : un circuit dessiné avec les SYMBOLES NORMALISÉS (source, pile,
-   *    interrupteur, lampe ⊗) + une trace tension/temps compacte. Un bouton
+   *    interrupteur, lampe ⊗) au-dessus d'une trace tension/temps pleine
+   *    largeur — disposition verticale imposée (jamais côte à côte), lisible
+   *    sur un téléphone tenu à la verticale. Un bouton
    *    fait glisser l'image réaliste (batterie de voiture, prise, connecteur de
    *    traction) vers son symbole — l'élève apprend à lire le schéma à partir
    *    de ce qu'il voit sous le capot. Le courant est montré par un tracé qui
