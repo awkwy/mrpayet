@@ -19,6 +19,10 @@
    *    de ce qu'il voit sous le capot. Le courant est montré par un tracé qui
    *    « se remplit » le long des fils quand on ferme l'interrupteur, puis des
    *    paquets qui circulent (jamais de saut ; coupé si mouvement réduit).
+   *    En contexte 400 V, fermer l'interrupteur GRILLE la lampe (prévue pour
+   *    12 V) : flash de surtension, verre qui noircit, filament rompu, éclats —
+   *    animation jouée une seule fois, réparée si on rouvre ou change de
+   *    contexte (état final direct si mouvement réduit).
    * 2. Couleur : les fils sont une teinte unique `--g`. Le contexte HAUTE
    *    TENSION (véhicule électrique) peint les fils en `--warn` (orange) avec
    *    un pictogramme ⚠ : c'est un usage LÉGITIME du jeton d'état réservé —
@@ -26,7 +30,8 @@
    *    tension/temps est la même série `--g` ; le repère de valeur efficace est
    *    un accent `--blue`.
    * 3. Validation : `--g` / `--blue` sur fond sombre, contraste ≥ 3:1 : PASS.
-   *    `--warn` n'est utilisé que comme état (alerte), jamais comme série.
+   *    `--warn` / `--red` ne servent que comme état (alerte câbles, destruction
+   *    de la lampe), jamais comme série.
    * 4. Marques : fils 2,4 u bouts arrondis, symboles filet 2 u, lampe ⊗.
    *    Trace : sinus / trait plat 2 u.
    * 5. Interaction : sélecteur de contexte, interrupteur, bascule image↔schéma,
@@ -173,8 +178,43 @@
     const lampG = svg.append('g').attr('class', 'lamp').attr('transform', `translate(${LAMP[0]},${LAMP[1]})`);
     const lampGlow = lampG.append('circle').attr('r', 24).attr('fill', 'var(--g)').attr('opacity', 0);
     const lampCircle = lampG.append('circle').attr('r', 13).attr('fill', 'var(--surf3)').attr('stroke', 'var(--tx)').attr('stroke-width', 2);
-    lampG.append('line').attr('x1', -9).attr('y1', -9).attr('x2', 9).attr('y2', 9).attr('stroke', 'var(--tx)').attr('stroke-width', 2);
-    lampG.append('line').attr('x1', -9).attr('y1', 9).attr('x2', 9).attr('y2', -9).attr('stroke', 'var(--tx)').attr('stroke-width', 2);
+    const lampX1 = lampG.append('line').attr('x1', -9).attr('y1', -9).attr('x2', 9).attr('y2', 9).attr('stroke', 'var(--tx)').attr('stroke-width', 2);
+    const lampX2 = lampG.append('line').attr('x1', -9).attr('y1', 9).attr('x2', 9).attr('y2', -9).attr('stroke', 'var(--tx)').attr('stroke-width', 2);
+    // filament rompu (caché tant que la lampe tient) : zigzag coupé au milieu
+    const lampBroken = lampG
+      .append('path')
+      .attr('d', 'M -9 -2 L -4 4 L -1 -3 M 1 3 L 4 -4 L 9 2')
+      .attr('fill', 'none')
+      .attr('stroke', 'var(--red)')
+      .attr('stroke-width', 2.2)
+      .attr('stroke-linecap', 'round')
+      .attr('opacity', 0);
+    // fêlure sur le verre (cachée au repos)
+    const lampCrack = lampG
+      .append('path')
+      .attr('d', 'M -13 -3 L -5 1 L -8 6 L 2 4 L -1 10')
+      .attr('fill', 'none')
+      .attr('stroke', 'var(--red)')
+      .attr('stroke-width', 1.4)
+      .attr('stroke-linecap', 'round')
+      .attr('opacity', 0);
+    // éclats projetés à la destruction (cachés au repos) — plus grands que la
+    // lampe pour rester lisibles à la taille d'affichage réelle
+    const sparkG = lampG.append('g').attr('class', 'spark');
+    [-155, -115, -75, -35, 10, 45, 90, 135, 170].forEach((deg) => {
+      const a = (deg * Math.PI) / 180;
+      sparkG
+        .append('line')
+        .attr('x1', Math.cos(a) * 9)
+        .attr('y1', Math.sin(a) * 9)
+        .attr('x2', Math.cos(a) * 18)
+        .attr('y2', Math.sin(a) * 18)
+        .attr('stroke', 'var(--warn)')
+        .attr('stroke-width', 2.6)
+        .attr('stroke-linecap', 'round')
+        .attr('opacity', 0)
+        .attr('data-a', deg);
+    });
 
     // ---- source : symbole normalisé + image réaliste (bascule) ----
     const srcG = svg.append('g').attr('class', 'src').attr('transform', `translate(${SRC[0]},${SRC[1]})`);
@@ -368,11 +408,83 @@
       return ctx.hv ? 'var(--warn)' : 'var(--g)';
     }
 
+    // ---- lampe : intacte, allumée, ou grillée par la surtension ----
+    let blown = false;
+    function applyLamp(animate) {
+      const an = animate && !RM;
+      const shouldBlow = on && ctx.hv;
+
+      if (shouldBlow && !blown) {
+        // 400 V sur une lampe prévue pour 12 V : surtension -> rupture.
+        blown = true;
+        // 1. flash de surtension : halo qui gonfle en blanc puis meurt
+        lampGlow.interrupt('l').attr('fill', 'var(--tx)').attr('opacity', RM ? 0 : 1).attr('r', 24);
+        lampCircle.interrupt('l').interrupt('b').attr('fill', 'var(--tx)').attr('stroke', 'var(--tx)');
+        if (an) {
+          lampGlow.transition('l').duration(120).attr('r', 46)
+            .transition().duration(430).attr('opacity', 0).attr('r', 24).attr('fill', 'var(--warn)');
+        } else {
+          lampGlow.attr('opacity', 0).attr('r', 24);
+        }
+        // 2. rupture : verre mort, fêlé, filament rompu
+        (an ? lampCircle.transition('b').delay(150).duration(240) : lampCircle.interrupt('b'))
+          .attr('fill', 'var(--bg)').attr('stroke', 'var(--red)');
+        (an ? lampX1.transition('b').delay(150).duration(140) : lampX1.interrupt('b')).attr('opacity', 0);
+        (an ? lampX2.transition('b').delay(150).duration(140) : lampX2.interrupt('b')).attr('opacity', 0);
+        (an ? lampBroken.transition('b').delay(210).duration(180) : lampBroken.interrupt('b')).attr('opacity', 1);
+        (an ? lampCrack.transition('b').delay(210).duration(180) : lampCrack.interrupt('b')).attr('opacity', 0.8);
+
+        // 3. éclats projetés
+        sparkG.selectAll('line').each(function (_, i) {
+          const s = select(this);
+          const a = (+s.attr('data-a') * Math.PI) / 180;
+          s.interrupt('k').attr('transform', null).attr('opacity', RM ? 0 : 1);
+          if (an) {
+            s.transition('k').duration(380).delay(90 + i * 10)
+              .attr('opacity', 0)
+              .attr('transform', `translate(${(Math.cos(a) * 16).toFixed(1)},${(Math.sin(a) * 16).toFixed(1)})`);
+          } else {
+            s.attr('opacity', 0);
+          }
+        });
+        return;
+      }
+
+      if (shouldBlow && blown) {
+        // déjà grillée : on reste dans l'état final, sans rejouer l'animation
+        lampGlow.interrupt('l').attr('opacity', 0).attr('r', 24);
+        lampCircle.interrupt('b').attr('fill', 'var(--bg)').attr('stroke', 'var(--red)');
+        lampX1.interrupt('b').attr('opacity', 0);
+        lampX2.interrupt('b').attr('opacity', 0);
+        lampBroken.interrupt('b').attr('opacity', 1);
+        lampCrack.interrupt('b').attr('opacity', 0.8);
+        return;
+      }
+
+      // lampe intacte : on la répare si elle était grillée
+      blown = false;
+      lampCircle.interrupt('b');
+      sparkG.selectAll('line').interrupt('k').attr('opacity', 0).attr('transform', null);
+      (an ? lampBroken.transition('b').duration(150) : lampBroken.interrupt('b')).attr('opacity', 0);
+      (an ? lampCrack.transition('b').duration(150) : lampCrack.interrupt('b')).attr('opacity', 0);
+      (an ? lampX1.transition('b').duration(150) : lampX1.interrupt('b')).attr('opacity', 1);
+      (an ? lampX2.transition('b').duration(150) : lampX2.interrupt('b')).attr('opacity', 1);
+
+      if (on) {
+        const wc = wireColour();
+        lampGlow.attr('fill', wc);
+        (an ? lampCircle.transition('l').duration(260) : lampCircle.interrupt('l')).attr('fill', wc).attr('stroke', 'var(--tx)');
+        (an ? lampGlow.transition('l').duration(260) : lampGlow.interrupt('l')).attr('opacity', 0.22).attr('r', 24);
+      } else {
+        (an ? lampCircle.transition('l').duration(200) : lampCircle.interrupt('l')).attr('fill', 'var(--surf3)').attr('stroke', 'var(--tx)');
+        (an ? lampGlow.transition('l').duration(200) : lampGlow.interrupt('l')).attr('opacity', 0).attr('r', 24);
+      }
+    }
+
     function applyState(animate) {
       const wc = wireColour();
       liveWire.attr('stroke', wc);
       flow.attr('stroke', wc);
-      lampGlow.attr('fill', wc);
       hvBadge.transition('h').duration(animate && !RM ? 220 : 0).attr('opacity', ctx.hv ? 1 : 0);
 
       // interrupteur ouvert (arm relevé) / fermé (arm horizontal)
@@ -385,22 +497,21 @@
           ? liveWire.transition('e').duration(620).ease(spring)
           : liveWire.interrupt('e')
         ).attr('stroke-dashoffset', 0);
-        lampCircle.transition('l').duration(animate && !RM ? 260 : 0).attr('fill', wc);
-        lampGlow.transition('l').duration(animate && !RM ? 260 : 0).attr('opacity', 0.22);
         flow.attr('opacity', RM ? 0 : 0.9);
       } else {
         (animate && !RM
           ? liveWire.transition('e').duration(320)
           : liveWire.interrupt('e')
         ).attr('stroke-dashoffset', PERIM);
-        lampCircle.transition('l').duration(animate && !RM ? 200 : 0).attr('fill', 'var(--surf3)');
-        lampGlow.transition('l').duration(animate && !RM ? 200 : 0).attr('opacity', 0);
         flow.attr('opacity', 0);
       }
 
+      applyLamp(animate);
+
+      const lampSay = on ? (blown ? 'fermé, la lampe a grillé' : 'fermé, lampe allumée') : 'ouvert, lampe éteinte';
       svg.attr(
         'aria-label',
-        `Circuit ${ctx.label}, tension ${ctx.ac ? 'alternative' : 'continue'} ${ctx.volts} volts, interrupteur ${on ? 'fermé, lampe allumée' : 'ouvert, lampe éteinte'}${ctx.hv ? ', haute tension, câbles orange' : ''}.`
+        `Circuit ${ctx.label}, tension ${ctx.ac ? 'alternative' : 'continue'} ${ctx.volts} volts, interrupteur ${lampSay}${ctx.hv ? ', haute tension, câbles orange' : ''}.`
       );
     }
 
@@ -438,7 +549,7 @@
       let extra = '';
       if (on) {
         extra = ctx.hv
-          ? ` Le courant circule : sur ce circuit, le contact est <b style="color:var(--warn)">mortel</b>.`
+          ? ` Le courant circule : le contact est <b style="color:var(--warn)">mortel</b> — et la lampe, prévue pour 12 V, grille sur le coup.`
           : ` Le courant circule : la lampe s'allume.`;
       }
       say.innerHTML = ctx.say + extra;
@@ -496,7 +607,7 @@
 
     cleanup = () => {
       loop.stop();
-      svg.selectAll('*').interrupt('e').interrupt('s').interrupt('l').interrupt('h').interrupt('p');
+      svg.selectAll('*').interrupt('e').interrupt('s').interrupt('l').interrupt('h').interrupt('p').interrupt('b').interrupt('k');
       select(host).selectAll('*').remove();
     };
   });
