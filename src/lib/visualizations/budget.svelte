@@ -155,6 +155,7 @@
       .text(`budget disponible : ${REST} €`);
 
     const rowsG = bG.append('g').attr('class', 'rows');
+    const rowG = PROJ.map(() => rowsG.append('g').attr('class', 'row'));
 
     readout(host, [
       { id: 'gR', k: 'reste après charges', c: 'b' },
@@ -237,7 +238,10 @@
         .on('mouseleave blur', () => bulle.hide());
 
       // pictogramme ✓ / ✗
-      const ic = g.append('g').attr('transform', `translate(${L},${y + 2})`);
+      const ic = g
+        .append('g')
+        .attr('transform', `translate(${L},${y + 2})`)
+        .style('pointer-events', 'none');
       if (ok) {
         ic.append('path')
           .attr('d', 'M0 5 L3.5 9 L10 -1')
@@ -263,6 +267,7 @@
         .attr('font-size', 11.5)
         .attr('font-weight', sel ? 'bold' : 'normal')
         .attr('fill', 'var(--tx)')
+        .style('pointer-events', 'none')
         .text(`Projet ${nm} — ${v} €`);
       g.append('text')
         .attr('x', R)
@@ -272,6 +277,7 @@
         .attr('font-size', 10.5)
         .attr('font-weight', 'bold')
         .attr('fill', col)
+        .style('pointer-events', 'none')
         .text(ok ? 'finançable' : `dépasse de ${v - REST} €`);
 
       // barre
@@ -285,7 +291,8 @@
         .attr('fill', col)
         .attr('stroke', sel ? 'var(--tx)' : 'none')
         .attr('stroke-width', sel ? 2 : 0)
-        .attr('width', 0);
+        .attr('width', 0)
+        .style('pointer-events', 'none');
 
       const target = Math.max(3, xB(v) - L);
       if (reveal && !RM) {
@@ -296,11 +303,7 @@
     }
 
     function render(reveal) {
-      const rows = rowsG.selectAll('g.row').data(PROJ.map((_, i) => i));
-      rows.enter().append('g').attr('class', 'row');
-      rowsG.selectAll('g.row').each(function (i) {
-        drawRow(select(this), i, reveal);
-      });
+      rowG.forEach((g, i) => drawRow(g, i, reveal));
 
       const [nm, v] = PROJ[pick];
       const ok = okOf(v);
