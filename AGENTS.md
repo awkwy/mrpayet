@@ -14,9 +14,9 @@ This file is the project's committed home for project-intrinsic agent knowledge:
 - **Migration D3 en cours** (canvas → `<svg>` animé par les transitions D3 ;
   imports modulaires `d3-selection`/`d3-transition`/`d3-drag`, pas le bundle
   `d3` ni `d3-scale`, pour le poids). Fiches déjà portées : `moyenne`,
-  `mediane`, `moypond`, `fluctuation`, `batons`, `budget` (+ `alternatif`,
-  refonte — voir ci-dessous). Les autres restent sur `shared.js` (canvas) en
-  attendant leur lot.
+  `mediane`, `moypond`, `fluctuation`, `batons`, `budget` (+ `alternatif` et
+  `fusible`, refontes — voir ci-dessous). Les autres restent sur `shared.js`
+  (canvas) en attendant leur lot.
 - `alternatif` est une **refonte** (pas une simple migration de graphe) :
   schéma de circuit avec symboles normalisés (source pile/générateur,
   interrupteur, lampe ⊗), animation de « remplissage » des fils à la fermeture
@@ -32,6 +32,16 @@ This file is the project's committed home for project-intrinsic agent knowledge:
   **verticale imposée** (circuit en haut, trace tension/temps en dessous — jamais
   côte à côte) pour rester lisible sur un téléphone. Même contrat `d3.js`
   (imports modulaires, `springEase`, `prefers-reduced-motion`).
+- `fusible` est une **refonte** analogue (schéma normalisé : pile 12 V, FUSIBLE
+  juste après = rectangle traversé par son filament, cinq consommateurs lampes ⊗
+  en parallèle sur grille alignée). Le filament chauffe `--g` → `--warn` →
+  `--red` selon I / calibre (rouge seulement si I > calibre, cohérent avec la
+  fusion), puis ROMPT en surintensité (arcs + flash joués une seule fois via
+  drapeau `wasMelted`, mot FONDU, circuit dé-énergisé ; réversible sous le
+  calibre). Jauge d'intensité sous le circuit : langage visuel de `budget`
+  (barre I face au calibre, repère `--blue` pointillé). Boutons consommateurs +
+  calibre, `role="img"` + `aria-label`, vue tableau repliable, paquets de
+  courant ∝ I coupés sous `prefers-reduced-motion`. Même contrat `d3.js`.
 - Socle partagé : `d3.js` — `dotPlot` + `stackDots` (nuage de points sur axe
   gradué), `barField` (diagramme en bâtons sur axe catégoriel : `band(i)`,
   `yScale(frac)` ; `batons` y ajoute un tracé de secteurs local `arcPath` pour
@@ -47,7 +57,8 @@ This file is the project's committed home for project-intrinsic agent knowledge:
   (moyenne, médiane, âge moyen) ou repère théorique (proportion `p`) = accent
   `--blue` ; jamais `--warn`/`--red` comme série de données — jetons d'état
   réservés, mais légitimes pour un vrai statut binaire (`budget` `--g`/`--red`
-  finançable/dépasse, `alternatif` `--warn` haute tension), toujours doublé
+  finançable/dépasse, `alternatif` `--warn` haute tension, `fusible`
+  `--warn`/`--red` filament qui chauffe puis fond), toujours doublé
   d'un pictogramme + libellé, jamais la couleur seule. Palettes validées
   `--mode dark` avec `scripts/validate_palette.js` (les FAIL band/chroma sont la
   propriété du thème néon du site, pas corrigeables sans hex hors tokens).
