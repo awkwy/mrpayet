@@ -61,7 +61,7 @@ export function typed(node, opts = {}) {
   const spans = [...fullText].map((ch) => {
     const s = document.createElement('span');
     s.textContent = ch;
-    s.className = glitch ? 'typed-char typed-glitch' : 'typed-char';
+    s.className = 'typed-char';
     anim.appendChild(s);
     return s;
   });

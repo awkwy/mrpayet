@@ -6,11 +6,11 @@
   // clair/sombre à faire pencher selon le visiteur.
   //
   // Le texte se compose à la machine à écrire (action `typed`, adaptée du
-  // CodePen shubniggurath/WbGyRKO) : le tag puis le "404" en glitch de blocs
+  // CodePen shubniggurath/WbGyRKO) : le tag puis le "404" en glitch de symboles
   // puis les deux phrases, échelonnés. `prefers-reduced-motion` = tout affiché
   // d'emblée ; le rendu serveur affiche déjà le texte brut.
 
-  const BLOCKS = '█▓▒░▄▀■▚▞';
+  const GLITCH = '#%&@*+=/\\<>?$';
   const DIGITS = '0123456789';
 </script>
 
@@ -52,7 +52,7 @@
       glitchChance: 1,
       glitchCycles: 12,
       glitchInterval: 55,
-      symbolsStart: BLOCKS,
+      symbolsStart: GLITCH,
       symbolsEnd: DIGITS
     }}
   >404</h1>
@@ -171,11 +171,6 @@
   }
   main :global(.typed-char.is-visible) {
     opacity: 1;
-  }
-  main :global(.typed-char.typed-glitch) {
-    display: inline-block;
-    width: 1ch;
-    text-align: center;
   }
   main :global(.typed-caret) {
     display: inline-block;
