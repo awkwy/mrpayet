@@ -14,9 +14,9 @@ This file is the project's committed home for project-intrinsic agent knowledge:
 - **Migration D3 en cours** (canvas → `<svg>` animé par les transitions D3 ;
   imports modulaires `d3-selection`/`d3-transition`/`d3-drag`, pas le bundle
   `d3` ni `d3-scale`, pour le poids). Fiches déjà portées : `moyenne`,
-  `mediane`, `moypond`, `fluctuation`, `batons` (+ `alternatif`, refonte — voir
-  ci-dessous). Les autres restent sur `shared.js` (canvas) en attendant leur
-  lot.
+  `mediane`, `moypond`, `fluctuation`, `batons`, `budget` (+ `alternatif`,
+  refonte — voir ci-dessous). Les autres restent sur `shared.js` (canvas) en
+  attendant leur lot.
 - `alternatif` est une **refonte** (pas une simple migration de graphe) :
   schéma de circuit avec symboles normalisés (source pile/générateur,
   interrupteur, lampe ⊗), animation de « remplissage » des fils à la fermeture
@@ -45,7 +45,10 @@ This file is the project's committed home for project-intrinsic agent knowledge:
   chaque fichier) : couleurs **exclusivement** via `var(--…)` de `tokens.css` —
   série de données = teinte séquentielle unique `--g` ; valeur dérivée
   (moyenne, médiane, âge moyen) ou repère théorique (proportion `p`) = accent
-  `--blue` ; jamais `--warn`/`--red`, jetons d'état réservés. Palettes validées
+  `--blue` ; jamais `--warn`/`--red` comme série de données — jetons d'état
+  réservés, mais légitimes pour un vrai statut binaire (`budget` `--g`/`--red`
+  finançable/dépasse, `alternatif` `--warn` haute tension), toujours doublé
+  d'un pictogramme + libellé, jamais la couleur seule. Palettes validées
   `--mode dark` avec `scripts/validate_palette.js` (les FAIL band/chroma sont la
   propriété du thème néon du site, pas corrigeables sans hex hors tokens).
   Accessibilité : vue tableau repliable, focus clavier = survol,
