@@ -9,9 +9,11 @@
    * milieux électriques d'un atelier et lire un schéma normalisé.
    *
    * 1. Forme  : un circuit dessiné avec les SYMBOLES NORMALISÉS (source, pile,
-   *    interrupteur, lampe ⊗) au-dessus d'une trace tension/temps pleine
-   *    largeur — disposition verticale imposée (jamais côte à côte), lisible
-   *    sur un téléphone tenu à la verticale. Un bouton
+   *    interrupteur, lampe ⊗) au-dessus d'un écran d'oscilloscope (cadre fermé,
+   *    tracé détouré) aligné sur la largeur du circuit — disposition verticale
+   *    imposée (jamais côte à côte), lisible sur un téléphone tenu à la
+   *    verticale. Deux valeurs en vedette (nature, valeur efficace) ; la
+   *    période T sous l'écran. Un bouton
    *    fait glisser l'image réaliste (batterie de voiture, prise, connecteur de
    *    traction) vers son symbole — l'élève apprend à lire le schéma à partir
    *    de ce qu'il voit sous le capot. Le courant est montré par un tracé qui
@@ -82,8 +84,8 @@
     let phase = 0;
 
     // Disposition VERTICALE (jamais côte à côte) : le circuit en grand en haut,
-    // la trace tension/temps pleine largeur en dessous — lisible sur un
-    // téléphone tenu à la verticale.
+    // l'écran d'oscilloscope en dessous, aligné sur la largeur du circuit —
+    // lisible sur un téléphone tenu à la verticale.
     const W = 620;
     const H = 430;
     const svg = select(host)
@@ -193,12 +195,27 @@
     hvBadge.append('text').attr('x', 0).attr('y', 5).attr('text-anchor', 'middle').attr('font-family', SM).attr('font-size', 11).attr('font-weight', 'bold').attr('fill', 'var(--warn)').text('!');
     hvBadge.append('text').attr('x', 16).attr('y', 5).attr('font-family', SM).attr('font-size', 10.5).attr('fill', 'var(--warn)').text('HAUTE TENSION');
 
-    // ---- trace tension / temps (bandeau plein, en bas) ----
-    const TL = 74;
-    const TR = W - 24;
+    // ---- trace tension / temps (écran d'oscilloscope, en bas) ----
+    // Écran d'oscilloscope aligné sur la largeur du circuit : jamais plus large
+    // que le schéma au-dessus (bord droit et bord gauche communs).
+    const TL = X0;
+    const TR = X1;
     const TY0 = 284;
     const TY1 = 404;
     const TCY = (TY0 + TY1) / 2;
+    // Le tracé est dessiné « sur l'écran » : on le détoure au rectangle de
+    // l'écran pour qu'il ne puisse jamais en sortir. Id unique par instance.
+    const clipId = 'osc-' + Math.random().toString(36).slice(2, 9);
+    svg
+      .append('defs')
+      .append('clipPath')
+      .attr('id', clipId)
+      .append('rect')
+      .attr('x', TL)
+      .attr('y', TY0)
+      .attr('width', TR - TL)
+      .attr('height', TY1 - TY0)
+      .attr('rx', 6);
     // séparateur entre le circuit et la trace
     svg
       .append('line')
@@ -218,8 +235,17 @@
       .attr('fill', 'var(--dim2)')
       .attr('letter-spacing', '0.5')
       .text('LA TENSION AU FIL DU TEMPS');
-    traceG.append('line').attr('x1', TL).attr('x2', TL).attr('y1', TY0).attr('y2', TY1).attr('stroke', 'var(--line2)').attr('stroke-width', 1);
-    traceG.append('line').attr('x1', TL).attr('x2', TR).attr('y1', TY1).attr('y2', TY1).attr('stroke', 'var(--line2)').attr('stroke-width', 1);
+    // cadre d'écran fermé (les quatre bords)
+    traceG
+      .append('rect')
+      .attr('x', TL)
+      .attr('y', TY0)
+      .attr('width', TR - TL)
+      .attr('height', TY1 - TY0)
+      .attr('rx', 6)
+      .attr('fill', 'rgba(0, 0, 0, 0.22)')
+      .attr('stroke', 'var(--line2)')
+      .attr('stroke-width', 1);
     traceG
       .append('line')
       .attr('x1', TL)
@@ -230,8 +256,10 @@
       .attr('stroke-dasharray', '3 4')
       .attr('stroke-width', 1);
     traceG.append('text').attr('x', TL - 5).attr('y', TCY + 3).attr('text-anchor', 'end').attr('font-family', SM).attr('font-size', 9).attr('fill', 'var(--dim2)').text('0');
-    const traceLine = traceG.append('path').attr('fill', 'none').attr('stroke', 'var(--g)').attr('stroke-width', 2.2).attr('stroke-linecap', 'round');
-    const effLine = traceG
+    // tout ce qui est « sur l'écran » passe par le groupe détouré
+    const screenG = traceG.append('g').attr('clip-path', `url(#${clipId})`);
+    const traceLine = screenG.append('path').attr('fill', 'none').attr('stroke', 'var(--g)').attr('stroke-width', 2.2).attr('stroke-linecap', 'round');
+    const effLine = screenG
       .append('line')
       .attr('x1', TL)
       .attr('x2', TR)
@@ -239,7 +267,7 @@
       .attr('stroke-dasharray', '5 4')
       .attr('stroke-width', 1.4)
       .attr('opacity', 0);
-    const effTxt = traceG.append('text').attr('x', TL + 4).attr('font-family', SM).attr('font-size', 9.5).attr('font-weight', 'bold').attr('fill', 'var(--blue)').attr('opacity', 0);
+    const effTxt = screenG.append('text').attr('x', TL + 4).attr('font-family', SM).attr('font-size', 9.5).attr('font-weight', 'bold').attr('fill', 'var(--blue)').attr('opacity', 0);
     const traceCap = traceG.append('text').attr('x', (TL + TR) / 2).attr('y', TY1 + 14).attr('text-anchor', 'middle').attr('font-family', SM).attr('font-size', 9.5).attr('fill', 'var(--dim2)');
 
     // ---- contrôles ----
@@ -262,10 +290,11 @@
       drawTrace();
     });
 
+    // Deux valeurs en vedette seulement (lisible sur un téléphone tenu à la
+    // verticale) ; la période T reste affichée sous l'écran.
     readout(host, [
       { id: 'aN', k: 'nature', c: 'b' },
-      { id: 'aU', k: 'valeur efficace', c: 'd' },
-      { id: 'aT', k: 'période T = 1 ÷ f', c: 'd' }
+      { id: 'aU', k: 'valeur efficace', c: 'd' }
     ]);
     const say = box(host, 'say', '');
 
@@ -395,7 +424,7 @@
         const ye = TCY - amp * (ctx.volts / peak);
         effLine.attr('y1', ye).attr('y2', ye).attr('opacity', 1);
         effTxt.attr('y', ye - 4).attr('opacity', 1).attr('fill', 'var(--blue)').text(`${ctx.volts} V eff.`);
-        traceCap.text(`une période T = ${fr((1000 / f).toFixed(1))} ms`);
+        traceCap.text(`une période : T = 1 ÷ f = ${fr((1000 / f).toFixed(1))} ms`);
       } else {
         effLine.attr('opacity', 0);
         effTxt.attr('y', dcY - 5).attr('opacity', 1).attr('fill', 'var(--g)').text(`${ctx.volts} V constants`);
@@ -406,7 +435,6 @@
     function updateReadouts() {
       host.querySelector('#aN').textContent = ctx.ac ? 'alternative' : 'continue';
       host.querySelector('#aU').textContent = `${ctx.volts} V`;
-      host.querySelector('#aT').textContent = ctx.ac ? `${fr((1000 / f).toFixed(1))} ms` : '—';
       let extra = '';
       if (on) {
         extra = ctx.hv
