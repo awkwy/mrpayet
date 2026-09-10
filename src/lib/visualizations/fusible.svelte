@@ -263,12 +263,12 @@
 
     // ---------- rendu ----------
     function heatColour(ratio) {
-      if (ratio >= 1) return 'var(--red)';
+      if (ratio > 1) return 'var(--red)';
       if (ratio >= 0.85) return 'var(--warn)';
       return 'var(--g)';
     }
 
-    function applyFuse(animate, ratio) {
+    function applyFuse(animate, ratio, justMelted) {
       const an = animate && !RM;
       const col = heatColour(ratio);
       [fuElt1, fuElt2].forEach((e) => (an ? e.transition('f').duration(240) : e.interrupt('f')).attr('stroke', col));
@@ -278,7 +278,7 @@
         (an ? fuArc1.transition('f').delay(120).duration(180) : fuArc1.interrupt('f')).attr('opacity', 1);
         (an ? fuArc2.transition('f').delay(120).duration(180) : fuArc2.interrupt('f')).attr('opacity', 1);
         (an ? fuLabel.transition('f').delay(160).duration(200) : fuLabel.interrupt('f')).attr('opacity', 1);
-        if (an) {
+        if (an && justMelted) {
           fuFlash.interrupt('f').attr('r', 4).attr('opacity', 0.95);
           fuFlash.transition('f').duration(360).attr('r', 16).attr('opacity', 0);
         }
@@ -325,21 +325,22 @@
       iTxt.attr('fill', col).text(`I = ${fr(I.toFixed(1))} A`);
     }
 
-    let animRatio = 0;
+    let wasMelted = false;
     function render(animate) {
       const P = totalP();
       const I = P / U;
       const ratio = cal ? I / cal : 0;
       melted = ratio > 1;
+      const justMelted = melted && !wasMelted;
 
-      applyFuse(animate, ratio);
+      applyFuse(animate, ratio, justMelted);
       applyWires(animate);
       applyGauge(animate, I, ratio);
 
       host.querySelector('#vP').textContent = `${P} W`;
       const iel = host.querySelector('#vI');
       iel.textContent = `${fr(I.toFixed(1))} A`;
-      iel.className = 'v ' + (ratio >= 1 ? 'r' : ratio >= 0.85 ? 'w' : 'd');
+      iel.className = 'v ' + (ratio > 1 ? 'r' : ratio >= 0.85 ? 'w' : 'd');
       host.querySelector('#vC').textContent = `${cal} A`;
 
       say.innerHTML = melted
@@ -362,8 +363,7 @@
         rowTr('Fusible', `${cal} A`, melted ? 'fondu' : 'intact')
       );
 
-      void animRatio;
-      animRatio = ratio;
+      wasMelted = melted;
     }
 
     function rowTr(a, b, c) {
