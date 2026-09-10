@@ -22,9 +22,13 @@ This file is the project's committed home for project-intrinsic agent knowledge:
   interrupteur, lampe ⊗), animation de « remplissage » des fils à la fermeture
   du circuit (`stroke-dashoffset`) + paquets de courant en circulation, trois
   contextes (12 V continu / 230 V ~ / 400 V haute tension). Le contexte haute
-  tension peint les fils en `--warn` (orange) avec un pictogramme ⚠ — usage
-  légitime du jeton d'état (le câble orange EST une alerte normalisée métier),
-  jamais comme série de données. Bascule image réaliste ↔ symbole. Disposition
+  tension peint les fils en `--warn` (orange, pictogramme ⚠) et, interrupteur
+  fermé, GRILLE la lampe prévue pour 12 V (flash de surtension, puis verre mort
+  `--bg` + fêlure/filament rompu `--red` + éclats `--warn` ; jouée une seule
+  fois, réparée en rouvrant l'interrupteur ou en changeant de contexte, état
+  final direct si mouvement réduit). `--warn` / `--red` sont ici des jetons
+  d'état légitimes (danger normalisé métier), jamais des séries de données.
+  Bascule image réaliste ↔ symbole. Disposition
   **verticale imposée** (circuit en haut, trace tension/temps en dessous — jamais
   côte à côte) pour rester lisible sur un téléphone. Même contrat `d3.js`
   (imports modulaires, `springEase`, `prefers-reduced-motion`).

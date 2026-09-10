@@ -30,7 +30,8 @@
    *    tension/temps est la même série `--g` ; le repère de valeur efficace est
    *    un accent `--blue`.
    * 3. Validation : `--g` / `--blue` sur fond sombre, contraste ≥ 3:1 : PASS.
-   *    `--warn` n'est utilisé que comme état (alerte), jamais comme série.
+   *    `--warn` / `--red` ne servent que comme état (alerte câbles, destruction
+   *    de la lampe), jamais comme série.
    * 4. Marques : fils 2,4 u bouts arrondis, symboles filet 2 u, lampe ⊗.
    *    Trace : sinus / trait plat 2 u.
    * 5. Interaction : sélecteur de contexte, interrupteur, bascule image↔schéma,
