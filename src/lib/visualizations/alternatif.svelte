@@ -417,7 +417,7 @@
         // 400 V sur une lampe prévue pour 12 V : surtension -> rupture.
         blown = true;
         // 1. flash de surtension : halo qui gonfle en blanc puis meurt
-        lampGlow.interrupt('l').attr('fill', 'var(--tx)').attr('opacity', RM ? 0 : 1).attr('r', RM ? 24 : 46);
+        lampGlow.interrupt('l').attr('fill', 'var(--tx)').attr('opacity', RM ? 0 : 1).attr('r', 24);
         lampCircle.interrupt('l').interrupt('b').attr('fill', 'var(--tx)').attr('stroke', 'var(--tx)');
         if (an) {
           lampGlow.transition('l').duration(120).attr('r', 46)
@@ -462,6 +462,7 @@
 
       // lampe intacte : on la répare si elle était grillée
       blown = false;
+      lampCircle.interrupt('b');
       sparkG.selectAll('line').interrupt('k').attr('opacity', 0).attr('transform', null);
       (an ? lampBroken.transition('b').duration(150) : lampBroken.interrupt('b')).attr('opacity', 0);
       (an ? lampCrack.transition('b').duration(150) : lampCrack.interrupt('b')).attr('opacity', 0);
