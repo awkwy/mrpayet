@@ -14,9 +14,9 @@ This file is the project's committed home for project-intrinsic agent knowledge:
 - **Migration D3 en cours** (canvas → `<svg>` animé par les transitions D3 ;
   imports modulaires `d3-selection`/`d3-transition`/`d3-drag`, pas le bundle
   `d3` ni `d3-scale`, pour le poids). Fiches déjà portées : `moyenne`,
-  `mediane`, `moypond`, `fluctuation`, `batons`, `budget` (+ `alternatif` et
-  `fusible`, refontes — voir ci-dessous). Les autres restent sur `shared.js`
-  (canvas) en attendant leur lot.
+  `mediane`, `moypond`, `fluctuation`, `batons`, `budget` (+ `alternatif`,
+  `fusible` et `noeuds`, refontes — voir ci-dessous). Les autres restent sur
+  `shared.js` (canvas) en attendant leur lot.
 - `alternatif` est une **refonte** (pas une simple migration de graphe) :
   schéma de circuit avec symboles normalisés (source pile/générateur,
   interrupteur, lampe ⊗), animation de « remplissage » des fils à la fermeture
@@ -42,6 +42,16 @@ This file is the project's committed home for project-intrinsic agent knowledge:
   (barre I face au calibre, repère `--blue` pointillé). Boutons consommateurs +
   calibre, `role="img"` + `aria-label`, vue tableau repliable, paquets de
   courant ∝ I coupés sous `prefers-reduced-motion`. Même contrat `d3.js`.
+- `noeuds` est une **refonte** analogue (schéma normalisé : pile, ampèremètre
+  d'entrée en série, un nœud repéré point + libellé, deux branches parallèles
+  après le nœud chacune avec son propre ampèremètre et sa lampe ⊗ — loi des
+  nœuds I_entrée = I_gauche + I_droite lisible directement sur les trois
+  appareils). Griller une lampe (boutons par branche + « tout réparer ») coupe
+  sa branche avec le même code visuel que `fusible`/`alternatif` (verre mort
+  `--bg`, contour + filament rompu `--red`, jeton d'état légitime pour un
+  statut binaire) et fait retomber aussitôt l'ampèremètre d'entrée. `role="img"`
+  + `aria-label` décrivant les trois ampèremètres, vue tableau repliable,
+  paquets de courant coupés sous `prefers-reduced-motion`. Même contrat `d3.js`.
 - Socle partagé : `d3.js` — `dotPlot` + `stackDots` (nuage de points sur axe
   gradué), `barField` (diagramme en bâtons sur axe catégoriel : `band(i)`,
   `yScale(frac)` ; `batons` y ajoute un tracé de secteurs local `arcPath` pour
@@ -58,8 +68,9 @@ This file is the project's committed home for project-intrinsic agent knowledge:
   `--blue` ; jamais `--warn`/`--red` comme série de données — jetons d'état
   réservés, mais légitimes pour un vrai statut binaire (`budget` `--g`/`--red`
   finançable/dépasse, `alternatif` `--warn` haute tension, `fusible`
-  `--warn`/`--red` filament qui chauffe puis fond), toujours doublé
-  d'un pictogramme + libellé, jamais la couleur seule. Palettes validées
+  `--warn`/`--red` filament qui chauffe puis fond, `noeuds` `--red` lampe
+  grillée), toujours doublé d'un pictogramme + libellé, jamais la couleur
+  seule. Palettes validées
   `--mode dark` avec `scripts/validate_palette.js` (les FAIL band/chroma sont la
   propriété du thème néon du site, pas corrigeables sans hex hors tokens).
   Accessibilité : vue tableau repliable, focus clavier = survol,
