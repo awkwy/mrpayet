@@ -106,7 +106,6 @@
     const gaps = circuitG.append('g');
     const maskRect = (x, y, w, h) => gaps.append('rect').attr('x', x).attr('y', y).attr('width', w).attr('height', h).attr('fill', 'var(--surf)');
     maskRect(SRC[0] - 6, SRC[1] - 16, 12, 32);
-    maskRect(BR[0] - 26, YT - 14, 52, 28); // ampèremètre d'entrée (sur le rail, près du nœud)
     BR.forEach((x) => {
       maskRect(x - 14, ammY - 14, 28, 28);
       maskRect(x - 12, lampY - 12, 24, 24);
