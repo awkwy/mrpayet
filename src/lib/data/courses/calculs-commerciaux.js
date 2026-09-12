@@ -9,7 +9,9 @@ export default {id:"calculs-commerciaux",classe:"TC APMP",mat:"Maths",titre:"Cal
   prob:"Combien chaque voisin doit-il payer pour la réparation de la vitre ?",
   steps:[
    {t:"La situation",txt:"Le fils de M. Ali joue au foot dans la cour. Le ballon casse la fenêtre de Mme Bacar. Les deux voisins se disputent. Vous intervenez comme agent de prévention et de médiation : pas pour dire qui a raison, mais pour aider à trouver un accord — y compris sur l'argent."},
-   {t:"Étape 1 — Lire le devis",doc:{h:["Prestation","Montant HT"],r:[["Vitre standard","180 €"],["Pose (main d'œuvre)","70 €"],["Total HT","250 €"]]},
+   {t:"Étape 1 — Lire le devis",
+    img:{src:"/images/facture-devis-vitre.svg",alt:"facture de la vitrerie : vitre standard 180 €, pose 70 €, total HT 250 €, TVA 20 % soit 50 €, total TTC 300 €"},
+    doc:{h:["Prestation","Montant HT"],r:[["Vitre standard","180 €"],["Pose (main d'œuvre)","70 €"],["Total HT","250 €"]]},
     apport:"Taux de TVA : <b>20 %</b>. Le client paie toujours le montant <b>TTC</b>.",
     q:[{q:"Montant de la TVA : 250 × 0,20 = ? (en €)",a:50,tol:0},
        {q:"Montant TTC : 250 + 50 = ? (en €)",a:300,tol:0}]},
