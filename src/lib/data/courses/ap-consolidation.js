@@ -3,6 +3,9 @@ export default {id:"ap-consolidation",classe:"TC AEPE",mat:"AP",titre:"Consolida
  pdf:"ap",
  obj:["Poser une division et la vérifier par la multiplication",
       "Reconnaître les deux sens de la division : partager et grouper",
+      "Choisir le bon sens d'arrondi selon la question posée",
+      "Lire un tableau à double entrée et additionner une ligne ou une colonne",
+      "Calculer avec un coefficient de proportionnalité et un pourcentage",
       "Repérer les outils à retravailler grâce à un diagnostic court"],
  seances:[
  {t:"Atelier — poser une division",pdf:["ap-atelier-division"],
