@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 258" font-family="Arial, Helvetica, sans-serif">
+  <rect width="620" height="258" fill="#ffffff"/>
+  <text x="20" y="24" font-size="16" font-weight="bold" fill="#111111">La jauge de carburant : le niveau d'essence règle une résistance</text>
+
+  <!-- reservoir -->
+  <rect x="40" y="56" width="190" height="140" fill="#ffffff" stroke="#111111" stroke-width="2.4"/>
+  <path d="M46 120 h178 v70 h-178 z" fill="#dddddd" stroke="none"/>
+  <path d="M40 120 H230" stroke="#111111" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="135" y="216" text-anchor="middle" font-size="12.5" fill="#111111">réservoir</text>
+
+  <!-- flotteur + bras + pivot -->
+  <circle cx="80" cy="120" r="11" fill="#ffffff" stroke="#111111" stroke-width="2.4"/>
+  <text x="80" y="100" text-anchor="middle" font-size="11.5" fill="#111111">flotteur</text>
+  <path d="M90 120 L214 92" stroke="#111111" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="214" cy="92" r="4" fill="#111111"/>
+  <text x="220" y="110" font-size="11.5" fill="#111111">pivot</text>
+
+  <!-- resistance variable (potentiometre) : rectangle + fleche -->
+  <rect x="300" y="78" width="150" height="30" fill="#ffffff" stroke="#111111" stroke-width="2.4"/>
+  <path d="M214 92 L360 40" stroke="#111111" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M360 40 L360 74" stroke="#111111" stroke-width="2.4"/>
+  <path d="M352 66 L360 76 L368 66" fill="#111111" stroke="none"/>
+  <text x="375" y="132" text-anchor="middle" font-size="12.5" fill="#111111">résistance variable R</text>
+  <text x="375" y="149" text-anchor="middle" font-size="12" fill="#111111">(le curseur suit le bras du flotteur)</text>
+
+  <!-- fils vers l'afficheur -->
+  <g stroke="#111111" stroke-width="2.4" fill="none" stroke-linecap="round">
+    <path d="M300 93 H270 V196 H520 V104"/>
+    <path d="M450 93 H520"/>
+  </g>
+  <rect x="522" y="72" width="72" height="44" fill="#ffffff" stroke="#111111" stroke-width="2.4"/>
+  <text x="558" y="90" text-anchor="middle" font-size="11" fill="#111111">afficheur</text>
+  <text x="558" y="104" text-anchor="middle" font-size="11" fill="#111111">(aiguille)</text>
+
+  <text x="20" y="232" font-size="12" fill="#111111">Réservoir plein : R faible → intensité forte → aiguille vers « plein ».</text>
+  <text x="20" y="247" font-size="12" fill="#111111">Réservoir vide : R grande → intensité faible → aiguille vers « vide ».</text>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 300" font-family="Arial, Helvetica, sans-serif">
+  <rect width="620" height="300" fill="#ffffff"/>
+  <text x="20" y="24" font-size="16" font-weight="bold" fill="#111111">Mesurer la tension et l'intensité sur un dipôle</text>
+
+  <!-- boucle principale -->
+  <g stroke="#111111" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M120 150 V70 H262"/>
+    <path d="M302 70 H430 V121"/>
+    <path d="M430 189 V240 H120 V150"/>
+  </g>
+
+  <!-- generateur : une pile (une plaque longue fine + une plaque courte epaisse) -->
+  <path d="M104 138 H136" stroke="#111111" stroke-width="2.4"/>
+  <path d="M112 162 H128" stroke="#111111" stroke-width="6"/>
+  <text x="94" y="145" text-anchor="end" font-size="13" fill="#111111">générateur</text>
+  <text x="94" y="162" text-anchor="end" font-size="13" fill="#111111">(pile 12 V)</text>
+
+  <!-- amperemetre en serie -->
+  <circle cx="282" cy="70" r="19" fill="#ffffff" stroke="#111111" stroke-width="2.4"/>
+  <text x="282" y="76" text-anchor="middle" font-size="16" font-weight="bold" fill="#111111">A</text>
+  <text x="282" y="40" text-anchor="middle" font-size="12.5" fill="#111111">ampèremètre</text>
+  <text x="282" y="106" text-anchor="middle" font-size="12" fill="#111111">EN SÉRIE (dans le fil)</text>
+
+  <!-- sens du courant I : fleche sur le fil du haut -->
+  <path d="M336 70 h24" stroke="#111111" stroke-width="2.4" fill="none"/>
+  <path d="M356 63 l10 7 l-10 7 z" fill="#111111" stroke="none"/>
+  <text x="348" y="58" text-anchor="middle" font-size="14" font-style="italic" fill="#111111">I</text>
+
+  <!-- dipole : resistance (dans la branche de droite) -->
+  <rect x="414" y="121" width="32" height="68" fill="#ffffff" stroke="#111111" stroke-width="2.4"/>
+  <text x="360" y="150" text-anchor="end" font-size="13" fill="#111111">dipôle</text>
+  <text x="360" y="167" text-anchor="end" font-size="13" fill="#111111">(résistance R)</text>
+
+  <!-- fleche de tension U : le long du dipole, pointe vers le + (haut) -->
+  <path d="M404 187 V127" stroke="#111111" stroke-width="2" fill="none"/>
+  <path d="M397 137 l7 -12 l7 12 z" fill="#111111" stroke="none"/>
+  <text x="392" y="160" text-anchor="end" font-size="14" font-style="italic" fill="#111111">U</text>
+
+  <!-- voltmetre en derivation : juste a cote de la resistance -->
+  <g stroke="#111111" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M430 121 H492 V137"/>
+    <path d="M430 189 H492 V173"/>
+  </g>
+  <circle cx="492" cy="155" r="18" fill="#ffffff" stroke="#111111" stroke-width="2.4"/>
+  <text x="492" y="161" text-anchor="middle" font-size="15" font-weight="bold" fill="#111111">V</text>
+  <text x="492" y="212" text-anchor="middle" font-size="12.5" fill="#111111">voltmètre</text>
+  <text x="492" y="229" text-anchor="middle" font-size="12" fill="#111111">EN DÉRIVATION</text>
+  <text x="492" y="245" text-anchor="middle" font-size="12" fill="#111111">(aux bornes du dipôle)</text>
+
+  <!-- noeuds -->
+  <circle cx="430" cy="121" r="3" fill="#111111"/>
+  <circle cx="430" cy="189" r="3" fill="#111111"/>
+</svg>
