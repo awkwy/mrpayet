@@ -96,6 +96,18 @@ This file is the project's committed home for project-intrinsic agent knowledge:
 - Pas de tests de visualisation dans la suite (`vitest` couvre `src/lib/stores/`
   et `src/lib/data/`).
 
+## TP / activité de manipulation dans une séance
+
+Le schéma d'étape (`t`/`txt`/`img`/`apport`/`doc`/`q`) n'a pas de champ dédié
+pour une activité de manipulation réelle (peser, mesurer, câbler…). Le pattern
+« Avec matériel » / « Sans matériel » déjà utilisé dans les séquences source du
+projet frère `cours` (ex. `sciences/physique/Securite_electrique_2PMV2_sequence.md`,
+séance 2) se transpose directement dans un `apport` HTML : sous-titres en gras
+« Avec matériel » (procédure réelle avec l'équipement) puis « Sans matériel »
+(renvoi vers un `doc` de repli avec des valeurs déjà relevées), suivi de `q`
+qui exploitent ce relevé de repli. Ça garde une vraie consigne de manipulation
+pour l'enseignant équipé, sans bloquer celui qui ne l'est pas.
+
 ## Maintaining this file
 
 Keep this file for knowledge useful to almost every future agent session in this project.

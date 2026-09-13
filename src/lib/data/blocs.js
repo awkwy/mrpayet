@@ -66,4 +66,6 @@ export const BLOCS = [
  // ---------- 2P MV2 — physique-chimie (2de bac pro) ----------
  {id:"mv-pc-secu",cls:["2P MV2"],dom:"Physique-chimie",
   t:"Prévention des risques électriques",cours:{"2P MV2":["securite-electrique"]},flash:["formules","mental"]},
+ {id:"mv-pc-meca",cls:["2P MV2"],dom:"Physique-chimie",
+  t:"Décrire le mouvement",cours:{"2P MV2":["mecanique-mv"]},flash:["formules","mental"]},
 ];
