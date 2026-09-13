@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 200" font-family="Arial, Helvetica, sans-serif">
+  <rect width="620" height="200" fill="#ffffff"/>
+  <text x="20" y="26" font-size="16" font-weight="bold" fill="#111111">Chronophotographie d'un essai routier complet</text>
+
+  <line x1="30" y1="110" x2="590" y2="110" stroke="#dddddd" stroke-width="1.4"/>
+
+  <!-- zone 1 : demarrage, points de plus en plus espaces (accelere) -->
+  <g fill="#c0392b">
+    <circle cx="30" cy="110" r="5"/><circle cx="45" cy="110" r="5"/><circle cx="68" cy="110" r="5"/>
+    <circle cx="100" cy="110" r="5"/><circle cx="145" cy="110" r="5"/>
+  </g>
+
+  <!-- zone 2 : vitesse stabilisee, points regulierement espaces (max ecart) -->
+  <g fill="#1e7d34">
+    <circle cx="145" cy="110" r="5"/><circle cx="210" cy="110" r="5"/><circle cx="275" cy="110" r="5"/>
+    <circle cx="340" cy="110" r="5"/><circle cx="405" cy="110" r="5"/>
+  </g>
+
+  <!-- zone 3 : freinage, points de plus en plus rapproches -->
+  <g fill="#1e6fb0">
+    <circle cx="405" cy="110" r="5"/><circle cx="455" cy="110" r="5"/><circle cx="495" cy="110" r="5"/>
+    <circle cx="525" cy="110" r="5"/><circle cx="545" cy="110" r="5"/><circle cx="558" cy="110" r="5"/>
+  </g>
+
+  <!-- accolades / zones -->
+  <line x1="30" y1="140" x2="145" y2="140" stroke="#c0392b" stroke-width="2"/>
+  <text x="87" y="158" text-anchor="middle" font-size="12" fill="#c0392b">1. démarrage — accéléré</text>
+
+  <line x1="145" y1="140" x2="405" y2="140" stroke="#1e7d34" stroke-width="2"/>
+  <text x="275" y="158" text-anchor="middle" font-size="12" fill="#1e7d34">2. vitesse stabilisée — uniforme</text>
+
+  <line x1="405" y1="140" x2="558" y2="140" stroke="#1e6fb0" stroke-width="2"/>
+  <text x="481" y="158" text-anchor="middle" font-size="12" fill="#1e6fb0">3. freinage — ralenti</text>
+
+  <text x="20" y="188" font-size="11.5" fill="#555555">Même durée entre deux points : l'espacement des points dit tout sur la vitesse du moment.</text>
+</svg>

@@ -11,6 +11,16 @@ export const RECAP = {
   {sig:"Passer de la fréquence à la période (ou l'inverse)",
    met:"T = 1 ÷ f  et  f = 1 ÷ T",ex:"f = 50 Hz → T = 1 ÷ 50 = 0,02 s = 20 ms",pg:"Unités : T en secondes, f en hertz. 20 ms = 0,020 s."}
  ],
+ "mecanique-mv":[
+  {sig:"Trancher repos ou mouvement",
+   met:"Toujours annoncer le référentiel choisi : la même situation change de réponse si on change de référentiel.",ex:"Une valve est immobile par rapport à l'écrou de la roue, en mouvement par rapport à la route.",pg:"Dire « ça bouge » sans préciser par rapport à quoi."},
+  {sig:"Lire une chronophotographie",
+   met:"Points régulièrement espacés = uniforme ; points de plus en plus espacés = accéléré ; points de plus en plus rapprochés = ralenti.",ex:"Zone de freinage : points de plus en plus rapprochés → mouvement ralenti.",pg:"Confondre l'espacement des points avec leur nombre."},
+  {sig:"Calculer une vitesse moyenne et convertir km/h ↔ m/s",
+   met:"v = d ÷ t (m et s → m/s). km/h → m/s : ÷ 3,6. m/s → km/h : × 3,6.",ex:"250 m en 12 s → 20,8 m/s → 20,8 × 3,6 ≈ 75 km/h",pg:"Mélanger les unités, ou multiplier au lieu de diviser par 3,6."},
+  {sig:"Donner un résultat unique à partir de plusieurs mesures",
+   met:"Calculer la moyenne, l'arrondir avec un nombre de chiffres cohérent avec la précision de l'instrument, puis comparer à une valeur de référence.",ex:"23,9 ; 24,0 ; 24,1 mm → moyenne 24,0 mm, compatible avec la référence constructeur 24,0 mm.",pg:"Se fier à une seule mesure, ou garder trop de chiffres après la virgule."}
+ ],
  "stats-probas":[
   {sig:"Résumer une série de mesures par un seul nombre",
    met:"Moyenne = somme de toutes les valeurs ÷ nombre de valeurs.",ex:"398 ÷ 8 = 49,75 min",pg:"Une seule valeur très éloignée des autres fait « mentir » la moyenne."},
