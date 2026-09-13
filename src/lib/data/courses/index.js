@@ -3,6 +3,7 @@ import statsProbas from './stats-probas.js';
 import deciderSousContrainte from './decider-sous-contrainte.js';
 import calculsCommerciaux from './calculs-commerciaux.js';
 import apConsolidation from './ap-consolidation.js';
+import apConsolidationApmp from './ap-consolidation-apmp.js';
 import ficheOutils from './fiche-outils.js';
 import statAepe from './stat-aepe.js';
 import chimieAepe from './chimie-aepe.js';
@@ -30,6 +31,7 @@ export const COURSES = [
   deciderSousContrainte,
   calculsCommerciaux,
   apConsolidation,
+  apConsolidationApmp,
   ficheOutils,
   statAepe,
   chimieAepe,

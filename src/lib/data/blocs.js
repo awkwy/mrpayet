@@ -24,7 +24,7 @@ export const BLOCS = [
   cours:{"TC APMP":["calculs-commerciaux","interet-apmp"]},flash:["commerce","propor","mental"]},
  {id:"numeriques-cap",cls:["TC AEPE","TC APMP"],dom:"Calculs numériques et automatismes",
   t:"Calculs numériques, automatismes",
-  cours:{"TC AEPE":["ap-consolidation","fiche-outils"],"TC APMP":[]},
+  cours:{"TC AEPE":["ap-consolidation","fiche-outils"],"TC APMP":["ap-consolidation-apmp"]},
   flash:["mental","signes","fractions","propor"],transversal:true},
 
  // ---------- TC AEPE / TC APMP — physique-chimie (programme commun) ----------
