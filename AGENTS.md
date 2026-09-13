@@ -4,6 +4,22 @@ This file is the project's committed home for project-intrinsic agent knowledge:
 
 - Add durable project-specific notes here as they are discovered through real work.
 
+## Fiches PDF téléchargeables
+
+- Une séance référence ses fiches imprimables via `pdf:["<slug>"]` (résolu en
+  `/fiches/<c.pdf>/<slug>.pdf`, voir le rendu dans
+  `src/routes/c/[id]/[n]/+page.svelte`) ; le fichier doit exister dans
+  `static/fiches/<c.pdf>/`, sinon le bouton de téléchargement pointe dans le
+  vide. Le contenu source de ces fiches (une page HTML imprimable par atelier,
+  méthode + exercices + corrigé) vit dans le projet frère en lecture seule
+  `cours` (`eleve/<matière>/<slug>.html`), pas dans ce dépôt.
+- Pour ajouter une fiche : lire le `.html` source dans `cours`, puis le rendre
+  en PDF avec Chromium headless (même commande que `eleve/render.sh` dans ce
+  projet frère, mais en sortant vers un répertoire de travail temporaire pour
+  ne rien écrire dans le projet en lecture seule) :
+  `chromium --headless --disable-gpu --no-sandbox --no-pdf-header-footer --print-to-pdf=<tmp>/<slug>.pdf file://<chemin>/<slug>.html`,
+  puis copier le PDF obtenu dans `static/fiches/<matière>/`.
+
 ## Visualisations
 
 - Les manipulations interactives vivent dans `src/lib/visualizations/` et sont
