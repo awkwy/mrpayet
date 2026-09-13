@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 260" font-family="Arial, Helvetica, sans-serif">
+  <rect width="620" height="260" fill="#ffffff"/>
+  <text x="20" y="26" font-size="16" font-weight="bold" fill="#111111">Trois chronophotographies (points relevés toutes les 0,5 s)</text>
+
+  <!-- ligne 1 : uniforme, points egaux -->
+  <g>
+    <text x="20" y="70" font-size="12.5" fill="#111111" font-weight="bold">1</text>
+    <line x1="40" y1="65" x2="590" y2="65" stroke="#dddddd" stroke-width="1.4"/>
+    <g fill="#111111">
+      <circle cx="40" cy="65" r="5"/><circle cx="110" cy="65" r="5"/><circle cx="180" cy="65" r="5"/>
+      <circle cx="250" cy="65" r="5"/><circle cx="320" cy="65" r="5"/><circle cx="390" cy="65" r="5"/>
+      <circle cx="460" cy="65" r="5"/><circle cx="530" cy="65" r="5"/>
+    </g>
+    <text x="615" y="70" text-anchor="end" font-size="12" fill="#555555">uniforme</text>
+  </g>
+
+  <!-- ligne 2 : accelere, points de plus en plus espaces -->
+  <g>
+    <text x="20" y="145" font-size="12.5" fill="#111111" font-weight="bold">2</text>
+    <line x1="40" y1="140" x2="590" y2="140" stroke="#dddddd" stroke-width="1.4"/>
+    <g fill="#c0392b">
+      <circle cx="40" cy="140" r="5"/><circle cx="60" cy="140" r="5"/><circle cx="90" cy="140" r="5"/>
+      <circle cx="135" cy="140" r="5"/><circle cx="200" cy="140" r="5"/><circle cx="285" cy="140" r="5"/>
+      <circle cx="395" cy="140" r="5"/><circle cx="535" cy="140" r="5"/>
+    </g>
+    <text x="615" y="145" text-anchor="end" font-size="12" fill="#555555">accéléré</text>
+  </g>
+
+  <!-- ligne 3 : ralenti, points de plus en plus rapproches -->
+  <g>
+    <text x="20" y="220" font-size="12.5" fill="#111111" font-weight="bold">3</text>
+    <line x1="40" y1="215" x2="590" y2="215" stroke="#dddddd" stroke-width="1.4"/>
+    <g fill="#1e6fb0">
+      <circle cx="40" cy="215" r="5"/><circle cx="180" cy="215" r="5"/><circle cx="290" cy="215" r="5"/>
+      <circle cx="375" cy="215" r="5"/><circle cx="440" cy="215" r="5"/><circle cx="485" cy="215" r="5"/>
+      <circle cx="515" cy="215" r="5"/><circle cx="535" cy="215" r="5"/>
+    </g>
+    <text x="615" y="220" text-anchor="end" font-size="12" fill="#555555">ralenti</text>
+  </g>
+</svg>

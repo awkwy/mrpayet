@@ -1,4 +1,5 @@
 import securiteElectrique from './securite-electrique.js';
+import mecaniqueMv from './mecanique-mv.js';
 import statsProbas from './stats-probas.js';
 import deciderSousContrainte from './decider-sous-contrainte.js';
 import calculsCommerciaux from './calculs-commerciaux.js';
@@ -26,6 +27,7 @@ import geoMv from './geo-mv.js';
 
 export const COURSES = [
   securiteElectrique,
+  mecaniqueMv,
   statsProbas,
   deciderSousContrainte,
   calculsCommerciaux,
