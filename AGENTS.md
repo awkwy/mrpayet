@@ -93,8 +93,8 @@ This file is the project's committed home for project-intrinsic agent knowledge:
   `prefers-reduced-motion` respecté.
 - Contrainte tenue : mobile d'abord / poids léger (voir `src/lib/styles/tokens.css`).
   Animations : jamais de saut instantané — easing amorti obligatoire.
-- Pas de tests de visualisation dans la suite (`vitest` couvre `src/lib/stores/`
-  et `src/lib/data/`).
+- Pas de tests de visualisation dans la suite (`vitest` couvre `src/lib/stores/`,
+  `src/lib/data/` et `src/lib/utils/`).
 
 ## TP / activité de manipulation dans une séance
 

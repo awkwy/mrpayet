@@ -15,6 +15,11 @@
     state = ok ? 'ok' : 'no';
     if (ok && !wasOk && onCorrect) onCorrect();
   }
+
+  function toggleSign() {
+    value = value.startsWith('-') ? value.slice(1) : '-' + value;
+    check();
+  }
 </script>
 
 <div class="qr">
@@ -28,6 +33,9 @@
       oninput={check}
       class={state}
     />
+    {#if !question.txt && question.a < 0}
+      <button type="button" class="sign" onclick={toggleSign} aria-label="Insérer ou retirer le signe moins">−</button>
+    {/if}
     <span class="mk {state}">{state === 'ok' ? '✓' : state === 'no' ? '✕' : ''}</span>
   </div>
   {#if question.sol}
@@ -68,6 +76,23 @@
   }
   input.no {
     border-color: var(--red);
+  }
+  .sign {
+    flex-shrink: 0;
+    width: 32px;
+    height: 34px;
+    background: var(--bg);
+    border: 1px solid var(--line2);
+    border-radius: 6px;
+    color: var(--tx);
+    font-family: var(--sm);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .sign:hover,
+  .sign:focus-visible {
+    border-color: var(--g);
   }
   .mk {
     font-family: var(--sm);
