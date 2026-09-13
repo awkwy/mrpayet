@@ -25,7 +25,7 @@
 
   <!-- fils vers l'afficheur -->
   <g stroke="#111111" stroke-width="2.4" fill="none" stroke-linecap="round">
-    <path d="M300 93 H270 V196 H520"/>
+    <path d="M300 93 H270 V196 H520 V104"/>
     <path d="M450 93 H520"/>
   </g>
   <rect x="522" y="72" width="72" height="44" fill="#ffffff" stroke="#111111" stroke-width="2.4"/>
