@@ -86,9 +86,11 @@ This file is the project's committed home for project-intrinsic agent knowledge:
   finançable/dépasse, `alternatif` `--warn` haute tension, `fusible`
   `--warn`/`--red` filament qui chauffe puis fond, `noeuds` `--red` lampe
   grillée), toujours doublé d'un pictogramme + libellé, jamais la couleur
-  seule. Palettes validées
-  `--mode dark` avec `scripts/validate_palette.js` (les FAIL band/chroma sont la
-  propriété du thème néon du site, pas corrigeables sans hex hors tokens).
+  seule. Palettes validées `--mode dark` avec le `validate_palette.js` fourni
+  par la skill `dataviz` (lancé depuis le répertoire de la skill lors de son
+  étape de validation, ce n'est pas un script de ce dépôt — voir les en-têtes
+  de fichier pour les commandes exactes rejouées) ; les FAIL band/chroma sont
+  la propriété du thème néon du site, pas corrigeables sans hex hors tokens.
   Accessibilité : vue tableau repliable, focus clavier = survol,
   `prefers-reduced-motion` respecté.
 - Contrainte tenue : mobile d'abord / poids léger (voir `src/lib/styles/tokens.css`).
