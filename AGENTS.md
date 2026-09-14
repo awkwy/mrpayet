@@ -128,7 +128,12 @@ pour l'enseignant équipé, sans bloquer celui qui ne l'est pas.
   est prérendue (`prerender = true`) : lire la query string s'y fait via
   `browser` + `location.search` (pattern `readLevel()` du composant), jamais
   via `page.url.searchParams` qui lève une erreur de build sur une page
-  statique.
+  statique. Le déblocage séquentiel n'est pas qu'un habillage du parcours :
+  `[theme]/+page.svelte` revérifie lui-même le prérequis (thème précédent de
+  `AUTO.c[classe].o` validé, ou tous les thèmes pour `defi`) avant d'appeler
+  `markThemeCleared`/`markDefiCleared`, pour qu'une arrivée directe sur l'URL
+  `?level=…` (lien partagé, retour navigateur) ne puisse pas valider un nœud
+  hors séquence.
 - Habillage pixel-art des deux mécanismes : sprites bitmap à la main dans
   `$lib/pixel/sprites.js` (grille de caractères `#`/`+`/`.`, voir
   commentaire d'en-tête), rendus par `$lib/components/pixel/PixelIcon.svelte`
