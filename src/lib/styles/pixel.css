@@ -1,0 +1,109 @@
+/* Habillage « pixel-art » des deux jeux de révision (cartes à associer et
+   parcours par niveaux — voir AGENTS.md « Jeux de révision »). Importé
+   uniquement par les pages de ces deux mécanismes (et par le sélecteur de
+   thème pour leurs points d'entrée) : volontairement PAS dans
+   +layout.svelte, pour que le reste du site garde son chrome habituel
+   (arrondi/doux). Couleurs exclusivement via var(--...) de tokens.css.
+   Bords « stepped » (clip-path en escalier) + ombres dures décalées (pas de
+   blur) à la place du arrondi/soft du site : boutons trapus, barres de
+   progression segmentées. */
+
+.pixel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  font-family: var(--sm);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--tx);
+  background: var(--surf3);
+  border: 2px solid var(--line2);
+  border-radius: 0;
+  box-shadow: 3px 3px 0 var(--line2);
+  clip-path: polygon(
+    0 4px,
+    4px 4px,
+    4px 0,
+    calc(100% - 4px) 0,
+    calc(100% - 4px) 4px,
+    100% 4px,
+    100% calc(100% - 4px),
+    calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 4px) 100%,
+    4px 100%,
+    4px calc(100% - 4px),
+    0 calc(100% - 4px)
+  );
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pixel-btn {
+    transition: transform 0.05s linear;
+  }
+}
+.pixel-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--line2);
+}
+.pixel-btn.g {
+  border-color: var(--g3);
+  color: var(--g);
+  box-shadow: 3px 3px 0 var(--g3);
+}
+.pixel-btn.b {
+  border-color: var(--blue);
+  color: var(--blue);
+  box-shadow: 3px 3px 0 var(--g3);
+}
+.pixel-btn.w {
+  border-color: var(--warn);
+  color: var(--warn);
+  box-shadow: 3px 3px 0 var(--g3);
+}
+.pixel-btn:disabled,
+.pixel-btn[aria-disabled='true'] {
+  color: var(--dim2);
+  border-color: var(--line);
+  box-shadow: 3px 3px 0 var(--line);
+  cursor: default;
+}
+
+/* Panneau (carte de jeu, écran de fin…) : même bord en escalier que les
+   boutons, mais statique. */
+.pixel-panel {
+  border: 2px solid var(--line2);
+  background: var(--surf);
+  box-shadow: 4px 4px 0 var(--line2);
+  clip-path: polygon(
+    0 6px,
+    6px 6px,
+    6px 0,
+    calc(100% - 6px) 0,
+    calc(100% - 6px) 6px,
+    100% 6px,
+    100% calc(100% - 6px),
+    calc(100% - 6px) calc(100% - 6px),
+    calc(100% - 6px) 100%,
+    6px 100%,
+    6px calc(100% - 6px),
+    0 calc(100% - 6px)
+  );
+}
+
+/* Barre de progression segmentée (« pixel-bar ») : chaque bloc est une
+   étape franche plutôt qu'un dégradé continu. `--n` = nombre de segments,
+   `--done` = segments remplis. */
+.pixel-bar {
+  --n: 6;
+  --done: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--n), 1fr);
+  gap: 3px;
+  height: 12px;
+}
+.pixel-bar > span {
+  background: var(--line2);
+}
+.pixel-bar > span.on {
+  background: var(--g);
+}
