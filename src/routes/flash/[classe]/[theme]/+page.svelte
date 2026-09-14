@@ -3,7 +3,16 @@
   import { browser } from '$app/environment';
   import { afterNavigate } from '$app/navigation';
   import { checkText } from '$lib/utils/answer-check.js';
-  import { PASS_RATIO, isPassing, markThemeCleared, markDefiCleared } from '$lib/stores/automatismes-progress.js';
+  import { AUTO } from '$lib/data/automatismes.js';
+  import {
+    PASS_RATIO,
+    isPassing,
+    markThemeCleared,
+    markDefiCleared,
+    currentProgress,
+    isThemeCleared,
+    allThemesCleared
+  } from '$lib/stores/automatismes-progress.js';
   import '$lib/styles/pixel.css';
 
   let { data } = $props();
@@ -89,8 +98,19 @@
   $effect(() => {
     if (!finished || !level || awarded || !results.length) return;
     awarded = true;
-    if (level === 'defi') markDefiCleared(data.slug, score, results.length);
-    else markThemeCleared(data.slug, data.theme, score, results.length);
+    // Le parcours n'affiche un nœud comme jouable qu'une fois son
+    // prérequis validé (voir parcours/+page.svelte) ; on retrouve la même
+    // règle ici pour qu'une arrivée directe sur l'URL (lien partagé,
+    // retour navigateur) ne puisse pas valider un nœud hors séquence.
+    const order = AUTO.c[data.classe]?.o ?? [];
+    const progress = currentProgress(data.slug);
+    if (level === 'defi') {
+      if (allThemesCleared(progress, order)) markDefiCleared(data.slug, score, results.length);
+    } else {
+      const i = order.indexOf(data.theme);
+      const unlocked = i <= 0 || isThemeCleared(progress, order[i - 1]);
+      if (unlocked) markThemeCleared(data.slug, data.theme, score, results.length);
+    }
   });
 </script>
 

@@ -66,6 +66,12 @@
     return round.cards.find((c) => c.id === id);
   }
 
+  // Le vrai partenaire d'une carte : la question si c'est une réponse,
+  // la réponse si c'est une question — jamais sa propre valeur.
+  function partnerOf(card) {
+    return card.kind === 'q' ? round.pool[card.pair][1] : round.pool[card.pair][0];
+  }
+
   function flip(id) {
     if (locked || finished) return;
     const card = cardAt(id);
@@ -85,8 +91,8 @@
       flippedIds = [];
     } else {
       locked = true;
-      const question = a.kind === 'q' ? a : b;
-      feedback = { question: question.text, answer: round.pool[question.pair][1] };
+      const shown = a.kind !== b.kind ? [a.kind === 'q' ? a : b] : [a, b];
+      feedback = shown.map((c) => ({ text: c.text, correct: partnerOf(c) }));
       setTimeout(() => {
         a.flipped = false;
         b.flipped = false;
@@ -154,7 +160,10 @@
     {#if feedback}
       <div class="pixel-panel feedback" role="status">
         <span aria-hidden="true">✗</span>
-        « {feedback.question} » → <strong>{feedback.answer}</strong>
+        {#each feedback as pair, i}
+          {#if i > 0}<br />{/if}
+          « {pair.text} » → <strong>{pair.correct}</strong>
+        {/each}
       </div>
     {/if}
   {:else}
