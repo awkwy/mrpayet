@@ -1,8 +1,26 @@
 <script>
   import { base } from '$app/paths';
+  import { browser } from '$app/environment';
+  import { afterNavigate } from '$app/navigation';
   import { checkText } from '$lib/utils/answer-check.js';
+  import { PASS_RATIO, isPassing, markThemeCleared, markDefiCleared } from '$lib/stores/automatismes-progress.js';
+  import '$lib/styles/pixel.css';
 
   let { data } = $props();
+
+  // Lancé depuis le parcours par niveaux (?level=1 pour un thème, ?level=defi
+  // pour le mélange final) : le quiz existant sert alors aussi de défi de
+  // validation de nœud, voir src/routes/flash/[classe]/parcours. Cette page
+  // est prérendue statiquement : `page.url.searchParams` est interdit au
+  // build (SvelteKit ne connaît pas la query string d'une page statique), on
+  // lit donc `location.search` côté navigateur uniquement, mis à jour à
+  // chaque navigation (y compris un changement de query sur la même route).
+  let level = $state(null);
+  function readLevel() {
+    if (browser) level = new URLSearchParams(window.location.search).get('level');
+  }
+  readLevel();
+  afterNavigate(() => readLevel());
 
   let pool = $state([]);
   let idx = $state(0);
@@ -11,6 +29,7 @@
   let timeLeft = $state(300);
   let finished = $state(false);
   let restartKey = $state(0);
+  let awarded = $state(false);
 
   function shuffle(arr) {
     const a = [...arr];
@@ -31,6 +50,7 @@
     results = [];
     timeLeft = 300;
     finished = false;
+    awarded = false;
     const id = setInterval(() => {
       timeLeft -= 1;
       if (timeLeft <= 0) {
@@ -62,15 +82,29 @@
   }
 
   let score = $derived(results.filter((r) => r.ok).length);
+  let passed = $derived(isPassing(score, results.length));
+  let needed = $derived(Math.ceil(PASS_RATIO * results.length));
+  let levelTitle = $derived(level === 'defi' ? 'Défi final' : data.title);
+
+  $effect(() => {
+    if (!finished || !level || awarded || !results.length) return;
+    awarded = true;
+    if (level === 'defi') markDefiCleared(data.slug, score, results.length);
+    else markThemeCleared(data.slug, data.theme, score, results.length);
+  });
 </script>
 
 <svelte:head>
-  <title>{data.title} — {data.classe} — Flash — MrPayet</title>
+  <title>{levelTitle} — {data.classe} — Flash — MrPayet</title>
 </svelte:head>
 
 <div class="wrap">
   <p class="crumb">
-    <a href="{base}/flash/{data.slug}">{data.classe}</a> / {data.title}
+    <a href="{base}/flash/{data.slug}">{data.classe}</a>
+    {#if level}
+      / <a href="{base}/flash/{data.slug}/parcours">Parcours</a>
+    {/if}
+    / {levelTitle}
   </p>
 
   {#if !finished && pool.length}
@@ -95,6 +129,15 @@
   {:else}
     <div class="results">
       <h1>Score : {score}/{results.length}</h1>
+      {#if level}
+        <div class="pixel-panel level-result" class:g={passed} class:w={!passed} role="status">
+          {#if passed}
+            🏆 Niveau validé !
+          {:else}
+            Pas encore validé — il faut au moins {needed}/{results.length} bonnes réponses. Retente le niveau !
+          {/if}
+        </div>
+      {/if}
       <div class="rows">
         {#each results as r}
           <div class="rrow" class:ok={r.ok} class:skip={r.skipped}>
@@ -113,7 +156,11 @@
       </div>
       <div class="actions">
         <button type="button" class="btn ok" onclick={() => (restartKey += 1)}>Recommencer</button>
-        <a class="btn skip" href="{base}/flash/{data.slug}">Changer de thème</a>
+        {#if level}
+          <a class="pixel-btn" class:g={passed} href="{base}/flash/{data.slug}/parcours">Retour au parcours</a>
+        {:else}
+          <a class="btn skip" href="{base}/flash/{data.slug}">Changer de thème</a>
+        {/if}
       </div>
     </div>
   {/if}
@@ -238,5 +285,20 @@
     display: flex;
     gap: 10px;
     margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .level-result {
+    margin-top: 10px;
+    padding: 10px 14px;
+    font-family: var(--sm);
+    font-size: 13px;
+  }
+  .level-result.g {
+    color: var(--g);
+    border-color: var(--g3);
+  }
+  .level-result.w {
+    color: var(--warn);
+    border-color: var(--warn);
   }
 </style>

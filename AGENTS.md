@@ -108,6 +108,36 @@ séance 2) se transpose directement dans un `apport` HTML : sous-titres en gras
 qui exploitent ce relevé de repli. Ça garde une vraie consigne de manipulation
 pour l'enseignant équipé, sans bloquer celui qui ne l'est pas.
 
+## Jeux de révision (automatismes)
+
+- Deux mécanismes de révision « ludiques » complètent le quiz flash existant
+  (`src/routes/flash/[classe]/[theme]`), même source de données
+  (`$lib/data/automatismes.js`), mêmes points d'entrée depuis le sélecteur de
+  thème (`src/routes/flash/[classe]/+page.svelte`) : **cartes à associer**
+  (`[theme]/cartes`, memory 6 paires/12 cartes, dédupliquées par réponse pour
+  éviter toute correspondance ambiguë — voir `dedupedItems` dans le
+  composant) et **parcours par niveaux** (`[classe]/parcours`, une carte de
+  progression par classe qui débloque les thèmes de `AUTO.c[classe].o` un par
+  un puis un nœud « défi final »).
+- Le parcours réutilise tel quel le quiz flash comme épreuve de nœud (pas un
+  3ᵉ mécanisme) : `[theme]/+page.svelte` lit `?level=1` (thème) ou
+  `?level=defi` (mélange, `?level=defi` sur la route `melange`) et
+  valide/persiste via `$lib/stores/automatismes-progress.js` (75 % minimum,
+  clé localStorage `mrp.parcours.<slug classe>`, dégradé en silence si
+  indisponible — même convention que `$lib/stores/progress.js`). Cette page
+  est prérendue (`prerender = true`) : lire la query string s'y fait via
+  `browser` + `location.search` (pattern `readLevel()` du composant), jamais
+  via `page.url.searchParams` qui lève une erreur de build sur une page
+  statique.
+- Habillage pixel-art des deux mécanismes : sprites bitmap à la main dans
+  `$lib/pixel/sprites.js` (grille de caractères `#`/`+`/`.`, voir
+  commentaire d'en-tête), rendus par `$lib/components/pixel/PixelIcon.svelte`
+  (`<rect>` SVG, pas d'asset raster — même convention que les visualisations,
+  voir ci-dessus). Chrome bouton/panneau/barre de progression trapu dans
+  `$lib/styles/pixel.css`, importé seulement par les pages de ces deux
+  mécanismes (jamais dans `+layout.svelte`) pour que le reste du site garde
+  son chrome habituel.
+
 ## Maintaining this file
 
 Keep this file for knowledge useful to almost every future agent session in this project.
