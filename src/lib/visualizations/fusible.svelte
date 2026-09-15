@@ -45,7 +45,7 @@
       ['Feux de croisement', 110, 'Feux'],
       ['Autoradio', 40, 'Radio'],
       ['Ventilateur habitacle', 120, 'Ventil.'],
-      ['Lunette dégivrante', 180, 'Dégiv.'],
+      ['Vitre chauffante', 180, 'Vitre'],
       ['Essuie-glace', 60, 'Essuie']
     ];
     const CALS = [5, 10, 15, 20, 30];

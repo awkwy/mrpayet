@@ -28,7 +28,7 @@ export default {id:"mecanique-mv",classe:"2P MV2",mat:"Physique-chimie",titre:"D
             ["b. Roue sur banc d'équilibrage","la valve de la roue","l'écrou central de la roue","repos"],
             ["c. Véhicule chargé sur une dépanneuse","le véhicule chargé","le plateau de la dépanneuse","repos"],
             ["d. Véhicule chargé sur une dépanneuse","le véhicule chargé","la route","mouvement"]]},
-    q:[{q:"Une dépanneuse tombe en panne sur l'autoroute ; le client dit que le véhicule chargé dessus n'a pas bougé. A-t-il raison ? (oui / non)",a:"oui",txt:true,sol:"Oui, dans le référentiel de la dépanneuse — c'est même pour cela qu'un véhicule arrimé sur un plateau ne glisse pas à chaque virage."}]},
+    q:[{q:"Une dépanneuse tombe en panne sur la RN1 ; le client dit que le véhicule chargé dessus n'a pas bougé. A-t-il raison ? (oui / non)",a:"oui",txt:true,sol:"Oui, dans le référentiel de la dépanneuse — c'est même pour cela qu'un véhicule arrimé sur un plateau ne glisse pas à chaque virage."}]},
    {t:"Le bon référentiel pour le bon diagnostic",
     apport:"Pour étudier le <b>déplacement du véhicule</b> (vitesse, trajet d'essai) : référentiel <b>Terre / route</b>. Pour étudier le <b>fonctionnement d'une pièce embarquée</b> (essuie-glace, rotule, piston) : référentiel <b>véhicule</b>.",
     q:[{q:"Pour contrôler qu'un piston coulisse bien dans son cylindre pendant que le moteur tourne, quel référentiel choisir ? (Terre / véhicule)",a:["véhicule"],txt:true},
