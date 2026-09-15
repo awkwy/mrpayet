@@ -106,11 +106,22 @@ export default {id:"securite-electrique",classe:"2P MV2",mat:"Physique-chimie",t
  {t:"12 V, 230 V, et les câbles orange",pdf:["s3-tension-eleve-standard","s3-tension-eleve-accessible"],
   prob:"Pourquoi les risques ne sont-ils pas les mêmes dans le véhicule, dans l'atelier, et sur un véhicule électrique ?",
   steps:[
-   {t:"Trois milieux, trois risques",doc:{h:["","Véhicule","Atelier (secteur)","Véhicule électrique"],r:[
-     ["Tension","12 V continue","230 V alternative, 50 Hz","400 à 800 V continue"],
-     ["Risque principal","court-circuit batterie : plusieurs centaines d'ampères, arc, brûlure","électrisation, électrocution","électrisation mortelle, arc"],
-     ["Protection","fusible, coupe-circuit","fusible, disjoncteur, différentiel, mise à la terre","consignation, habilitation, EPI isolants"],
-     ["Repère visuel","—","—","câbles orange"]]}},
+   {t:"Trois milieux, trois risques",situations:[
+     {t:"Véhicule",illus:"vehicule",fields:[
+       ["Tension","12 V continue"],
+       ["Risque principal","court-circuit batterie : plusieurs centaines d'ampères, arc, brûlure"],
+       ["Protection","fusible, coupe-circuit"],
+       ["Repère visuel","—"]]},
+     {t:"Atelier (secteur)",illus:"atelier",fields:[
+       ["Tension","230 V alternative, 50 Hz"],
+       ["Risque principal","électrisation, électrocution"],
+       ["Protection","fusible, disjoncteur, différentiel, mise à la terre"],
+       ["Repère visuel","—"]]},
+     {t:"Véhicule électrique",illus:"vehicule-electrique",fields:[
+       ["Tension","400 à 800 V continue"],
+       ["Risque principal","électrisation mortelle, arc"],
+       ["Protection","consignation, habilitation, EPI isolants"],
+       ["Repère visuel","câbles orange"]]}]},
    {t:"Continu ou alternatif : regarde le signal",viz:"alternatif",
     apport:"En France, le secteur est <b>alternatif sinusoïdal</b>, de valeur efficace <b>230 V</b> et de fréquence <b>50 Hz</b>. La tension du véhicule, elle, est <b>continue</b> : elle ne change pas de signe."},
    {t:"La tension du secteur",

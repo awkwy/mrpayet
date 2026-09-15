@@ -7,6 +7,7 @@
   import QuizInput from '$lib/components/QuizInput.svelte';
   import QuizMCQ from '$lib/components/QuizMCQ.svelte';
   import LockedNotice from '$lib/components/LockedNotice.svelte';
+  import SituationsTabs from '$lib/components/SituationsTabs.svelte';
 
   let { data } = $props();
   let c = $derived(data.course);
@@ -162,6 +163,9 @@
               </tbody>
             </table>
           </div>
+        {/if}
+        {#if st.situations}
+          <SituationsTabs situations={st.situations} />
         {/if}
         {#if st.apport}
           <p class="apport">{@html st.apport}</p>
