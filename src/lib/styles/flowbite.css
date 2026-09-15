@@ -1,0 +1,8 @@
+/* Tailwind utilities pour flowbite-svelte (Tabs/TabItem, voir
+   SituationsTabs.svelte) — SANS la couche preflight/base : elle réinitialise
+   des éléments globaux (h1, button, ul…) et casserait le design du reste du
+   site, qui n'utilise pas Tailwind. Importé uniquement par SituationsTabs.svelte
+   (jamais dans +layout.svelte), même convention que pixel.css : opt-in par
+   page/composant plutôt que global. */
+@import 'tailwindcss/theme' layer(theme);
+@import 'tailwindcss/utilities' layer(utilities);

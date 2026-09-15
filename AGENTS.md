@@ -145,6 +145,45 @@ pour l'enseignant équipé, sans bloquer celui qui ne l'est pas.
   mécanismes (jamais dans `+layout.svelte`) pour que le reste du site garde
   son chrome habituel.
 
+## Comparaison de situations en onglets (`situations`)
+
+- Pour comparer un petit nombre de situations parallèles (2-4) avec de la
+  place pour une illustration, un `step` peut porter
+  `situations:[{t, illus, fields:[[label,value],...]}, …]` au lieu de
+  `doc:{h,r}` (ex. `securite-electrique.js`, étape « Trois milieux, trois
+  risques »). Rendu par `$lib/components/SituationsTabs.svelte` en onglets
+  (une situation = un onglet, illustration + liste label/valeur), consommé
+  par `src/routes/c/[id]/[n]/+page.svelte` en parallèle du rendu `doc:{h,r}`
+  générique (jamais remplacé : `doc` reste le bon choix pour un vrai tableau,
+  ex. le code couleur des fusibles ou les relevés du technicien dans ce même
+  fichier). N'utiliser `situations` que pour ce cas précis (comparaison
+  illustrée, peu d'entrées) ; un tableau de données réelles reste `doc`.
+- **Seule dépendance UI-kit du projet** (choix délibéré, pas un défaut à
+  reproduire ailleurs) : `SituationsTabs.svelte` s'appuie sur
+  `flowbite-svelte` (`Tabs`/`TabItem`) avec `tabStyle="none"` — désactive tout
+  le thème visuel par défaut de flowbite (classes Tailwind gray/primary) pour
+  ne garder que la structure ARIA (`role="tablist"`/`"tab"`/`"tabpanel"`,
+  sélection) ; l'apparence vient entièrement du CSS scoped du composant, en
+  tokens.css. `tailwindcss` + `@tailwindcss/vite` (`vite.config.js`) sont
+  requis comme peer deps mais **sans la couche preflight** :
+  `src/lib/styles/flowbite.css` importe seulement `tailwindcss/theme` et
+  `tailwindcss/utilities`, jamais `tailwindcss/preflight` (qui réinitialise
+  les éléments globaux et casserait le design du reste du site). Ce fichier
+  n'est importé que par `SituationsTabs.svelte`, jamais dans
+  `+layout.svelte` — même convention opt-in que `pixel.css`. Tailwind
+  n'analyse pas `node_modules` par défaut : les classes par défaut de
+  flowbite-svelte (définies dans son propre bundle compilé) ne génèrent donc
+  aucun CSS et sont inertes ; c'est voulu, puisque `tabStyle="none"` +
+  classes maison les remplacent de toute façon.
+- Illustrations pixel-art multi-teintes : `$lib/pixel/situations.js` (bitmaps
+  + palette `caractère → var(--…)`, plusieurs teintes par sprite) rendues par
+  `$lib/components/pixel/SituationIllus.svelte` (`<rect>` SVG,
+  `image-rendering: pixelated`) — variante de la technique
+  `$lib/pixel/sprites.js`/`PixelIcon.svelte` (voir « Jeux de révision »
+  ci-dessus) mais avec plus de deux tons par bitmap au lieu du seul couple
+  ink/accent ; `--warn` y sert de câble haute tension (véhicule électrique),
+  même convention que la visualisation `alternatif`.
+
 ## Maintaining this file
 
 Keep this file for knowledge useful to almost every future agent session in this project.
