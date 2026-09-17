@@ -2,8 +2,8 @@
  * (« Dessine le circuit toi-même », séance fusible). Séparée du rendu car
  * c'est un algorithme de graphe (cycle simple, court-circuit, connexité) —
  * pas seulement de l'assemblage SVG — et se prête à être relu/testé
- * indépendamment, même si la suite vitest du projet ne couvre pas les
- * visualisations (voir AGENTS.md).
+ * indépendamment (voir circuit-eval.test.js) même si le rendu SVG de
+ * `circuit.svelte` lui-même reste hors de la suite vitest (voir AGENTS.md).
  *
  * Modèle : la grille n'autorise que des arêtes horizontales/verticales entre
  * nœuds voisins (construction, pas détection) : un fil ou un dipôle est

@@ -95,8 +95,11 @@ This file is the project's committed home for project-intrinsic agent knowledge:
   `prefers-reduced-motion` respecté.
 - Contrainte tenue : mobile d'abord / poids léger (voir `src/lib/styles/tokens.css`).
   Animations : jamais de saut instantané — easing amorti obligatoire.
-- Pas de tests de visualisation dans la suite (`vitest` couvre `src/lib/stores/`,
-  `src/lib/data/` et `src/lib/utils/`).
+- Pas de tests du rendu SVG/canvas des visualisations dans la suite (`vitest`
+  couvre `src/lib/stores/`, `src/lib/data/` et `src/lib/utils/`) ; un module de
+  logique pure extrait d'une visualisation (ex. `circuit-eval.js`, voir
+  ci-dessous) peut avoir son propre test, `vitest` incluant tout
+  `src/**/*.test.js`.
 
 ## Activité de construction avec correction en direct (`circuit`)
 
@@ -108,11 +111,13 @@ This file is the project's committed home for project-intrinsic agent knowledge:
   pictogramme + texte de statut). Patron réutilisable pour toute future
   activité « construis et vérifie » du même type :
   - **Séparer la logique de correction du rendu** dans un module pur dédié
-    (`circuit-eval.js`) quand c'est un vrai algorithme (ici : fermeture de
-    boucle, court-circuit, convention de schéma), même sans test vitest pour
-    les visualisations — la logique de graphe (ex. « connexe + degré 2 partout
-    ⇒ cycle simple unique ») porte à elle seule plusieurs invariants électriques
-    d'un coup, voir l'en-tête de ce fichier.
+    (`circuit-eval.js`, testé par `circuit-eval.test.js`) quand c'est un vrai
+    algorithme (ici : fermeture de boucle, court-circuit, convention de
+    schéma) — le rendu SVG lui-même (`circuit.svelte`) reste hors suite vitest,
+    comme les autres visualisations, mais la logique de graphe (ex. « connexe
+    + degré 2 partout ⇒ cycle simple unique ») porte à elle seule plusieurs
+    invariants électriques d'un coup et se prête bien à un test unitaire, voir
+    l'en-tête de ce fichier.
   - **Snapper à des emplacements fixes plutôt que détecter un tracé libre** :
     élimine toute la détection géométrique (diagonale, désalignement) par
     construction.
