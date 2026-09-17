@@ -63,6 +63,8 @@ export default {id:"securite-electrique",classe:"2P MV2",mat:"Physique-chimie",t
     img:[{src:"/images/fusible-neuf-fondu.svg",alt:"un fusible neuf et un fusible fondu, côte à côte"},
          {src:"/images/fusible-maillon-faible.svg",alt:"le fusible, point le plus fin du circuit"}],
     apport:"Le courant électrique échauffe tout conducteur qu'il traverse, d'autant plus qu'il est intense. Le filament du fusible est volontairement le point <b>le plus fin</b> du circuit : c'est lui qui chauffe et fond le premier, avant que le reste du circuit ne soit endommagé. Il est conçu pour être le <b>maillon faible</b>."},
+   {t:"Dessine le circuit toi-même",viz:"circuit",
+    apport:"Générateur, fusible, lampe : place les trois symboles normalisés et relie-les avec des fils, comme sur ta fiche papier. Le contour de la manipulation te dit tout de suite si le circuit fonctionne (boucle fermée, pas de court-circuit) et si le schéma respecte la convention vue plus haut : le fusible protège tout le circuit, donc il se place juste après le générateur."},
    {t:"Document — code couleur des fusibles",doc:{h:["Couleur","Calibre"],r:[["Beige","5 A"],["Marron","7,5 A"],["Rouge","10 A"],["Bleu","15 A"],["Jaune","20 A"],["Blanc","25 A"],["Vert","30 A"],["Orange","40 A"]]}},
    {t:"Allume les consommateurs et regarde le fusible",viz:"fusible",
     apport:"Sur une plaque signalétique : puissance P (W) et tension U (V). La relation est P = U × I, donc <b>I = P ÷ U</b>."},

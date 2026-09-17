@@ -1,6 +1,7 @@
 import fusible from './fusible.svelte';
 import noeuds from './noeuds.svelte';
 import alternatif from './alternatif.svelte';
+import circuit from './circuit.svelte';
 import taux from './taux.svelte';
 import aire from './aire.svelte';
 import bascule from './bascule.svelte';
@@ -35,7 +36,7 @@ import parabole from './parabole.svelte';
 import agrandir from './agrandir.svelte';
 
 export const VIZ = {
-  fusible, noeuds, alternatif, taux, aire, bascule, budget, remise, partage,
+  fusible, noeuds, alternatif, circuit, taux, aire, bascule, budget, remise, partage,
   division, multiplication, moyenne, mediane, experience, arbre, fluctuation,
   stabilisation, batons, moypond, ph, interet, onde, propor, courbe, geo, pyth,
   db, chauffe, force, refraction, rgb, interval, affine, parabole, agrandir

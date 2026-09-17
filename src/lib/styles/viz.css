@@ -228,6 +228,59 @@
   color: var(--blue);
 }
 
+/* Halo de correction en direct — pilote la manipulation `circuit` (« Dessine
+   le circuit toi-même », voir $lib/visualizations/circuit.svelte / circuit-
+   eval.js). Le cadre `.viz` partagé prend un contour de la couleur d'état ;
+   le statut est toujours doublé d'un pictogramme + libellé dans le SVG
+   (jamais la couleur seule). Additif, sans effet sur les autres fiches qui
+   n'émettent pas ces classes. */
+.viz.circuit-red,
+.viz.circuit-orange,
+.viz.circuit-green {
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.viz.circuit-red {
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--red) 35%, transparent);
+}
+.viz.circuit-orange {
+  border-color: var(--warn);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--warn) 35%, transparent);
+}
+.viz.circuit-green {
+  border-color: var(--g);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--g) 35%, transparent);
+}
+/* La pulsation « jeu télévisé » n'est qu'un renfort visuel de motion — coupée
+   sous prefers-reduced-motion, le halo statique + le texte de statut restent
+   la source d'information. */
+@media (prefers-reduced-motion: no-preference) {
+  .viz.circuit-red {
+    animation: circuit-pulse-red 1.6s ease-in-out infinite;
+  }
+  .viz.circuit-orange {
+    animation: circuit-pulse-orange 1.6s ease-in-out infinite;
+  }
+}
+@keyframes circuit-pulse-red {
+  0%,
+  100% {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--red) 35%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--red) 15%, transparent);
+  }
+}
+@keyframes circuit-pulse-orange {
+  0%,
+  100% {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--warn) 35%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--warn) 15%, transparent);
+  }
+}
+
 @media (min-width: 640px) {
   .viz {
     padding: 18px;
