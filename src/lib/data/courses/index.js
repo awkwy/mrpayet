@@ -5,6 +5,9 @@ import deciderSousContrainte from './decider-sous-contrainte.js';
 import calculsCommerciaux from './calculs-commerciaux.js';
 import apConsolidation from './ap-consolidation.js';
 import apConsolidationTcapmp from './ap-consolidation-tcapmp.js';
+import apConsolidation2pmv2 from './ap-consolidation-2pmv2.js';
+import apFractions from './ap-fractions.js';
+import apSignes from './ap-signes.js';
 import ficheOutils from './fiche-outils.js';
 import statAepe from './stat-aepe.js';
 import chimieAepe from './chimie-aepe.js';
@@ -34,6 +37,9 @@ export const COURSES = [
   calculsCommerciaux,
   apConsolidation,
   apConsolidationTcapmp,
+  apConsolidation2pmv2,
+  apFractions,
+  apSignes,
   ficheOutils,
   statAepe,
   chimieAepe,

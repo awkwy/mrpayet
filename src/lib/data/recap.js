@@ -87,6 +87,42 @@ export const RECAP = {
   {sig:"Choisir le sens d'un arrondi de quantité",
    met:"« Au minimum pour tout contenir » → vers le haut. « Combien de lots complets » → vers le bas.",ex:"204 pièces, cartons de 25 → 204 ÷ 25 = 8,16 → 9 cartons",pg:"Arrondir systématiquement au plus proche sans regarder la question posée."}
  ],
+ "ap-consolidation-2pmv2":[
+  {sig:"Poser une division",
+   met:"Chiffre par chiffre, de gauche à droite : « combien de fois ? », j'écris au quotient, je soustrais, j'abaisse le chiffre suivant.",ex:"92 bougies en 4 lots égaux : 9÷4 → 2 (reste 1) ; j'abaisse le 2 → 12÷4 → 3. Quotient 23.",pg:"Oublier d'abaisser le chiffre suivant."},
+  {sig:"« Combien pour chacun ? »",
+   met:"Division-partage : total ÷ nombre de parts.",ex:"24 filtres, 4 véhicules → 24 ÷ 4 = 6 par véhicule",pg:"Confondre avec « combien de cartons »."},
+  {sig:"« Combien de cartons / de lots ? »",
+   met:"Division-groupement : total ÷ taille du lot.",ex:"24 filtres, cartons de 4 → 6 cartons",pg:"Le reste ne forme pas un carton complet."},
+  {sig:"Choisir le sens d'un arrondi de quantité",
+   met:"« Au minimum pour tout inclure » → vers le haut. « Combien de lots complets » → vers le bas.",ex:"45 bidons, étagères de 8 → 45 ÷ 8 = 5,6 → 6 étagères",pg:"Arrondir systématiquement au plus proche sans regarder la question posée."},
+  {sig:"Prix de n articles connaissant le prix de p articles",
+   met:"Proportionnalité : prix d'un article = prix ÷ p, puis × n.",ex:"5 bidons = 20 € → 1 bidon = 4 € → 8 bidons = 32 €",pg:"Additionner au lieu de multiplier."},
+  {sig:"« X % de Y »",
+   met:"Y × (X/100).",ex:"60 % de 20 véhicules : 20 × 0,60 = 12",pg:"Diviser par X au lieu de multiplier par X/100."}
+ ],
+ "ap-fractions":[
+  {sig:"Lire une fraction a/b",
+   met:"b = nombre total de parts égales (dénominateur), a = nombre de parts prises (numérateur).",ex:"3/4 : 4 parts égales, on en prend 3",pg:"Inverser numérateur et dénominateur."},
+  {sig:"Simplifier une fraction",
+   met:"Diviser le numérateur et le dénominateur par un même diviseur commun.",ex:"6/8 = (6÷2)/(8÷2) = 3/4",pg:"Diviser seulement l'un des deux termes."},
+  {sig:"Comparer deux fractions",
+   met:"Même dénominateur : je compare les numérateurs. Sinon, je les ramène au même dénominateur ou je compare à 1/2 et à 1.",ex:"3/4 = 6/8, donc 3/4 > 5/8",pg:"Comparer directement les numérateurs de fractions à dénominateurs différents."},
+  {sig:"Additionner deux fractions de même dénominateur",
+   met:"On garde le dénominateur et on additionne les numérateurs.",ex:"3/8 + 4/8 = 7/8",pg:"Additionner aussi les dénominateurs."},
+  {sig:"Calculer a/b d'une quantité N",
+   met:"(N ÷ b) × a.",ex:"3/4 de 20 : 20 ÷ 4 = 5, puis 5 × 3 = 15",pg:"Multiplier directement N par a sans diviser par b."}
+ ],
+ "ap-signes":[
+  {sig:"Additionner deux nombres relatifs de même signe",
+   met:"On additionne les distances à zéro et on garde le signe commun.",ex:"(−3) + (−4) = −7",pg:"Oublier de garder le signe commun."},
+  {sig:"Additionner deux nombres relatifs de signes différents",
+   met:"On soustrait la plus petite distance à zéro de la plus grande, et on garde le signe du nombre qui a la plus grande distance.",ex:"(−7) + (+3) = −4",pg:"Additionner les distances au lieu de les soustraire."},
+  {sig:"Soustraire un nombre relatif",
+   met:"a − b = a + (−b) : soustraire, c'est additionner l'opposé.",ex:"5 − (−3) = 5 + (+3) = 8",pg:"Garder le signe − au lieu de le transformer en +."},
+  {sig:"Multiplier ou diviser deux nombres relatifs",
+   met:"Signes identiques → résultat positif. Signes différents → résultat négatif.",ex:"(−3) × (−4) = 12 ; (−3) × 4 = −12",pg:"Oublier d'appliquer la règle des signes au résultat."}
+ ],
  "fiche-outils":[
   {sig:"Addition posée",
    met:"Aligner les unités sous les unités, additionner de droite à gauche, retenir la dizaine quand une colonne dépasse 9.",ex:"47 + 38 : 7 + 8 = 15 → j'écris 5, je retiens 1 ; 4 + 3 + 1 = 8 → 85",pg:"Mal aligner les chiffres."},
