@@ -1,5 +1,6 @@
 export default {id:"ap-consolidation-2pmv2",classe:"2P MV2",mat:"AP",titre:"Consolidation des outils de calcul",
  desc:"Diagnostic court puis ateliers autocorrectifs : division, arrondi, tableau, proportionnalité, pourcentage — les outils de l'atelier.",
+ pdf:"ap",
  obj:["Poser une division et la vérifier par la multiplication",
       "Reconnaître les deux sens de la division : partager et grouper",
       "Choisir le bon sens d'arrondi selon la question posée",
@@ -7,7 +8,7 @@ export default {id:"ap-consolidation-2pmv2",classe:"2P MV2",mat:"AP",titre:"Cons
       "Calculer avec un coefficient de proportionnalité et un pourcentage",
       "Repérer les outils à retravailler grâce à un diagnostic court"],
  seances:[
- {t:"Atelier — poser une division",
+ {t:"Atelier — poser une division",pdf:["ap-2pmv2-atelier-division"],
   prob:"Répartir des pièces ou des consommables entre des véhicules ou des lots, et vérifier le résultat.",
   steps:[
    {t:"Partager ou grouper ?",viz:"division",
@@ -19,7 +20,7 @@ export default {id:"ap-consolidation-2pmv2",classe:"2P MV2",mat:"AP",titre:"Cons
   quiz:[{q:"« 24 filtres rangés par cartons de 4 » est un problème de :",o:["Partage","Groupement"],c:1,e:"On cherche combien de cartons : c'est un groupement."},
         {q:"On vérifie 96 ÷ 8 = 12 en calculant :",o:["12 + 8","12 × 8","96 − 8"],c:1,e:"quotient × diviseur = dividende."}],
   trace:"La division répond à deux questions : <b>partager</b> (combien pour chacun ?) et <b>grouper</b> (combien de lots ?). On vérifie toujours une division par la multiplication : quotient × diviseur = dividende."},
- {t:"Atelier — arrondir selon le contexte",
+ {t:"Atelier — arrondir selon le contexte",pdf:["ap-2pmv2-atelier-arrondi"],
   prob:"Arrondir un nombre à la dizaine, puis choisir le bon sens d'arrondi selon la question posée.",
   steps:[
    {t:"Arrondir un nombre",apport:"<b>À la dizaine :</b> on regarde le chiffre des unités. De 0 à 4 → on descend. De 5 à 9 → on monte. Exemple : 347 → 350 ; 342 → 340. Même principe à l'unité pour un nombre décimal.",
@@ -35,7 +36,7 @@ export default {id:"ap-consolidation-2pmv2",classe:"2P MV2",mat:"AP",titre:"Cons
   quiz:[{q:"19 véhicules, 1 poste de contrôle pour 6 : combien en faut-il ?",o:["3","4","3,17"],c:1,e:"19 ÷ 6 = 3,17 → on arrondit vers le haut : 4."},
         {q:"« Combien de lots complets ? » : on arrondit toujours…",o:["vers le haut","vers le bas","à l'entier le plus proche"],c:1,e:"Un lot incomplet ne compte pas : vers le bas."}],
   trace:"Arrondir à la dizaine : 0 à 4 → on descend, 5 à 9 → on monte.<br>Quand une division ne tombe pas juste, le sens de l'arrondi dépend de la question : « combien de … pour tout inclure ? » (conteneurs, créneaux, étagères) → <b>vers le haut</b> ; « combien de … complets ? » (lots, cartons, sachets) → <b>vers le bas</b>."},
- {t:"Atelier — lire un tableau à double entrée",
+ {t:"Atelier — lire un tableau à double entrée",pdf:["ap-2pmv2-atelier-tableau"],
   prob:"Trouver une valeur dans un tableau à double entrée, puis additionner une ligne ou une colonne.",
   steps:[
    {t:"Croiser une ligne et une colonne",apport:"Un <b>tableau à double entrée</b> croise une <b>ligne</b> et une <b>colonne</b>. Pour trouver une valeur : je pose un doigt sur la ligne, un doigt sur la colonne, je descends et je vais à droite jusqu'à ce qu'ils se rencontrent."},
@@ -52,7 +53,7 @@ export default {id:"ap-consolidation-2pmv2",classe:"2P MV2",mat:"AP",titre:"Cons
   quiz:[{q:"Dans un tableau à double entrée, pour trouver une valeur je croise :",o:["deux colonnes","une ligne et une colonne","deux lignes"],c:1,e:"Une ligne et une colonne se croisent en une seule case."},
         {q:"Pour le total d'une même catégorie sur toute la semaine, j'additionne :",o:["une colonne","une ligne","toutes les cases"],c:1,e:"La ligne regroupe les valeurs de cette catégorie pour chaque jour."}],
   trace:"Un tableau à double entrée croise une ligne et une colonne : leur case commune donne la valeur cherchée.<br>Additionner une <b>colonne</b> donne un total par jour ; additionner une <b>ligne</b> donne un total sur la période.<br>Une valeur lue dans un tableau peut ensuite servir à un autre calcul (division, pourcentage…)."},
- {t:"Atelier — la proportionnalité",
+ {t:"Atelier — la proportionnalité",pdf:["ap-2pmv2-atelier-proportionnalite"],
   prob:"5 bidons d'huile coûtent 20 € : combien coûtent 8 bidons ?",
   steps:[
    {t:"Le coefficient de proportionnalité",viz:"propor",
@@ -74,7 +75,7 @@ export default {id:"ap-consolidation-2pmv2",classe:"2P MV2",mat:"AP",titre:"Cons
   quiz:[{q:"5 bidons coûtent 20 €. Le coefficient (€ par bidon) est :",o:["4","5","20"],c:0,e:"20 ÷ 5 = 4."},
         {q:"Pour trouver une valeur inconnue dans un tableau de proportionnalité, je multiplie l'autre valeur de sa ligne par :",o:["le coefficient","le nombre de colonnes","la moyenne des deux lignes"],c:0,e:"Le coefficient relie chaque valeur du haut à celle du bas (ou l'inverse)."}],
   trace:"Deux grandeurs sont <b>proportionnelles</b> quand on passe de l'une à l'autre en multipliant toujours par le même <b>coefficient</b>.<br>Pour trouver une valeur inconnue dans un tableau : je calcule le coefficient (valeur du bas ÷ valeur du haut), puis je multiplie ; ou je passe par la valeur pour <b>1 unité</b>."},
- {t:"Atelier — les pourcentages",
+ {t:"Atelier — les pourcentages",pdf:["ap-2pmv2-atelier-pourcentage"],
   prob:"Une remise de 20 % sur une réparation à 60 € : combien reste-t-il à payer ?",
   steps:[
    {t:"Prendre un pourcentage",apport:"<b>X % de N</b> = N × X ÷ 100. Exemple : 20 % de 60 → 60 × 20 ÷ 100 = <b>12</b>.",
@@ -91,7 +92,7 @@ export default {id:"ap-consolidation-2pmv2",classe:"2P MV2",mat:"AP",titre:"Cons
   quiz:[{q:"Une remise de 20 % correspond au coefficient :",o:["0,20","0,80","1,20"],c:1,e:"1 − 0,20 = 0,80."},
         {q:"25 % de 40, c'est :",o:["10","16","100"],c:0,e:"40 × 25 ÷ 100 = 10."}],
   trace:"Prendre <b>X % de N</b> : N × X ÷ 100.<br><b>Réduction de X %</b> : × (1 − X/100). <b>Augmentation de X %</b> : × (1 + X/100). Ce facteur est le <b>coefficient multiplicateur</b> : il permet de faire le calcul en une seule opération."},
- {t:"Diagnostic — où j'en suis",
+ {t:"Diagnostic — où j'en suis",pdf:["ap-2pmv2-diagnostic"],
   prob:"12 questions courtes pour repérer ce qu'il faut retravailler.",
   steps:[{t:"Comment ça marche",apport:"Ce diagnostic n'est pas noté. Il sert à savoir par quel atelier commencer. Calculatrice autorisée."},
    {t:"Le taux « 1 pour n », pour s'échauffer",viz:"taux",

@@ -1,11 +1,12 @@
 export default {id:"ap-signes",classe:"TC AEPE",classes:["TC AEPE","TC APMP","2P MV2"],mat:"AP",titre:"Atelier — les nombres relatifs",
  desc:"Atelier autocorrectif pas-à-pas : lire un nombre relatif, l'additionner, le soustraire, et appliquer la règle des signes en multiplication.",
+ pdf:"ap",
  obj:["Lire et situer un nombre relatif sur une droite graduée",
       "Additionner deux nombres relatifs, de même signe ou de signes différents",
       "Transformer une soustraction en addition de l'opposé",
       "Appliquer la règle des signes en multiplication et en division"],
  seances:[
- {t:"Atelier — les nombres relatifs",
+ {t:"Atelier — les nombres relatifs",pdf:["ap-signes"],
   prob:"Un nombre relatif a un signe (+ ou −) et une distance à zéro : température, altitude, solde d'un compte…",
   steps:[
    {t:"Situer un nombre relatif",
