@@ -1,12 +1,13 @@
 export default {id:"ap-fractions",classe:"TC AEPE",classes:["TC AEPE","TC APMP","2P MV2"],mat:"AP",titre:"Atelier — les fractions",
  desc:"Atelier autocorrectif pas-à-pas : reconnaître, simplifier, comparer, additionner une fraction, et l'utiliser dans un calcul de quantité.",
+ pdf:"ap",
  obj:["Reconnaître une fraction et ce qu'elle représente (numérateur, dénominateur)",
       "Simplifier une fraction et reconnaître des fractions équivalentes",
       "Comparer deux fractions",
       "Additionner deux fractions de même dénominateur",
       "Calculer une fraction d'une quantité, et passer à l'écriture décimale ou au pourcentage"],
  seances:[
- {t:"Atelier — les fractions",
+ {t:"Atelier — les fractions",pdf:["ap-fractions"],
   prob:"Une fraction décrit une part d'un tout : combien de parts prises, sur combien de parts égales au total.",
   steps:[
    {t:"Numérateur et dénominateur",
