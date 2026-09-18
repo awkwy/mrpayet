@@ -4,6 +4,7 @@ import statsProbas from './stats-probas.js';
 import deciderSousContrainte from './decider-sous-contrainte.js';
 import calculsCommerciaux from './calculs-commerciaux.js';
 import apConsolidation from './ap-consolidation.js';
+import apConsolidationTcapmp from './ap-consolidation-tcapmp.js';
 import ficheOutils from './fiche-outils.js';
 import statAepe from './stat-aepe.js';
 import chimieAepe from './chimie-aepe.js';
@@ -32,6 +33,7 @@ export const COURSES = [
   deciderSousContrainte,
   calculsCommerciaux,
   apConsolidation,
+  apConsolidationTcapmp,
   ficheOutils,
   statAepe,
   chimieAepe,

@@ -75,6 +75,18 @@ export const RECAP = {
   {sig:"Prix de n articles connaissant le prix de p articles",
    met:"Proportionnalité : prix d'un article = prix ÷ p, puis × n.",ex:"5 pots = 21,50 € → 1 pot = 4,30 € → 8 pots = 34,40 €",pg:"Additionner au lieu de multiplier."}
  ],
+ "ap-consolidation-tcapmp":[
+  {sig:"Passer d'un prix HT à un prix TTC",
+   met:"TTC = HT × (1 + taux de TVA).",ex:"320 € HT, TVA 20 % → 320 × 1,20 = 384 €",pg:"Additionner le taux au lieu de multiplier (320 + 20 n'est pas le TTC)."},
+  {sig:"Retrouver le HT à partir du TTC",
+   met:"HT = TTC ÷ (1 + taux).",ex:"180 € TTC, TVA 20 % → 180 ÷ 1,20 = 150 €",pg:"Multiplier au lieu de diviser."},
+  {sig:"Appliquer une remise ou une hausse en une seule opération",
+   met:"Nouveau prix = prix × coefficient multiplicateur : (1 − X/100) pour une remise, (1 + X/100) pour une hausse.",ex:"Remise 15 % sur 80 € → × 0,85 = 68 €",pg:"Confondre le montant de la remise (prix × taux) et le prix payé."},
+  {sig:"Répartir une somme selon des pourcentages",
+   met:"Chaque part = total × (pourcentage/100) ; la somme des parts doit redonner le total.",ex:"350 € en 60 / 40 → 210 € et 140 € ; 210 + 140 = 350 ✓",pg:"Ne pas vérifier que la somme des parts fait bien le total."},
+  {sig:"Choisir le sens d'un arrondi de quantité",
+   met:"« Au minimum pour tout contenir » → vers le haut. « Combien de lots complets » → vers le bas.",ex:"204 pièces, cartons de 25 → 204 ÷ 25 = 8,16 → 9 cartons",pg:"Arrondir systématiquement au plus proche sans regarder la question posée."}
+ ],
  "fiche-outils":[
   {sig:"Addition posée",
    met:"Aligner les unités sous les unités, additionner de droite à gauche, retenir la dizaine quand une colonne dépasse 9.",ex:"47 + 38 : 7 + 8 = 15 → j'écris 5, je retiens 1 ; 4 + 3 + 1 = 8 → 85",pg:"Mal aligner les chiffres."},
