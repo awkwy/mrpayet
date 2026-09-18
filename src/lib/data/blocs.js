@@ -24,7 +24,7 @@ export const BLOCS = [
   cours:{"TC APMP":["calculs-commerciaux","interet-apmp"]},flash:["commerce","propor","mental"]},
  {id:"numeriques-cap",cls:["TC AEPE","TC APMP"],dom:"Calculs numériques et automatismes",
   t:"Calculs numériques, automatismes",
-  cours:{"TC AEPE":["ap-consolidation","fiche-outils"],"TC APMP":["ap-consolidation-tcapmp"]},
+  cours:{"TC AEPE":["ap-consolidation","ap-fractions","ap-signes","fiche-outils"],"TC APMP":["ap-consolidation-tcapmp","ap-fractions","ap-signes"]},
   flash:["mental","signes","fractions","propor"],transversal:true},
 
  // ---------- TC AEPE / TC APMP — physique-chimie (programme commun) ----------
@@ -60,7 +60,7 @@ export const BLOCS = [
  {id:"mv-geo",cls:["2P MV2"],dom:"Géométrie",t:"Géométrie",cours:{"2P MV2":["geo-mv"]},flash:["mental","puissances"],
   appr:["Utiliser les configurations de Thalès et de Pythagore","Calculer des grandeurs (longueurs, aires, volumes, angles) et convertir des unités"]},
  {id:"mv-num",cls:["2P MV2"],dom:"Calculs numériques et automatismes",
-  t:"Calculs numériques, automatismes",cours:{},
+  t:"Calculs numériques, automatismes",cours:{"2P MV2":["ap-consolidation-2pmv2","ap-fractions","ap-signes"]},
   flash:["mental","signes","fractions","propor","formules","puissances"],transversal:true},
 
  // ---------- 2P MV2 — physique-chimie (2de bac pro) ----------
