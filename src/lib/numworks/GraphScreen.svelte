@@ -1,5 +1,5 @@
 <script>
-  import { affine } from './regression.js';
+  import { affine, exponential, logarithmic } from './regression.js';
   import { fmtNum } from './format.js';
 
   let { points, reg = 'affine' } = $props();
@@ -7,8 +7,29 @@
   const W = 300;
   const H = 200;
   const PAD = 26;
+  const CURVE_SAMPLES = 40;
 
-  let fit = $derived(reg === 'affine' ? affine(points) : null);
+  const REG_LABELS = {
+    affine: 'Régression affine',
+    exponentielle: 'Régression exponentielle',
+    logarithmique: 'Régression logarithmique'
+  };
+
+  let fitFn = $derived(
+    reg === 'affine' ? affine : reg === 'exponentielle' ? exponential : reg === 'logarithmique' ? logarithmic : null
+  );
+  let fit = $derived(fitFn ? fitFn(points) : null);
+
+  // La fonction modélisée par l'ajustement, pour tracer la courbe.
+  let modelFn = $derived(
+    !fit
+      ? null
+      : reg === 'affine'
+        ? (x) => fit.a * x + fit.b
+        : reg === 'exponentielle'
+          ? (x) => fit.a * Math.exp(fit.b * x)
+          : (x) => fit.a * Math.log(x) + fit.b
+  );
 
   let xs = $derived(points.map((p) => p[0]));
   let ys = $derived(points.map((p) => p[1]));
@@ -19,6 +40,11 @@
   let xSpan = $derived(xMax - xMin || 1);
   let ySpan = $derived(yMax - yMin || 1);
 
+  // Logarithmique : ln(x) n'est défini que pour x > 0. Les points de données
+  // sont déjà garantis positifs par regression.js (sinon `fit` est null), on
+  // se contente ici de ne pas échantillonner en dessous de xMin.
+  let curveStart = $derived(reg === 'logarithmique' ? Math.max(xMin, 1e-6) : xMin);
+
   function sx(x) {
     return PAD + ((x - xMin) / xSpan) * (W - 2 * PAD);
   }
@@ -26,19 +52,34 @@
     return H - PAD - ((y - yMin) / ySpan) * (H - 2 * PAD);
   }
 
-  let line = $derived(
-    fit
-      ? { x1: sx(xMin), y1: sy(fit.a * xMin + fit.b), x2: sx(xMax), y2: sy(fit.a * xMax + fit.b) }
-      : null
-  );
+  let curvePoints = $derived.by(() => {
+    if (!modelFn) return '';
+    const pts = [];
+    for (let i = 0; i <= CURVE_SAMPLES; i++) {
+      const x = curveStart + ((xMax - curveStart) * i) / CURVE_SAMPLES;
+      pts.push(`${sx(x)},${sy(modelFn(x))}`);
+    }
+    return pts.join(' ');
+  });
+
+  let equation = $derived.by(() => {
+    if (!fit) return '';
+    if (reg === 'affine') {
+      return `y = ${fmtNum(fit.a, 3)}x ${fit.b >= 0 ? '+' : '−'} ${fmtNum(Math.abs(fit.b), 3)}`;
+    }
+    if (reg === 'exponentielle') {
+      return `y = ${fmtNum(fit.a, 3)} × e^(${fmtNum(fit.b, 4)}x)`;
+    }
+    return `y = ${fmtNum(fit.a, 3)}ln(x) ${fit.b >= 0 ? '+' : '−'} ${fmtNum(Math.abs(fit.b), 3)}`;
+  });
 </script>
 
 <div class="gs">
-  <svg viewBox="0 0 {W} {H}" role="img" aria-label="Nuage de points et droite de régression">
+  <svg viewBox="0 0 {W} {H}" role="img" aria-label="Nuage de points et courbe de régression">
     <line x1={PAD} y1={H - PAD} x2={W - PAD} y2={H - PAD} class="axis" />
     <line x1={PAD} y1={PAD} x2={PAD} y2={H - PAD} class="axis" />
-    {#if line}
-      <line x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2} class="fit" />
+    {#if curvePoints}
+      <polyline points={curvePoints} class="fit" />
     {/if}
     {#each points as [x, y], i (i)}
       <circle cx={sx(x)} cy={sy(y)} r="3" class="pt" />
@@ -46,8 +87,8 @@
   </svg>
   <div class="info">
     {#if fit}
-      <span class="regtype">Régression affine</span>
-      <span class="eq">y = {fmtNum(fit.a, 3)}x {fit.b >= 0 ? '+' : '−'} {fmtNum(Math.abs(fit.b), 3)}</span>
+      <span class="regtype">{REG_LABELS[reg]}</span>
+      <span class="eq">{equation}</span>
     {:else}
       <span class="regtype">Pas de régression calculable</span>
     {/if}
@@ -71,8 +112,10 @@
     stroke-width: 1;
   }
   .fit {
+    fill: none;
     stroke: var(--g);
     stroke-width: 1.5;
+    stroke-linejoin: round;
   }
   .pt {
     fill: var(--blue);
