@@ -94,9 +94,9 @@
         if (on1) {
           x.fillStyle = '#e7efe9';
           x.textAlign = 'center';
-          x.fillText(g.l1.label, x1, g.y1 - 18);
+          x.fillText(g.l1.label, x1, g.y1 - 22);
           x.fillStyle = '#8fa79b';
-          x.fillText(fr(g.l1.p), x1, g.y1 - 6);
+          x.fillText(fr(g.l1.p), x1, g.y1 - 7);
           x.fillStyle = '#46c288';
           x.beginPath();
           x.arc(x1, g.y1, 4.5, 0, 7);
