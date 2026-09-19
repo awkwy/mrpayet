@@ -6,11 +6,12 @@ import { PROGRESSION, futureLock } from '$lib/data/progression.js';
 export const CLASSES = [
   { n: '2P MV2', d: '2de bac pro Maintenance des véhicules', m: 'Maths · Physique-chimie' },
   { n: 'TC AEPE', d: 'Terminale CAP Accompagnant éducatif petite enfance', m: 'Maths · Sciences · AP' },
-  { n: 'TC APMP', d: 'Terminale CAP Agent de prévention et de médiation', m: 'Maths · Sciences' }
+  { n: 'TC APMP', d: 'Terminale CAP Agent de prévention et de médiation', m: 'Maths · Sciences' },
+  { n: 'TP MS', d: 'Terminale bac pro Métiers de la sécurité', m: 'Maths' }
 ];
 
-const SLUGS = { '2P MV2': '2pmv2', 'TC AEPE': 'tcaepe', 'TC APMP': 'tcapmp' };
-const UNSLUGS = { '2pmv2': '2P MV2', tcaepe: 'TC AEPE', tcapmp: 'TC APMP' };
+const SLUGS = { '2P MV2': '2pmv2', 'TC AEPE': 'tcaepe', 'TC APMP': 'tcapmp', 'TP MS': 'tpms' };
+const UNSLUGS = { '2pmv2': '2P MV2', tcaepe: 'TC AEPE', tcapmp: 'TC APMP', tpms: 'TP MS' };
 
 export function bslug(classe) {
   return SLUGS[classe];

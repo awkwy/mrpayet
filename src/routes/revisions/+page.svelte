@@ -10,14 +10,14 @@
 
 <div class="wrap">
   <p class="eyebrow">Révisions</p>
-  <h1>CCF et devoir commun</h1>
+  <h1>Révisions et entraînement</h1>
   <p class="lead">Les cinq compétences évaluées, et des tâches types classées comme le jour de l'épreuve.</p>
   <div class="classes">
     {#each CLASSES as c}
       {#if CCF[c.n]}
         <a class="ccard" href="{base}/revisions/{bslug(c.n)}">
           <div class="cn">{c.n}</div>
-          <div class="cd">{CCF[c.n].label === 'devoir commun' ? 'Devoir commun' : 'CCF maths-sciences'}</div>
+          <div class="cd">{CCF[c.n].label ? CCF[c.n].label[0].toUpperCase() + CCF[c.n].label.slice(1) : 'CCF maths-sciences'}</div>
         </a>
       {/if}
     {/each}

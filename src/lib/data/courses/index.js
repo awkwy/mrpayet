@@ -28,6 +28,12 @@ import degre1Apmp from './degre1-apmp.js';
 import degre1Mv from './degre1-mv.js';
 import fonctionsMv from './fonctions-mv.js';
 import geoMv from './geo-mv.js';
+import stat2varMs from './stat2var-ms.js';
+import probaMs from './proba-ms.js';
+import suitesMs from './suites-ms.js';
+import poly3Ms from './poly3-ms.js';
+import expologMs from './expolog-ms.js';
+import commerceMs from './commerce-ms.js';
 
 export const COURSES = [
   securiteElectrique,
@@ -59,7 +65,13 @@ export const COURSES = [
   degre1Apmp,
   degre1Mv,
   fonctionsMv,
-  geoMv
+  geoMv,
+  stat2varMs,
+  probaMs,
+  suitesMs,
+  poly3Ms,
+  expologMs,
+  commerceMs
 ];
 
 export function courseById(id) {

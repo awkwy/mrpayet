@@ -2,6 +2,7 @@
   import { base } from '$app/paths';
   import { blocOfCourse, bslug, courseLock } from '$lib/utils/course-helpers.js';
   import { RECAP } from '$lib/data/recap.js';
+  import { CCF } from '$lib/data/ccf.js';
   import ProgressBar from '$lib/components/ProgressBar.svelte';
   import { done } from '$lib/stores/progress.js';
   import LockedNotice from '$lib/components/LockedNotice.svelte';
@@ -54,7 +55,9 @@
     {#if RECAP[c.id]}
       <a href="{base}/r/{c.id}">Fiche récap</a>
     {/if}
-    <a href="{base}/revisions/{bslug(c.classe)}">Révisions</a>
+    {#if CCF[c.classe]}
+      <a href="{base}/revisions/{bslug(c.classe)}">Révisions</a>
+    {/if}
   </div>
 
   <h2 class="h2">Chapitres</h2>

@@ -340,5 +340,55 @@ export const RECAP = {
    met:"si a² + b² = (diagonale)², le triangle (ou le cadre) est rectangle.",ex:"90² + 120² = 22500 = 150² → d'équerre",pg:"Prendre le mauvais côté comme hypoténuse."},
   {sig:"Prévoir l'effet d'un agrandissement de rapport k",
    met:"longueurs × k, aires × k², volumes × k³.",ex:"maquette au 1/5 : volumes × (1/5)³ = 1/125",pg:"Diviser le volume par k au lieu de k³."}
+ ],
+ "stat2var-ms":[
+  {sig:"Le nuage de points monte ou descend à peu près régulièrement",
+   met:"Ajustement affine y = ax + b, donné par la calculatrice — on ne le recalcule pas à la main.",ex:"y = 3,5x + 12 → au mois 8 : 3,5 × 8 + 12 = 40",pg:"Refaire un calcul de régression à la main : on utilise l'outil numérique."},
+  {sig:"Le nuage de points s'incurve nettement (pas une droite)",
+   met:"Changement de variable indiqué (ex. z = log(y)), ajustement affine sur (x ; z), puis retour à y = 10ᶻ.",ex:"z = 0,05x + 1 → à x = 20 : z = 2 → y = 10² = 100",pg:"Oublier de revenir à y après avoir travaillé sur z."},
+  {sig:"Estimer une valeur dans / hors de la période mesurée",
+   met:"Dans la période : interpoler (fiable). En dehors : extrapoler (moins fiable, la tendance est supposée se poursuivre).",ex:"données de 1 à 10 : le mois 8 s'interpole, le mois 15 s'extrapole",pg:"Faire autant confiance à une extrapolation lointaine qu'à une interpolation."}
+ ],
+ "proba-ms":[
+  {sig:"Une situation aléatoire à plusieurs épreuves qui se suivent",
+   met:"Arbre pondéré : somme des probabilités = 1 sur chaque nœud ; probabilité d'un chemin = produit des branches.",ex:"0,95 × 0,98 = 0,931",pg:"Additionner les probabilités d'un chemin au lieu de les multiplier."},
+  {sig:"Calculer P(un événement du 2ᵉ niveau) sur un arbre à deux niveaux",
+   met:"Formule des probabilités totales : additionner les probabilités de tous les chemins qui mènent à cet événement.",ex:"0,0196 + 0,0294 = 0,049",pg:"N'additionner qu'un seul chemin au lieu de tous ceux qui aboutissent à l'événement."},
+  {sig:"Montrer que deux événements A et B sont indépendants",
+   met:"Comparer la probabilité mesurée de « A et B » au produit P(A) × P(B) calculé séparément : s'ils coïncident, l'indépendance est vérifiée.",ex:"0,90 × 0,85 = 0,765, égal à la mesure : indépendance confirmée",pg:"Confondre indépendance et incompatibilité (ne jamais pouvoir se produire ensemble)."}
+ ],
+ "suites-ms":[
+  {sig:"Une évolution à taux fixe, période après période",
+   met:"Suite géométrique uₙ₊₁ = uₙ × q, avec q = 1 + taux (hausse) ou q = 1 − taux (baisse). Terme direct : uₙ = u₀ × qⁿ.",ex:"+8 % par an, u₀ = 40 → u₅ = 40 × 1,08⁵ ≈ 59",pg:"Utiliser q = taux au lieu de q = 1 ± taux."},
+  {sig:"Trouver un budget ou un cumul sur plusieurs périodes",
+   met:"Somme des n premiers termes de la suite géométrique, avec l'outil numérique (formule non exigée par cœur).",ex:"coûts 3000 ; 3150 ; … sur 5 ans → total ≈ 16 577 €",pg:"Multiplier le premier terme par n au lieu d'additionner les vrais termes (qui augmentent)."},
+  {sig:"Trouver le premier rang où la suite dépasse (ou passe sous) un seuil",
+   met:"Recherche par balayage : calculer les termes un par un jusqu'à franchir le seuil.",ex:"2000 × 0,94ⁿ < 1000 → n = 12 (951,8 < 1000, alors que n = 11 donne encore 1012,6)",pg:"Résoudre une équation exacte alors qu'un balayage numérique suffit et est attendu."}
+ ],
+ "poly3-ms":[
+  {sig:"Étudier la fonction cube f(x) = x³",
+   met:"f'(x) = 3x², toujours positive ou nulle (un carré) : f est strictement croissante sur ℝ.",ex:"f'(0) = 0 mais pas d'extremum : f continue de croître avant et après 0",pg:"Croire qu'une dérivée nulle en un point signale toujours un extremum local."},
+  {sig:"Dresser le tableau de variations d'un polynôme de degré ⩽ 3",
+   met:"Étudier le signe de la dérivée f' : f' > 0 → f croissante ; f' < 0 → f décroissante. Extremum local où f' change de signe.",ex:"f'(x) = 3(x−1)(x−3) : positive avant 1 et après 3, négative entre les deux",pg:"Étudier le signe de f au lieu du signe de f'."},
+  {sig:"Compter le nombre de solutions de f(x) = c à l'aide du tableau",
+   met:"Compter, sur chaque morceau strictement monotone du tableau de variations, si la valeur c est franchie.",ex:"maximum local 4, minimum local 0 : f(x) = 2 a 3 solutions ; f(x) = 5 n'en a aucune sur l'intervalle étudié",pg:"Vouloir résoudre l'équation par le calcul algébrique au lieu de lire le tableau."}
+ ],
+ "expolog-ms":[
+  {sig:"Une évolution exponentielle de base q, f(x) = A × qˣ",
+   met:"q > 1 → fonction croissante ; 0 < q < 1 → fonction décroissante. Propriété : qᵃ × qᵇ = qᵃ⁺ᵇ.",ex:"P(x) = 100 × 0,6ˣ (q = 0,6 < 1) : décroissante, P(3) = 21,6",pg:"Confondre le sens de variation : croire que q < 1 donne toujours une fonction croissante."},
+  {sig:"Passer de 10ˣ = b à x, ou inversement",
+   met:"log(b) est l'unique solution de 10ˣ = b ; en particulier log(10ˣ) = x. La fonction log est croissante sur ]0 ; +∞[.",ex:"log(1000) = 3 car 10³ = 1000",pg:"Appliquer log(x) à une valeur négative ou nulle : ce n'est pas défini."},
+  {sig:"Résoudre une équation ou inéquation qˣ = a (ou qˣ ⩽/⩾ a)",
+   met:"Appliquer log aux deux membres : log(qˣ) = x × log(q), donc x = log(a) ÷ log(q).",ex:"0,6ˣ = 0,05 → x = log(0,05) ÷ log(0,6) ≈ 5,9",pg:"Oublier que log(qˣ) = x × log(q), pas log(q)^x ni x + log(q)."}
+ ],
+ "commerce-ms":[
+  {sig:"Calculer un capital après n périodes à intérêts composés",
+   met:"Cₙ = C₀ × (1 + t)ⁿ, avec t le taux par période en décimal.",ex:"8000 × 1,03⁵ ≈ 9274,19 €",pg:"Utiliser la formule des intérêts simples (C₀ × t × n) à la place."},
+  {sig:"Compléter un tableau d'amortissement à annuités constantes",
+   met:"intérêt de l'année = capital restant dû × taux ; amortissement = annuité − intérêt ; nouveau capital restant dû = ancien − amortissement.",ex:"15000 € à 4 %, annuité 3369,41 € : année 1, intérêt 600 €, amortissement 2769,41 €, restant dû 12230,59 €",pg:"Calculer l'intérêt sur le capital initial chaque année au lieu du capital restant dû."},
+  {sig:"Convertir un taux annuel en taux mensuel équivalent",
+   met:"(1 + tₘ)¹² = 1 + t, donc tₘ = (1 + t)^(1/12) − 1 — différent de t ÷ 12.",ex:"taux annuel 4 % → taux mensuel équivalent ≈ 0,33 %",pg:"Diviser simplement le taux annuel par 12."},
+  {sig:"Calculer le taux moyen de plusieurs évolutions successives",
+   met:"Coefficient global = produit des coefficients de chaque période ; taux moyen tel que (1 + tₘₒy)ⁿ = coefficient global.",ex:"+5 % puis −3 % puis +2 % → coefficient 1,0389 → taux moyen ≈ +1,28 % par an",pg:"Faire la moyenne arithmétique des pourcentages (ici +1,33 %, ce qui est faux)."}
  ]
 };
