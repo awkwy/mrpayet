@@ -36,7 +36,10 @@
       BOXH = 24,
       GAP = 36;
     const leafY = (k) => PAD + BOXH / 2 + k * GAP;
-    const H = leafY(leaves.length - 1) + BOXH / 2 + PAD;
+    // +14 : marge basse pour le libellé d'un nœud du bas de l'arbre, qui se
+    // dessine sous le nœud (symétrique du libellé d'un nœud du haut, dessiné
+    // au-dessus) plutôt que de s'entasser au-dessus avec les autres.
+    const H = leafY(leaves.length - 1) + BOXH / 2 + PAD + 14;
 
     let k = 0;
     const groups = level1.map((l1, i) => {
@@ -92,11 +95,15 @@
         x.lineTo(x1, g.y1);
         x.stroke();
         if (on1) {
+          // Nœud du bas de l'arbre (sous le point de départ) : libellé + probabilité
+          // dessinés SOUS le nœud, symétrique du nœud du haut où ils sont dessinés
+          // au-dessus — évite d'entasser tous les libellés côte à côte au milieu.
+          const below = g.y1 > departY;
           x.fillStyle = '#e7efe9';
           x.textAlign = 'center';
-          x.fillText(g.l1.label, x1, g.y1 - 18);
+          x.fillText(g.l1.label, x1, below ? g.y1 + 31 : g.y1 - 22);
           x.fillStyle = '#8fa79b';
-          x.fillText(fr(g.l1.p), x1, g.y1 - 6);
+          x.fillText(fr(g.l1.p), x1, below ? g.y1 + 16 : g.y1 - 7);
           x.fillStyle = '#46c288';
           x.beginPath();
           x.arc(x1, g.y1, 4.5, 0, 7);
