@@ -2,6 +2,7 @@
   import { base } from '$app/paths';
   import { blocsOf, blocState, blocById, blocLock } from '$lib/utils/course-helpers.js';
   import { weekOf, progressionAt } from '$lib/data/progression.js';
+  import { CCF } from '$lib/data/ccf.js';
 
   let { data } = $props();
 
@@ -89,7 +90,9 @@
 
   <hr class="hr" />
   <div class="rtools">
-    <a href="{base}/revisions/{data.slug}">Révisions / devoir commun</a>
+    {#if CCF[data.classe]}
+      <a href="{base}/revisions/{data.slug}">Révisions / devoir commun</a>
+    {/if}
     <a href="{base}/r/{encodeURIComponent(data.classe)}">Aide-mémoire</a>
     <a href="{base}/flash/{data.slug}">Questions flash</a>
   </div>
