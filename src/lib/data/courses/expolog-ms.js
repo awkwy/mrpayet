@@ -7,7 +7,7 @@ export default {id:"expolog-ms",classe:"bac pro MS",mat:"Maths",titre:"Fonctions
  {t:"Le signal radio qui traverse les murs",
   prob:"Quelle est la puissance du signal radio après avoir traversé plusieurs murs ?",
   steps:[
-   {t:"La situation",txt:"Les agents d'un site utilisent des radios portatives reliées à un poste central. Dans un modèle simplifié utilisé par le technicien radio, chaque mur traversé réduit la puissance du signal de 40 % par rapport à ce qu'elle était juste avant ce mur. La puissance en sortie d'émetteur vaut 100 (en unité relative)."},
+   {t:"La situation",txt:"Les agents DOM Sécurité Mayotte utilisent des radios portatives reliées à un poste central, sur un entrepôt du port de Longoni. Dans un modèle simplifié utilisé par le technicien radio, chaque mur traversé réduit la puissance du signal de 40 % par rapport à ce qu'elle était juste avant ce mur. La puissance en sortie d'émetteur vaut 100 (en unité relative)."},
    {t:"Étape 1 — Une fonction exponentielle de base q",
     apport:"Réduire de 40 %, c'est multiplier par (1 − 0,40) = <b>0,6</b> à chaque mur. La puissance après x murs traversés est <b>P(x) = 100 × 0,6ˣ</b> : une <b>fonction exponentielle de base q = 0,6</b>.",
     q:[{q:"Puissance après 1 mur : P(1) = 100 × 0,6¹ = ?",a:60,tol:0},
