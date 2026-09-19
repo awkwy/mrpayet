@@ -1,4 +1,4 @@
-export default {id:"expolog-ms",classe:"TP MS",mat:"Maths",titre:"Fonctions exponentielles et logarithme décimal",
+export default {id:"expolog-ms",classe:"bac pro MS",mat:"Maths",titre:"Fonctions exponentielles et logarithme décimal",
  desc:"Un signal radio qui s'affaiblit mur après mur — étudier et résoudre avec les fonctions exponentielles et le logarithme décimal.",
  obj:["Représenter et étudier les variations d'une fonction exponentielle de base q",
       "Représenter et étudier les variations de la fonction logarithme décimal",
