@@ -14,6 +14,7 @@ import moyenne from './moyenne.svelte';
 import mediane from './mediane.svelte';
 import experience from './experience.svelte';
 import arbre from './arbre.svelte';
+import arbrepondere from './arbrepondere.svelte';
 import fluctuation from './fluctuation.svelte';
 import stabilisation from './stabilisation.svelte';
 import batons from './batons.svelte';
@@ -37,7 +38,7 @@ import agrandir from './agrandir.svelte';
 
 export const VIZ = {
   fusible, noeuds, alternatif, circuit, taux, aire, bascule, budget, remise, partage,
-  division, multiplication, moyenne, mediane, experience, arbre, fluctuation,
+  division, multiplication, moyenne, mediane, experience, arbre, arbrepondere, fluctuation,
   stabilisation, batons, moypond, ph, interet, onde, propor, courbe, geo, pyth,
   db, chauffe, force, refraction, rgb, interval, affine, parabole, agrandir
 };

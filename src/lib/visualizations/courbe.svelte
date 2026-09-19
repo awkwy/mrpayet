@@ -71,15 +71,29 @@
       x.font = '10px ' + SM;
       x.fillStyle = '#63776d';
       x.textAlign = 'center';
+      // Graduations réparties sur 6/4 divisions fixes quel que soit XL/YL :
+      // si l'écart ne tombe pas juste, deux divisions voisines peuvent
+      // arrondir sur le même entier — on saute alors le doublon plutôt que
+      // d'afficher deux fois la même étiquette côte à côte.
+      let lastXLab = null;
       for (let k = 0; k <= 6; k++) {
         const v = XL[0] + (k * (XL[1] - XL[0])) / 6;
-        x.fillText('' + Math.round(v), sx(v), H - B + 13);
+        const rv = Math.round(v);
+        if (rv !== lastXLab) {
+          x.fillText('' + rv, sx(v), H - B + 13);
+          lastXLab = rv;
+        }
       }
       x.textAlign = 'right';
       x.textBaseline = 'middle';
+      let lastYLab = null;
       for (let k = 0; k <= 4; k++) {
         const v = YL[0] + (k * (YL[1] - YL[0])) / 4;
-        x.fillText('' + Math.round(v), L - 6, sy(v));
+        const rv = Math.round(v);
+        if (rv !== lastYLab) {
+          x.fillText('' + rv, L - 6, sy(v));
+          lastYLab = rv;
+        }
       }
       x.textBaseline = 'alphabetic';
       x.strokeStyle = '#7ef2b0';
