@@ -7,7 +7,7 @@ export default {id:"poly3-ms",classe:"bac pro MS",mat:"Maths",titre:"Fonctions p
  {t:"La réserve d'eau cubique du poste de défense incendie",
   prob:"Comment le volume de la réserve évolue-t-il quand on augmente la taille du bac ?",
   steps:[
-   {t:"La situation",txt:"Le poste de sécurité incendie d'un site industriel doit installer une réserve d'eau de forme cubique, de côté x mètres, pour l'attaque d'un départ de feu. Le chef de poste hésite entre plusieurs tailles de bac et vous demande d'étudier comment le volume évolue avec le côté."},
+   {t:"La situation",txt:"Le poste de sécurité incendie du port de Longoni doit installer une réserve d'eau de forme cubique, de côté x mètres, pour l'attaque d'un départ de feu. À Mayotte, le réseau d'eau courante est soumis à des tours d'eau (coupures régulières) : le site ne peut pas compter sur le robinet en cas d'urgence, la réserve doit être autonome et bien dimensionnée dès le départ. Le chef de poste hésite entre plusieurs tailles de bac et vous demande d'étudier comment le volume évolue avec le côté."},
    {t:"Étape 1 — La fonction cube",
     apport:"Le volume d'un cube de côté x est <b>V(x) = x³</b> : c'est la <b>fonction cube</b>. Sa dérivée est <b>V'(x) = 3x²</b>.",
     q:[{q:"Volume pour un côté de 2 m : V(2) = 2³ = ? (en m³)",a:8,tol:0},
@@ -25,7 +25,7 @@ export default {id:"poly3-ms",classe:"bac pro MS",mat:"Maths",titre:"Fonctions p
  {t:"La fréquentation d'un site sécurisé sur une journée",
   prob:"À quels moments de la journée la fréquentation du site est-elle la plus forte ou la plus faible ?",
   steps:[
-   {t:"La situation",txt:"Sur un site accueillant du public (musée, salle d'exposition), le service de sécurité modélise le nombre cumulé de passages depuis l'ouverture, en centaines de visiteurs, par la fonction f(x) = x³ − 6x² + 9x, où x est le nombre d'heures depuis l'ouverture (0 ⩽ x ⩽ 4). Le chef de poste veut savoir à quels moments renforcer la présence aux entrées."},
+   {t:"La situation",txt:"Au Musée de Mayotte, à Dzaoudzi, le service de sécurité modélise le nombre cumulé de passages depuis l'ouverture, en centaines de visiteurs, par la fonction f(x) = x³ − 6x² + 9x, où x est le nombre d'heures depuis l'ouverture (0 ⩽ x ⩽ 4). Le chef de poste veut savoir à quels moments renforcer la présence aux entrées."},
    {t:"Étape 1 — Calculer la dérivée",
     apport:"Pour f(x) = x³ − 6x² + 9x, la dérivée est <b>f'(x) = 3x² − 12x + 9</b>, qui se factorise en <b>f'(x) = 3(x − 1)(x − 3)</b>.",
     q:[{q:"f'(0) = 3(0−1)(0−3) = ?",a:9,tol:0},

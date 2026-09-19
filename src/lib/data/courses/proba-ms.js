@@ -7,7 +7,7 @@ export default {id:"proba-ms",classe:"bac pro MS",mat:"Maths",titre:"Probabilit�
  {t:"Le double contrôle à l'entrée d'un événement",
   prob:"Quelle est la probabilité qu'un visiteur passe les deux contrôles sans problème ?",
   steps:[
-   {t:"La situation",txt:"Vous êtes agent de sécurité lors d'un concert. À l'entrée, chaque visiteur passe par deux contrôles indépendants : la palpation de sécurité, puis la vérification du billet. D'après les statistiques des soirées précédentes, 95 % des visiteurs passent la palpation sans problème, et 98 % ont un billet valide. Votre chef vous demande d'estimer, avant l'ouverture des portes, la probabilité qu'un visiteur pris au hasard passe les deux contrôles sans incident."},
+   {t:"La situation",txt:"Vous êtes agent chez Sécurité Événementiel Mayotte, une société mahoraise basée à Bouéni spécialisée dans la sécurité des grands rassemblements (Fête de la musique, festivals, meetings). Pour un concert à Mamoudzou, à l'entrée, chaque visiteur passe par deux contrôles indépendants : la palpation de sécurité, puis la vérification du billet. D'après les statistiques des soirées précédentes, 95 % des visiteurs passent la palpation sans problème, et 98 % ont un billet valide. Votre chef d'équipe vous demande d'estimer, avant l'ouverture des portes, la probabilité qu'un visiteur pris au hasard passe les deux contrôles sans incident."},
    {t:"Étape 1 — Construire l'arbre",
     apport:"Deux épreuves qui se suivent (palpation, puis billet) : on les représente par un <b>arbre pondéré</b>. Chaque branche porte la probabilité de l'issue ; sur chaque nœud, la somme des probabilités des branches vaut <b>1</b>.",
     q:[{q:"Probabilité que la palpation pose un problème : 1 − 0,95 = ?",a:0.05,tol:0},
@@ -28,7 +28,7 @@ export default {id:"proba-ms",classe:"bac pro MS",mat:"Maths",titre:"Probabilit�
  {t:"Fausses alarmes et vraies alarmes du système incendie",
   prob:"Sur une alerte donnée par le système, quelle proportion correspond à un vrai départ de feu ?",
   steps:[
-   {t:"La situation",txt:"Vous surveillez le poste de sécurité incendie d'un centre commercial. Sur une année, on estime qu'un vrai départ de feu a lieu dans 2 % des zones surveillées par jour (situation rare, mais à ne jamais négliger). Le détecteur sonne dans 98 % des cas où il y a réellement un début d'incendie (vrai positif), mais il se déclenche aussi par erreur (poussière, vapeur de cuisine…) dans 3 % des cas où il n'y a aucun incident (fausse alarme)."},
+   {t:"La situation",txt:"Vous surveillez, pour DOM Sécurité Mayotte (Kaweni), le poste de sécurité incendie d'un centre commercial de Mamoudzou. Sur une année, on estime qu'un vrai départ de feu a lieu dans 2 % des zones surveillées par jour (situation rare, mais à ne jamais négliger). Le détecteur sonne dans 98 % des cas où il y a réellement un début d'incendie (vrai positif), mais il se déclenche aussi par erreur (poussière, chaleur et humidité du climat tropical…) dans 3 % des cas où il n'y a aucun incident (fausse alarme)."},
    {t:"Étape 1 — Construire l'arbre à deux niveaux",
     apport:"Premier niveau : <b>incident réel</b> ou <b>pas d'incident</b>. Deuxième niveau, sur chaque branche : <b>le détecteur sonne</b> ou <b>ne sonne pas</b>. C'est une <b>probabilité conditionnée</b> par ce qui s'est passé au premier niveau.",
     doc:{h:["Situation au 1er niveau","P(le détecteur sonne)","P(le détecteur ne sonne pas)"],
@@ -47,7 +47,7 @@ export default {id:"proba-ms",classe:"bac pro MS",mat:"Maths",titre:"Probabilit�
  {t:"Deux capteurs, une même zone : sont-ils indépendants ?",
   prob:"Le fait que la caméra détecte un mouvement change-t-il la probabilité que le capteur infrarouge le détecte aussi ?",
   steps:[
-   {t:"La situation",txt:"Un site sensible est équipé de deux systèmes de détection indépendants sur la même zone : une caméra avec analyse de mouvement, et un capteur infrarouge. Le fabricant annonce que la caméra détecte un intrus réel dans 90 % des cas, et le capteur infrarouge dans 85 % des cas — et que les deux systèmes fonctionnent selon des principes physiques totalement différents (image contre chaleur), donc sans influence l'un sur l'autre."},
+   {t:"La situation",txt:"Mayotte Sécurité Surveillance (MSS Mayotte, à Tsingoni) équipe une zone du port de Longoni de deux systèmes de détection indépendants sur la même zone : une caméra avec analyse de mouvement, et un capteur infrarouge. Le fabricant annonce que la caméra détecte un intrus réel dans 90 % des cas, et le capteur infrarouge dans 85 % des cas — et que les deux systèmes fonctionnent selon des principes physiques totalement différents (image contre chaleur), donc sans influence l'un sur l'autre."},
    {t:"Étape 1 — Rappel : que veut dire « indépendants » ?",
     apport:"Deux événements A et B sont <b>indépendants</b> quand la réalisation de l'un ne change rien à la probabilité de l'autre. Dans ce cas, la probabilité qu'ils se réalisent tous les deux est simplement le <b>produit</b> : P(A ⋂ B) = P(A) × P(B)."},
    {t:"Étape 2 — Calculer la probabilité que les deux détectent",

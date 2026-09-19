@@ -7,7 +7,7 @@ export default {id:"commerce-ms",classe:"bac pro MS",mat:"Maths",titre:"Calculs 
  {t:"Le fonds de renouvellement du matériel",
   prob:"Combien d'années faut-il pour que le fonds atteigne 10 000 € ?",
   steps:[
-   {t:"La situation",txt:"Une entreprise de sécurité met de côté 8 000 € sur un compte réservé au renouvellement du matériel (gilets, radios, caméras). La banque propose un taux de 3 % par an, avec intérêts composés : chaque année, les intérêts de l'année précédente rapportent eux aussi des intérêts.",},
+   {t:"La situation",txt:"DOM Sécurité Mayotte met de côté 8 000 € sur un compte réservé au renouvellement du matériel (gilets, radios, caméras). La banque propose un taux de 3 % par an, avec intérêts composés : chaque année, les intérêts de l'année précédente rapportent eux aussi des intérêts.",},
    {t:"Étape 1 — Intérêts simples ou composés ?",viz:"interet",
     apport:"Avec des <b>intérêts composés</b>, le capital obtenu après n périodes est <b>Cₙ = C₀ × (1 + t)ⁿ</b> (C₀ capital initial, t taux par période en décimal). À la différence des intérêts simples, on ne recalcule pas les intérêts sur C₀ à chaque fois, mais sur le capital déjà augmenté."},
    {t:"Étape 2 — Calculer le capital après quelques années",
@@ -25,7 +25,7 @@ export default {id:"commerce-ms",classe:"bac pro MS",mat:"Maths",titre:"Calculs 
  {t:"Le crédit pour le véhicule de service",
   prob:"Combien l'entreprise rembourse-t-elle chaque année, et combien lui coûte au total ce crédit ?",
   steps:[
-   {t:"La situation",txt:"L'entreprise emprunte 15 000 € sur 5 ans pour acheter un véhicule de ronde, à un taux annuel de 4 %. La banque propose un remboursement par <b>annuités constantes</b> : la somme remboursée chaque année est toujours la même, mais elle se répartit différemment entre intérêts et capital remboursé."},
+   {t:"La situation",txt:"DOM Sécurité Mayotte emprunte 15 000 € sur 5 ans pour acheter un véhicule de ronde adapté au climat et aux routes de l'île (RN1, pas d'autoroute à Mayotte), à un taux annuel de 4 %. La banque propose un remboursement par <b>annuités constantes</b> : la somme remboursée chaque année est toujours la même, mais elle se répartit différemment entre intérêts et capital remboursé."},
    {t:"Étape 1 — L'annuité constante",
     apport:"Pour un emprunt de 15 000 € sur 5 ans à 4 %, la banque (ou la calculatrice financière) donne une annuité constante de <b>3 369,41 €</b> par an. On ne redémontre pas cette formule : on l'utilise pour compléter le tableau."},
    {t:"Étape 2 — Compléter la première ligne du tableau",
@@ -50,7 +50,7 @@ export default {id:"commerce-ms",classe:"bac pro MS",mat:"Maths",titre:"Calculs 
  {t:"Convertir un taux, comparer une évolution sur plusieurs années",
   prob:"Quel est le taux mensuel équivalent à ce taux annuel, et le taux moyen d'évolution sur plusieurs années ?",
   steps:[
-   {t:"La situation",txt:"Pour un contrat de leasing de matériel de sécurité, le fournisseur annonce un taux annuel de 4 %, mais les paiements sont mensuels : il faut connaître le taux mensuel réellement appliqué. Par ailleurs, la valeur de revente du matériel a évolué de façon irrégulière sur 3 ans (+5 % puis −3 % puis +2 %) : la direction veut connaître le taux moyen annuel équivalent à cette évolution."},
+   {t:"La situation",txt:"Pour un contrat de leasing de matériel de sécurité, le fournisseur (livré par bateau via le port de Longoni) annonce un taux annuel de 4 %, mais les paiements sont mensuels : il faut connaître le taux mensuel réellement appliqué. Par ailleurs, la valeur de revente du matériel a évolué de façon irrégulière sur 3 ans (+5 % puis −3 % puis +2 %) : la direction veut connaître le taux moyen annuel équivalent à cette évolution."},
    {t:"Étape 1 — Le taux mensuel équivalent",
     apport:"Un <b>taux mensuel équivalent</b> à un taux annuel t doit, appliqué 12 fois dans l'année, redonner le même coefficient multiplicateur : (1 + tₘ)¹² = 1 + t, donc tₘ = (1 + t)^(1/12) − 1.",
     q:[{q:"Coefficient multiplicateur annuel : 1 + 0,04 = ?",a:1.04,tol:0},

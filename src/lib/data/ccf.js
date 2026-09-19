@@ -107,7 +107,7 @@ export const CCF = {
   intro:"Le bac pro Métiers de la sécurité n'a pas de CCF en mathématiques (spécifique aux CAP) : l'évaluation est une <b>épreuve écrite ponctuelle</b> en fin de terminale. Cette page réunit des tâches d'entraînement qui couvrent les six modules du programme (groupement C), classées par les mêmes cinq compétences que pour l'épreuve.",
   maths:{titre:"Entraînement — mathématiques",duree:"tous les modules du programme",note:"non noté",taches:[
    {titre:"Prévoir les rondes de nuit",
-    ctx:"La société de sécurité suit depuis 10 mois le nombre moyen de rondes de nuit effectuées, et la calculatrice donne l'ajustement affine y = 2,8x + 20, où x est le nombre de mois depuis le début du suivi.",
+    ctx:"DOM Sécurité Mayotte (Kaweni) suit depuis 10 mois le nombre moyen de rondes de nuit effectuées, et la calculatrice donne l'ajustement affine y = 2,8x + 20, où x est le nombre de mois depuis le début du suivi.",
     qs:[
      {comp:"S'approprier",q:"Dans le modèle y = 2,8x + 20, que représente x ?",a:["le nombre de mois","nombre de mois","le mois","mois depuis le debut du suivi"],txt:true,sol:"x est le nombre de mois écoulés depuis le début du suivi."},
      {comp:"Réaliser",q:"Nombre de rondes prévu au mois 5 : 2,8 × 5 + 20 = ?",a:34,tol:0},
@@ -119,7 +119,7 @@ export const CCF = {
     comm:"Le responsable planning te demande une phrase pour justifier l'effectif prévu au mois 15.",
     commA:"« D'après la tendance observée sur les 10 premiers mois, on prévoit environ 62 rondes au mois 15 ; à confirmer une fois le mois passé, l'extrapolation restant une estimation. »"},
    {titre:"Le double contrôle du parking sécurisé",
-    ctx:"À l'entrée d'un parking sécurisé, chaque véhicule passe deux contrôles indépendants : la lecture du badge (valide dans 97 % des cas) et la reconnaissance de plaque (valide dans 99 % des cas).",
+    ctx:"À l'entrée du parking sécurisé du port de Longoni, chaque véhicule passe deux contrôles indépendants : la lecture du badge (valide dans 97 % des cas) et la reconnaissance de plaque (valide dans 99 % des cas).",
     qs:[
      {comp:"S'approprier",q:"Probabilité que le badge pose un problème : 1 − 0,97 = ?",a:0.03,tol:0},
      {comp:"S'approprier",q:"Probabilité que la plaque pose un problème : 1 − 0,99 = ?",a:0.01,tol:0},
@@ -131,7 +131,7 @@ export const CCF = {
     comm:"Le responsable du site te demande de résumer la fiabilité du double contrôle.",
     commA:"« Sur 1000 passages, environ 960 se font sans aucun problème et environ 40 rencontrent un souci sur au moins un des deux contrôles — badge et plaque restant indépendants l'un de l'autre. »"},
    {titre:"Le nombre d'agents formés chaque année",
-    ctx:"Le centre de formation a formé 25 agents cette année (rang 0). La direction prévoit une hausse de 6 % du nombre de nouveaux agents formés chaque année.",
+    ctx:"Le RSMA-Mayotte (régiment du service militaire adapté), qui forme des agents de prévention et de sécurité, a formé 25 agents cette année (rang 0). La direction prévoit une hausse de 6 % du nombre de nouveaux agents formés chaque année.",
     qs:[
      {comp:"S'approprier",q:"Une hausse de 6 % correspond à quelle raison q pour la suite géométrique ?",a:1.06,tol:0.001},
      {comp:"Réaliser",q:"u₁ = 25 × 1,06 = ?",a:26.5,tol:0},
@@ -143,7 +143,7 @@ export const CCF = {
     comm:"Rédige une phrase de bilan pour le rapport annuel du centre de formation.",
     commA:"« Avec une hausse de 6 % par an, le centre aura formé environ 109 agents au total sur ses quatre premières années d'activité. »"},
    {titre:"Achat de matériel et caution placée",
-    ctx:"L'entreprise achète du matériel de sécurité pour 5 000 € HT, avec une remise de 12 % accordée par le fournisseur, puis la TVA à 20 %. Elle place par ailleurs une caution de 1 000 € sur un compte à intérêts composés à 2 % par an, pour 3 ans.",
+    ctx:"DOM Sécurité Mayotte achète du matériel de sécurité pour 5 000 € HT, avec une remise de 12 % accordée par le fournisseur, puis la TVA à 20 %. Elle place par ailleurs une caution de 1 000 € sur un compte à intérêts composés à 2 % par an, pour 3 ans.",
     qs:[
      {comp:"S'approprier",q:"Coefficient multiplicateur d'une remise de 12 % ?",a:0.88,tol:0.001},
      {comp:"Réaliser",q:"Net HT après remise : 5000 × 0,88 = ? (en €)",a:4400,tol:0},

@@ -7,7 +7,7 @@ export default {id:"suites-ms",classe:"bac pro MS",mat:"Maths",titre:"Suites num
  {t:"Le parc de caméras de la commune",
   prob:"Combien de caméras seront installées dans 5 ans, si le rythme d'installation se maintient ?",
   steps:[
-   {t:"La situation",txt:"La commune a installé 40 caméras de vidéoprotection cette année (rang 0). Le conseil municipal a voté une augmentation du parc de 8 % chaque année. Le service sécurité vous demande de projeter le nombre de caméras sur les prochaines années pour préparer le budget."},
+   {t:"La situation",txt:"La commune de Mamoudzou a installé 40 caméras de vidéoprotection cette année (rang 0). Le conseil municipal a voté une augmentation du parc de 8 % chaque année. Le service sécurité vous demande de projeter le nombre de caméras sur les prochaines années pour préparer le budget."},
    {t:"Étape 1 — Le passage d'une année à la suivante",
     apport:"Augmenter de 8 %, c'est multiplier par (1 + 0,08) = <b>1,08</b>. On note u₀ = 40 (année de départ), et chaque terme suivant s'obtient par <b>uₙ₊₁ = uₙ × 1,08</b> : c'est une <b>suite géométrique de raison q = 1,08</b>.",
     q:[{q:"u₁ = u₀ × 1,08 = 40 × 1,08, arrondi à l'unité",a:43,tol:0},
@@ -26,7 +26,7 @@ export default {id:"suites-ms",classe:"bac pro MS",mat:"Maths",titre:"Suites num
  {t:"Le budget de maintenance sur 5 ans",
   prob:"Quel budget total la société doit-elle prévoir pour les 5 premières années du contrat de maintenance ?",
   steps:[
-   {t:"La situation",txt:"Une entreprise de sécurité signe un contrat de maintenance de son parc de matériel (caméras, alarmes, badges). Le coût de la première année est de 3 000 €, et le contrat prévoit une hausse de 5 % chaque année (pièces, main d'œuvre). La direction veut connaître le coût total sur 5 ans pour monter le dossier budgétaire."},
+   {t:"La situation",txt:"DOM Sécurité Mayotte signe un contrat de maintenance de son parc de matériel (caméras, alarmes, badges). Le coût de la première année est de 3 000 €, et le contrat prévoit une hausse de 5 % chaque année (pièces, main d'œuvre, coût du fret pour faire venir certaines pièces par bateau). La direction veut connaître le coût total sur 5 ans pour monter le dossier budgétaire."},
    {t:"Étape 1 — La suite des coûts annuels",
     apport:"u₀ = 3 000 (première année), raison q = 1,05 (hausse de 5 %).",
     q:[{q:"Coût de la 2ᵉ année : u₁ = 3 000 × 1,05 = ? (en €)",a:3150,tol:0},
@@ -45,7 +45,7 @@ export default {id:"suites-ms",classe:"bac pro MS",mat:"Maths",titre:"Suites num
  {t:"L'autonomie du talkie-walkie qui décroît",
   prob:"Au bout de combien de recharges la batterie tombe-t-elle sous le seuil critique de 1000 mAh ?",
   steps:[
-   {t:"La situation",txt:"Les talkies-walkies de l'équipe de sécurité fonctionnent sur batterie rechargeable. À chaque cycle de recharge, la capacité maximale de la batterie diminue légèrement à cause de l'usure : environ 6 % de moins à chaque recharge. La batterie neuve a une capacité de 2 000 mAh. En dessous de 1 000 mAh, l'autonomie est jugée insuffisante pour une vacation complète : la batterie doit être remplacée."},
+   {t:"La situation",txt:"Les talkies-walkies de l'équipe DOM Sécurité Mayotte fonctionnent sur batterie rechargeable. À chaque cycle de recharge, la capacité maximale de la batterie diminue légèrement à cause de l'usure — accélérée par la chaleur et l'humidité du climat tropical : environ 6 % de moins à chaque recharge. La batterie neuve a une capacité de 2 000 mAh. En dessous de 1 000 mAh, l'autonomie est jugée insuffisante pour une vacation complète : la batterie doit être remplacée."},
    {t:"Étape 1 — Modéliser la décroissance",
     apport:"Perdre 6 % à chaque recharge, c'est multiplier par (1 − 0,06) = <b>0,94</b> à chaque fois : suite géométrique de raison <b>q = 0,94</b>, u₀ = 2000.",
     q:[{q:"Capacité après 1 recharge : u₁ = 2000 × 0,94 = ? (en mAh)",a:1880,tol:0},
