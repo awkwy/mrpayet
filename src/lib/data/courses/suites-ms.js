@@ -1,4 +1,4 @@
-export default {id:"suites-ms",classe:"TP MS",mat:"Maths",titre:"Suites numériques",
+export default {id:"suites-ms",classe:"bac pro MS",mat:"Maths",titre:"Suites numériques",
  desc:"Le parc de caméras qui s'agrandit chaque année, le budget de maintenance qui grimpe, la batterie du talkie-walkie qui s'affaiblit — la suite géométrique.",
  obj:["Calculer un terme d'une suite géométrique, par récurrence ou par la formule explicite",
       "Déterminer le sens de variation d'une suite géométrique",

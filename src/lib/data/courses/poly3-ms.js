@@ -1,4 +1,4 @@
-export default {id:"poly3-ms",classe:"TP MS",mat:"Maths",titre:"Fonctions polynômes de degré 3",
+export default {id:"poly3-ms",classe:"bac pro MS",mat:"Maths",titre:"Fonctions polynômes de degré 3",
  desc:"Le volume d'une réserve d'eau cubique, la fréquentation d'un site sur une journée — étudier la fonction cube et les polynômes de degré 3.",
  obj:["Étudier la fonction cube : dérivée, variations, représentation graphique",
       "Dresser le tableau de variations d'une fonction polynôme de degré ⩽ 3 à partir du signe de la dérivée",

@@ -1,4 +1,4 @@
-export default {id:"commerce-ms",classe:"TP MS",mat:"Maths",titre:"Calculs commerciaux et financiers",
+export default {id:"commerce-ms",classe:"bac pro MS",mat:"Maths",titre:"Calculs commerciaux et financiers",
  desc:"Un fonds de renouvellement de matériel qui rapporte des intérêts, un véhicule de service acheté à crédit — intérêts composés, emprunt, taux.",
  obj:["Calculer le montant du capital obtenu après n périodes de placement à intérêts composés",
       "Compléter un tableau d'amortissement (annuités constantes ou amortissement constant)",

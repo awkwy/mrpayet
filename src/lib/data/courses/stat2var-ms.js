@@ -1,4 +1,4 @@
-export default {id:"stat2var-ms",classe:"TP MS",mat:"Maths",titre:"Statistiques à deux variables",
+export default {id:"stat2var-ms",classe:"bac pro MS",mat:"Maths",titre:"Statistiques à deux variables",
  desc:"Prévoir le nombre d'interventions, suivre l'essor d'un quartier équipé en alarmes — ajuster un nuage de points pour interpoler ou extrapoler.",
  obj:["Choisir un modèle d'ajustement adapté à un nuage de points (affine ou non)",
       "Utiliser un ajustement pour interpoler ou extrapoler une valeur"],

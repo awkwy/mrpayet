@@ -1,4 +1,4 @@
-export default {id:"proba-ms",classe:"TP MS",mat:"Maths",titre:"Probabilités",
+export default {id:"proba-ms",classe:"bac pro MS",mat:"Maths",titre:"Probabilités",
  desc:"Contrôles d'accès, système de détection incendie, capteurs indépendants — l'arbre pondéré pour calculer une probabilité.",
  obj:["Représenter une situation aléatoire par un arbre de probabilités pondéré",
       "Calculer une probabilité à l'aide de la formule des probabilités totales",

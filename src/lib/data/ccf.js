@@ -102,7 +102,7 @@ export const CCF = {
     commA:"« Dissoudre 4 pastilles (6 g) dans 3 L d'eau pour obtenir 2 g/L. Port de gants et lunettes obligatoire (produit corrosif). Solution basique (pH 9) : ne pas mélanger avec un autre produit. »"}
   ]}
  },
- "TP MS":{
+ "bac pro MS":{
   label:"entraînement — épreuve de mathématiques",
   intro:"Le bac pro Métiers de la sécurité n'a pas de CCF en mathématiques (spécifique aux CAP) : l'évaluation est une <b>épreuve écrite ponctuelle</b> en fin de terminale. Cette page réunit des tâches d'entraînement qui couvrent les six modules du programme (groupement C), classées par les mêmes cinq compétences que pour l'épreuve.",
   maths:{titre:"Entraînement — mathématiques",duree:"tous les modules du programme",note:"non noté",taches:[
