@@ -14,7 +14,7 @@
     const leaves = [];
     C.forEach((c, i) => D.forEach((d, j) => leaves.push({ c, d, i, j })));
     const fav = (l) => (ev === 'p' ? l.c === 'Pile' : ev === 'd' ? l.d === 4 : l.c === 'Pile' && l.d === 4);
-    const { x, W, H } = cvs(host, 196);
+    const { x, W, H } = cvs(host, 260);
     const evb = box(
       host,
       'vctl',
