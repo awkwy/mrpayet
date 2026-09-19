@@ -11,13 +11,26 @@
   let host;
   const loop = createLoop();
 
+  const leaves = [];
+  vd.level1.forEach((l1, i) => (vd.level2[i] || []).forEach((l2, j) => leaves.push({ i, j, l1, l2 })));
+  const favSet = new Set((vd.favorable || []).map(([i, j]) => i + ':' + j));
+  const ariaLabel =
+    'Arbre pondéré. Premier niveau : ' +
+    vd.level1.map((l1) => `${l1.label} (probabilité ${fr(l1.p)})`).join(', ') +
+    '. ' +
+    leaves
+      .map(
+        (l) =>
+          `Depuis ${l.l1.label} : ${l.l2.label} (probabilité ${fr(l.l2.p)})` +
+          (favSet.has(l.i + ':' + l.j) ? ', chemin favorable' : '')
+      )
+      .join('. ');
+
   onMount(() => {
     const level1 = vd.level1;
     const level2 = vd.level2;
-    const favorable = new Set((vd.favorable || []).map(([i, j]) => i + ':' + j));
-
-    const leaves = [];
-    level1.forEach((l1, i) => (level2[i] || []).forEach((l2, j) => leaves.push({ i, j, l1, l2 })));
+    const favorable = favSet;
+    const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const PAD = 20,
       BOXH = 24,
@@ -36,6 +49,19 @@
 
     const { x, W } = cvs(host, H);
     const ctl = box(host, 'vctl', `<button class="p" id="bd">&#8635; Revoir la construction</button>`);
+    box(
+      host,
+      'viz-data',
+      `<details><summary>Voir les chemins</summary>` +
+        `<table><thead><tr><th>1ᵉʳ niveau</th><th>2ᵉ niveau</th><th>Probabilité</th><th>Chemin favorable</th></tr></thead>` +
+        `<tbody>${leaves
+          .map(
+            (l) =>
+              `<tr><td>${l.l1.label} (${fr(l.l1.p)})</td><td>${l.l2.label} (${fr(l.l2.p)})</td>` +
+              `<td>${fr((l.l1.p * l.l2.p).toFixed(4))}</td><td>${favorable.has(l.i + ':' + l.j) ? 'oui' : ''}</td></tr>`
+          )
+          .join('')}</tbody></table></details>`
+    );
 
     const x0 = 26,
       x1 = Math.min(110, W * 0.28),
@@ -119,10 +145,15 @@
     }
 
     ctl.querySelector('#bd').onclick = () => {
+      const totalSteps = 1 + level1.length + leaves.length;
+      if (RM) {
+        grown = totalSteps;
+        draw();
+        return;
+      }
       grown = 0;
       draw();
       let f0 = 0;
-      const totalSteps = 1 + level1.length + leaves.length;
       const step = () => {
         f0++;
         if (f0 % 4 === 0) {
@@ -140,4 +171,4 @@
   onDestroy(() => loop.stop());
 </script>
 
-<div bind:this={host} class="viz"></div>
+<div bind:this={host} class="viz" role="img" aria-label={ariaLabel}></div>
