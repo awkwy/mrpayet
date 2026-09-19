@@ -2,6 +2,7 @@
   import { base } from '$app/paths';
   import { blocOfCourse, bslug, chapterKey, chapterLock } from '$lib/utils/course-helpers.js';
   import { VIZ } from '$lib/visualizations/registry.js';
+  import Shell from '$lib/numworks/Shell.svelte';
   import { markDone, setLast, done } from '$lib/stores/progress.js';
   import ChapterDrawer from '$lib/components/ChapterDrawer.svelte';
   import QuizInput from '$lib/components/QuizInput.svelte';
@@ -176,6 +177,12 @@
               <svelte:component this={VIZ[st.viz]} vd={st.vd} />
             </div>
           {/key}
+        {/if}
+        {#if st.calc}
+          {@const calcPoints = se.datasets?.[st.calc.dataset] || []}
+          <div class="calc-host">
+            <Shell calc={st.calc} points={calcPoints} />
+          </div>
         {/if}
         {#if st.q}
           <div class="questions">
@@ -402,6 +409,9 @@
     color: var(--dim);
   }
   .viz-host {
+    margin-top: 14px;
+  }
+  .calc-host {
     margin-top: 14px;
   }
   .questions {
