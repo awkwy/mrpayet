@@ -18,7 +18,7 @@
 
 <div class="wrap">
   <p class="eyebrow">Révisions</p>
-  <h1>{data.classe}{data.ccf.label === 'devoir commun' ? ' — devoir commun' : ' — CCF'}</h1>
+  <h1>{data.classe}{data.ccf.label ? ` — ${data.ccf.label}` : ' — CCF'}</h1>
   {#if data.ccf.intro}
     <p class="intro">{@html data.ccf.intro}</p>
   {/if}

@@ -101,5 +101,59 @@ export const CCF = {
     comm:"Une collègue va reprendre la préparation. Que lui écris-tu sur la fiche de poste ?",
     commA:"« Dissoudre 4 pastilles (6 g) dans 3 L d'eau pour obtenir 2 g/L. Port de gants et lunettes obligatoire (produit corrosif). Solution basique (pH 9) : ne pas mélanger avec un autre produit. »"}
   ]}
+ },
+ "TP MS":{
+  label:"entraînement — épreuve de mathématiques",
+  intro:"Le bac pro Métiers de la sécurité n'a pas de CCF en mathématiques (spécifique aux CAP) : l'évaluation est une <b>épreuve écrite ponctuelle</b> en fin de terminale. Cette page réunit des tâches d'entraînement qui couvrent les six modules du programme (groupement C), classées par les mêmes cinq compétences que pour l'épreuve.",
+  maths:{titre:"Entraînement — mathématiques",duree:"tous les modules du programme",note:"non noté",taches:[
+   {titre:"Prévoir les rondes de nuit",
+    ctx:"La société de sécurité suit depuis 10 mois le nombre moyen de rondes de nuit effectuées, et la calculatrice donne l'ajustement affine y = 2,8x + 20, où x est le nombre de mois depuis le début du suivi.",
+    qs:[
+     {comp:"S'approprier",q:"Dans le modèle y = 2,8x + 20, que représente x ?",a:["le nombre de mois","nombre de mois","le mois","mois depuis le debut du suivi"],txt:true,sol:"x est le nombre de mois écoulés depuis le début du suivi."},
+     {comp:"Réaliser",q:"Nombre de rondes prévu au mois 5 : 2,8 × 5 + 20 = ?",a:34,tol:0},
+     {comp:"Réaliser",q:"Nombre de rondes prévu au mois 10 : 2,8 × 10 + 20 = ?",a:48,tol:0},
+     {comp:"Analyser/Raisonner",q:"Le suivi couvre les mois 1 à 10. Le mois 15 est-il une interpolation ou une extrapolation ? (1 = interpolation, 2 = extrapolation)",a:2,tol:0,sol:"Le mois 15 est hors de la période suivie (1 à 10) : c'est une extrapolation."},
+     {comp:"Réaliser",q:"Prévision au mois 15 : 2,8 × 15 + 20 = ?",a:62,tol:0},
+     {comp:"Valider",q:"Le mois 15 venu, on compte réellement 63 rondes. L'écart de 1 avec la prévision (62) remet-il en cause le modèle ? (oui / non)",a:"non",txt:true,sol:"Non : un petit résidu de 1 ronde reste tout à fait normal pour un modèle d'ajustement."}
+    ],
+    comm:"Le responsable planning te demande une phrase pour justifier l'effectif prévu au mois 15.",
+    commA:"« D'après la tendance observée sur les 10 premiers mois, on prévoit environ 62 rondes au mois 15 ; à confirmer une fois le mois passé, l'extrapolation restant une estimation. »"},
+   {titre:"Le double contrôle du parking sécurisé",
+    ctx:"À l'entrée d'un parking sécurisé, chaque véhicule passe deux contrôles indépendants : la lecture du badge (valide dans 97 % des cas) et la reconnaissance de plaque (valide dans 99 % des cas).",
+    qs:[
+     {comp:"S'approprier",q:"Probabilité que le badge pose un problème : 1 − 0,97 = ?",a:0.03,tol:0},
+     {comp:"S'approprier",q:"Probabilité que la plaque pose un problème : 1 − 0,99 = ?",a:0.01,tol:0},
+     {comp:"Analyser/Raisonner",q:"Les deux contrôles sont indépendants : comment calcule-t-on P(les deux passent) ? (1 = en les additionnant, 2 = en les multipliant)",a:2,tol:0},
+     {comp:"Réaliser",q:"P(badge OK et plaque OK) = 0,97 × 0,99 = ?",a:0.9603,tol:0.0001},
+     {comp:"Réaliser",q:"P(au moins un problème) = 1 − 0,9603 = ?",a:0.0397,tol:0.0001},
+     {comp:"Valider",q:"Sur 1000 véhicules, le nombre attendu avec au moins un problème est proche de 1000 × 0,0397, soit environ ? (arrondi à l'unité)",a:40,tol:1,sol:"Environ 40 véhicules sur 1000, cohérent avec une probabilité proche de 4 %."}
+    ],
+    comm:"Le responsable du site te demande de résumer la fiabilité du double contrôle.",
+    commA:"« Sur 1000 passages, environ 960 se font sans aucun problème et environ 40 rencontrent un souci sur au moins un des deux contrôles — badge et plaque restant indépendants l'un de l'autre. »"},
+   {titre:"Le nombre d'agents formés chaque année",
+    ctx:"Le centre de formation a formé 25 agents cette année (rang 0). La direction prévoit une hausse de 6 % du nombre de nouveaux agents formés chaque année.",
+    qs:[
+     {comp:"S'approprier",q:"Une hausse de 6 % correspond à quelle raison q pour la suite géométrique ?",a:1.06,tol:0.001},
+     {comp:"Réaliser",q:"u₁ = 25 × 1,06 = ?",a:26.5,tol:0},
+     {comp:"Réaliser",q:"u₃ = 25 × 1,06³, arrondi au centième",a:29.78,tol:0.01},
+     {comp:"Analyser/Raisonner",q:"q = 1,06 > 1 : la suite est-elle croissante ou décroissante ? (1 = croissante, 2 = décroissante)",a:1,tol:0},
+     {comp:"Réaliser",q:"Total des formations sur les 4 premières années (u₀ + u₁ + u₂ + u₃), arrondi au centième",a:109.37,tol:0.01},
+     {comp:"Valider",q:"Ce total (109,37) est-il supérieur ou inférieur à 4 × 25 = 100 (le total sans aucune hausse) ? (1 = supérieur, 2 = inférieur)",a:1,tol:0,sol:"Supérieur : logique, puisque le nombre d'agents formés augmente chaque année."}
+    ],
+    comm:"Rédige une phrase de bilan pour le rapport annuel du centre de formation.",
+    commA:"« Avec une hausse de 6 % par an, le centre aura formé environ 109 agents au total sur ses quatre premières années d'activité. »"},
+   {titre:"Achat de matériel et caution placée",
+    ctx:"L'entreprise achète du matériel de sécurité pour 5 000 € HT, avec une remise de 12 % accordée par le fournisseur, puis la TVA à 20 %. Elle place par ailleurs une caution de 1 000 € sur un compte à intérêts composés à 2 % par an, pour 3 ans.",
+    qs:[
+     {comp:"S'approprier",q:"Coefficient multiplicateur d'une remise de 12 % ?",a:0.88,tol:0.001},
+     {comp:"Réaliser",q:"Net HT après remise : 5000 × 0,88 = ? (en €)",a:4400,tol:0},
+     {comp:"Réaliser",q:"Montant TTC : 4400 × 1,20 = ? (en €)",a:5280,tol:0},
+     {comp:"Réaliser",q:"Caution après 3 ans à intérêts composés : 1000 × 1,02³, arrondi au centime (en €)",a:1061.21,tol:0.01},
+     {comp:"Analyser/Raisonner",q:"Intérêts gagnés sur la caution en 3 ans : 1061,21 − 1000 = ? (en €)",a:61.21,tol:0.01},
+     {comp:"Valider",q:"Le fournisseur annonce que la remise fait économiser plus de 500 € HT. Vrai ou faux ? (calcule 5000 − 4400)",a:"vrai",txt:true,sol:"5000 − 4400 = 600 € d'économie HT, donc bien plus de 500 €."}
+    ],
+    comm:"Rédige la phrase de synthèse pour le dossier d'achat transmis à la direction.",
+    commA:"« Le matériel revient à 5 280 € TTC après remise ; en parallèle, la caution de 1 000 € rapportera environ 61,21 € d'intérêts sur les 3 ans du contrat. »"}
+  ]}
  }
 };
