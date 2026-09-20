@@ -9,7 +9,7 @@ export default {id:"stat2var-ms",classe:"bac pro MS",mat:"Maths",titre:"Statisti
   steps:[
    {t:"La situation",txt:"Vous travaillez pour DOM Sécurité Mayotte (Kaweni). Selon le ministère de l'Intérieur, les cambriolages ont augmenté de 26 % à Mayotte en 2025 : la demande d'interventions (rondes supplémentaires, levées de doute, main courante) ne cesse de monter, et le responsable planning veut anticiper le nombre d'interventions pour ajuster les effectifs. Il vous donne le nombre moyen d'interventions par mois depuis le début de l'année."},
    {t:"Étape 1 — Le nuage de points",
-    doc:{h:["Mois (x)","1","3","6","9","12"],r:[["Interventions (y)","16","22","33","44","54"]]},
+    doc:{h:["Mois (x)","1","3","6","9","12"],r:[["Interventions (y)","15,5","22,5","33","43,5","54"]]},
     apport:"En reportant ces points sur un graphique, on obtient un nuage qui monte à peu près <b>régulièrement</b> : un <b>ajustement affine</b> est adapté."},
    {t:"Sur la calculatrice",
     apport:"Entre ces points toi-même dans l'écran <b>Statistiques → Données</b> de la calculatrice ci-dessous (une colonne par variable), puis passe à l'écran <b>Régression</b> pour voir la droite d'ajustement — tu dois retrouver y = 3,5x + 12.",
@@ -28,7 +28,7 @@ export default {id:"stat2var-ms",classe:"bac pro MS",mat:"Maths",titre:"Statisti
   trace:"Quand un nuage de points monte ou descend à peu près régulièrement, on choisit un <b>ajustement affine</b> : y = ax + b, donné par la calculatrice ou le tableur (on ne le recalcule pas à la main).<br><b>Interpoler</b> : estimer une valeur <b>entre</b> deux mesures. <b>Extrapoler</b> : estimer une valeur <b>en dehors</b> de la période mesurée — moins fiable, car on suppose que la tendance continue à l'identique."},
  {t:"L'essor des alarmes connectées dans un quartier",
   prob:"Combien de logements du quartier seront équipés d'une alarme connectée dans 5 ans, si la tendance se poursuit ?",
-  datasets:{d1:[[0,10],[5,17.78279410038922],[10,31.622776601683768],[15,56.23413251903483],[20,100]]},
+  datasets:{d1:[[0,10],[5,17.78],[10,31.62],[15,56.23],[20,100]]},
   steps:[
    {t:"La situation",txt:"Mayotte Sécurité Surveillance (MSS Mayotte, Tsingoni) suit, depuis l'ouverture d'un nouveau quartier résidentiel de Mamoudzou, le nombre cumulé de logements équipés d'une alarme connectée à leur centrale de télésurveillance. Le nuage de points obtenu ne monte pas régulièrement : il grimpe de plus en plus vite au fil des années — un ajustement affine ne conviendrait pas ici."},
    {t:"Étape 1 — Un nuage qui n'est pas une droite",
@@ -38,7 +38,8 @@ export default {id:"stat2var-ms",classe:"bac pro MS",mat:"Maths",titre:"Statisti
     apport:"Le nuage (x ; z) est bien une droite : la calculatrice donne <b>z = 0,05x + 1</b>. Pour revenir à y, on utilise la définition du logarithme décimal : si z = log(y), alors <b>y = 10ᶻ</b>.",
     q:[{q:"z prévu à l'année 20 : 0,05 × 20 + 1 = ?",a:2,tol:0}]},
    {t:"Sur la calculatrice",
-    apport:"Entre directement les années et les logements équipés dans l'écran <b>Statistiques → Données</b>, puis passe à l'écran <b>Régression</b> et choisis le modèle <b>Exponentielle</b> (y = a·e^(bx)) — sans passer par le changement de variable : tu dois retrouver a ≈ 10 et b ≈ 0,1151, exactement la même courbe que z = 0,05x + 1 (10^0,05 = e^0,1151…), juste écrite autrement.",
+    doc:{h:["Année (x)","0","5","10","15","20"],r:[["Logements (y)","10","17,78","31,62","56,23","100"]]},
+    apport:"Entre directement ces années et ces logements équipés dans l'écran <b>Statistiques → Données</b>, puis passe à l'écran <b>Régression</b> et choisis le modèle <b>Exponentielle</b> (y = a·e^(bx)) — sans passer par le changement de variable : tu dois retrouver a ≈ 10 et b ≈ 0,1151, exactement la même courbe que z = 0,05x + 1 (10^0,05 = e^0,1151…), juste écrite autrement.",
     calc:{dataset:"d1",cols:["Année","Logements"],reg:"exponentielle"}},
    {t:"Étape 3 — Revenir à y et extrapoler à 5 ans de plus (année 25)",
     apport:"On calcule d'abord z avec la droite, puis y = 10ᶻ.",
