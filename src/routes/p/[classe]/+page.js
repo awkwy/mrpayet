@@ -4,7 +4,14 @@ import { bunslug } from '$lib/utils/course-helpers.js';
 export const prerender = true;
 
 export function entries() {
-  return [{ classe: '2pmv2' }, { classe: 'tcaepe' }, { classe: 'tcapmp' }, { classe: 'bacproms' }, { classe: 'bacpromcv' }];
+  return [
+    { classe: '2pmv2' },
+    { classe: 'tcaepe' },
+    { classe: 'tcapmp' },
+    { classe: 'bacproms' },
+    { classe: 'bacpromcv' },
+    { classe: 'bacpromcvtle' }
+  ];
 }
 
 export function load({ params }) {

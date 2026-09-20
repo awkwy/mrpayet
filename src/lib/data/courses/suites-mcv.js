@@ -6,6 +6,7 @@ export default {id:"suites-mcv",classe:"bac pro MCV",mat:"Maths",titre:"Suites n
  seances:[
  {t:"Les nouveaux clients de Moinécha",
   prob:"Combien de clients réguliers Moinécha aura-t-elle dans 10 semaines, si le rythme se maintient ?",
+  datasets:{d1:[[0,8],[1,11],[2,14],[3,17],[4,20],[5,23]]},
   steps:[
    {t:"La situation",txt:"Moinécha tient un stand d'accessoires (bracelets, casquettes) juste à côté de celui d'Aïcha, au marché couvert de Mamoudzou. Elle note chaque semaine son nombre de clients réguliers (ceux qui reviennent). La première semaine, elle en comptait 8. Le comité des commerçants du marché constate qu'elle en gagne 3 de plus, très régulièrement, chaque semaine."},
    {t:"Étape 1 — Générer les termes de la suite",
@@ -13,6 +14,9 @@ export default {id:"suites-mcv",classe:"bac pro MCV",mat:"Maths",titre:"Suites n
     q:[{q:"u₁ = u₀ + 3 = 8 + 3 = ?",a:11,tol:0},
        {q:"u₂ = u₁ + 3 = 11 + 3 = ?",a:14,tol:0},
        {q:"u₃ = u₂ + 3 = 14 + 3 = ?",a:17,tol:0}]},
+   {t:"Sur la calculatrice",
+    apport:"Entre les rangs n et les termes u<sub>n</sub> des 6 premières semaines dans l'écran <b>Suites → Données</b> ci-dessous, puis passe à l'écran <b>Graphique</b> : les points (n ; u<sub>n</sub>) s'alignent parfaitement sur une droite — c'est le <b>lien entre suite arithmétique et fonction affine</b> annoncé au programme, tu dois retrouver u<sub>n</sub> = 3n + 8.",
+    calc:{dataset:"d1",cols:["n","uₙ"],reg:"affine"}},
    {t:"Étape 2 — Reconnaître une suite arithmétique",
     apport:"Une suite est <b>arithmétique</b> quand on passe d'un terme au suivant en ajoutant toujours le même nombre, appelé <b>raison</b> (notée r). Ici, <b>r = 3</b> et le premier terme est <b>u₀ = 8</b>.",
     q:[{q:"Quelle est la raison r de cette suite arithmétique ?",a:3,tol:0}]},
