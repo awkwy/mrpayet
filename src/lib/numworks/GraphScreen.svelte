@@ -18,7 +18,7 @@
   let fitFn = $derived(
     reg === 'affine' ? affine : reg === 'exponentielle' ? exponential : reg === 'logarithmique' ? logarithmic : null
   );
-  let fit = $derived(fitFn ? fitFn(points) : null);
+  let fit = $derived(points && fitFn ? fitFn(points) : null);
 
   // La fonction modélisée par l'ajustement, pour tracer la courbe.
   let modelFn = $derived(
@@ -31,12 +31,12 @@
           : (x) => fit.a * Math.log(x) + fit.b
   );
 
-  let xs = $derived(points.map((p) => p[0]));
-  let ys = $derived(points.map((p) => p[1]));
-  let xMin = $derived(Math.min(...xs));
-  let xMax = $derived(Math.max(...xs));
-  let yMin = $derived(Math.min(0, ...ys));
-  let yMax = $derived(Math.max(...ys));
+  let xs = $derived(points ? points.map((p) => p[0]) : []);
+  let ys = $derived(points ? points.map((p) => p[1]) : []);
+  let xMin = $derived(xs.length ? Math.min(...xs) : 0);
+  let xMax = $derived(xs.length ? Math.max(...xs) : 1);
+  let yMin = $derived(ys.length ? Math.min(0, ...ys) : 0);
+  let yMax = $derived(ys.length ? Math.max(...ys) : 1);
   let xSpan = $derived(xMax - xMin || 1);
   let ySpan = $derived(yMax - yMin || 1);
 
@@ -53,7 +53,7 @@
   }
 
   let curvePoints = $derived.by(() => {
-    if (!modelFn) return '';
+    if (!points || !modelFn) return '';
     const pts = [];
     for (let i = 0; i <= CURVE_SAMPLES; i++) {
       const x = curveStart + ((xMax - curveStart) * i) / CURVE_SAMPLES;
@@ -75,6 +75,9 @@
 </script>
 
 <div class="gs">
+  {#if !points}
+    <p class="incomplete">Complète la saisie des données pour voir le graphique.</p>
+  {:else}
   <svg viewBox="0 0 {W} {H}" role="img" aria-label="Nuage de points et courbe de régression">
     <line x1={PAD} y1={H - PAD} x2={W - PAD} y2={H - PAD} class="axis" />
     <line x1={PAD} y1={PAD} x2={PAD} y2={H - PAD} class="axis" />
@@ -93,6 +96,7 @@
       <span class="regtype">Pas de régression calculable</span>
     {/if}
   </div>
+  {/if}
 </div>
 
 <style>
@@ -136,5 +140,12 @@
   }
   .eq {
     color: var(--tx);
+  }
+  .incomplete {
+    font-family: var(--sm);
+    font-size: 13px;
+    color: var(--dim);
+    text-align: center;
+    padding: 24px 8px;
   }
 </style>
