@@ -1,20 +1,35 @@
 <script>
   import DataScreen from './DataScreen.svelte';
   import GraphScreen from './GraphScreen.svelte';
+  import { buildEntryState, entryComplete } from './entry-state.js';
 
   let { calc, points } = $props();
 
-  const TITLES = { data: 'Statistiques — Données', graph: 'Statistiques — Régression' };
-  let title = $derived(TITLES[calc.screen] || 'Calculatrice');
+  let screen = $state('data');
+  let typed = $state(points.map(() => ['', '']));
+
+  let entryState = $derived(buildEntryState(points, typed));
+  let complete = $derived(entryComplete(entryState));
+
+  function onedit(row, col, value) {
+    typed[row][col] = value;
+  }
 </script>
 
 <div class="nw-shell">
-  <div class="nw-bar">{title}</div>
+  <div class="nw-tabs">
+    <button type="button" class:on={screen === 'data'} onclick={() => (screen = 'data')}>
+      Données
+    </button>
+    <button type="button" class:on={screen === 'graph'} onclick={() => (screen = 'graph')}>
+      Graphique
+    </button>
+  </div>
   <div class="nw-screen">
-    {#if calc.screen === 'data'}
-      <DataScreen {points} cols={calc.cols} />
-    {:else if calc.screen === 'graph'}
-      <GraphScreen {points} reg={calc.reg} />
+    {#if screen === 'data'}
+      <DataScreen {entryState} {typed} cols={calc.cols} {onedit} />
+    {:else}
+      <GraphScreen points={complete ? points : undefined} reg={calc.reg} />
     {/if}
   </div>
 </div>
@@ -28,15 +43,30 @@
     background: var(--surf2);
     overflow: hidden;
   }
-  .nw-bar {
+  .nw-tabs {
+    display: flex;
+  }
+  .nw-tabs button {
+    flex: 1;
     padding: 8px 14px;
     background: var(--surf3);
     color: var(--dim);
+    border: none;
+    border-bottom: 1px solid var(--line);
     font-family: var(--sm);
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+  }
+  .nw-tabs button.on {
+    color: var(--tx);
+    background: var(--surf2);
+    border-bottom-color: var(--g);
+  }
+  .nw-tabs button:focus-visible {
+    outline: 1px solid var(--g);
+    outline-offset: -1px;
   }
   .nw-screen {
     padding: 14px;
