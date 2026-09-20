@@ -35,10 +35,11 @@ import interval from './interval.svelte';
 import affine from './affine.svelte';
 import parabole from './parabole.svelte';
 import agrandir from './agrandir.svelte';
+import poly2 from './poly2.svelte';
 
 export const VIZ = {
   fusible, noeuds, alternatif, circuit, taux, aire, bascule, budget, remise, partage,
   division, multiplication, moyenne, mediane, experience, arbre, arbrepondere, fluctuation,
   stabilisation, batons, moypond, ph, interet, onde, propor, courbe, geo, pyth,
-  db, chauffe, force, refraction, rgb, interval, affine, parabole, agrandir
+  db, chauffe, force, refraction, rgb, interval, affine, parabole, agrandir, poly2
 };
