@@ -398,5 +398,47 @@ export const RECAP = {
    met:"Regarder |r| (ou r²) donné par la calculatrice : |r| ⩾ 0,95 excellent, 0,85 ⩽ |r| < 0,95 acceptable, |r| < 0,85 à éviter.",ex:"r ≈ 0,96 → ajustement excellent",pg:"Croire qu'un r² proche de 1 prouve un lien de cause à effet (corrélation ≠ causalité)."},
   {sig:"Extrapoler très loin de la zone observée",
    met:"Résoudre l'équation normalement, mais rappeler que la fiabilité diminue d'autant plus que l'extrapolation est lointaine.",ex:"données de la semaine 1 à 7, prédiction à la semaine 29 : extrapolation lointaine, à prendre avec prudence",pg:"Faire autant confiance à une extrapolation lointaine qu'à une interpolation, même avec un bon r²."}
+ ],
+ "proba-mcv":[
+  {sig:"Calculer P(A ⋂ B) et P(A ⋃ B) à partir d'un tableau croisé",
+   met:"P(A ⋂ B) = effectif de la case commune ÷ total. P(A ⋃ B) = P(A) + P(B) − P(A ⋂ B), pour ne pas compter deux fois l'intersection.",ex:"P(abîmé) = 0,12, P(taille S) = 0,45, P(abîmé ∩ S) = 0,07 → P(abîmé ∪ S) = 0,5",pg:"Additionner P(A) + P(B) sans retrancher l'intersection : on la compte deux fois."},
+  {sig:"Calculer une fréquence ou une probabilité conditionnelle",
+   met:"Fréquence conditionnelle : lue directement sur la ligne/colonne de la catégorie qui conditionne. Probabilité conditionnelle : P_A(B) = P(A ⋂ B) ÷ P(A).",ex:"42 sur 48 déjà-acheteurs recommandent → 42 ÷ 48 ≈ 0,88",pg:"Diviser par le total général au lieu de l'effectif de la catégorie qui conditionne."}
+ ],
+ "suites-mcv":[
+  {sig:"Une quantité augmente (ou diminue) toujours du même nombre à chaque étape",
+   met:"Suite arithmétique : uₙ₊₁ = uₙ + r. Terme de rang n : uₙ = u₀ + n × r.",ex:"u₀ = 8, r = 3 → u₁₀ = 8 + 10 × 3 = 38",pg:"Confondre avec une suite géométrique (× r au lieu de + r) — vue en terminale, pas en première."},
+  {sig:"Calculer un total cumulé sur plusieurs périodes",
+   met:"Somme des n premiers termes, obtenue à l'aide d'un outil numérique (la formule n'est pas exigée par cœur en première).",ex:"8+11+14+17+20+23 = 93",pg:"Ne prendre que le dernier terme au lieu d'additionner tous les termes de la période."}
+ ],
+ "eqineq-mcv":[
+  {sig:"Trouver le seuil de rentabilité (coût = recette)",
+   met:"Résoudre graphiquement (ou dans un tableau de valeurs) C(x) = R(x) : chercher où les deux lignes/courbes coïncident.",ex:"C(5) = R(5) = 25 → seuil à x = 5",pg:"Chercher où C(x) = 0 ou R(x) = 0 au lieu de C(x) = R(x)."},
+  {sig:"Trouver à partir de quand on est bénéficiaire",
+   met:"Résoudre l'inéquation R(x) ⩾ C(x) : chercher où la ligne/courbe de R est au-dessus de celle de C.",ex:"à partir de x = 6, R(x) &gt; C(x)",pg:"S'arrêter au seuil d'égalité sans vérifier de quel côté l'inéquation est vraie."}
+ ],
+ "poly2-mcv":[
+  {sig:"Un polynôme de degré 2 est donné sous forme factorisée a(x − x₁)(x − x₂)",
+   met:"Les racines se lisent directement : x₁ et x₂. Le signe s'étudie facteur par facteur (règle des signes d'un produit).",ex:"−2(p−3)(p−9) → racines 3 et 9",pg:"Chercher les racines par une autre méthode alors qu'elles sont déjà lisibles dans la forme factorisée."},
+  {sig:"Trouver le sommet (maximum ou minimum) d'une parabole à partir de ses racines",
+   met:"Le sommet est toujours au milieu des deux racines : (x₁ + x₂) ÷ 2. Le signe de a indique si c'est un maximum (a &lt; 0) ou un minimum (a &gt; 0).",ex:"racines 3 et 9 → sommet en (3+9)÷2 = 6",pg:"Oublier que a &lt; 0 donne un maximum et a &gt; 0 un minimum (facile à inverser)."}
+ ],
+ "derivee-mcv":[
+  {sig:"Étudier les variations d'une fonction polynôme de degré ⩽ 2",
+   met:"Calculer f'(x) = 2ax + b, étudier son signe, puis en déduire le sens de variation de f (f' &gt; 0 → f croissante).",ex:"B(p) = −2p²+24p−54 → B'(p) = −4p+24, nulle en p = 6",pg:"Étudier le signe de f au lieu du signe de f' pour parler des variations."},
+  {sig:"La fonction inverse dans un coût moyen unitaire (k/x + c)",
+   met:"1/x est décroissante sur ]0 ; +∞[ ; ajouter une constante ne change pas le sens de variation.",ex:"CM(x) = 15/x + 2 est décroissante : plus x augmente, plus CM(x) diminue",pg:"Croire qu'un coût moyen peut descendre en dessous du coût variable constant (ici 2 €) : il s'en approche sans l'atteindre."}
+ ],
+ "commerce-mcv":[
+  {sig:"Calculer un capital après une durée à intérêts simples",
+   met:"Intérêt = capital initial × taux × durée (en fraction d'année si besoin). Capital disponible = capital initial + intérêt.",ex:"300 € à 4 % annuel sur 6 mois → intérêt 6 €, capital 306 €",pg:"Calculer l'intérêt sur le capital déjà augmenté des intérêts précédents (c'est l'intérêt composé, pas simple)."},
+  {sig:"Calculer un coût marginal",
+   met:"Cm(x) = C(x+1) − C(x) ; pour de grandes quantités, on peut l'approcher par C'(x).",ex:"C(x) = 15+2x → Cm(x) = 2, constant, égal à C'(x)",pg:"Confondre coût marginal (coût d'une unité de plus) et coût moyen (coût total ÷ quantité)."}
+ ],
+ "geo-mcv":[
+  {sig:"Section d'un pavé droit par un plan parallèle à une face",
+   met:"La section garde exactement les mêmes dimensions que la face à laquelle elle est parallèle.",ex:"carton 60×40×50 cm coupé à mi-hauteur → section 60×40 cm, comme la base",pg:"Croire que la section change de taille selon la hauteur de coupe dans un pavé droit — c'est vrai pour une pyramide, pas pour un pavé droit."},
+  {sig:"Section d'une pyramide par un plan parallèle à sa base",
+   met:"La section est un polygone semblable à la base mais plus petit ; sa taille diminue en se rapprochant du sommet.",ex:"base 1,20 m coupée à mi-hauteur → section 0,60 m de côté",pg:"Appliquer la règle du pavé droit (section identique à la base) à une pyramide."}
  ]
 };

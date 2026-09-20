@@ -35,6 +35,13 @@ import poly3Ms from './poly3-ms.js';
 import expologMs from './expolog-ms.js';
 import commerceMs from './commerce-ms.js';
 import stat2varMcv from './stat2var-mcv.js';
+import probaMcv from './proba-mcv.js';
+import suitesMcv from './suites-mcv.js';
+import eqineqMcv from './eqineq-mcv.js';
+import poly2Mcv from './poly2-mcv.js';
+import deriveeMcv from './derivee-mcv.js';
+import commerceMcv from './commerce-mcv.js';
+import geoMcv from './geo-mcv.js';
 
 export const COURSES = [
   securiteElectrique,
@@ -73,7 +80,14 @@ export const COURSES = [
   poly3Ms,
   expologMs,
   commerceMs,
-  stat2varMcv
+  stat2varMcv,
+  probaMcv,
+  suitesMcv,
+  eqineqMcv,
+  poly2Mcv,
+  deriveeMcv,
+  commerceMcv,
+  geoMcv
 ];
 
 export function courseById(id) {
