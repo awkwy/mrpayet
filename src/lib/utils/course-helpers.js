@@ -7,11 +7,12 @@ export const CLASSES = [
   { n: '2P MV2', d: '2de bac pro Maintenance des véhicules', m: 'Maths · Physique-chimie' },
   { n: 'TC AEPE', d: 'Terminale CAP Accompagnant éducatif petite enfance', m: 'Maths · Sciences · AP' },
   { n: 'TC APMP', d: 'Terminale CAP Agent de prévention et de médiation', m: 'Maths · Sciences' },
-  { n: 'bac pro MS', d: 'Terminale bac pro Métiers de la sécurité', m: 'Maths' }
+  { n: 'bac pro MS', d: 'Terminale bac pro Métiers de la sécurité', m: 'Maths' },
+  { n: 'bac pro MCV', d: 'Première bac pro Métiers du commerce et de la vente', m: 'Maths' }
 ];
 
-const SLUGS = { '2P MV2': '2pmv2', 'TC AEPE': 'tcaepe', 'TC APMP': 'tcapmp', 'bac pro MS': 'bacproms' };
-const UNSLUGS = { '2pmv2': '2P MV2', tcaepe: 'TC AEPE', tcapmp: 'TC APMP', bacproms: 'bac pro MS' };
+const SLUGS = { '2P MV2': '2pmv2', 'TC AEPE': 'tcaepe', 'TC APMP': 'tcapmp', 'bac pro MS': 'bacproms', 'bac pro MCV': 'bacpromcv' };
+const UNSLUGS = { '2pmv2': '2P MV2', tcaepe: 'TC AEPE', tcapmp: 'TC APMP', bacproms: 'bac pro MS', bacpromcv: 'bac pro MCV' };
 
 export function bslug(classe) {
   return SLUGS[classe];
