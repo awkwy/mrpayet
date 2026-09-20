@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { affine, exponential, logarithmic } from './regression.js';
+import { affine, exponential, logarithmic, pearsonStats } from './regression.js';
 
 describe('affine', () => {
   it('retrouve exactement une droite sans bruit', () => {
@@ -60,5 +60,34 @@ describe('logarithmic', () => {
 
   it('renvoie null avec moins de 2 points', () => {
     expect(logarithmic([[1, 2]])).toBeNull();
+  });
+});
+
+describe('pearsonStats', () => {
+  it('retrouve les valeurs du tutoriel BP MCV (le pari d’Aïcha)', () => {
+    const pts = [[1, 0], [2, 3], [3, 4], [4, 7], [6, 8], [7, 9]];
+    const s = pearsonStats(pts);
+    expect(s.n).toBe(6);
+    expect(s.sx).toBeCloseTo(23, 6);
+    expect(s.sxy).toBeCloseTo(157, 6);
+    expect(s.xbar).toBeCloseTo(3.8333, 3);
+    expect(s.ybar).toBeCloseTo(5.1667, 3);
+    expect(s.r).toBeCloseTo(0.9606, 3);
+    expect(s.r2).toBeCloseTo(0.9227, 3);
+  });
+
+  it('renvoie r = 1 pour une droite exacte', () => {
+    const s = pearsonStats([[0, 1], [1, 3], [2, 5]]);
+    expect(s.r).toBeCloseTo(1, 6);
+    expect(s.r2).toBeCloseTo(1, 6);
+  });
+
+  it('renvoie null avec moins de 2 points', () => {
+    expect(pearsonStats([[1, 2]])).toBeNull();
+  });
+
+  it('renvoie r = null si une des deux séries est constante (corrélation indéfinie)', () => {
+    const s = pearsonStats([[1, 5], [2, 5], [3, 5]]);
+    expect(s.r).toBeNull();
   });
 });

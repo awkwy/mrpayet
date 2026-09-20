@@ -1,6 +1,7 @@
 <script>
   import DataScreen from './DataScreen.svelte';
   import GraphScreen from './GraphScreen.svelte';
+  import StatsScreen from './StatsScreen.svelte';
   import { buildEntryState, entryComplete } from './entry-state.js';
 
   let { calc, points } = $props();
@@ -24,10 +25,17 @@
     <button type="button" class:on={screen === 'graph'} onclick={() => (screen = 'graph')}>
       Graphique
     </button>
+    {#if calc.stats}
+      <button type="button" class:on={screen === 'stats'} onclick={() => (screen = 'stats')}>
+        Stats
+      </button>
+    {/if}
   </div>
   <div class="nw-screen">
     {#if screen === 'data'}
       <DataScreen {entryState} {typed} cols={calc.cols} {onedit} />
+    {:else if screen === 'stats'}
+      <StatsScreen points={complete ? points : undefined} reg={calc.reg} />
     {:else}
       <GraphScreen points={complete ? points : undefined} reg={calc.reg} />
     {/if}

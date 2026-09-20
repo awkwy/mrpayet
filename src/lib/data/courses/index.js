@@ -34,6 +34,7 @@ import suitesMs from './suites-ms.js';
 import poly3Ms from './poly3-ms.js';
 import expologMs from './expolog-ms.js';
 import commerceMs from './commerce-ms.js';
+import stat2varMcv from './stat2var-mcv.js';
 
 export const COURSES = [
   securiteElectrique,
@@ -71,7 +72,8 @@ export const COURSES = [
   suitesMs,
   poly3Ms,
   expologMs,
-  commerceMs
+  commerceMs,
+  stat2varMcv
 ];
 
 export function courseById(id) {

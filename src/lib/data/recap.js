@@ -390,5 +390,13 @@ export const RECAP = {
    met:"(1 + tₘ)¹² = 1 + t, donc tₘ = (1 + t)^(1/12) − 1 — différent de t ÷ 12.",ex:"taux annuel 4 % → taux mensuel équivalent ≈ 0,33 %",pg:"Diviser simplement le taux annuel par 12."},
   {sig:"Calculer le taux moyen de plusieurs évolutions successives",
    met:"Coefficient global = produit des coefficients de chaque période ; taux moyen tel que (1 + tₘₒy)ⁿ = coefficient global.",ex:"+5 % puis −3 % puis +2 % → coefficient 1,0389 → taux moyen ≈ +1,28 % par an",pg:"Faire la moyenne arithmétique des pourcentages (ici +1,33 %, ce qui est faux)."}
+ ],
+ "stat2var-mcv":[
+  {sig:"Le nuage de points monte ou descend à peu près régulièrement",
+   met:"Ajustement affine y = ax + b, donné par la calculatrice (onglet Stats) — on ne le recalcule pas à la main.",ex:"y = 1,42x − 0,29 → à la semaine 10 : 1,42 × 10 − 0,29 ≈ 13,9",pg:"Refaire un calcul de régression à la main : on utilise l'outil numérique."},
+  {sig:"Évaluer si un ajustement affine est pertinent",
+   met:"Regarder |r| (ou r²) donné par la calculatrice : |r| ⩾ 0,95 excellent, 0,85 ⩽ |r| < 0,95 acceptable, |r| < 0,85 à éviter.",ex:"r ≈ 0,96 → ajustement excellent",pg:"Croire qu'un r² proche de 1 prouve un lien de cause à effet (corrélation ≠ causalité)."},
+  {sig:"Extrapoler très loin de la zone observée",
+   met:"Résoudre l'équation normalement, mais rappeler que la fiabilité diminue d'autant plus que l'extrapolation est lointaine.",ex:"données de la semaine 1 à 7, prédiction à la semaine 29 : extrapolation lointaine, à prendre avec prudence",pg:"Faire autant confiance à une extrapolation lointaine qu'à une interpolation, même avec un bon r²."}
  ]
 };
