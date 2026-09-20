@@ -9,8 +9,7 @@ export function entries() {
     { classe: 'tcaepe' },
     { classe: 'tcapmp' },
     { classe: 'bacproms' },
-    { classe: 'bacpromcv' },
-    { classe: 'bacpromcvtle' }
+    { classe: 'bacpromcv' }
   ];
 }
 

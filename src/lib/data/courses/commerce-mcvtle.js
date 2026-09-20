@@ -1,4 +1,4 @@
-export default {id:"commerce-mcvtle",classe:"bac pro MCV Tle",mat:"Maths",titre:"Calculs commerciaux et financiers",
+export default {id:"commerce-mcvtle",classe:"bac pro MCV",mat:"Maths",titre:"Calculs commerciaux et financiers (Tle)",
  desc:"Un fonds de renouvellement de la boutique qui rapporte des intérêts, une camionnette de livraison achetée à crédit — intérêts composés, emprunt, taux.",
  obj:["Calculer le montant du capital obtenu après n périodes de placement à intérêts composés",
       "Compléter un tableau d'amortissement (annuités constantes ou amortissement constant)",

@@ -1,4 +1,4 @@
-export default {id:"stat2var-mcv",classe:"bac pro MCV",mat:"Maths",titre:"Statistique à deux variables quantitatives",
+export default {id:"stat2var-mcv",classe:"bac pro MCV",mat:"Maths",titre:"Statistique à deux variables quantitatives (1re)",
  desc:"Le pari d'Aïcha : vendra-t-elle 40 maillots par semaine ? Nuage de points, ajustement affine, coefficient de détermination — et la décision qui en découle.",
  obj:["Représenter un nuage de points et réaliser un ajustement affine à l'aide d'outils numériques",
       "Déterminer l'équation réduite d'une droite d'ajustement pour interpoler ou extrapoler une valeur",

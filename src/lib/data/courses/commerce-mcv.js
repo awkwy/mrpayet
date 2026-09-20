@@ -1,4 +1,4 @@
-export default {id:"commerce-mcv",classe:"bac pro MCV",mat:"Maths",titre:"Calculs commerciaux et financiers",
+export default {id:"commerce-mcv",classe:"bac pro MCV",mat:"Maths",titre:"Calculs commerciaux et financiers (1re)",
  desc:"Aïcha emprunte pour agrandir son stock, puis calcule le vrai coût d'un maillot supplémentaire : intérêts simples et coût marginal.",
  obj:["Calculer le montant d'un capital disponible après n périodes de placement à intérêts simples",
       "Calculer un coût total de production, un résultat, un coût marginal",

@@ -1,4 +1,4 @@
-export default {id:"proba-mcv",classe:"bac pro MCV",mat:"Maths",titre:"Probabilités",
+export default {id:"proba-mcv",classe:"bac pro MCV",mat:"Maths",titre:"Probabilités (1re)",
  desc:"Un carton de maillots venu de métropole : combien sont abîmés ? Réunion, intersection, probabilités conditionnelles à partir d'un tableau croisé.",
  obj:["Calculer la probabilité d'un événement, d'un événement contraire, de la réunion ou de l'intersection de deux événements",
       "Compléter et exploiter un tableau croisé d'effectifs ou de fréquences",
