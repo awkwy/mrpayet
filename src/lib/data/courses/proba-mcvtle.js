@@ -1,4 +1,4 @@
-export default {id:"proba-mcvtle",classe:"bac pro MCV Tle",mat:"Maths",titre:"Probabilités",
+export default {id:"proba-mcvtle",classe:"bac pro MCV",mat:"Maths",titre:"Probabilités (Tle)",
  desc:"Le double contrôle à la caisse, le portique antivol qui sonne parfois pour rien, deux avis clients indépendants — l'arbre pondéré pour calculer une probabilité.",
  obj:["Représenter une situation aléatoire par un arbre de probabilités pondéré",
       "Calculer une probabilité à l'aide de la formule des probabilités totales",

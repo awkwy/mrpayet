@@ -8,12 +8,11 @@ export const CLASSES = [
   { n: 'TC AEPE', d: 'Terminale CAP Accompagnant éducatif petite enfance', m: 'Maths · Sciences · AP' },
   { n: 'TC APMP', d: 'Terminale CAP Agent de prévention et de médiation', m: 'Maths · Sciences' },
   { n: 'bac pro MS', d: 'Terminale bac pro Métiers de la sécurité', m: 'Maths' },
-  { n: 'bac pro MCV', d: 'Première bac pro Métiers du commerce et de la vente', m: 'Maths' },
-  { n: 'bac pro MCV Tle', d: 'Terminale bac pro Métiers du commerce et de la vente', m: 'Maths' }
+  { n: 'bac pro MCV', d: 'Première et Terminale bac pro Métiers du commerce et de la vente (option A)', m: 'Maths' }
 ];
 
-const SLUGS = { '2P MV2': '2pmv2', 'TC AEPE': 'tcaepe', 'TC APMP': 'tcapmp', 'bac pro MS': 'bacproms', 'bac pro MCV': 'bacpromcv', 'bac pro MCV Tle': 'bacpromcvtle' };
-const UNSLUGS = { '2pmv2': '2P MV2', tcaepe: 'TC AEPE', tcapmp: 'TC APMP', bacproms: 'bac pro MS', bacpromcv: 'bac pro MCV', bacpromcvtle: 'bac pro MCV Tle' };
+const SLUGS = { '2P MV2': '2pmv2', 'TC AEPE': 'tcaepe', 'TC APMP': 'tcapmp', 'bac pro MS': 'bacproms', 'bac pro MCV': 'bacpromcv' };
+const UNSLUGS = { '2pmv2': '2P MV2', tcaepe: 'TC AEPE', tcapmp: 'TC APMP', bacproms: 'bac pro MS', bacpromcv: 'bac pro MCV' };
 
 export function bslug(classe) {
   return SLUGS[classe];

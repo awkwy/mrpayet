@@ -1,4 +1,4 @@
-export default {id:"expolog-mcvtle",classe:"bac pro MCV Tle",mat:"Maths",titre:"Fonctions exponentielles et logarithme décimal",
+export default {id:"expolog-mcvtle",classe:"bac pro MCV",mat:"Maths",titre:"Fonctions exponentielles et logarithme décimal",
  desc:"La portée d'un post sponsorisé qui s'affaiblit jour après jour — étudier et résoudre avec les fonctions exponentielles et le logarithme décimal.",
  obj:["Représenter et étudier les variations d'une fonction exponentielle de base q",
       "Représenter et étudier les variations de la fonction logarithme décimal",

@@ -1,4 +1,4 @@
-export default {id:"stat2var-mcvtle",classe:"bac pro MCV Tle",mat:"Maths",titre:"Statistiques à deux variables",
+export default {id:"stat2var-mcvtle",classe:"bac pro MCV",mat:"Maths",titre:"Statistiques à deux variables (Tle)",
  desc:"Prévoir les ventes du mois prochain, suivre l'essor des commandes en ligne — ajuster un nuage de points pour interpoler ou extrapoler.",
  obj:["Choisir un modèle d'ajustement adapté à un nuage de points (affine ou non)",
       "Utiliser un ajustement pour interpoler ou extrapoler une valeur"],

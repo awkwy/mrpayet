@@ -1,4 +1,4 @@
-export default {id:"suites-mcv",classe:"bac pro MCV",mat:"Maths",titre:"Suites numériques",
+export default {id:"suites-mcv",classe:"bac pro MCV",mat:"Maths",titre:"Suites numériques (1re)",
  desc:"Moinécha, une voisine de stand d'Aïcha au marché couvert, gagne régulièrement de nouveaux clients chaque semaine — une suite arithmétique.",
  obj:["Générer les termes d'une suite et étudier son sens de variation",
       "Calculer un terme de rang donné d'une suite arithmétique et reconnaître ses premiers termes",

@@ -1,4 +1,4 @@
-export default {id:"poly3-mcvtle",classe:"bac pro MCV Tle",mat:"Maths",titre:"Fonctions polynômes de degré 3",
+export default {id:"poly3-mcvtle",classe:"bac pro MCV",mat:"Maths",titre:"Fonctions polynômes de degré 3",
  desc:"Le volume d'un casier de rangement cubique, la fréquentation du magasin un jour de soldes — étudier la fonction cube et les polynômes de degré 3.",
  obj:["Étudier la fonction cube : dérivée, variations, représentation graphique",
       "Dresser le tableau de variations d'une fonction polynôme de degré ⩽ 3 à partir du signe de la dérivée",

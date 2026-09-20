@@ -1,4 +1,4 @@
-export default {id:"suites-mcvtle",classe:"bac pro MCV Tle",mat:"Maths",titre:"Suites numériques",
+export default {id:"suites-mcvtle",classe:"bac pro MCV",mat:"Maths",titre:"Suites numériques (Tle)",
  desc:"Les abonnés Instagram de la boutique qui grimpent, le budget publicité qui augmente, la batterie du terminal de paiement qui s'affaiblit — la suite géométrique.",
  obj:["Calculer un terme d'une suite géométrique, par récurrence ou par la formule explicite",
       "Déterminer le sens de variation d'une suite géométrique",
