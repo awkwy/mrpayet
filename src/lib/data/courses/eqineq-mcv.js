@@ -1,0 +1,26 @@
+export default {id:"eqineq-mcv",classe:"bac pro MCV",mat:"Maths",titre:"Résolution graphique d'équations et d'inéquations",
+ desc:"À partir de combien de maillots vendus Aïcha rentre-t-elle dans ses frais ? Lire un seuil de rentabilité sur deux courbes.",
+ obj:["Résoudre graphiquement une équation du type f(x) = g(x)",
+      "Résoudre graphiquement une inéquation du type f(x) ⩾ g(x)"],
+ seances:[
+ {t:"Le seuil de rentabilité d'Aïcha",
+  prob:"À partir de combien de maillots vendus les recettes dépassent-elles les coûts ?",
+  steps:[
+   {t:"La situation",txt:"Pour son dossier auprès de la mairie, Aïcha doit prouver que son stand est rentable. Chaque samedi, elle paie un droit de place fixe de 15 € au marché couvert de Mamoudzou, plus 2 € de frais (sac, étiquette) par maillot vendu. Elle revend chaque maillot 5 €. Elle veut savoir, sur une matinée, à partir de combien de maillots vendus elle commence à gagner de l'argent."},
+   {t:"Étape 1 — Deux fonctions : coûts et recettes",
+    apport:"Le <b>coût total</b> pour x maillots vendus est C(x) = 15 + 2x (en euros). La <b>recette</b> pour x maillots vendus est R(x) = 5x (en euros). Les deux représentations graphiques de C et de R sont fournies : deux droites.",
+    doc:{h:["x (maillots)","0","2","4","5","6","8","10"],r:[["C(x) = 15 + 2x","15","19","23","25","27","31","35"],["R(x) = 5x","0","10","20","25","30","40","50"]]}},
+   {t:"Étape 2 — Résoudre graphiquement C(x) = R(x)",
+    apport:"Le <b>seuil de rentabilité</b> est la valeur de x pour laquelle les coûts sont exactement égaux aux recettes : C(x) = R(x). Sur le tableau, on repère la colonne où les deux lignes affichent la <b>même valeur</b>.",
+    q:[{q:"D'après le tableau, pour quelle valeur de x a-t-on C(x) = R(x) ?",a:5,tol:0,
+        sol:"À x = 5, C(5) = 25 et R(5) = 25 : les coûts et les recettes sont égaux. C'est le seuil de rentabilité."}]},
+   {t:"Étape 3 — Résoudre graphiquement l'inéquation R(x) ⩾ C(x)",
+    apport:"Aïcha veut savoir à partir de quand elle <b>gagne de l'argent</b>, c'est-à-dire quand R(x) ⩾ C(x). D'après le tableau, avant x = 5 la recette est inférieure au coût (perte), après x = 5 elle est supérieure (bénéfice).",
+    q:[{q:"Pour x = 4, la recette R(4) = 20 est-elle supérieure ou inférieure au coût C(4) = 23 ? (1 = supérieure, 2 = inférieure)",a:2,tol:0},
+       {q:"Pour x = 8, la recette R(8) = 40 est-elle supérieure ou inférieure au coût C(8) = 31 ? (1 = supérieure, 2 = inférieure)",a:1,tol:0},
+       {q:"À partir de combien de maillots vendus (nombre entier) Aïcha commence-t-elle à être bénéficiaire, R(x) &gt; C(x) ?",a:6,tol:0,
+        sol:"À x = 5 pile, elle ne gagne ni ne perd rien (seuil). À partir du 6ᵉ maillot vendu, la recette dépasse le coût : elle devient bénéficiaire."}]}],
+  quiz:[{q:"Le seuil de rentabilité correspond à la solution de l'équation :",o:["C(x) = R(x)","C(x) = 0","R(x) = 0"],c:0,e:"Le seuil est le point où coûts et recettes sont égaux."},
+        {q:"Résoudre graphiquement R(x) ⩾ C(x) revient à trouver :",o:["où la courbe de R est au-dessus (ou au niveau) de celle de C","où les deux courbes se croisent uniquement","où C(x) est négatif"],c:0,e:"Une inéquation f(x) ⩾ g(x) se lit comme « la courbe de f au-dessus de celle de g »."}],
+  trace:"Pour résoudre graphiquement une <b>équation f(x) = g(x)</b>, on cherche les points où les deux représentations graphiques (ou les deux colonnes d'un tableau de valeurs) coïncident.<br>Pour résoudre une <b>inéquation f(x) ⩾ g(x)</b>, on cherche les valeurs de x pour lesquelles la courbe (ou la valeur) de f est au-dessus de celle de g.<br>En économie, le point où <b>coût = recette</b> s'appelle le <b>seuil de rentabilité</b>."}]}
+;
