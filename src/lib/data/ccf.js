@@ -116,7 +116,7 @@ export const CCF = {
   format:{type:"bacpro",situations:[
    {mat:"Mathématiques — situation 1",duree:"45 min",note:"10 points",quand:"2ᵉ semestre de première (ou 1ᵉʳ semestre de terminale)"},
    {mat:"Mathématiques — situation 2",duree:"45 min",note:"10 points",quand:"2ᵉ semestre de terminale"}],
-   note:"Cette page ne couvre que le programme de terminale : la situation 1 (programme de première) n'a pas d'entraînement ici, ce site ne portant que sur l'année de terminale pour cette classe."},
+   note:"Comme pour bac pro MCV, cette classe suit une même cohorte sur ses deux années : la situation 1 (programme de première) a déjà eu lieu l'an dernier. Cette page couvre l'entraînement pour la situation 2, celle de terminale."},
   maths:{titre:"Entraînement — mathématiques",duree:"tous les modules du programme",note:"non noté",taches:[
    {titre:"Prévoir les rondes de nuit",
     ctx:"DOM Sécurité Mayotte (Kaweni) suit depuis 10 mois le nombre moyen de rondes de nuit effectuées, et la calculatrice donne l'ajustement affine y = 2,8x + 20, où x est le nombre de mois depuis le début du suivi.",
