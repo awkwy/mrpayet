@@ -33,6 +33,10 @@ export const CCF = {
  },
  "TC APMP":{
   intro:"Groupement 2 : le CCF de maths porte sur la statistique, la proportionnalité, le premier degré, les fonctions et les <b>calculs commerciaux et financiers</b> (pas de géométrie).",
+  format:{type:"cap",situations:[
+   {mat:"Mathématiques",duree:"45 min",note:"12 points"},
+   {mat:"Physique-chimie",duree:"45 min",note:"8 points"}],
+   quand:"Une seule fois, au cours de la dernière année de formation (fenêtre prévisionnelle : 4 au 30 avril 2027)."},
   maths:{titre:"Situation de mathématiques",duree:"45 min",note:"/ 12",taches:[
    {titre:"Le matériel de la salle de médiation",
     ctx:"Une association de médiation de quartier équipe une salle de réunion. Devis du fournisseur (montants HT) : 12 chaises à 24 €, 1 tableau à 85 €, livraison 30 €. TVA 20 %. Le fournisseur accorde une remise de 5 % sur le mobilier (chaises + tableau), pas sur la livraison. La dépense est partagée : mairie 60 %, association 40 %.",
@@ -69,6 +73,10 @@ export const CCF = {
  },
  "TC AEPE":{
   intro:"Groupement 1 : le CCF de maths porte sur la statistique, la proportionnalité, le premier degré, les fonctions et la <b>géométrie</b> (pas de calculs commerciaux).",
+  format:{type:"cap",situations:[
+   {mat:"Mathématiques",duree:"45 min",note:"12 points"},
+   {mat:"Physique-chimie",duree:"45 min",note:"8 points"}],
+   quand:"Une seule fois, au cours de la dernière année de formation (fenêtre prévisionnelle : 4 au 30 avril 2027)."},
   maths:{titre:"Situation de mathématiques",duree:"45 min",note:"/ 12",taches:[
    {titre:"La commande de couches de la crèche",
     ctx:"Une micro-crèche accueille 12 enfants et ouvre 4 jours par semaine. Chaque enfant utilise en moyenne 6 couches par jour. Un carton contient 132 couches et coûte 28,50 €. Le fournisseur accorde une remise de 10 % à partir de 10 cartons commandés.",
@@ -104,7 +112,11 @@ export const CCF = {
  },
  "bac pro MS":{
   label:"entraînement — épreuve de mathématiques",
-  intro:"Le bac pro Métiers de la sécurité n'a pas de CCF en mathématiques (spécifique aux CAP) : l'évaluation est une <b>épreuve écrite ponctuelle</b> en fin de terminale. Cette page réunit des tâches d'entraînement qui couvrent les six modules du programme (groupement C), classées par les mêmes cinq compétences que pour l'épreuve.",
+  intro:"Le bac pro Métiers de la sécurité est évalué en mathématiques par un <b>contrôle en cours de formation (CCF)</b> : deux situations de 45 minutes, 10 points chacune, réparties sur la première et la terminale — pas une épreuve unique de fin d'année. Cette page réunit des tâches d'entraînement qui couvrent les six modules du programme (groupement C), classées par les mêmes cinq compétences que le jour de l'épreuve.",
+  format:{type:"bacpro",situations:[
+   {mat:"Mathématiques — situation 1",duree:"45 min",note:"10 points",quand:"2ᵉ semestre de première (ou 1ᵉʳ semestre de terminale)"},
+   {mat:"Mathématiques — situation 2",duree:"45 min",note:"10 points",quand:"2ᵉ semestre de terminale"}],
+   note:"Cette page ne couvre que le programme de terminale : la situation 1 (programme de première) n'a pas d'entraînement ici, ce site ne portant que sur l'année de terminale pour cette classe."},
   maths:{titre:"Entraînement — mathématiques",duree:"tous les modules du programme",note:"non noté",taches:[
    {titre:"Prévoir les rondes de nuit",
     ctx:"DOM Sécurité Mayotte (Kaweni) suit depuis 10 mois le nombre moyen de rondes de nuit effectuées, et la calculatrice donne l'ajustement affine y = 2,8x + 20, où x est le nombre de mois depuis le début du suivi.",
@@ -154,6 +166,29 @@ export const CCF = {
     ],
     comm:"Rédige la phrase de synthèse pour le dossier d'achat transmis à la direction.",
     commA:"« Le matériel revient à 5 280 € TTC après remise ; en parallèle, la caution de 1 000 € rapportera environ 61,21 € d'intérêts sur les 3 ans du contrat. »"}
+  ]}
+ },
+ "bac pro MCV":{
+  label:"entraînement — épreuve de mathématiques",
+  intro:"Le bac pro Métiers du commerce et de la vente est évalué en mathématiques par un <b>contrôle en cours de formation (CCF)</b> : deux situations de 45 minutes, 10 points chacune, une en première et une en terminale. Cette page réunit des tâches d'entraînement qui couvrent les modules du programme (groupement C), classées par les mêmes cinq compétences que le jour de l'épreuve.",
+  format:{type:"bacpro",situations:[
+   {mat:"Mathématiques — situation 1",duree:"45 min",note:"10 points",quand:"2ᵉ semestre de première (ou 1ᵉʳ semestre de terminale)"},
+   {mat:"Mathématiques — situation 2",duree:"45 min",note:"10 points",quand:"2ᵉ semestre de terminale"}]},
+  maths:{titre:"Entraînement — mathématiques",duree:"tous les modules du programme",note:"non noté",taches:[
+   {titre:"Solder la fin de collection avant la CAN",
+    ctx:"Aïcha doit vider son stock de maillots de la saison précédente avant l'arrivée des nouveaux modèles pour la CAN. Un maillot affiché à 25 € HT (TVA 20 %) passe en solde avec une remise de 30 %. La première semaine des soldes, elle en vend 45 ; elle espère une progression de 20 % des ventes chaque semaine suivante.",
+    qs:[
+     {comp:"S'approprier",q:"Prix affiché HT d'un maillot avant remise (en €) ?",a:25,tol:0},
+     {comp:"Analyser/Raisonner",q:"Une remise de 30 % correspond à quel coefficient multiplicateur ?",a:0.7,tol:0.001},
+     {comp:"Réaliser",q:"Prix remisé HT : 25 × 0,7 = ? (en €)",a:17.5,tol:0.02},
+     {comp:"Réaliser",q:"Prix remisé TTC : 17,5 × 1,20 = ? (en €)",a:21,tol:0.05},
+     {comp:"Analyser/Raisonner",q:"Une progression de 20 % par semaine correspond à quel coefficient multiplicateur ?",a:1.2,tol:0.001},
+     {comp:"Réaliser",q:"Ventes prévues la 2ᵉ semaine : 45 × 1,2, arrondi à l'unité",a:54,tol:0},
+     {comp:"Réaliser",q:"Ventes prévues la 3ᵉ semaine : 54 × 1,2, arrondi à l'unité",a:65,tol:1,sol:"54 × 1,2 = 64,8, arrondi à 65."},
+     {comp:"Valider",q:"Le maillot lui coûte 15 € à l'achat. Le prix remisé HT (17,5 €) reste-t-il supérieur au coût d'achat ? (oui / non)",a:"oui",txt:true,sol:"Oui : 17,5 € > 15 €. La marge reste positive après remise, mais elle est nettement réduite."}
+    ],
+    comm:"Rédige la phrase que tu utiliserais pour annoncer cette offre de fin de collection à tes clients du marché.",
+    commA:"« Maillots de la collection précédente à −30 %, soit 21 € au lieu de 30 € TTC, jusqu'à épuisement du stock avant l'arrivée des nouveaux modèles CAN ! »"}
   ]}
  }
 };

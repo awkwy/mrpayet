@@ -11,6 +11,7 @@
         p.startsWith(`${base}/cours`) || p.startsWith(`${base}/p/`) || p.startsWith(`${base}/bloc/`) || p.startsWith(`${base}/c/`)
     },
     { href: `${base}/revisions`, label: 'Révisions', match: (p) => p.startsWith(`${base}/revisions`) || p.startsWith(`${base}/r`) },
+    { href: `${base}/ccf`, label: 'CCF', match: (p) => p.startsWith(`${base}/ccf`) },
     { href: `${base}/flash`, label: 'Flash', match: (p) => p.startsWith(`${base}/flash`) }
   ];
 </script>
