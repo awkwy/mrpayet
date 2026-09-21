@@ -55,7 +55,7 @@ export const CCF = {
     comm:"Rédige la phrase que l'association enverra à la mairie pour lui indiquer sa participation.",
     commA:"« Le coût total du matériel s'élève à 461,22 € TTC. Conformément à la répartition 60 / 40, la participation de la mairie est de 276,73 € et celle de l'association de 184,49 €. »"}
   ]},
-  sciences:{titre:"Situation de physique-chimie",duree:"45 min",note:"/ 8",taches:[
+  sciences:{titre:"Situation de physique-chimie",duree:"45 min",note:"/ 8",tuto:{href:"/tutoriels/multimetre",label:"Tutoriel — utiliser un multimètre"},taches:[
    {titre:"Un conflit de voisinage pour bruit",
     ctx:"Un voisin se plaint de la musique d'un autre. Le soir, tu mesures au sonomètre : 88 dB à 1 m de l'enceinte. Le bruit de fond du quartier le soir est de 40 dB. La réglementation tolère une émergence (différence avec le bruit de fond) de 5 dB. Échelle fournie : seuil de danger pour l'oreille 85 dB, seuil de douleur 120 dB. Un mur mitoyen atténue le son de 30 dB.",
     qs:[
@@ -69,15 +69,14 @@ export const CCF = {
     ],
     comm:"En tant qu'agent de prévention et de médiation, que dis-tu aux deux parties, chiffres à l'appui ?",
     commA:"« Le niveau mesuré, 88 dB, dépasse le seuil de danger (85 dB) et l'émergence autorisée (48 dB contre 5 dB tolérés). Même atténué par le mur, le son reste à 58 dB chez le voisin. Il faut baisser le volume ou déplacer l'enceinte. »"},
-   {titre:"Le lampadaire qui grille trop vite",viz:"multimetre",vd:{r:10,umax:12},
-    ctx:"Un habitant signale un lampadaire qui grille ses ampoules trop souvent. Tu vérifies l'installation avec un multimètre sur une résistance test de 10 Ω, alimentée par une tension réglable (le principe de mesure est le même qu'avec la tension réelle du secteur).",
+   {titre:"Le lampadaire qui grille trop vite",
+    ctx:"Un habitant signale un lampadaire qui grille ses ampoules trop souvent. Tu vérifies l'installation avec un multimètre sur une résistance test de 10 Ω, alimentée par une tension de 9 V (le principe de mesure est le même qu'avec la tension réelle du secteur).",
     qs:[
-     {comp:"S'approprier",q:"Quelle position du multimètre permet de lire directement la tension ? (V, A ou W)",a:"V",txt:true},
-     {comp:"Réaliser",q:"Règle la tension à 9 V (position V) sur le multimètre. Quelle valeur lis-tu ?",a:9,tol:0.1},
-     {comp:"Analyser/Raisonner",q:"Passe en position A : quelle formule calcule l'intensité I à partir de U et R ?",a:["I = U / R","U/R","I=U/R","I = U ÷ R"],txt:true,sol:"I = U ÷ R (loi d'Ohm)."},
-     {comp:"Réaliser",q:"À 9 V, quelle intensité I lis-tu sur le multimètre (en A) ?",a:0.9,tol:0.05},
-     {comp:"Réaliser",q:"Passe en position W : quelle puissance P lis-tu à 9 V (en W) ?",a:8.1,tol:0.2},
-     {comp:"Valider",q:"Vérifie par le calcul : P = U × I = 9 × 0,9 = ?",a:8.1,tol:0.2,sol:"On retrouve bien la même valeur que sur l'écran du multimètre."}
+     {comp:"S'approprier",q:"Pour mesurer une tension, la borne rouge du multimètre doit être sur quelle position ? (VΩ ou mA)",a:"VΩ",txt:true},
+     {comp:"Analyser/Raisonner",q:"Quelle formule calcule l'intensité I à partir de U et R ?",a:["I = U / R","U/R","I=U/R","I = U ÷ R"],txt:true,sol:"I = U ÷ R (loi d'Ohm)."},
+     {comp:"Réaliser",q:"À 9 V sur une résistance de 10 Ω, quelle intensité I circule (en A) ? I = 9 ÷ 10",a:0.9,tol:0.05},
+     {comp:"Réaliser",q:"Quelle puissance P est dissipée ? P = U × I = 9 × 0,9",a:8.1,tol:0.2},
+     {comp:"Valider",q:"Pour mesurer cette intensité, faut-il brancher l'ampèremètre en série (dans une coupure du circuit) ou en parallèle (comme le voltmètre) ? (série ou parallèle)",a:"série",txt:true,sol:"En série : l'ampèremètre mesure ce qui traverse le circuit, il doit donc en faire partie."}
     ],
     comm:"Rédige la phrase de ton rapport d'intervention pour expliquer simplement ce qu'indique une puissance plus élevée.",
     commA:"« Plus la puissance dissipée est élevée, plus l'installation chauffe et s'use vite : c'est cohérent avec des ampoules qui grillent trop souvent. »"}
@@ -106,7 +105,7 @@ export const CCF = {
     comm:"Tu conseilles la directrice sur la commande à passer. Que lui dis-tu ?",
     commA:"« Il faut 9 cartons pour le mois, mais 10 cartons avec la remise coûtent le même prix (256,50 €). Autant commander 10 cartons : on paie pareil et on a une avance pour le mois suivant. »"}
   ]},
-  sciences:{titre:"Situation de physique-chimie",duree:"45 min",note:"/ 8",taches:[
+  sciences:{titre:"Situation de physique-chimie",duree:"45 min",note:"/ 8",tuto:{href:"/tutoriels/multimetre",label:"Tutoriel — utiliser un multimètre"},taches:[
    {titre:"Préparer une solution désinfectante",
     ctx:"Le protocole d'hygiène de la crèche demande une solution de chlore de concentration massique 2 g/L. Tu dois en préparer 3 L. Tu disposes de pastilles de chlore de 1,5 g. Le bidon de pastilles porte le pictogramme « corrosif ». Après préparation, tu mesures le pH de la solution : 9.",
     qs:[
@@ -120,15 +119,14 @@ export const CCF = {
     ],
     comm:"Une collègue va reprendre la préparation. Que lui écris-tu sur la fiche de poste ?",
     commA:"« Dissoudre 4 pastilles (6 g) dans 3 L d'eau pour obtenir 2 g/L. Port de gants et lunettes obligatoire (produit corrosif). Solution basique (pH 9) : ne pas mélanger avec un autre produit. »"},
-   {titre:"Le chauffe-biberon de la crèche",viz:"multimetre",vd:{r:10,umax:12},
-    ctx:"Le chauffe-biberon de la crèche utilise une résistance chauffante de 10 Ω, alimentée par une tension réglable. Avant de le remettre en service, tu le vérifies avec un multimètre.",
+   {titre:"Le chauffe-biberon de la crèche",
+    ctx:"Le chauffe-biberon de la crèche utilise une résistance chauffante de 10 Ω, alimentée par une tension de 6 V. Avant de le remettre en service, tu le vérifies avec un multimètre.",
     qs:[
-     {comp:"S'approprier",q:"Quelle position du multimètre permet de lire directement la tension ? (V, A ou W)",a:"V",txt:true},
-     {comp:"Réaliser",q:"Règle la tension à 6 V (position V) sur le multimètre. Quelle valeur lis-tu ?",a:6,tol:0.1},
-     {comp:"Analyser/Raisonner",q:"Passe en position A : quelle formule calcule l'intensité I à partir de U et R ?",a:["I = U / R","U/R","I=U/R","I = U ÷ R"],txt:true,sol:"I = U ÷ R (loi d'Ohm)."},
-     {comp:"Réaliser",q:"À 6 V, quelle intensité I lis-tu sur le multimètre (en A) ?",a:0.6,tol:0.05},
-     {comp:"Réaliser",q:"Passe en position W : quelle puissance P lis-tu à 6 V (en W) ?",a:3.6,tol:0.1},
-     {comp:"Valider",q:"Vérifie par le calcul : P = U × I = 6 × 0,6 = ?",a:3.6,tol:0.1,sol:"On retrouve bien la même valeur que sur l'écran du multimètre."}
+     {comp:"S'approprier",q:"Pour mesurer une tension, la borne rouge du multimètre doit être sur quelle position ? (VΩ ou mA)",a:"VΩ",txt:true},
+     {comp:"Analyser/Raisonner",q:"Quelle formule calcule l'intensité I à partir de U et R ?",a:["I = U / R","U/R","I=U/R","I = U ÷ R"],txt:true,sol:"I = U ÷ R (loi d'Ohm)."},
+     {comp:"Réaliser",q:"À 6 V sur une résistance de 10 Ω, quelle intensité I circule (en A) ? I = 6 ÷ 10",a:0.6,tol:0.05},
+     {comp:"Réaliser",q:"Quelle puissance P est dissipée ? P = U × I = 6 × 0,6",a:3.6,tol:0.1},
+     {comp:"Valider",q:"Pour mesurer cette intensité, faut-il brancher l'ampèremètre en série (dans une coupure du circuit) ou en parallèle (comme le voltmètre) ? (série ou parallèle)",a:"série",txt:true,sol:"En série : l'ampèremètre mesure ce qui traverse le circuit, il doit donc en faire partie."}
     ],
     comm:"Une collègue te demande pourquoi la puissance augmente autant quand tu montes la tension jusqu'à 12 V. Explique-lui en une phrase.",
     commA:"« La puissance suit le carré de la tension (P = U² ÷ R) : doubler la tension multiplie la puissance par quatre, elle ne fait pas que doubler. »"}
