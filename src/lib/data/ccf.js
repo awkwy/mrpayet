@@ -68,7 +68,19 @@ export const CCF = {
      {comp:"Réaliser",q:"Niveau perçu chez le plaignant, derrière le mur : 88 − 30 = ? (en dB)",a:58,tol:0}
     ],
     comm:"En tant qu'agent de prévention et de médiation, que dis-tu aux deux parties, chiffres à l'appui ?",
-    commA:"« Le niveau mesuré, 88 dB, dépasse le seuil de danger (85 dB) et l'émergence autorisée (48 dB contre 5 dB tolérés). Même atténué par le mur, le son reste à 58 dB chez le voisin. Il faut baisser le volume ou déplacer l'enceinte. »"}
+    commA:"« Le niveau mesuré, 88 dB, dépasse le seuil de danger (85 dB) et l'émergence autorisée (48 dB contre 5 dB tolérés). Même atténué par le mur, le son reste à 58 dB chez le voisin. Il faut baisser le volume ou déplacer l'enceinte. »"},
+   {titre:"Le lampadaire qui grille trop vite",viz:"multimetre",vd:{r:10,umax:12},
+    ctx:"Un habitant signale un lampadaire qui grille ses ampoules trop souvent. Tu vérifies l'installation avec un multimètre sur une résistance test de 10 Ω, alimentée par une tension réglable (le principe de mesure est le même qu'avec la tension réelle du secteur).",
+    qs:[
+     {comp:"S'approprier",q:"Quelle position du multimètre permet de lire directement la tension ? (V, A ou W)",a:"V",txt:true},
+     {comp:"Réaliser",q:"Règle la tension à 9 V (position V) sur le multimètre. Quelle valeur lis-tu ?",a:9,tol:0.1},
+     {comp:"Analyser/Raisonner",q:"Passe en position A : quelle formule calcule l'intensité I à partir de U et R ?",a:["I = U / R","U/R","I=U/R","I = U ÷ R"],txt:true,sol:"I = U ÷ R (loi d'Ohm)."},
+     {comp:"Réaliser",q:"À 9 V, quelle intensité I lis-tu sur le multimètre (en A) ?",a:0.9,tol:0.05},
+     {comp:"Réaliser",q:"Passe en position W : quelle puissance P lis-tu à 9 V (en W) ?",a:8.1,tol:0.2},
+     {comp:"Valider",q:"Vérifie par le calcul : P = U × I = 9 × 0,9 = ?",a:8.1,tol:0.2,sol:"On retrouve bien la même valeur que sur l'écran du multimètre."}
+    ],
+    comm:"Rédige la phrase de ton rapport d'intervention pour expliquer simplement ce qu'indique une puissance plus élevée.",
+    commA:"« Plus la puissance dissipée est élevée, plus l'installation chauffe et s'use vite : c'est cohérent avec des ampoules qui grillent trop souvent. »"}
   ]}
  },
  "TC AEPE":{
@@ -107,7 +119,19 @@ export const CCF = {
      {comp:"Réaliser",q:"Pictogramme « corrosif » : quel équipement de protection mets-tu ? (un mot suffit)",a:["gants","lunettes","gants et lunettes","des gants","gants lunettes","blouse"],txt:true,sol:"Gants et lunettes de protection au minimum."}
     ],
     comm:"Une collègue va reprendre la préparation. Que lui écris-tu sur la fiche de poste ?",
-    commA:"« Dissoudre 4 pastilles (6 g) dans 3 L d'eau pour obtenir 2 g/L. Port de gants et lunettes obligatoire (produit corrosif). Solution basique (pH 9) : ne pas mélanger avec un autre produit. »"}
+    commA:"« Dissoudre 4 pastilles (6 g) dans 3 L d'eau pour obtenir 2 g/L. Port de gants et lunettes obligatoire (produit corrosif). Solution basique (pH 9) : ne pas mélanger avec un autre produit. »"},
+   {titre:"Le chauffe-biberon de la crèche",viz:"multimetre",vd:{r:10,umax:12},
+    ctx:"Le chauffe-biberon de la crèche utilise une résistance chauffante de 10 Ω, alimentée par une tension réglable. Avant de le remettre en service, tu le vérifies avec un multimètre.",
+    qs:[
+     {comp:"S'approprier",q:"Quelle position du multimètre permet de lire directement la tension ? (V, A ou W)",a:"V",txt:true},
+     {comp:"Réaliser",q:"Règle la tension à 6 V (position V) sur le multimètre. Quelle valeur lis-tu ?",a:6,tol:0.1},
+     {comp:"Analyser/Raisonner",q:"Passe en position A : quelle formule calcule l'intensité I à partir de U et R ?",a:["I = U / R","U/R","I=U/R","I = U ÷ R"],txt:true,sol:"I = U ÷ R (loi d'Ohm)."},
+     {comp:"Réaliser",q:"À 6 V, quelle intensité I lis-tu sur le multimètre (en A) ?",a:0.6,tol:0.05},
+     {comp:"Réaliser",q:"Passe en position W : quelle puissance P lis-tu à 6 V (en W) ?",a:3.6,tol:0.1},
+     {comp:"Valider",q:"Vérifie par le calcul : P = U × I = 6 × 0,6 = ?",a:3.6,tol:0.1,sol:"On retrouve bien la même valeur que sur l'écran du multimètre."}
+    ],
+    comm:"Une collègue te demande pourquoi la puissance augmente autant quand tu montes la tension jusqu'à 12 V. Explique-lui en une phrase.",
+    commA:"« La puissance suit le carré de la tension (P = U² ÷ R) : doubler la tension multiplie la puissance par quatre, elle ne fait pas que doubler. »"}
   ]}
  },
  "bac pro MS":{
