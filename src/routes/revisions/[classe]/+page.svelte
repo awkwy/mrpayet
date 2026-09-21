@@ -1,7 +1,7 @@
 <script>
+  import { base } from '$app/paths';
   import { CCF_M } from '$lib/data/ccf-methode.js';
   import QuizInput from '$lib/components/QuizInput.svelte';
-  import { VIZ } from '$lib/visualizations/registry.js';
 
   let { data } = $props();
   let revealed = $state({});
@@ -37,15 +37,13 @@
 
   {#each sections as sect}
     <h2 class="h2">{sect.titre}{sect.duree ? ` · ${sect.duree}` : ''}{sect.note ? ` · ${sect.note}` : ''}</h2>
+    {#if sect.tuto}
+      <a class="tuto" href="{base}{sect.tuto.href}">{sect.tuto.label} →</a>
+    {/if}
     {#each sect.taches as tache, ti}
       <div class="tache">
         <h3 class="tt">{tache.titre}</h3>
         <p class="ctx">{tache.ctx}</p>
-        {#if tache.viz && VIZ[tache.viz]}
-          <div class="viz-host">
-            <svelte:component this={VIZ[tache.viz]} vd={tache.vd} />
-          </div>
-        {/if}
         <div class="qs">
           {#each tache.qs as q}
             <div class="qwrap">
@@ -128,8 +126,18 @@
     border-radius: var(--r);
     background: var(--surf);
   }
-  .viz-host {
-    margin-top: 14px;
+  .tuto {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 16px;
+    border: 1px solid var(--g3);
+    border-radius: var(--r);
+    color: var(--g);
+    font-family: var(--sm);
+    font-size: 13px;
+  }
+  .tuto:hover {
+    border-color: var(--g);
   }
   .tt {
     font-size: 16px;
