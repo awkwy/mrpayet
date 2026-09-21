@@ -16,12 +16,24 @@
    * point de contact (glisser-déposer réel, d3-drag, PAS le clic-choix
    * précédent). La borne du multimètre (VΩ ou mA) suit automatiquement le
    * mode choisi — ce n'est plus une décision séparée à faire, seulement
-   * une information affichée. Avec seulement deux points de contact
-   * valides par mode, tout dépôt qui « prend » est donc forcément correct :
-   * plus d'état « presque correct », seulement incomplet → correct.
+   * une information affichée.
+   *
+   * Révision (captain, 2026-09-21, troisième retour) : la polarité compte
+   * réellement (question du capitaine) — en courant continu, la sonde
+   * rouge doit être du côté par où le courant conventionnel entre pour
+   * lire une valeur positive ; inversée, un multimètre réel affiche
+   * juste la même valeur en négatif, ce n'est pas une panne. Donc trois
+   * états désormais : incomplet (rouge) → posé mais sondes inversées
+   * (orange, lecture négative affichée + expliquée) → polarité correcte
+   * (vert, lecture positive). Les deux points restent les deux SEULS
+   * emplacements valides (aucun mauvais point à poser dessus) : seul
+   * l'ORDRE rouge/noire sur ces deux points est encore à trouver.
    * Circuit fixe : pile 9 V, résistor 100 Ω, lampe (résistance équivalente
    * 50 Ω) en série. I = 9 / 150 = 0,06 A ; U aux bornes de la lampe =
-   * 0,06 × 50 = 3 V. */
+   * 0,06 × 50 = 3 V. Le courant conventionnel circule de la pile vers la
+   * résistance puis la lampe (gauche → droite sur le schéma) : la sonde
+   * rouge se pose du côté amont (le plus proche de la pile/résistance),
+   * la noire du côté aval. */
 
   let host;
   let cleanup = () => {};
@@ -45,10 +57,11 @@
     ]
   };
   const PORT_LABEL = { V: 'VΩ', A: 'mA' };
-  const READING = { V: `${fr(ULAMP.toFixed(1))} V`, A: `${fr((I * 1000).toFixed(0))} mA` };
+  const MAGNITUDE = { V: `${fr(ULAMP.toFixed(1))} V`, A: `${fr((I * 1000).toFixed(0))} mA` };
+  const UPSTREAM = { V: 'lampL', A: 'gapL' }; // côté où la sonde rouge donne une lecture positive
   const HINT = {
-    V: 'Fais glisser chaque sonde jusqu\'aux deux bornes de la lampe : le voltmètre se branche <b>en parallèle</b>, sans rien débrancher.',
-    A: "Fais glisser chaque sonde jusqu'aux deux côtés de la coupure : l'ampèremètre se branche <b>en série</b>, dans le fil ouvert."
+    V: "Fais glisser chaque sonde jusqu'aux deux bornes de la lampe : le voltmètre se branche <b>en parallèle</b>, sans rien débrancher. La sonde rouge se pose du côté L1 (le plus proche de la pile), la noire du côté L2.",
+    A: "Fais glisser chaque sonde jusqu'aux deux côtés de la coupure : l'ampèremètre se branche <b>en série</b>, dans le fil ouvert. La sonde rouge se pose du côté C1 (le plus proche de la pile), la noire du côté C2."
   };
   const SNAP = 30; // rayon d'accrochage, en unités du viewBox
 
@@ -254,14 +267,20 @@
       drawProbes();
       drawCables();
 
-      const colorTok = complete ? 'g' : 'red';
-      drawMeter(mode === 'V' ? 'DC V' : 'DC mA', complete ? READING[mode] : '- - - -', colorTok);
+      const polarityOK = complete && placedAt.red === UPSTREAM[mode];
+      const reading = polarityOK ? MAGNITUDE[mode] : `−${MAGNITUDE[mode]}`;
+      const colorTok = !complete ? 'red' : polarityOK ? 'g' : 'warn';
+      drawMeter(mode === 'V' ? 'DC V' : 'DC mA', complete ? reading : '- - - -', colorTok);
 
-      host.classList.remove('circuit-red', 'circuit-green');
-      host.classList.add(complete ? 'circuit-green' : 'circuit-red');
-      const status = complete ? `✓ Correct — Lecture : <b>${READING[mode]}</b>.` : 'Sondes pas encore posées.';
+      host.classList.remove('circuit-red', 'circuit-orange', 'circuit-green');
+      host.classList.add(!complete ? 'circuit-red' : polarityOK ? 'circuit-green' : 'circuit-orange');
+      const status = !complete
+        ? 'Sondes pas encore posées.'
+        : polarityOK
+          ? `✓ Correct — Lecture : <b>${reading}</b>.`
+          : `⚠ Sondes inversées — Lecture : <b>${reading}</b>. La sonde rouge doit être du côté ${mode === 'V' ? 'L1' : 'C1'} (là où le courant entre), pas ${mode === 'V' ? 'L2' : 'C2'}.`;
       say.innerHTML = `${HINT[mode]}<br><b>${status}</b>`;
-      svg.attr('aria-label', `Multimètre en position ${mode === 'V' ? 'tension' : 'intensité'}. ${complete ? 'Sondes posées, lecture ' + READING[mode] + '.' : 'Sondes pas encore posées.'}`);
+      svg.attr('aria-label', `Multimètre en position ${mode === 'V' ? 'tension' : 'intensité'}. ${!complete ? 'Sondes pas encore posées.' : 'Sondes posées, lecture ' + reading + (polarityOK ? '' : ' (sondes inversées)') + '.'}`);
     }
 
     ctl.querySelectorAll('[data-mode]').forEach((b) => {
