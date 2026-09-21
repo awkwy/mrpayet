@@ -2,25 +2,26 @@
   import { onDestroy, onMount } from 'svelte';
   import { box, SM, fr } from './shared.js';
   import { select } from './d3.js';
+  import { drag } from 'd3-drag';
 
-  /* Tutoriel « Utiliser un multimètre » — activité neuve, même patron que
-   * circuit.svelte : le circuit est fixe (pas de construction), seule la
-   * PLACE des sondes est interactive, sur un petit nombre d'emplacements
-   * fixes (jamais de glisser-déposer libre — cf. AGENTS.md « Snapper à des
-   * emplacements fixes »). Le vrai geste enseigné : voltmètre en parallèle
-   * (aux bornes d'un dipôle), ampèremètre en série (dans une coupure du
-   * circuit) — capacités exigibles du programme CAP physique-chimie
-   * (« mesurer l'intensité », « mesurer la tension aux bornes d'un dipôle »).
+  /* Tutoriel « Utiliser un multimètre » — le circuit est fixe, seule la
+   * PLACE des sondes est interactive.
+   *
+   * Révision (captain, 2026-09-21, deuxième retour) : les boutons pour
+   * choisir la sonde active puis la borne du multimètre demandaient trop
+   * d'étapes indirectes à comprendre avant même de toucher au circuit —
+   * « trop perturbant », pas adapté à un enfant en difficulté. Remplacé
+   * par un geste direct : chaque sonde (rouge, noire) est un objet visible
+   * en permanence près de l'appareil, qu'on fait glisser jusqu'au bon
+   * point de contact (glisser-déposer réel, d3-drag, PAS le clic-choix
+   * précédent). La borne du multimètre (VΩ ou mA) suit automatiquement le
+   * mode choisi — ce n'est plus une décision séparée à faire, seulement
+   * une information affichée. Avec seulement deux points de contact
+   * valides par mode, tout dépôt qui « prend » est donc forcément correct :
+   * plus d'état « presque correct », seulement incomplet → correct.
    * Circuit fixe : pile 9 V, résistor 100 Ω, lampe (résistance équivalente
    * 50 Ω) en série. I = 9 / 150 = 0,06 A ; U aux bornes de la lampe =
-   * 0,06 × 50 = 3 V.
-   *
-   * Révision (captain, 2026-09-21) : voir les sondes ET l'appareil lui-même
-   * (écran qui affiche la lecture) sont tous les deux importants — la v2
-   * n'avait plus que le circuit + un texte de statut, sans forme de
-   * multimètre. Cette version dessine l'appareil (écran + deux bornes) à
-   * gauche, le circuit à droite, et route un fil de sonde (rouge/noir)
-   * depuis chaque borne jusqu'au point de contact posé sur le circuit. */
+   * 0,06 × 50 = 3 V. */
 
   let host;
   let cleanup = () => {};
@@ -43,39 +44,43 @@
       { id: 'gapR', x: 290 + OX, y: 50, lab: 'C2' }
     ]
   };
-  const PORT_OK = { V: 'VOHM', A: 'mA' };
+  const PORT_LABEL = { V: 'VΩ', A: 'mA' };
   const READING = { V: `${fr(ULAMP.toFixed(1))} V`, A: `${fr((I * 1000).toFixed(0))} mA` };
   const HINT = {
-    V: "Le voltmètre se branche <b>en parallèle</b>, aux deux bornes de la lampe, sans rien débrancher.",
-    A: "L'ampèremètre se branche <b>en série</b> : on ouvre le circuit et on l'insère dans la coupure."
+    V: 'Fais glisser chaque sonde jusqu\'aux deux bornes de la lampe : le voltmètre se branche <b>en parallèle</b>, sans rien débrancher.',
+    A: "Fais glisser chaque sonde jusqu'aux deux côtés de la coupure : l'ampèremètre se branche <b>en série</b>, dans le fil ouvert."
   };
+  const SNAP = 30; // rayon d'accrochage, en unités du viewBox
 
   onMount(() => {
     host.style.position = 'relative';
 
     let mode = 'V';
-    let port = null;
-    let probe = 'red';
-    let placed = { red: null, black: null };
+    const placedAt = { red: null, black: null }; // id du point, ou null = au repos
 
     const W = 680,
-      H = 210;
+      H = 230;
     const svg = select(host)
       .append('svg')
       .attr('class', 'd3viz')
       .attr('viewBox', `0 0 ${W} ${H}`)
-      .attr('role', 'img')
       .attr('preserveAspectRatio', 'xMidYMid meet');
+    // pas de role="img" ici : ça masquerait les sondes (role="button") à
+    // l'arbre d'accessibilité — le SVG reste un groupe générique, chaque
+    // sonde porte son propre rôle/label/clavier.
 
     const meterG = svg.append('g');
     const cableG = svg.append('g');
     const circuitG = svg.append('g');
     const pointsG = svg.append('g');
+    const probesG = svg.append('g');
 
     const METER = { x: 10, y: 18, w: 110, h: 150 };
     const PORT_RED = { x: METER.x + 78, y: METER.y + METER.h - 8 };
     const PORT_BLACK = { x: METER.x + 30, y: METER.y + METER.h - 8 };
-    const LANE_Y = 190;
+    const HOME = { red: { x: PORT_RED.x, y: PORT_RED.y + 55 }, black: { x: PORT_BLACK.x, y: PORT_BLACK.y + 55 } };
+    const pos = { red: { ...HOME.red }, black: { ...HOME.black } };
+    const LANE_Y = 200;
 
     function wire(g, x1, y1, x2, y2) {
       g.append('line').attr('x1', x1).attr('y1', y1).attr('x2', x2).attr('y2', y2).attr('stroke', 'var(--tx)').attr('stroke-width', 2.4).attr('stroke-linecap', 'round');
@@ -120,13 +125,12 @@
       meterG.selectAll('*').remove();
       const { x, y, w, h } = METER;
       meterG.append('rect').attr('x', x).attr('y', y).attr('width', w).attr('height', h).attr('rx', 8).attr('fill', 'var(--surf3)').attr('stroke', 'var(--tx)').attr('stroke-width', 2);
-      const scr = meterG.append('rect').attr('x', x + 10).attr('y', y + 14).attr('width', w - 20).attr('height', 46).attr('rx', 3).attr('fill', 'var(--bg)').attr('stroke', `var(--${statusColor})`).attr('stroke-width', 2);
+      meterG.append('rect').attr('x', x + 10).attr('y', y + 14).attr('width', w - 20).attr('height', 46).attr('rx', 3).attr('fill', 'var(--bg)').attr('stroke', `var(--${statusColor})`).attr('stroke-width', 2);
       meterG.append('text').attr('x', x + w / 2).attr('y', y + 30).attr('text-anchor', 'middle').attr('font-family', SM).attr('font-size', 10).attr('fill', 'var(--dim)').text(screenLine1);
       meterG.append('text').attr('x', x + w / 2).attr('y', y + 51).attr('text-anchor', 'middle').attr('font-family', SM).attr('font-size', 15).attr('font-weight', 'bold').attr('fill', `var(--${statusColor})`).text(screenLine2);
-      // deux bornes (COM à gauche, VΩ/mA à droite)
       [
         { p: PORT_BLACK, lab: 'COM' },
-        { p: PORT_RED, lab: port === 'mA' ? 'mA' : 'VΩ' }
+        { p: PORT_RED, lab: PORT_LABEL[mode] }
       ].forEach(({ p, lab }) => {
         meterG.append('circle').attr('cx', p.x).attr('cy', p.y).attr('r', 7).attr('fill', 'var(--bg)').attr('stroke', 'var(--dim)').attr('stroke-width', 2);
         meterG.append('text').attr('x', p.x).attr('y', y + h + 14).attr('text-anchor', 'middle').attr('font-size', 9).attr('font-weight', 900).attr('fill', 'var(--dim2)').text(lab);
@@ -138,45 +142,19 @@
     }
     function drawCables() {
       cableG.selectAll('*').remove();
-      const pts = Object.fromEntries(POINTS[mode].map((p) => [p.id, p]));
-      if (placed.black && pts[placed.black]) {
-        cableG.append('path').attr('d', cablePath(PORT_BLACK, pts[placed.black])).attr('fill', 'none').attr('stroke', 'var(--dim2)').attr('stroke-width', 3).attr('stroke-linecap', 'round');
-      }
-      if (placed.red && pts[placed.red]) {
-        cableG.append('path').attr('d', cablePath(PORT_RED, pts[placed.red])).attr('fill', 'none').attr('stroke', 'var(--red)').attr('stroke-width', 3).attr('stroke-linecap', 'round');
-      }
+      cableG.append('path').attr('d', cablePath(PORT_BLACK, pos.black)).attr('fill', 'none').attr('stroke', 'var(--dim2)').attr('stroke-width', 3).attr('stroke-linecap', 'round');
+      cableG.append('path').attr('d', cablePath(PORT_RED, pos.red)).attr('fill', 'none').attr('stroke', 'var(--red)').attr('stroke-width', 3).attr('stroke-linecap', 'round');
     }
 
-    function evalState() {
-      const need = new Set(POINTS[mode].map((p) => p.id));
-      const got = new Set([placed.red, placed.black].filter(Boolean));
-      const bothPlaced = placed.red && placed.black;
-      const samePoint = bothPlaced && placed.red === placed.black;
-      const nodesOK = bothPlaced && !samePoint && [...need].every((id) => got.has(id));
-      const portOK = port === PORT_OK[mode];
-      if (nodesOK && portOK) return { status: 'green', reason: 'ok' };
-      if (samePoint) return { status: 'red', reason: 'same' };
-      if (!bothPlaced) return { status: 'red', reason: 'incomplete' };
-      if (nodesOK && !portOK) return { status: 'orange', reason: 'port' };
-      return { status: 'red', reason: 'nodes' };
+    function isComplete() {
+      return placedAt.red && placedAt.black && placedAt.red !== placedAt.black;
     }
-
-    const REASON_TEXT = {
-      incomplete: () => 'Place la sonde rouge et la sonde noire chacune sur un point de contact.',
-      same: () => 'Les deux sondes ne peuvent pas être au même endroit.',
-      nodes: () => (mode === 'V' ? 'Place les deux sondes sur les deux bornes de la lampe (L1 et L2).' : 'Place les deux sondes sur les deux côtés de la coupure (C1 et C2).'),
-      port: () => `Bonne position des sondes, mais la borne rouge du multimètre doit être sur <b>${PORT_OK[mode] === 'VOHM' ? 'VΩ' : 'mA'}</b>, pas sur l'autre.`,
-      ok: () => `Branchement correct. Lecture : <b>${READING[mode]}</b>.`
-    };
-    const STATUS_LABEL = { red: '✗ Incorrect', orange: '⚠ Presque', green: '✓ Correct' };
 
     const ctl = box(
       host,
       'vctl',
       ['V', 'A'].map((m) => `<button data-mode="${m}"${m === mode ? ' class="on"' : ''}>${m === 'V' ? 'Tension (V)' : 'Intensité (A)'}</button>`).join('')
     );
-    const portCtl = box(host, 'vctl', `<button data-port="VOHM">Borne rouge : VΩ</button><button data-port="mA">Borne rouge : mA</button>`);
-    const probeCtl = box(host, 'vctl', `<button data-probe="red" class="on">Sonde rouge</button><button data-probe="black">Sonde noire</button>`);
     const say = box(host, 'say', '');
     box(
       host,
@@ -191,67 +169,110 @@
         </tbody></table></details>`
     );
 
-    function render() {
-      const st = evalState();
-      drawCircuit(st.status === 'green');
-      pointsG.selectAll('*').remove();
+    function nearestPoint(x, y) {
+      let best = null,
+        bd = SNAP;
       POINTS[mode].forEach((p) => {
-        const occ = placed.red === p.id ? 'red' : placed.black === p.id ? 'black' : null;
-        const g = pointsG
-          .append('g')
-          .attr('transform', `translate(${p.x},${p.y})`)
-          .attr('role', 'button')
-          .attr('tabindex', 0)
-          .attr('aria-label', `Point de contact ${p.lab}${occ ? ', sonde ' + (occ === 'red' ? 'rouge' : 'noire') + ' posée ici' : ', vide'}`);
-        g.append('circle').attr('r', 14).attr('fill', 'transparent');
-        g.append('circle').attr('r', 6).attr('fill', occ ? (occ === 'red' ? 'var(--red)' : 'var(--dim)') : 'var(--surf3)').attr('stroke', 'var(--blue)').attr('stroke-width', 1.6);
-        g.append('text').attr('y', -14).attr('text-anchor', 'middle').attr('font-size', 10).attr('font-weight', 900).attr('fill', 'var(--blue)').text(p.lab);
-        g.style('cursor', 'pointer').on('click', () => place(p.id));
-        g.on('keydown', (event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            place(p.id);
-          }
-        });
+        const d = Math.hypot(p.x - x, p.y - y);
+        if (d <= bd) {
+          bd = d;
+          best = p;
+        }
       });
-
-      const colorTok = st.status === 'red' ? 'red' : st.status === 'orange' ? 'warn' : 'g';
-      drawMeter(mode === 'V' ? 'DC V' : 'DC mA', st.status === 'green' ? READING[mode] : '- - - -', colorTok);
-      drawCables();
-
-      host.classList.remove('circuit-red', 'circuit-orange', 'circuit-green');
-      host.classList.add(`circuit-${st.status}`);
-      const msg = (REASON_TEXT[st.reason] || REASON_TEXT.ok)();
-      say.innerHTML = `${HINT[mode]}<br><b>${STATUS_LABEL[st.status]}</b> — ${msg}`;
-      svg.attr('aria-label', `Multimètre en position ${mode === 'V' ? 'tension' : 'intensité'}, écran affiche ${st.status === 'green' ? READING[mode] : 'aucune lecture valide'}. ${STATUS_LABEL[st.status]}.`);
+      return best;
     }
 
-    function place(pointId) {
-      if (placed.red === pointId) placed.red = null;
-      if (placed.black === pointId) placed.black = null;
-      placed[probe] = pointId;
+    function dropProbe(color, x, y) {
+      const other = color === 'red' ? 'black' : 'red';
+      const hit = nearestPoint(x, y);
+      if (hit) {
+        if (placedAt[other] === hit.id) placedAt[other] = null; // bumpe l'autre sonde
+        placedAt[color] = hit.id;
+        pos[color] = { x: hit.x, y: hit.y };
+      } else {
+        placedAt[color] = null;
+        pos[color] = { ...HOME[color] };
+      }
       render();
+    }
+
+    function makeDrag(color) {
+      return drag()
+        .on('start', function () {
+          select(this).raise();
+        })
+        .on('drag', function (event) {
+          pos[color] = { x: event.x, y: event.y };
+          drawCables();
+          probesG.select(`[data-probe="${color}"]`).attr('transform', `translate(${event.x},${event.y})`);
+        })
+        .on('end', (event) => dropProbe(color, event.x, event.y));
+    }
+
+    function drawProbes() {
+      probesG.selectAll('*').remove();
+      ['red', 'black'].forEach((color) => {
+        const g = probesG
+          .append('g')
+          .attr('data-probe', color)
+          .attr('transform', `translate(${pos[color].x},${pos[color].y})`)
+          .attr('role', 'button')
+          .attr('tabindex', 0)
+          .attr('aria-label', `Sonde ${color === 'red' ? 'rouge' : 'noire'}${placedAt[color] ? ', posée sur ' + POINTS[mode].find((p) => p.id === placedAt[color]).lab : ', pas encore posée — fais-la glisser jusqu\'à un point de contact'}`)
+          .style('cursor', 'grab')
+          .call(makeDrag(color));
+        g.append('circle').attr('r', 28).attr('fill', 'transparent'); // zone de préhension élargie (tactile)
+        g.append('circle').attr('r', 12).attr('fill', color === 'red' ? 'var(--red)' : 'var(--dim2)').attr('stroke', 'var(--tx)').attr('stroke-width', 1.6);
+        const cycleNext = () => {
+          const pts = POINTS[mode];
+          const cur = placedAt[color];
+          const next = cur === pts[0].id ? pts[1] : pts[0];
+          dropProbe(color, next.x, next.y);
+        };
+        // Le glisser-déposer est le geste principal ; clic/tape et clavier
+        // (Entrée/Espace) restent une alternative accessible équivalente —
+        // d3-drag supprime lui-même le clic fantôme qui suit un vrai glisser.
+        g.on('click', cycleNext);
+        g.on('keydown', (event) => {
+          if (event.key !== 'Enter' && event.key !== ' ') return;
+          event.preventDefault();
+          cycleNext();
+        });
+      });
+    }
+
+    function render() {
+      const complete = isComplete();
+      drawCircuit(complete);
+      pointsG.selectAll('*').remove();
+      POINTS[mode].forEach((p) => {
+        const occ = placedAt.red === p.id ? 'red' : placedAt.black === p.id ? 'black' : null;
+        const g = pointsG.append('g').attr('transform', `translate(${p.x},${p.y})`);
+        g.append('circle').attr('r', 6).attr('fill', occ ? (occ === 'red' ? 'var(--red)' : 'var(--dim)') : 'var(--surf3)').attr('stroke', 'var(--blue)').attr('stroke-width', 1.6);
+        g.append('text').attr('y', -14).attr('text-anchor', 'middle').attr('font-size', 10).attr('font-weight', 900).attr('fill', 'var(--blue)').text(p.lab);
+      });
+      drawProbes();
+      drawCables();
+
+      const colorTok = complete ? 'g' : 'red';
+      drawMeter(mode === 'V' ? 'DC V' : 'DC mA', complete ? READING[mode] : '- - - -', colorTok);
+
+      host.classList.remove('circuit-red', 'circuit-green');
+      host.classList.add(complete ? 'circuit-green' : 'circuit-red');
+      const status = complete ? `✓ Correct — Lecture : <b>${READING[mode]}</b>.` : 'Sondes pas encore posées.';
+      say.innerHTML = `${HINT[mode]}<br><b>${status}</b>`;
+      svg.attr('aria-label', `Multimètre en position ${mode === 'V' ? 'tension' : 'intensité'}. ${complete ? 'Sondes posées, lecture ' + READING[mode] + '.' : 'Sondes pas encore posées.'}`);
     }
 
     ctl.querySelectorAll('[data-mode]').forEach((b) => {
       b.onclick = () => {
         mode = b.dataset.mode;
-        placed = { red: null, black: null };
+        placedAt.red = null;
+        placedAt.black = null;
+        pos.red = { ...HOME.red };
+        pos.black = { ...HOME.black };
         ctl.querySelectorAll('button').forEach((z) => z.classList.toggle('on', z === b));
         render();
-      };
-    });
-    portCtl.querySelectorAll('[data-port]').forEach((b) => {
-      b.onclick = () => {
-        port = b.dataset.port;
-        portCtl.querySelectorAll('button').forEach((z) => z.classList.toggle('on', z === b));
-        render();
-      };
-    });
-    probeCtl.querySelectorAll('[data-probe]').forEach((b) => {
-      b.onclick = () => {
-        probe = b.dataset.probe;
-        probeCtl.querySelectorAll('button').forEach((z) => z.classList.toggle('on', z === b));
       };
     });
 
