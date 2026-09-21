@@ -13,7 +13,14 @@
    * (« mesurer l'intensité », « mesurer la tension aux bornes d'un dipôle »).
    * Circuit fixe : pile 9 V, résistor 100 Ω, lampe (résistance équivalente
    * 50 Ω) en série. I = 9 / 150 = 0,06 A ; U aux bornes de la lampe =
-   * 0,06 × 50 = 3 V. */
+   * 0,06 × 50 = 3 V.
+   *
+   * Révision (captain, 2026-09-21) : voir les sondes ET l'appareil lui-même
+   * (écran qui affiche la lecture) sont tous les deux importants — la v2
+   * n'avait plus que le circuit + un texte de statut, sans forme de
+   * multimètre. Cette version dessine l'appareil (écran + deux bornes) à
+   * gauche, le circuit à droite, et route un fil de sonde (rouge/noir)
+   * depuis chaque borne jusqu'au point de contact posé sur le circuit. */
 
   let host;
   let cleanup = () => {};
@@ -25,14 +32,15 @@
     I = U / RTOT,
     ULAMP = I * R2;
 
+  const OX = 150; // décalage du circuit pour laisser la place à l'appareil
   const POINTS = {
     V: [
-      { id: 'lampL', x: 340, y: 50, lab: 'L1' },
-      { id: 'lampR', x: 400, y: 50, lab: 'L2' }
+      { id: 'lampL', x: 340 + OX, y: 50, lab: 'L1' },
+      { id: 'lampR', x: 400 + OX, y: 50, lab: 'L2' }
     ],
     A: [
-      { id: 'gapL', x: 230, y: 50, lab: 'C1' },
-      { id: 'gapR', x: 290, y: 50, lab: 'C2' }
+      { id: 'gapL', x: 230 + OX, y: 50, lab: 'C1' },
+      { id: 'gapR', x: 290 + OX, y: 50, lab: 'C2' }
     ]
   };
   const PORT_OK = { V: 'VOHM', A: 'mA' };
@@ -50,8 +58,8 @@
     let probe = 'red';
     let placed = { red: null, black: null };
 
-    const W = 560,
-      H = 190;
+    const W = 680,
+      H = 210;
     const svg = select(host)
       .append('svg')
       .attr('class', 'd3viz')
@@ -59,22 +67,21 @@
       .attr('role', 'img')
       .attr('preserveAspectRatio', 'xMidYMid meet');
 
+    const meterG = svg.append('g');
+    const cableG = svg.append('g');
     const circuitG = svg.append('g');
     const pointsG = svg.append('g');
-    const statusTxt = svg
-      .append('text')
-      .attr('x', W / 2)
-      .attr('y', 172)
-      .attr('text-anchor', 'middle')
-      .attr('font-family', SM)
-      .attr('font-size', 12)
-      .attr('font-weight', 'bold');
+
+    const METER = { x: 10, y: 18, w: 110, h: 150 };
+    const PORT_RED = { x: METER.x + 78, y: METER.y + METER.h - 8 };
+    const PORT_BLACK = { x: METER.x + 30, y: METER.y + METER.h - 8 };
+    const LANE_Y = 190;
 
     function wire(g, x1, y1, x2, y2) {
       g.append('line').attr('x1', x1).attr('y1', y1).attr('x2', x2).attr('y2', y2).attr('stroke', 'var(--tx)').attr('stroke-width', 2.4).attr('stroke-linecap', 'round');
     }
     function battery(g) {
-      const x = 60,
+      const x = 60 + OX,
         y0 = 50,
         y1 = 130;
       wire(g, x, y0, x, y0 + 28);
@@ -97,16 +104,47 @@
     function drawCircuit(lit) {
       circuitG.selectAll('*').remove();
       battery(circuitG);
-      wire(circuitG, 60, 50, 120, 50);
-      resistor(circuitG, 150);
-      wire(circuitG, 180, 50, 230, 50);
-      if (mode === 'V') wire(circuitG, 230, 50, 290, 50);
+      wire(circuitG, 60 + OX, 50, 120 + OX, 50);
+      resistor(circuitG, 150 + OX);
+      wire(circuitG, 180 + OX, 50, 230 + OX, 50);
+      if (mode === 'V') wire(circuitG, 230 + OX, 50, 290 + OX, 50);
       // en mode A, le segment 230→290 reste absent : coupure visible
-      wire(circuitG, 290, 50, 340, 50);
-      lamp(circuitG, 370, lit);
-      wire(circuitG, 400, 50, 460, 50);
-      wire(circuitG, 460, 50, 460, 130);
-      wire(circuitG, 60, 130, 460, 130);
+      wire(circuitG, 290 + OX, 50, 340 + OX, 50);
+      lamp(circuitG, 370 + OX, lit);
+      wire(circuitG, 400 + OX, 50, 460 + OX, 50);
+      wire(circuitG, 460 + OX, 50, 460 + OX, 130);
+      wire(circuitG, 60 + OX, 130, 460 + OX, 130);
+    }
+
+    function drawMeter(screenLine1, screenLine2, statusColor) {
+      meterG.selectAll('*').remove();
+      const { x, y, w, h } = METER;
+      meterG.append('rect').attr('x', x).attr('y', y).attr('width', w).attr('height', h).attr('rx', 8).attr('fill', 'var(--surf3)').attr('stroke', 'var(--tx)').attr('stroke-width', 2);
+      const scr = meterG.append('rect').attr('x', x + 10).attr('y', y + 14).attr('width', w - 20).attr('height', 46).attr('rx', 3).attr('fill', 'var(--bg)').attr('stroke', `var(--${statusColor})`).attr('stroke-width', 2);
+      meterG.append('text').attr('x', x + w / 2).attr('y', y + 30).attr('text-anchor', 'middle').attr('font-family', SM).attr('font-size', 10).attr('fill', 'var(--dim)').text(screenLine1);
+      meterG.append('text').attr('x', x + w / 2).attr('y', y + 51).attr('text-anchor', 'middle').attr('font-family', SM).attr('font-size', 15).attr('font-weight', 'bold').attr('fill', `var(--${statusColor})`).text(screenLine2);
+      // deux bornes (COM à gauche, VΩ/mA à droite)
+      [
+        { p: PORT_BLACK, lab: 'COM' },
+        { p: PORT_RED, lab: port === 'mA' ? 'mA' : 'VΩ' }
+      ].forEach(({ p, lab }) => {
+        meterG.append('circle').attr('cx', p.x).attr('cy', p.y).attr('r', 7).attr('fill', 'var(--bg)').attr('stroke', 'var(--dim)').attr('stroke-width', 2);
+        meterG.append('text').attr('x', p.x).attr('y', y + h + 14).attr('text-anchor', 'middle').attr('font-size', 9).attr('font-weight', 900).attr('fill', 'var(--dim2)').text(lab);
+      });
+    }
+
+    function cablePath(anchor, target) {
+      return `M${anchor.x},${anchor.y} L${anchor.x},${LANE_Y} L${target.x},${LANE_Y} L${target.x},${target.y}`;
+    }
+    function drawCables() {
+      cableG.selectAll('*').remove();
+      const pts = Object.fromEntries(POINTS[mode].map((p) => [p.id, p]));
+      if (placed.black && pts[placed.black]) {
+        cableG.append('path').attr('d', cablePath(PORT_BLACK, pts[placed.black])).attr('fill', 'none').attr('stroke', 'var(--dim2)').attr('stroke-width', 3).attr('stroke-linecap', 'round');
+      }
+      if (placed.red && pts[placed.red]) {
+        cableG.append('path').attr('d', cablePath(PORT_RED, pts[placed.red])).attr('fill', 'none').attr('stroke', 'var(--red)').attr('stroke-width', 3).attr('stroke-linecap', 'round');
+      }
     }
 
     function evalState() {
@@ -177,12 +215,15 @@
         });
       });
 
+      const colorTok = st.status === 'red' ? 'red' : st.status === 'orange' ? 'warn' : 'g';
+      drawMeter(mode === 'V' ? 'DC V' : 'DC mA', st.status === 'green' ? READING[mode] : '- - - -', colorTok);
+      drawCables();
+
       host.classList.remove('circuit-red', 'circuit-orange', 'circuit-green');
       host.classList.add(`circuit-${st.status}`);
-      statusTxt.text(STATUS_LABEL[st.status]).attr('fill', `var(--${st.status === 'red' ? 'red' : st.status === 'orange' ? 'warn' : 'g'})`);
       const msg = (REASON_TEXT[st.reason] || REASON_TEXT.ok)();
       say.innerHTML = `${HINT[mode]}<br><b>${STATUS_LABEL[st.status]}</b> — ${msg}`;
-      svg.attr('aria-label', `Multimètre en position ${mode === 'V' ? 'tension' : 'intensité'}. ${STATUS_LABEL[st.status]}.`);
+      svg.attr('aria-label', `Multimètre en position ${mode === 'V' ? 'tension' : 'intensité'}, écran affiche ${st.status === 'green' ? READING[mode] : 'aucune lecture valide'}. ${STATUS_LABEL[st.status]}.`);
     }
 
     function place(pointId) {
