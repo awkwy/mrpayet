@@ -1,6 +1,7 @@
 <script>
   import { CCF_M } from '$lib/data/ccf-methode.js';
   import QuizInput from '$lib/components/QuizInput.svelte';
+  import { VIZ } from '$lib/visualizations/registry.js';
 
   let { data } = $props();
   let revealed = $state({});
@@ -40,6 +41,11 @@
       <div class="tache">
         <h3 class="tt">{tache.titre}</h3>
         <p class="ctx">{tache.ctx}</p>
+        {#if tache.viz && VIZ[tache.viz]}
+          <div class="viz-host">
+            <svelte:component this={VIZ[tache.viz]} vd={tache.vd} />
+          </div>
+        {/if}
         <div class="qs">
           {#each tache.qs as q}
             <div class="qwrap">
@@ -121,6 +127,9 @@
     border: 1px solid var(--line);
     border-radius: var(--r);
     background: var(--surf);
+  }
+  .viz-host {
+    margin-top: 14px;
   }
   .tt {
     font-size: 16px;
