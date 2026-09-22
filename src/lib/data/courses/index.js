@@ -6,6 +6,7 @@ import calculsCommerciaux from './calculs-commerciaux.js';
 import apConsolidation from './ap-consolidation.js';
 import apConsolidationTcapmp from './ap-consolidation-tcapmp.js';
 import apConsolidation2pmv2 from './ap-consolidation-2pmv2.js';
+import coInterventionDevisMv2 from './co-intervention-devis-mv2.js';
 import apFractions from './ap-fractions.js';
 import apSignes from './ap-signes.js';
 import ficheOutils from './fiche-outils.js';
@@ -58,6 +59,7 @@ export const COURSES = [
   apConsolidation,
   apConsolidationTcapmp,
   apConsolidation2pmv2,
+  coInterventionDevisMv2,
   apFractions,
   apSignes,
   ficheOutils,
