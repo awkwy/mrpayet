@@ -57,5 +57,24 @@ export default {id:"stat-aepe",classe:"TC AEPE",mat:"Maths",titre:"Décrire un g
     q:[{q:"Pour montrer quelle part de la crèche représente chaque tranche d'âge, quel diagramme est le plus parlant ? (bâtons ou circulaire)",a:["circulaire","le circulaire","diagramme circulaire"],txt:true,sol:"Le circulaire : on voit tout de suite le poids de chaque tranche dans l'ensemble."}]}],
   quiz:[{q:"Un secteur représente 25 % du total. Son angle est :",o:["25°","90°","360°"],c:1,e:"0,25 × 360 = 90°."},
         {q:"Pour comparer les effectifs de 4 sections, on choisit :",o:["un diagramme en bâtons","un diagramme circulaire"],c:0,e:"Les bâtons comparent des hauteurs ; le circulaire montre des parts d'un tout."}],
-  trace:"Le <b>diagramme en bâtons</b> : un bâton par valeur, hauteur = effectif ou fréquence. Sert à <b>comparer des quantités</b>.<br>Le <b>diagramme circulaire</b> : un secteur par valeur, <b>angle = fréquence × 360°</b>. Sert à montrer <b>la part de chaque valeur dans le tout</b> ; la somme des angles fait 360°.<br>On choisit selon le message : comparer → bâtons ; montrer des parts → circulaire."}]}
+  trace:"Le <b>diagramme en bâtons</b> : un bâton par valeur, hauteur = effectif ou fréquence. Sert à <b>comparer des quantités</b>.<br>Le <b>diagramme circulaire</b> : un secteur par valeur, <b>angle = fréquence × 360°</b>. Sert à montrer <b>la part de chaque valeur dans le tout</b> ; la somme des angles fait 360°.<br>On choisit selon le message : comparer → bâtons ; montrer des parts → circulaire."},
+ {t:"Réviser avant le devoir — deux enquêtes",
+  prob:"Deux enquêtes nouvelles, sur le même principe que celle de l'école Les Flamboyants. Cette fois, sans exemple : à toi de tout mener, comme le jour du devoir.",
+  steps:[
+   {t:"La crèche Les Petits Lutins",txt:"« La crèche associative Les Petits Lutins a interrogé 32 familles inscrites : « Quel moyen préférez-vous pour être informé de la vie de votre enfant à la crèche ? », une seule réponse parmi quatre. Résultat, déjà compté : 14 familles préfèrent le cahier de liaison, 10 le SMS ou une application, 5 l'affichage à l'entrée, 3 une réunion d'équipe. »"},
+   {t:"Compléter et vérifier",
+    q:[{q:"Somme des quatre effectifs : 14 + 10 + 5 + 3 = ?",a:32,tol:0,sol:"Le total retombe bien sur les 32 familles interrogées."},
+       {q:"Quel moyen les familles préfèrent-elles le plus ?",a:["cahier de liaison","le cahier de liaison"],txt:true},
+       {q:"Combien de familles préfèrent un moyen numérique (SMS/appli) plutôt que le cahier de liaison ?",a:4,tol:0,sol:"14 − 10 = 4 familles de plus pour le cahier de liaison."}]},
+   {t:"Le diagramme de la crèche",viz:"batons",vd:{cats:[["Cahier de liaison",14],["SMS / appli",10],["Affichage",5],["Réunion",3]],unit:"familles"}},
+   {t:"L'école maternelle Les Étoiles",txt:"« L'école maternelle Les Étoiles a interrogé 28 familles : « Votre enfant profite-t-il du moment du goûter ? », une seule réponse parmi quatre. Résultat, déjà compté : 12 familles ont répondu « toujours », 9 « souvent », 5 « rarement », 2 « jamais ». »"},
+   {t:"Compléter et vérifier",
+    q:[{q:"Somme des quatre effectifs : 12 + 9 + 5 + 2 = ?",a:28,tol:0},
+       {q:"Combien de familles ont répondu « rarement » ou « jamais » ?",a:7,tol:0,sol:"5 + 2 = 7 familles, sur 28 : moins d'un quart."}]},
+   {t:"Le diagramme de l'école",viz:"batons",vd:{cats:[["Toujours",12],["Souvent",9],["Rarement",5],["Jamais",2]],unit:"familles"}},
+   {t:"Comparer les deux enquêtes",
+    q:[{q:"Les deux enquêtes portent-elles sur le même total de familles ? (oui/non)",a:"non",txt:true,sol:"32 familles pour la crèche, 28 pour l'école : ce n'est pas le même total — mais on lit chaque diagramme de la même façon, en comparant ses propres barres entre elles."}]}],
+  quiz:[{q:"Avant de tracer un diagramme, on vérifie toujours :",o:["que les barres sont de la même couleur","que la somme des effectifs redonne le total annoncé","que le diagramme est circulaire"],c:1,e:"C'est le seul moyen de repérer une erreur de recopie avant de tracer."},
+        {q:"Deux enquêtes n'ont pas le même effectif total. Peut-on quand même comparer la réponse la plus fréquente de chacune ?",o:["Oui, chaque diagramme se lit pour lui-même","Non, il faut d'abord le même total"],c:0,e:"Chaque diagramme se lit indépendamment ; le total différent ne change rien à sa lecture."}],
+  trace:"Avant le devoir : je complète le tableau, je <b>vérifie le total</b>, je trace une barre par réponse à la <b>même échelle</b>, puis je relis pour conclure (réponse la plus/moins fréquente, regroupement, phrase de synthèse)."}]}
 ;
