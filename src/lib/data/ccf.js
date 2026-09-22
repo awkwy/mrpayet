@@ -55,7 +55,7 @@ export const CCF = {
     comm:"Rédige la phrase que l'association enverra à la mairie pour lui indiquer sa participation.",
     commA:"« Le coût total du matériel s'élève à 461,22 € TTC. Conformément à la répartition 60 / 40, la participation de la mairie est de 276,73 € et celle de l'association de 184,49 €. »"}
   ]},
-  sciences:{titre:"Situation de physique-chimie",duree:"45 min",note:"/ 8",tuto:{href:"/tutoriels/multimetre",label:"Tutoriel — utiliser un multimètre"},taches:[
+  sciences:{titre:"Situation de physique-chimie",duree:"45 min",note:"/ 8",tutos:[{href:"/tutoriels/multimetre",label:"Tutoriel — utiliser un multimètre"},{href:"/tutoriels/ph-metre",label:"Tutoriel — mesurer un pH"}],taches:[
    {titre:"Un conflit de voisinage pour bruit",
     ctx:"Un voisin se plaint de la musique d'un autre. Le soir, tu mesures au sonomètre : 88 dB à 1 m de l'enceinte. Le bruit de fond du quartier le soir est de 40 dB. La réglementation tolère une émergence (différence avec le bruit de fond) de 5 dB. Échelle fournie : seuil de danger pour l'oreille 85 dB, seuil de douleur 120 dB. Un mur mitoyen atténue le son de 30 dB.",
     qs:[
@@ -105,7 +105,7 @@ export const CCF = {
     comm:"Tu conseilles la directrice sur la commande à passer. Que lui dis-tu ?",
     commA:"« Il faut 9 cartons pour le mois, mais 10 cartons avec la remise coûtent le même prix (256,50 €). Autant commander 10 cartons : on paie pareil et on a une avance pour le mois suivant. »"}
   ]},
-  sciences:{titre:"Situation de physique-chimie",duree:"45 min",note:"/ 8",tuto:{href:"/tutoriels/multimetre",label:"Tutoriel — utiliser un multimètre"},taches:[
+  sciences:{titre:"Situation de physique-chimie",duree:"45 min",note:"/ 8",tutos:[{href:"/tutoriels/multimetre",label:"Tutoriel — utiliser un multimètre"},{href:"/tutoriels/ph-metre",label:"Tutoriel — mesurer un pH"}],taches:[
    {titre:"Préparer une solution désinfectante",
     ctx:"Le protocole d'hygiène de la crèche demande une solution de chlore de concentration massique 2 g/L. Tu dois en préparer 3 L. Tu disposes de pastilles de chlore de 1,5 g. Le bidon de pastilles porte le pictogramme « corrosif ». Après préparation, tu mesures le pH de la solution : 9.",
     qs:[

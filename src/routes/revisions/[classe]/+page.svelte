@@ -37,8 +37,12 @@
 
   {#each sections as sect}
     <h2 class="h2">{sect.titre}{sect.duree ? ` · ${sect.duree}` : ''}{sect.note ? ` · ${sect.note}` : ''}</h2>
-    {#if sect.tuto}
-      <a class="tuto" href="{base}{sect.tuto.href}">{sect.tuto.label} →</a>
+    {#if sect.tutos}
+      <div class="tutos">
+        {#each sect.tutos as t}
+          <a class="tuto" href="{base}{t.href}">{t.label} →</a>
+        {/each}
+      </div>
     {/if}
     {#each sect.taches as tache, ti}
       <div class="tache">
@@ -126,9 +130,14 @@
     border-radius: var(--r);
     background: var(--surf);
   }
+  .tutos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
   .tuto {
     display: inline-block;
-    margin-top: 10px;
     padding: 10px 16px;
     border: 1px solid var(--g3);
     border-radius: var(--r);
