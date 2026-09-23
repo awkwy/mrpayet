@@ -89,6 +89,16 @@ export default {id:"ap-consolidation-tcapmp",classe:"TC APMP",mat:"AP",titre:"Co
     q:[{q:"204 pièces à ranger par cartons de 25 : combien de cartons au minimum ?",a:9,tol:0,sol:"204 ÷ 25 = 8,16 → 9 (vers le haut)."},
        {q:"145 kg de matériel, camion de 30 kg de charge utile : combien de voyages ?",a:5,tol:0,sol:"145 ÷ 30 = 4,83 → 5 (vers le haut)."},
        {q:"100 pièces vendues par lots complets de 12 : combien de lots peut-on vendre ?",a:8,tol:0,sol:"100 ÷ 12 = 8,33 → 8 (vers le bas)."}]},
+   {t:"Décide vite : haut ou bas ?",viz:"arrondiDecision",
+    vd:{title:"Vers le haut ou vers le bas ?",cards:[
+      {ctx:"204 pièces à ranger par cartons de 25 : combien de cartons au minimum ?",up:true,why:"Le carton du surplus est nécessaire même à moitié plein."},
+      {ctx:"100 pièces vendues par lots complets de 12 : combien de lots peut-on vendre ?",up:false,why:"Un lot incomplet ne se vend pas comme lot complet."},
+      {ctx:"145 kg de matériel, camion de 30 kg de charge utile : combien de voyages ?",up:true,why:"Le reste de matériel exige quand même un voyage de plus."},
+      {ctx:"80 badges à distribuer, boîtes de 15 : combien de boîtes pleines peut-on préparer ?",up:false,why:"Une boîte non pleine n'est pas complète."},
+      {ctx:"37 visiteurs, 1 véhicule pour 8 personnes : combien de véhicules au minimum ?",up:true,why:"Le dernier groupe, même petit, doit être transporté."},
+      {ctx:"150 flyers, paquets de 20 : combien de paquets complets peut-on faire ?",up:false,why:"Le paquet entamé ne compte pas comme complet."}
+    ]},
+    apport:"Avant de calculer, entraîne-toi à décider seul(e) du sens de l'arrondi."},
    {t:"Prix par unité, arrondi au centime",
     apport:"Un coût par unité s'arrondit toujours au centime le plus proche.",
     q:[{q:"318 € pour 7 pièces : coût par pièce, arrondi au centime",a:45.43,tol:.01},

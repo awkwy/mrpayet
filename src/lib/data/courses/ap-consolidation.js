@@ -27,6 +27,16 @@ export default {id:"ap-consolidation",classe:"TC AEPE",mat:"AP",titre:"Consolida
     q:[{q:"68 à la dizaine",a:70,tol:0},{q:"145 à la dizaine",a:150,tol:0},{q:"4,7 à l'unité",a:5,tol:0},{q:"12,3 à l'unité",a:12,tol:0}]},
    {t:"Arrondir selon le contexte",viz:"division",
     apport:"Quand la division ne tombe pas juste, le sens de l'arrondi dépend de la question. <b>« Combien d'adultes / de voitures / d'étagères ? »</b> → on arrondit <b>vers le haut</b> (le dernier groupe, même incomplet, réclame quand même la sienne). <b>« Combien de paquets complets / de parts entières ? »</b> → on arrondit <b>vers le bas</b> (un paquet incomplet ne compte pas)."},
+   {t:"Décide vite : haut ou bas ?",viz:"arrondiDecision",
+    vd:{title:"Vers le haut ou vers le bas ?",cards:[
+      {ctx:"17 enfants, 1 adulte pour 5 : combien d'adultes ?",up:true,why:"Il faut un encadrant même pour le dernier petit groupe."},
+      {ctx:"100 gommettes, paquets de 6 : combien de paquets complets ?",up:false,why:"Un paquet incomplet ne compte pas."},
+      {ctx:"23 enfants, 1 table pour 4 : combien de tables faut-il installer ?",up:true,why:"Le dernier groupe, même petit, a besoin de sa table."},
+      {ctx:"60 crayons, boîtes de 8 : combien de boîtes pleines peut-on faire ?",up:false,why:"Une boîte non pleine n'est pas une boîte complète."},
+      {ctx:"14 enfants, 1 accompagnateur pour 6 : combien d'accompagnateurs ?",up:true,why:"Même règle : personne ne reste sans encadrant."},
+      {ctx:"90 fiches, classeurs de 12 pages : combien de classeurs complets ?",up:false,why:"Le classeur entamé ne compte pas comme complet."}
+    ]},
+    apport:"Avant de calculer, entraîne-toi à décider seul(e) du sens de l'arrondi."},
    {t:"À toi",apport:"Fais la division, puis choisis le bon arrondi.",
     q:[{q:"17 enfants, 1 adulte pour 5 : combien d'adultes ?",a:4,tol:0,sol:"17 ÷ 5 = 3,4 → 4 (on arrondit vers le haut)."},
        {q:"30 enfants en sortie, 6 places par voiture : combien de voitures ?",a:5,tol:0,sol:"30 ÷ 6 = 5 : la division tombe juste."},
