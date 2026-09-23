@@ -27,6 +27,16 @@ export default {id:"ap-consolidation-2pmv2",classe:"2P MV2",mat:"AP",titre:"Cons
     q:[{q:"68 à la dizaine",a:70,tol:0},{q:"145 à la dizaine",a:150,tol:0},{q:"4,7 à l'unité",a:5,tol:0},{q:"12,3 à l'unité",a:12,tol:0}]},
    {t:"Arrondir selon le contexte",viz:"division",
     apport:"Quand la division ne tombe pas juste, le sens de l'arrondi dépend de la question. <b>« Combien de conteneurs / de créneaux ? »</b> → on arrondit <b>vers le haut</b> (le dernier, même incomplet, réclame quand même le sien). <b>« Combien de lots complets ? »</b> → on arrondit <b>vers le bas</b> (un lot incomplet ne compte pas)."},
+   {t:"Décide vite : haut ou bas ?",viz:"arrondiDecision",
+    vd:{title:"Vers le haut ou vers le bas ?",cards:[
+      {ctx:"17 pneus usagés, 1 conteneur pour 5 : combien de conteneurs faut-il ?",up:true,why:"Le reste de pneus a quand même besoin d'un conteneur."},
+      {ctx:"100 vis, sachets de 6 : combien de sachets complets peut-on faire ?",up:false,why:"Un sachet incomplet ne compte pas comme complet."},
+      {ctx:"45 bidons d'huile à ranger, 8 par étagère : combien d'étagères pour tout ranger ?",up:true,why:"Les derniers bidons, même peu nombreux, réclament une étagère de plus."},
+      {ctx:"250 € de pièces à répartir en lots complets de 40 € : combien de lots complets ?",up:false,why:"Le reliquat sous 40 € ne fait pas un lot complet."},
+      {ctx:"23 véhicules à réceptionner, 1 poste de contrôle pour 6 : combien de postes au minimum ?",up:true,why:"Le dernier petit groupe de véhicules doit quand même être contrôlé."},
+      {ctx:"130 filtres à huile, cartons de 12 : combien de cartons complets ?",up:false,why:"Un carton non plein n'est pas complet."}
+    ]},
+    apport:"Avant de calculer, entraîne-toi à décider seul(e) du sens de l'arrondi."},
    {t:"À toi",apport:"Fais la division, puis choisis le bon arrondi.",
     q:[{q:"17 pneus usagés, 1 conteneur pour 5 : combien de conteneurs ?",a:4,tol:0,sol:"17 ÷ 5 = 3,4 → 4 (on arrondit vers le haut)."},
        {q:"30 véhicules à réviser, 6 par journée : combien de journées ?",a:5,tol:0,sol:"30 ÷ 6 = 5 : la division tombe juste."},

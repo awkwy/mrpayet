@@ -38,11 +38,12 @@ import agrandir from './agrandir.svelte';
 import poly2 from './poly2.svelte';
 import ensembles from './ensembles.svelte';
 import multimetre from './multimetre.svelte';
+import arrondiDecision from './arrondi-decision.svelte';
 
 export const VIZ = {
   fusible, noeuds, alternatif, circuit, taux, aire, bascule, budget, remise, partage,
   division, multiplication, moyenne, mediane, experience, arbre, arbrepondere, fluctuation,
   stabilisation, batons, moypond, ph, interet, onde, propor, courbe, geo, pyth,
   db, chauffe, force, refraction, rgb, interval, affine, parabole, agrandir, poly2, ensembles,
-  multimetre
+  multimetre, arrondiDecision
 };
