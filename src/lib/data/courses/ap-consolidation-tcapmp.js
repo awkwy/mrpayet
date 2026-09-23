@@ -124,5 +124,19 @@ export default {id:"ap-consolidation-tcapmp",classe:"TC APMP",mat:"AP",titre:"Co
       {q:"45 pièces à ranger par cartons de 8 : combien de cartons au minimum ?",a:6,tol:0,sol:"45 ÷ 8 = 5,6 → 6 (vers le haut)."},
       {q:"204 € pour 8 vélos : coût par vélo",a:25.5,tol:0},
       {q:"145 € TTC pour 12 participants : coût par participant, arrondi au centime",a:12.08,tol:.01,sol:"145 ÷ 12 = 12,083… → 12,08 €."}]}],
-  trace:"Ces cinq outils — HT/TVA/TTC, coefficient multiplicateur, remise, répartition proportionnelle, arrondi selon le contexte — reviennent dans toutes les séances de la séquence « Calculs commerciaux et financiers »."}]}
+  trace:"Ces cinq outils — HT/TVA/TTC, coefficient multiplicateur, remise, répartition proportionnelle, arrondi selon le contexte — reviennent dans toutes les séances de la séquence « Calculs commerciaux et financiers »."},
+ {t:"Le mot du jour",
+  prob:"Cinq mots déjà rencontrés dans les ateliers. Les reconnais-tu à l'écrit ?",
+  steps:[
+   {t:"Devine le mot",viz:"motDuJour",
+    vd:{words:[
+      {word:"coefficient",def:"le nombre multiplicateur qui donne directement un résultat"},
+      {word:"remise",def:"une réduction accordée sur un prix"},
+      {word:"pourcentage",def:"une part sur cent"},
+      {word:"arrondi",def:"le nombre le plus proche que l'on garde à la place d'un résultat exact"},
+      {word:"repartition",def:"le partage d'un montant entre plusieurs parties"},
+      {word:"facture",def:"le document qui détaille un prix à payer"}
+    ]},
+    apport:"Ce sont les mots des cinq ateliers de cette séquence — pas de nouveau vocabulaire, juste de la reconnaissance."}],
+  trace:"Reconnaître un mot à l'écrit, c'est déjà le comprendre à moitié : ces six mots reviendront dans toutes les séances de la séquence « Calculs commerciaux et financiers »."}]}
 ;

@@ -111,5 +111,20 @@ export default {id:"ap-consolidation-2pmv2",classe:"2P MV2",mat:"AP",titre:"Cons
        {q:"5 bidons de liquide de frein à 21,50 € : combien coûtent 8 bidons ? (en €)",a:34.4,tol:.05},
        {q:"Remise de 15 % sur une pièce à 40 € : prix payé (en €)",a:34,tol:.05},
        {q:"Sur 25 véhicules contrôlés, 60 % ont un défaut mineur : combien de véhicules ?",a:15,tol:0}]}],
-  trace:"Ces cinq outils — division, arrondi selon le contexte, lecture de tableau, proportionnalité, pourcentage — reviennent dans toutes les séances de l'atelier."}]}
+  trace:"Ces cinq outils — division, arrondi selon le contexte, lecture de tableau, proportionnalité, pourcentage — reviennent dans toutes les séances de l'atelier."},
+ {t:"Le mot du jour",
+  prob:"Cinq mots déjà rencontrés dans les ateliers. Les reconnais-tu à l'écrit ?",
+  steps:[
+   {t:"Devine le mot",viz:"motDuJour",
+    vd:{words:[
+      {word:"quotient",def:"le résultat d'une division"},
+      {word:"diviseur",def:"le nombre par lequel on divise"},
+      {word:"coefficient",def:"le nombre qui relie deux grandeurs proportionnelles"},
+      {word:"pourcentage",def:"une part sur cent"},
+      {word:"conteneur",def:"le contenant dans lequel on range un lot de pièces"},
+      {word:"colonne",def:"dans un tableau, ce qu'on lit de haut en bas"},
+      {word:"arrondi",def:"le nombre le plus proche que l'on garde à la place d'un résultat exact"}
+    ]},
+    apport:"Ce sont les mots des cinq ateliers de cette séquence — pas de nouveau vocabulaire, juste de la reconnaissance."}],
+  trace:"Reconnaître un mot à l'écrit, c'est déjà le comprendre à moitié : ces sept mots reviendront dans toutes les séances de maths qui suivent."}]}
 ;

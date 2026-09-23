@@ -111,5 +111,20 @@ export default {id:"ap-consolidation",classe:"TC AEPE",mat:"AP",titre:"Consolida
        {q:"5 pots de peinture coûtent 21,50 € : combien coûtent 8 pots ? (en €)",a:34.4,tol:.05},
        {q:"Réduction de 15 % sur un jeu à 40 € : prix payé (en €)",a:34,tol:.05},
        {q:"Sur 25 enfants, 60 % mangent à la cantine : combien d'enfants ?",a:15,tol:0}]}],
-  trace:"Ces cinq outils — division, arrondi selon le contexte, lecture de tableau, proportionnalité, pourcentage — reviennent dans toutes les séances de la séquence."}]}
+  trace:"Ces cinq outils — division, arrondi selon le contexte, lecture de tableau, proportionnalité, pourcentage — reviennent dans toutes les séances de la séquence."},
+ {t:"Le mot du jour",
+  prob:"Cinq mots déjà rencontrés dans les ateliers. Les reconnais-tu à l'écrit ?",
+  steps:[
+   {t:"Devine le mot",viz:"motDuJour",
+    vd:{words:[
+      {word:"quotient",def:"le résultat d'une division"},
+      {word:"diviseur",def:"le nombre par lequel on divise"},
+      {word:"coefficient",def:"le nombre qui relie deux grandeurs proportionnelles"},
+      {word:"pourcentage",def:"une part sur cent"},
+      {word:"effectif",def:"le nombre de personnes ou d'éléments"},
+      {word:"colonne",def:"dans un tableau, ce qu'on lit de haut en bas"},
+      {word:"arrondi",def:"le nombre le plus proche que l'on garde à la place d'un résultat exact"}
+    ]},
+    apport:"Ce sont les mots des cinq ateliers de cette séquence — pas de nouveau vocabulaire, juste de la reconnaissance."}],
+  trace:"Reconnaître un mot à l'écrit, c'est déjà le comprendre à moitié : ces sept mots reviendront dans toutes les séances de maths qui suivent."}]}
 ;

@@ -43,6 +43,29 @@
   </section>
   <hr class="hr" />
   <section class="sect" style="padding-top:0">
+    <p class="eyebrow">Accès direct</p>
+    <h2 style="margin-top:8px">Accompagnement personnalisé (AP)</h2>
+    <p class="lead" style="margin-top:8px">
+      Le kit de consolidation des outils de base, un accès direct par classe — sans passer par
+      le programme.
+    </p>
+    <div class="apgrid">
+      <a class="ccard" href="{base}/c/ap-consolidation">
+        <div class="cn">TC AEPE</div>
+        <div class="cd">Division, arrondi, tableau, proportionnalité, pourcentage</div>
+      </a>
+      <a class="ccard" href="{base}/c/ap-consolidation-tcapmp">
+        <div class="cn">TC APMP</div>
+        <div class="cd">HT/TVA/TTC, coefficient, remise, répartition, arrondi</div>
+      </a>
+      <a class="ccard" href="{base}/c/ap-consolidation-2pmv2">
+        <div class="cn">2P MV2</div>
+        <div class="cd">Division, arrondi, tableau, proportionnalité, pourcentage</div>
+      </a>
+    </div>
+  </section>
+  <hr class="hr" />
+  <section class="sect" style="padding-top:0">
     <p class="eyebrow">Le rituel</p>
     <h2 style="margin-top:8px">Questions flash</h2>
     <p class="lead" style="margin-top:8px">
@@ -99,6 +122,12 @@
     display: grid;
     gap: 11px;
     margin-top: 24px;
+  }
+  .apgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 11px;
+    margin-top: 16px;
   }
   .ccard {
     display: block;
