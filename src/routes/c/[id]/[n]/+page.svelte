@@ -113,7 +113,11 @@
       <div class="dllinks">
         {#each se.pdf as stem}
           <a class="dlbtn" href="{base}/fiches/{c.pdf}/{stem}.pdf" target="_blank" rel="noopener">
-            {stem.endsWith('-accessible')
+            {stem === 'devoir-2pmv2-mediane-modele'
+              ? 'Devoir « La médiane » — énoncé modèle (PDF)'
+              : stem === 'devoir-2pmv2-mediane-30-versions'
+                ? 'Devoir « La médiane » — les 30 versions (PDF)'
+                : stem.endsWith('-accessible')
               ? 'Version en langue accessible (PDF)'
               : stem.endsWith('-standard')
                 ? 'Version standard (PDF)'
