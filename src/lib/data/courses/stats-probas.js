@@ -21,7 +21,7 @@ export default {id:"stats-probas",classe:"2P MV2",mat:"Maths",titre:"Statistique
          e:"Une seule — celle du bouchon grippé. La moyenne a été tirée vers le haut."},
         {q:"Pour calculer une moyenne, on :",o:["Prend la valeur du milieu","Additionne puis divise par l'effectif","Prend max moins min"],c:1,e:"Somme des valeurs ÷ nombre de valeurs."}],
   trace:"La <b>moyenne</b> d'une série vaut : somme des valeurs ÷ effectif total. C'est un <b>indicateur de tendance centrale</b> : elle résume la série par un seul nombre.<br>La moyenne est le <b>point d'équilibre</b> de la série. Une valeur très éloignée des autres la déplace fortement : elle n'est alors plus représentative."},
- {t:"Quand la moyenne ment",pdf:["stats-2pmv2-serie-standard", "stats-2pmv2-serie-accessible"],
+ {t:"Quand la moyenne ment",pdf:["stats-2pmv2-serie-standard", "stats-2pmv2-serie-accessible", "devoir-2pmv2-mediane-modele", "devoir-2pmv2-mediane-30-versions"],
   prob:"28 minutes de moyenne, mais dix vidanges sur onze durent moins de 25 minutes. Quel nombre annoncer au client ?",
   steps:[
    {t:"Range les valeurs et compare",viz:"mediane",
