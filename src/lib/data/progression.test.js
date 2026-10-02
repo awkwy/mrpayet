@@ -79,8 +79,8 @@ describe('gating sur les données réelles (semaine 3)', () => {
   });
 
   it('les chapitres de la partie proba de stats-probas restent verrouillés (mv-proba, from 10)', () => {
-    // mv-proba couvre ch [2,3,4,5], from 10 : hors de la fenêtre d’anticipation
-    const l = chapterLock(courseById('stats-probas'), 3, week);
+    // mv-proba couvre ch [5,6,7,8], from 10 : hors de la fenêtre d’anticipation
+    const l = chapterLock(courseById('stats-probas'), 5, week);
     expect(l).not.toBeNull();
     expect(l.monday.toISOString().slice(0, 10)).toBe('2026-10-26');
   });

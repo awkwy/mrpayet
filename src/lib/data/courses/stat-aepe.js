@@ -5,7 +5,7 @@ export default {id:"stat-aepe",classe:"TC AEPE",mat:"Maths",titre:"Décrire un g
       "Calculer et interpréter une moyenne quand les valeurs se répètent",
       "Lire et construire un diagramme en bâtons et un diagramme circulaire"],
  seances:[
- {t:"Combien d'enfants par tranche d'âge ?",
+ {t:"Combien d'enfants par tranche d'âge ?",pdf:["observation-groupe-tcaepe-standard","observation-groupe-tcaepe-accessible"],
   prob:"La directrice doit répartir le personnel selon l'âge des enfants. Comment décrire d'un coup d'œil la composition de la crèche ?",
   steps:[
    {t:"La situation",txt:"La crèche accueille 40 enfants. À l'inscription, on note l'âge de chacun. La directrice veut savoir combien d'enfants dans chaque tranche d'âge, pour organiser les sections et les commandes (couches, repas, matériel)."},
@@ -24,7 +24,7 @@ export default {id:"stat-aepe",classe:"TC AEPE",mat:"Maths",titre:"Décrire un g
   quiz:[{q:"Sur 40 enfants, 12 ont entre 2 et 3 ans. La fréquence est :",o:["0,3 (soit 30 %)","12","3 %"],c:0,e:"12 ÷ 40 = 0,3, soit 30 %."},
         {q:"La somme des fréquences d'une série vaut toujours :",o:["l'effectif total","1 (ou 100 %)","0"],c:1,e:"C'est le moyen de vérifier ses calculs."}],
   trace:"Un <b>tableau d'effectifs</b> donne, pour chaque valeur ou chaque classe, le nombre d'individus concernés. L'<b>effectif total</b> est leur somme.<br>La <b>fréquence</b> d'une valeur = effectif ÷ effectif total ; elle s'écrit en décimal, en fraction ou en pourcentage. <b>La somme des fréquences vaut 1</b> (ou 100 %).<br>Un <b>diagramme en bâtons</b> représente les effectifs ou les fréquences ; un <b>diagramme circulaire</b> représente les fréquences sous forme d'angles (360° pour le total)."},
- {t:"L'âge moyen, et ce qu'il cache",
+ {t:"L'âge moyen, et ce qu'il cache",pdf:["stats-tcaepe-standard","stats-tcaepe-accessible"],
   prob:"Deux crèches annoncent le même âge moyen. Accueillent-elles vraiment les mêmes enfants ?",
   steps:[
    {t:"La situation",txt:"La crèche Arc-en-ciel et la crèche Coquelicot annoncent toutes les deux un âge moyen de 2 ans. Pourtant l'une accueille surtout des moyens, l'autre surtout des bébés et des grands. L'âge moyen suffit-il à les décrire ?"},
