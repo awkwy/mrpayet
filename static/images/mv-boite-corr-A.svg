@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 190" width="740" height="190" font-family="Helvetica, Arial, sans-serif" font-size="13">
+<title>Boîte à moustaches, équipe du matin</title><desc>Minimum 19, Q1 22, médiane 23, Q3 25, maximum 31 ; barème à 24 minutes.</desc>
+<rect width="740" height="190" fill="#fff"/>
+<line x1="40" y1="150" x2="700" y2="150" stroke="#222" stroke-width="1.5"/>
+<line x1="40.0" y1="150" x2="40.0" y2="158" stroke="#222"/>
+<text x="40.0" y="174" text-anchor="middle">10</text>
+<line x1="40.0" y1="40" x2="40.0" y2="150" stroke="#ddd"/>
+<line x1="65.4" y1="150" x2="65.4" y2="154" stroke="#222"/>
+<line x1="90.8" y1="150" x2="90.8" y2="158" stroke="#222"/>
+<text x="90.8" y="174" text-anchor="middle">12</text>
+<line x1="90.8" y1="40" x2="90.8" y2="150" stroke="#ddd"/>
+<line x1="116.2" y1="150" x2="116.2" y2="154" stroke="#222"/>
+<line x1="141.5" y1="150" x2="141.5" y2="158" stroke="#222"/>
+<text x="141.5" y="174" text-anchor="middle">14</text>
+<line x1="141.5" y1="40" x2="141.5" y2="150" stroke="#ddd"/>
+<line x1="166.9" y1="150" x2="166.9" y2="154" stroke="#222"/>
+<line x1="192.3" y1="150" x2="192.3" y2="158" stroke="#222"/>
+<text x="192.3" y="174" text-anchor="middle">16</text>
+<line x1="192.3" y1="40" x2="192.3" y2="150" stroke="#ddd"/>
+<line x1="217.7" y1="150" x2="217.7" y2="154" stroke="#222"/>
+<line x1="243.1" y1="150" x2="243.1" y2="158" stroke="#222"/>
+<text x="243.1" y="174" text-anchor="middle">18</text>
+<line x1="243.1" y1="40" x2="243.1" y2="150" stroke="#ddd"/>
+<line x1="268.5" y1="150" x2="268.5" y2="154" stroke="#222"/>
+<line x1="293.8" y1="150" x2="293.8" y2="158" stroke="#222"/>
+<text x="293.8" y="174" text-anchor="middle">20</text>
+<line x1="293.8" y1="40" x2="293.8" y2="150" stroke="#ddd"/>
+<line x1="319.2" y1="150" x2="319.2" y2="154" stroke="#222"/>
+<line x1="344.6" y1="150" x2="344.6" y2="158" stroke="#222"/>
+<text x="344.6" y="174" text-anchor="middle">22</text>
+<line x1="344.6" y1="40" x2="344.6" y2="150" stroke="#ddd"/>
+<line x1="370.0" y1="150" x2="370.0" y2="154" stroke="#222"/>
+<line x1="395.4" y1="150" x2="395.4" y2="158" stroke="#222"/>
+<text x="395.4" y="174" text-anchor="middle">24</text>
+<line x1="395.4" y1="40" x2="395.4" y2="150" stroke="#ddd"/>
+<line x1="420.8" y1="150" x2="420.8" y2="154" stroke="#222"/>
+<line x1="446.2" y1="150" x2="446.2" y2="158" stroke="#222"/>
+<text x="446.2" y="174" text-anchor="middle">26</text>
+<line x1="446.2" y1="40" x2="446.2" y2="150" stroke="#ddd"/>
+<line x1="471.5" y1="150" x2="471.5" y2="154" stroke="#222"/>
+<line x1="496.9" y1="150" x2="496.9" y2="158" stroke="#222"/>
+<text x="496.9" y="174" text-anchor="middle">28</text>
+<line x1="496.9" y1="40" x2="496.9" y2="150" stroke="#ddd"/>
+<line x1="522.3" y1="150" x2="522.3" y2="154" stroke="#222"/>
+<line x1="547.7" y1="150" x2="547.7" y2="158" stroke="#222"/>
+<text x="547.7" y="174" text-anchor="middle">30</text>
+<line x1="547.7" y1="40" x2="547.7" y2="150" stroke="#ddd"/>
+<line x1="573.1" y1="150" x2="573.1" y2="154" stroke="#222"/>
+<line x1="598.5" y1="150" x2="598.5" y2="158" stroke="#222"/>
+<text x="598.5" y="174" text-anchor="middle">32</text>
+<line x1="598.5" y1="40" x2="598.5" y2="150" stroke="#ddd"/>
+<line x1="623.8" y1="150" x2="623.8" y2="154" stroke="#222"/>
+<line x1="649.2" y1="150" x2="649.2" y2="158" stroke="#222"/>
+<text x="649.2" y="174" text-anchor="middle">34</text>
+<line x1="649.2" y1="40" x2="649.2" y2="150" stroke="#ddd"/>
+<line x1="674.6" y1="150" x2="674.6" y2="154" stroke="#222"/>
+<line x1="700.0" y1="150" x2="700.0" y2="158" stroke="#222"/>
+<text x="700.0" y="174" text-anchor="middle">36</text>
+<line x1="700.0" y1="40" x2="700.0" y2="150" stroke="#ddd"/>
+<text x="714" y="155" font-size="12">min</text>
+<line x1="268.5" y1="95.0" x2="344.6" y2="95.0" stroke="#222" stroke-width="2"/>
+<line x1="420.8" y1="95.0" x2="573.1" y2="95.0" stroke="#222" stroke-width="2"/>
+<line x1="268.5" y1="80.0" x2="268.5" y2="110.0" stroke="#222" stroke-width="2"/>
+<line x1="573.1" y1="80.0" x2="573.1" y2="110.0" stroke="#222" stroke-width="2"/>
+<rect x="344.6" y="70" width="76.2" height="50" fill="#2a6fdb" fill-opacity="0.35" stroke="#222" stroke-width="2"/>
+<line x1="370.0" y1="70" x2="370.0" y2="120" stroke="#b00020" stroke-width="3"/>
+<text x="268.5" y="64" text-anchor="middle" font-size="12" fill="#222">min 19</text>
+<text x="344.6" y="64" text-anchor="middle" font-size="12" fill="#222">Q₁ 22</text>
+<text x="420.8" y="64" text-anchor="middle" font-size="12" fill="#222">Q₃ 25</text>
+<text x="573.1" y="64" text-anchor="middle" font-size="12" fill="#222">max 31</text>
+<text x="370.0" y="135" text-anchor="middle" font-size="12" fill="#b00020" font-weight="bold">méd. 23</text>
+<text x="40" y="46" font-weight="bold" font-size="14">Équipe du matin — 24 vidanges</text>
+<line x1="395.4" y1="40" x2="395.4" y2="150" stroke="#0b6e4f" stroke-width="2.5" stroke-dasharray="7 5"/>
+<text x="401.4" y="52" fill="#0b6e4f" font-weight="bold" font-size="12">barème 24 min</text>
+</svg>

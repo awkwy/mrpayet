@@ -45,11 +45,11 @@ export const BLOCS = [
 
  // ---------- 2P MV2 — mathématiques (2de bac pro) ----------
  {id:"mv-stat",cls:["2P MV2"],dom:"Statistique et probabilités",
-  t:"Statistique à une variable",cours:{"2P MV2":["stats-probas"]},ch:[0,1],flash:["mental","fractions"],
-  appr:["Calculer une moyenne, une médiane, une étendue","Choisir l'indicateur adapté et repérer l'effet d'une valeur extrême","Lire et interpréter une série présentée dans un tableau ou un graphique"]},
+  t:"Statistique à une variable",cours:{"2P MV2":["stats-probas"]},ch:[0,1,2,3,4],flash:["mental","fractions"],
+  appr:["Calculer une moyenne, une médiane, une étendue","Choisir l'indicateur adapté et repérer l'effet d'une valeur extrême","Calculer les quartiles et l'écart interquartile, lire une boîte à moustaches, lire un écart type","Lire et interpréter une série présentée dans un tableau ou un graphique"]},
  {id:"mv-proba",cls:["2P MV2"],dom:"Statistique et probabilités",
   t:"Fluctuation d'une fréquence selon les échantillons, probabilités",
-  cours:{"2P MV2":["stats-probas"]},ch:[2,3,4,5],flash:["fractions","mental"],
+  cours:{"2P MV2":["stats-probas"]},ch:[5,6,7,8],flash:["fractions","mental"],
   appr:["Calculer une probabilité dans un cas simple ; savoir qu'elle est comprise entre 0 et 1","Dénombrer les issues de deux épreuves avec un arbre ou un tableau","Comprendre la fluctuation d'échantillonnage et la stabilisation des fréquences vers la probabilité"]},
  {id:"mv-degre1",cls:["2P MV2"],dom:"Algèbre et analyse",
   t:"Résolution d'un problème du premier degré",cours:{"2P MV2":["degre1-mv"]},flash:["formules","signes"],
