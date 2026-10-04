@@ -214,6 +214,16 @@ pour l'enseignant équipé, sans bloquer celui qui ne l'est pas.
   ink/accent ; `--warn` y sert de câble haute tension (véhicule électrique),
   même convention que la visualisation `alternatif`.
 
+## Jeu du pendu
+
+- Route `/jeux/pendu` (page unique, lien depuis l'accueil). Mots par thème dans
+  `$lib/data/pendu-words.js` (un mot simple par entrée, sans tiret ni ligature
+  œ — le test `pendu.test.js` le vérifie) ; logique pure (accents → lettre de
+  base, tirage, état immuable) dans `$lib/utils/pendu.js`. Le mot est tiré
+  dans `onMount` (page prérendue : pas de hasard au rendu serveur). Touches
+  du clavier à l'écran en `aria-disabled` (pas `disabled`) pour garder le
+  focus clavier.
+
 ## Maintaining this file
 
 Keep this file for knowledge useful to almost every future agent session in this project.
