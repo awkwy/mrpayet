@@ -54,6 +54,18 @@
       <div class="cd">3 classes · plusieurs thèmes · questions tirées au hasard</div>
     </a>
   </section>
+  <hr class="hr" />
+  <section class="sect" style="padding-top:0">
+    <p class="eyebrow">Pour se détendre</p>
+    <h2 style="margin-top:8px">Jeu du pendu</h2>
+    <p class="lead" style="margin-top:8px">
+      Retrouve le mot du cours (maths, statistiques, électricité, chimie…) avant le dernier trait.
+    </p>
+    <a class="ccard wide" href="{base}/jeux/pendu">
+      <div class="cn">Jouer au pendu</div>
+      <div class="cd">6 thèmes · clavier à l'écran ou au clavier</div>
+    </a>
+  </section>
 </div>
 
 <style>
