@@ -14,9 +14,15 @@ function keyFor(classeSlug) {
   return `mrp.parcours.${classeSlug}`;
 }
 
+// Classes renommées : on relit la progression enregistrée sous l'ancien slug (TC APMP → TC APM)
+// si rien n'existe encore sous le nouveau ; elle est réécrite sous le nouveau à la première validation.
+const LEGACY_KEYS = { tcapm: 'tcapmp' };
+
 function load(classeSlug) {
   try {
-    const raw = localStorage.getItem(keyFor(classeSlug));
+    const raw =
+      localStorage.getItem(keyFor(classeSlug)) ??
+      (LEGACY_KEYS[classeSlug] ? localStorage.getItem(keyFor(LEGACY_KEYS[classeSlug])) : null);
     return raw ? JSON.parse(raw) : {};
   } catch {
     return {};

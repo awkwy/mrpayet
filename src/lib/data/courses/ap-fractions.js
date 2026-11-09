@@ -1,4 +1,4 @@
-export default {id:"ap-fractions",classe:"TC AEPE",classes:["TC AEPE","TC APMP","2P MV2"],mat:"AP",titre:"Atelier — les fractions",
+export default {id:"ap-fractions",classe:"TC AEPE",classes:["TC AEPE","TC APM","2P MV2"],mat:"AP",titre:"Atelier — les fractions",
  desc:"Atelier autocorrectif pas-à-pas : reconnaître, simplifier, comparer, additionner une fraction, et l'utiliser dans un calcul de quantité.",
  pdf:"ap",
  obj:["Reconnaître une fraction et ce qu'elle représente (numérateur, dénominateur)",

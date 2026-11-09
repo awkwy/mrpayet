@@ -11,7 +11,7 @@
   // réelle. Si verrouillé, on n'affiche rien du contenu, même en lien direct.
   let lock = $derived(blocLock(data.bloc, data.classe));
 
-  // Un bloc partagé entre classes ne propose que les thèmes flash que la classe a (ex. `freq` : TC APMP seulement).
+  // Un bloc partagé entre classes ne propose que les thèmes flash que la classe a (ex. `freq` : TC APM seulement).
   let flashThemes = $derived((data.bloc.flash ?? []).filter((f) => AUTO.c[data.classe]?.o.includes(f)));
   let chapters = $derived(blocChapters(data.bloc, data.classe));
   // touching $done keeps this reactive to progress changes

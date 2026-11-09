@@ -32,10 +32,10 @@ const textOf = (x) =>
   });
 
 describe('cours TC APM — statistique à une variable', () => {
-  it('les quatre cours existent, pour la classe TC APMP, et ont des séances', () => {
+  it('les quatre cours existent, pour la classe TC APM, et ont des séances', () => {
     courses.forEach((c, i) => {
       expect(c, IDS[i]).toBeTruthy();
-      expect(c.classe).toBe('TC APMP');
+      expect(c.classe).toBe('TC APM');
       expect(c.seances.length).toBeGreaterThan(0);
     });
   });
@@ -107,11 +107,9 @@ describe('cours TC APM — statistique à une variable', () => {
     expect(textOf(AUTO.t.freq)).not.toContain('÷');
   });
 
-  it("jamais « APMP » dans un texte destiné aux élèves (la clé de classe seule le porte)", () => {
-    for (const c of courses) {
-      const { classe, ...rest } = c;
-      expect(textOf(rest), c.id).not.toMatch(/APMP/);
-    }
+  it("jamais « APMP » dans un contenu destiné aux élèves, classe comprise", () => {
+    for (const c of courses) expect(textOf(c), c.id).not.toMatch(/APMP/);
+    for (const id of IDS) expect(textOf(RECAP[id]), `recap ${id}`).not.toMatch(/APMP/);
   });
 
   it('les séances de calculatrice stat1 portent une série cohérente', () => {
@@ -128,8 +126,8 @@ describe('cours TC APM — statistique à une variable', () => {
 });
 
 describe('câblage du module Statistique', () => {
-  it('les quatre cours sont rattachés à un bloc du programme TC APMP', () => {
-    const inBlocs = (id) => BLOCS.some((b) => (b.cours['TC APMP'] || []).includes(id));
+  it('les quatre cours sont rattachés à un bloc du programme TC APM', () => {
+    const inBlocs = (id) => BLOCS.some((b) => (b.cours['TC APM'] || []).includes(id));
     IDS.forEach((id) => expect(inBlocs(id), id).toBe(true));
   });
 
@@ -140,20 +138,20 @@ describe('câblage du module Statistique', () => {
     }
   });
 
-  it('le thème flash « freq » est proposé au TC APMP, avec des questions à réponse unique', () => {
-    expect(AUTO.c['TC APMP'].o).toContain('freq');
+  it('le thème flash « freq » est proposé au TC APM, avec des questions à réponse unique', () => {
+    expect(AUTO.c['TC APM'].o).toContain('freq');
     const answers = AUTO.t.freq.i.map((it) => it[1]);
     expect(new Set(answers).size).toBe(answers.length);
   });
 
   it('la statistique est ouverte depuis la semaine 10 (27 octobre), probabilités et fonctions restent verrouillées', () => {
-    const stat = PROGRESSION.filter((p) => p.classe === 'TC APMP' && p.blocId === 'stat-cap');
+    const stat = PROGRESSION.filter((p) => p.classe === 'TC APM' && p.blocId === 'stat-cap');
     expect(Math.min(...stat.map((p) => p.from))).toBe(10);
     // semaine 12 (9 novembre) : statistique accessible
     expect(futureLock(stat, 12)).toBeNull();
     const week = 12;
     for (const blocId of ['proba-cap', 'fonctions-cap']) {
-      const entries = PROGRESSION.filter((p) => p.classe === 'TC APMP' && p.blocId === blocId);
+      const entries = PROGRESSION.filter((p) => p.classe === 'TC APM' && p.blocId === blocId);
       expect(futureLock(entries, week), blocId).not.toBeNull();
     }
   });

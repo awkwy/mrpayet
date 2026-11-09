@@ -1,4 +1,4 @@
-export default {id:"propor-apmp",classe:"TC APMP",mat:"Maths",titre:"Partager, doser, comparer",
+export default {id:"propor-apmp",classe:"TC APM",mat:"Maths",titre:"Partager, doser, comparer",
  desc:"Proportionnalité : coefficient, quatrième proportionnelle, pourcentages et évolutions — répartitions et chiffres de la médiation.",
  pdf:"maths",
  obj:["Reconnaître une situation de proportionnalité et compléter un tableau",

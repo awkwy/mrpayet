@@ -16,7 +16,7 @@ const MANGROVE_Q2 = {question:"Q2 — Selon vous, à quoi sert surtout la mangro
 const HARCELEMENT_Q1 = {question:"Q1 — Combien de fois cette semaine as-tu vu ou subi une moquerie, une insulte ou une bousculade répétée ?",
   options:["0","1","2","3","4 ou plus"],counts:[15,12,10,8,5],values:[0,1,2,3,4],graph:"batons",unit:"élèves",seed:11,meanUnit:"fait par élève et par semaine"};
 
-export default {id:"sondage-tcapm",classe:"TC APMP",mat:"Maths",titre:"Faire un sondage",
+export default {id:"sondage-tcapm",classe:"TC APM",mat:"Maths",titre:"Faire un sondage",
  desc:"Poser, organiser, présenter : dépouiller un questionnaire, calculer effectifs, fréquences et moyenne, tracer bâtons et circulaire, puis fabriquer son propre questionnaire dans Word.",
  pdf:"maths",
  obj:["Poser une question de départ, choisir un échantillon et écrire des questions fermées qui se comptent",

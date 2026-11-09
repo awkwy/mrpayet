@@ -74,7 +74,7 @@ describe('gating sur les données réelles (semaine 3)', () => {
     expect(courseLock(courseById('stats-probas'), week)).toBeNull();
   });
 
-  it('acoustique-apmp est accessible : ouvert pour TC APMP (from 2) même si TC AEPE est plus tard', () => {
+  it('acoustique-apmp est accessible : ouvert pour TC APM (from 2) même si TC AEPE est plus tard', () => {
     expect(courseLock(courseById('acoustique-apmp'), week)).toBeNull();
   });
 

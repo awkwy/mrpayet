@@ -1,4 +1,4 @@
-export default {id:"stat-apmp",classe:"TC APMP",mat:"Maths",titre:"Compter les conflits",
+export default {id:"stat-apmp",classe:"TC APM",mat:"Maths",titre:"Compter les conflits",
  desc:"Statistique à une variable : effectifs et fréquences, moyenne et médiane des délais, diagrammes — pour le rapport d'activité.",
  pdf:"maths",
  obj:["Organiser des relevés dans un tableau d'effectifs et calculer des fréquences",

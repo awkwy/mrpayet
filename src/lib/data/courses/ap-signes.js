@@ -1,4 +1,4 @@
-export default {id:"ap-signes",classe:"TC AEPE",classes:["TC AEPE","TC APMP","2P MV2"],mat:"AP",titre:"Atelier — les nombres relatifs",
+export default {id:"ap-signes",classe:"TC AEPE",classes:["TC AEPE","TC APM","2P MV2"],mat:"AP",titre:"Atelier — les nombres relatifs",
  desc:"Atelier autocorrectif pas-à-pas : lire un nombre relatif, l'additionner, le soustraire, et appliquer la règle des signes en multiplication.",
  pdf:"ap",
  obj:["Lire et situer un nombre relatif sur une droite graduée",

@@ -216,11 +216,16 @@ pour l'enseignant équipé, sans bloquer celui qui ne l'est pas.
 
 ## Statistique TC APM (stage, registre, sondage, AP)
 
-- Quatre cours pour la classe `TC APMP` (clé interne ; **le libellé élève est « TC APM »** :
-  n'écrire jamais « APMP » dans un texte neuf, la clé `TC APMP` de `blocs.js` /
-  `course-helpers.js` n'est pas encore renommée — rename = slug `/r/…`, `/flash/tcapmp`,
-  clés localStorage) : `stats-stage-tcapm`, `registre-mediation-tcapm`, `sondage-tcapm`,
-  `ap-stats-tcapm`, tous dans le bloc `stat-cap` / `numeriques-cap` (AP). Programme CAP :
+- Quatre cours pour la classe `TC APM` (slug `tcapm`) : `stats-stage-tcapm`,
+  `registre-mediation-tcapm`, `sondage-tcapm`, `ap-stats-tcapm`, tous dans le bloc
+  `stat-cap` / `numeriques-cap` (AP). **La classe s'appelle « TC APM », jamais « APMP »** (règle du
+  capitaine, tout texte visible) : l'ancien libellé et l'ancien slug `tcapmp` ne subsistent que dans
+  `$lib/utils/legacy-class.js`, qui prérend des redirections 307 (`/p/tcapmp`, `/flash/tcapmp/…`,
+  `/bloc/tcapmp/…`, `/revisions/…`, `/ccf/…`, `/r/TC APMP`) — toute route à paramètre `classe` y
+  passe via `withLegacyClassEntries` + `redirectLegacyClass`. Restent volontairement en `apmp`
+  (liens imprimés / QR / favoris, progression `mrp.done` indexée par id) : les ids de cours
+  (`stat-apmp`, `ap-consolidation-tcapmp`…) et les noms de PDF `*-tcapmp-*`. La progression du
+  parcours d'automatismes (`mrp.parcours.<slug>`) est relue depuis l'ancienne clé. Programme CAP :
   effectif total, fréquences, moyenne, bâtons, circulaire ; médiane et quartiles hors programme
   (boîte « pour les curieux » seulement, voir `Stat1Shell`).
 - **Division : jamais ÷.** Dans `apport` / `trace` / `met` des récap (HTML via `{@html}`) on
@@ -243,7 +248,7 @@ pour l'enseignant équipé, sans bloquer celui qui ne l'est pas.
   (consigne générale), affichés après une pause de frappe : c'est le « retour sur question
   ouverte » préféré du capitaine aux phrases à trous. `checkText` compare maintenant un nombre
   attendu **exactement** (0,35 n'est plus accepté pour 0,3, 400 pour 40) et accepte virgule ou point.
-- Automatismes : le thème `freq` (TC APMP) est ajouté en FIN de `automatismes.js` (fichier d'une
+- Automatismes : le thème `freq` (TC APM) est ajouté en FIN de `automatismes.js` (fichier d'une
   seule ligne : toute autre édition entre en conflit) ; ses variantes aléatoires viennent de
   `$lib/data/auto-freq.js` (`GENERATORS`), branchées dans `flash/[classe]/[theme]`. Un item
   `[q, a, {bars}]` dessine un diagramme sous la question. Les thèmes d'un bloc partagé sont

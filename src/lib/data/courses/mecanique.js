@@ -1,4 +1,4 @@
-export default {id:"mecanique",classe:"TC AEPE",classes:["TC AEPE","TC APMP"],mat:"Physique-chimie",titre:"Mouvement, vitesse et équilibre",
+export default {id:"mecanique",classe:"TC AEPE",classes:["TC AEPE","TC APM"],mat:"Physique-chimie",titre:"Mouvement, vitesse et équilibre",
  desc:"Mécanique : vitesse moyenne, modéliser une action par une force, poids et masse, équilibre d'un solide soumis à deux forces.",
  pdf:"sciences",
  obj:["Calculer une vitesse moyenne (distance ÷ durée)",

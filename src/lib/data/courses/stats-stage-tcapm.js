@@ -11,7 +11,7 @@ import { fr } from '$lib/utils/frac.js';
 
 const SERIE = [[10, 2], [12, 4], [14, 2], [16, 1], [18, 1]];
 
-export default {id:"stats-stage-tcapm",classe:"TC APMP",mat:"Maths",titre:"Mon stage en chiffres",
+export default {id:"stats-stage-tcapm",classe:"TC APM",mat:"Maths",titre:"Mon stage en chiffres",
  desc:"Statistique à une variable avec la NumWorks : effectif, effectif total, moyenne, bâtons, fréquence et pourcentage — faut-il un deuxième agent à l'accueil de la mairie ?",
  pdf:"maths",
  obj:["Ranger des relevés dans un tableau d'effectifs et trouver l'effectif total",

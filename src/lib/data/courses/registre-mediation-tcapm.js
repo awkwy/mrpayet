@@ -14,7 +14,7 @@ const PHRASE_BY = {
   "les autres":{eff:"2",pct:"10 %"}
 };
 
-export default {id:"registre-mediation-tcapm",classe:"TC APMP",mat:"Maths",titre:"Le registre de la médiation",
+export default {id:"registre-mediation-tcapm",classe:"TC APM",mat:"Maths",titre:"Le registre de la médiation",
  desc:"Effectif et effectif total, fréquence et pourcentage dans les deux sens, puis la phrase récap : les médiateurs du lycée comptent les situations traitées dans le mois.",
  pdf:"maths",
  obj:["Distinguer l'effectif (un seul type) et l'effectif total (tous les types ensemble)",

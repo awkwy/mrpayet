@@ -45,7 +45,7 @@ export const PROGRESSION = [
   // Chimie, Acoustique, Optique — mais ces modules n'ont pas encore de
   // cours ni de bloc en ligne pour 2P MV2 (seul « Sécurité électrique »,
   // mv-pc-secu, est porté ; les blocs pc-* du programme BO2019 CAP
-  // couvrent TC AEPE/TC APMP, pas 2P MV2, qui suit le programme bac pro).
+  // couvrent TC AEPE/TC APM, pas 2P MV2, qui suit le programme bac pro).
   // Pas d'entrée ici tant que ce contenu n'existe pas côté site — mieux
   // vaut ne rien afficher qu'un lien mort.
 
@@ -66,22 +66,22 @@ export const PROGRESSION = [
   { classe: 'TC AEPE', blocId: 'pc-optique', from: 29, to: 29 },
   { classe: 'TC AEPE', blocId: 'pc-optique', from: 34, to: 36 },
 
-  // ---------- TC APMP — maths (Progression_TCAPMP_maths.md) ----------
-  { classe: 'TC APMP', blocId: 'commerce-cap', from: 2, to: 3, note: 'déjà fait' },
-  { classe: 'TC APMP', blocId: 'commerce-cap', from: 10, to: 12 },
+  // ---------- TC APM — maths (Progression_TCAPM_maths.md) ----------
+  { classe: 'TC APM', blocId: 'commerce-cap', from: 2, to: 3, note: 'déjà fait' },
+  { classe: 'TC APM', blocId: 'commerce-cap', from: 10, to: 12 },
   // Ouverture avancée au mardi 27/10 (semaine 10, choix du capitaine) : « Mon stage en chiffres »,
   // puis le registre de la médiation et le sondage ; la fin du module reste en semaines 13-16.
-  { classe: 'TC APMP', blocId: 'stat-cap', from: 10, to: 16 },
-  { classe: 'TC APMP', blocId: 'proba-cap', from: 21, to: 23 },
-  { classe: 'TC APMP', blocId: 'fonctions-cap', from: 24, to: 26 },
-  { classe: 'TC APMP', blocId: 'propor-cap', from: 29, to: 29 },
+  { classe: 'TC APM', blocId: 'stat-cap', from: 10, to: 16 },
+  { classe: 'TC APM', blocId: 'proba-cap', from: 21, to: 23 },
+  { classe: 'TC APM', blocId: 'fonctions-cap', from: 24, to: 26 },
+  { classe: 'TC APM', blocId: 'propor-cap', from: 29, to: 29 },
 
-  // ---------- TC APMP — sciences (Progression_TCAPMP_sciences.md) ----------
-  { classe: 'TC APMP', blocId: 'pc-acous', from: 2, to: 3 },
-  { classe: 'TC APMP', blocId: 'pc-chimie', from: 10, to: 16 },
-  { classe: 'TC APMP', blocId: 'pc-meca', from: 24, to: 26 },
-  { classe: 'TC APMP', blocId: 'pc-thermique', from: 29, to: 29 },
-  { classe: 'TC APMP', blocId: 'pc-optique', from: 33, to: 36 }
+  // ---------- TC APM — sciences (Progression_TCAPM_sciences.md) ----------
+  { classe: 'TC APM', blocId: 'pc-acous', from: 2, to: 3 },
+  { classe: 'TC APM', blocId: 'pc-chimie', from: 10, to: 16 },
+  { classe: 'TC APM', blocId: 'pc-meca', from: 24, to: 26 },
+  { classe: 'TC APM', blocId: 'pc-thermique', from: 29, to: 29 },
+  { classe: 'TC APM', blocId: 'pc-optique', from: 33, to: 36 }
 ];
 
 /** Numéro de semaine (convention calendrier-annee) pour une date donnée. */

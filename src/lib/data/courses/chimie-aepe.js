@@ -1,4 +1,4 @@
-export default {id:"chimie-aepe",classe:"TC AEPE",classes:["TC AEPE","TC APMP"],mat:"Physique-chimie",titre:"Les produits d'entretien de la crèche",
+export default {id:"chimie-aepe",classe:"TC AEPE",classes:["TC AEPE","TC APM"],mat:"Physique-chimie",titre:"Les produits d'entretien de la crèche",
  desc:"Chimie : pictogrammes et EPI, pH et nature d'une solution, concentration massique et dilution.",
  pdf:"sciences",
  obj:["Lire un pictogramme de danger et choisir les EPI adaptés",

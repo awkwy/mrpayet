@@ -1,4 +1,4 @@
-export default {id:"degre1-apmp",classe:"TC APMP",mat:"Maths",titre:"Trouver le juste montant",
+export default {id:"degre1-apmp",classe:"TC APM",mat:"Maths",titre:"Trouver le juste montant",
  desc:"Problème du premier degré : mettre en équation, résoudre ax + b = c, écrire et utiliser une inéquation de budget.",
  pdf:"maths",
  obj:["Traduire un problème par une équation du premier degré et la résoudre",

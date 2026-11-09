@@ -1,4 +1,4 @@
-export default {id:"interet-apmp",classe:"TC APMP",mat:"Maths",titre:"Placer et rembourser de l'argent",
+export default {id:"interet-apmp",classe:"TC APM",mat:"Maths",titre:"Placer et rembourser de l'argent",
  desc:"Calculs financiers : intérêt simple, valeur acquise, durée en mois, paiement échelonné — budget d'association et médiation.",
  pdf:"maths",
  obj:["Calculer un intérêt simple à partir du capital, du taux et de la durée",

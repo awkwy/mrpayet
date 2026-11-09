@@ -10,7 +10,7 @@ import { fr } from '$lib/utils/frac.js';
 
 const SERIE = [[10, 2], [12, 4], [14, 2], [16, 1], [18, 1]];
 
-export default {id:"ap-stats-tcapm",classe:"TC APMP",mat:"AP",titre:"Consolidation des outils de statistique",
+export default {id:"ap-stats-tcapm",classe:"TC APM",mat:"AP",titre:"Consolidation des outils de statistique",
  desc:"Ateliers autocorrectifs : moyenne, fréquence et pourcentage, lire un tableau et des bâtons, saisir V1 / N1 dans la NumWorks — avec un retour sur chaque erreur.",
  pdf:"ap",
  obj:["Calculer une moyenne, avec ou sans effectifs, et vérifier qu'elle est vraisemblable",
