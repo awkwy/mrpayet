@@ -1,3 +1,17 @@
+import triSerie from './tri-serie.svelte';
+import bilanTableau from './bilan-tableau.svelte';
+import boitesEquipes from './boites-equipes.svelte';
+import phraseMv from './phrase-mv.svelte';
+import autotest from './autotest.svelte';
+import sigma from './sigma.svelte';
+import convertisseur from './convertisseur.svelte';
+import registreMv from './registre-mv.svelte';
+import bac from './bac.svelte';
+import mecaniciens from './mecaniciens.svelte';
+import sachet from './sachet.svelte';
+import cinqquestions from './cinqquestions.svelte';
+import tarif from './tarif.svelte';
+import autotestChoix from './autotest-choix.svelte';
 import fusible from './fusible.svelte';
 import noeuds from './noeuds.svelte';
 import alternatif from './alternatif.svelte';
@@ -49,6 +63,8 @@ import depouillement from './depouillement.svelte';
 import saisieErreur from './saisie-erreur.svelte';
 
 export const VIZ = {
+  triSerie, bilanTableau, boitesEquipes, phraseMv, autotest, sigma, convertisseur, registreMv, bac,
+  mecaniciens, sachet, cinqquestions, tarif, autotestChoix,
   fusible, noeuds, alternatif, circuit, taux, aire, bascule, budget, remise, partage,
   division, multiplication, moyenne, mediane, experience, arbre, arbrepondere, fluctuation,
   stabilisation, batons, moypond, ph, interet, onde, propor, courbe, geo, pyth,

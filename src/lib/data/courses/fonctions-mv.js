@@ -1,10 +1,14 @@
+import { TARIF } from './fonctions-tarif.js';
+
 export default {id:"fonctions-mv",classe:"2P MV2",mat:"Maths",titre:"Lire et modéliser avec des fonctions",
  desc:"Fonctions : registres, image et antécédent, fonction affine (coefficient directeur, ordonnée à l'origine), variations et extremum, fonction carré.",
  pdf:"maths",
  obj:["Passer d'un registre à l'autre : expression, tableau, courbe",
+      "Placer des points et lire image et antécédent sur un prix (diagnostic + tarif horaire)",
       "Lire image, antécédents, variations et extremum sur une courbe",
       "Reconnaître une fonction affine et une fonction carré, et les exploiter"],
  seances:[
+ TARIF,
  {t:"Trois façons de dire la même chose",
   prob:"L'usure d'un pneu selon les kilomètres parcourus : on peut la donner par une formule, un tableau ou une courbe. Comment passer de l'une à l'autre ?",
   steps:[

@@ -39,8 +39,12 @@
     host.style.position = 'relative';
     const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const P = 0.2;
-    let n = 10;
+    // `vd` (facultatif) : { p, ns } — proportion du lot et tailles d'échantillon
+    // proposées (ex. lot de durites à 15 % de défauts : { p: 0.15, ns: [5, 20, 100, 500] }).
+    // Sans `vd`, le comportement historique (p = 0,2 ; n = 10, 30, 100, 1000).
+    const P = vd?.p ?? 0.2;
+    const NS = vd?.ns ?? [10, 30, 100, 1000];
+    let n = NS[0];
     let fs = [];
     let anim = null;
     let gen = 0;
@@ -129,7 +133,7 @@
     const nb = box(
       host,
       'vctl',
-      [10, 30, 100, 1000].map((v) => `<button data-n="${v}"${v === 10 ? ' class="on"' : ''}>n = ${v}</button>`).join('')
+      NS.map((v) => `<button data-n="${v}"${v === NS[0] ? ' class="on"' : ''}>n = ${v}</button>`).join('')
     );
     const ctl = box(
       host,
@@ -218,9 +222,9 @@
           `Sur ${fs.length} échantillons de <b>n = ${n}</b>, les fréquences vont de ` +
           `<b>${fr(Math.min(...fs).toFixed(2))}</b> à <b>${fr(Math.max(...fs).toFixed(2))}</b> : ` +
           `l'étendue vaut <b>${fr(e.toFixed(3))}</b>. ` +
-          (n >= 100
+          (n >= NS[NS.length - 2]
             ? 'Avec un grand n, les fréquences se resserrent autour de p.'
-            : 'Passe à n = 100 puis n = 1000 : regarde le nuage se resserrer.');
+            : `Passe à n = ${NS[NS.length - 2]} puis n = ${NS[NS.length - 1]} : regarde le nuage se resserrer.`);
       } else if (fs.length === 1) {
         host.querySelector('#fE').textContent = '—';
         say.innerHTML = `Fréquence de cet échantillon : <b>${fr(fs[0].toFixed(2))}</b>. Il en faut plusieurs pour parler d'étendue.`;

@@ -5,7 +5,7 @@
 <div class="rcard">
   <div class="sig"><span class="lbl">Si tu vois</span> {r.sig}</div>
   <div class="met"><span class="lbl">Tu fais</span> {@html r.met}</div>
-  <div class="ex"><span class="lbl">Exemple</span> {r.ex}</div>
+  <div class="ex"><span class="lbl">Exemple</span> {#if r.exh}{@html r.exh}{:else}{r.ex}{/if}</div>
   <div class="pg"><span class="lbl">Piège</span> {r.pg}</div>
 </div>
 

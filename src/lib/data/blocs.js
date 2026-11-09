@@ -45,11 +45,11 @@ export const BLOCS = [
 
  // ---------- 2P MV2 — mathématiques (2de bac pro) ----------
  {id:"mv-stat",cls:["2P MV2"],dom:"Statistique et probabilités",
-  t:"Statistique à une variable",cours:{"2P MV2":["stats-probas"]},ch:[0,1,2,3,4],flash:["mental","fractions"],
-  appr:["Calculer une moyenne, une médiane, une étendue","Choisir l'indicateur adapté et repérer l'effet d'une valeur extrême","Calculer les quartiles et l'écart interquartile, lire une boîte à moustaches, lire un écart type","Lire et interpréter une série présentée dans un tableau ou un graphique"]},
+  t:"Statistique à une variable",cours:{"2P MV2":["stats-probas"]},ch:[0,1,2,3,4,5,6,7,8],flash:["mental","fractions","stats_rituel"],
+  appr:["Calculer une moyenne, une médiane, une étendue","Choisir l'indicateur adapté et repérer l'effet d'une valeur extrême","Calculer les quartiles et l'écart interquartile, lire une boîte à moustaches, lire un écart type","Comparer la régularité de deux séries (boîtes sur un même axe, écart type)","Lire et interpréter une série présentée dans un tableau ou un graphique"]},
  {id:"mv-proba",cls:["2P MV2"],dom:"Statistique et probabilités",
   t:"Fluctuation d'une fréquence selon les échantillons, probabilités",
-  cours:{"2P MV2":["stats-probas"]},ch:[5,6,7,8],flash:["fractions","mental"],
+  cours:{"2P MV2":["stats-probas"]},ch:[9,10,11,12,13,14],flash:["fractions","mental","probas_bougies"],
   appr:["Calculer une probabilité dans un cas simple ; savoir qu'elle est comprise entre 0 et 1","Dénombrer les issues de deux épreuves avec un arbre ou un tableau","Comprendre la fluctuation d'échantillonnage et la stabilisation des fréquences vers la probabilité"]},
  {id:"mv-degre1",cls:["2P MV2"],dom:"Algèbre et analyse",
   t:"Résolution d'un problème du premier degré",cours:{"2P MV2":["degre1-mv"]},flash:["formules","signes"],
@@ -60,8 +60,8 @@ export const BLOCS = [
  {id:"mv-geo",cls:["2P MV2"],dom:"Géométrie",t:"Géométrie",cours:{"2P MV2":["geo-mv"]},flash:["mental","puissances"],
   appr:["Utiliser les configurations de Thalès et de Pythagore","Calculer des grandeurs (longueurs, aires, volumes, angles) et convertir des unités"]},
  {id:"mv-num",cls:["2P MV2"],dom:"Calculs numériques et automatismes",
-  t:"Calculs numériques, automatismes",cours:{"2P MV2":["ap-consolidation-2pmv2","co-intervention-devis-mv2","ap-fractions","ap-signes"]},
-  flash:["mental","signes","fractions","propor","formules","puissances"],transversal:true},
+  t:"Calculs numériques, automatismes",cours:{"2P MV2":["ap-consolidation-2pmv2","co-intervention-devis-mv2","co-intervention-conversions-mv2","ap-fractions","ap-signes"]},
+  flash:["mental","signes","fractions","propor","formules","puissances","unites_garage"],transversal:true},
 
  // ---------- 2P MV2 — physique-chimie (2de bac pro) ----------
  {id:"mv-pc-secu",cls:["2P MV2"],dom:"Physique-chimie",
