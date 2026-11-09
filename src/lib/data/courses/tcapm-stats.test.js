@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { COURSES, courseById } from './index.js';
 import { RECAP } from '../recap.js';
@@ -7,17 +7,13 @@ import { COMP } from '../competences.js';
 import { BLOCS } from '../blocs.js';
 import { AUTO } from '../automatismes.js';
 import { PROGRESSION, futureLock } from '../progression.js';
+import { VIZ } from '../../visualizations/registry.js';
 
 // Intégrité des cours « Statistique à une variable » du TC APM : mon stage en chiffres,
 // registre de la médiation, sondage, AP statistique, et leur câblage (blocs, récap,
 // compétences, automatismes, progression).
 const IDS = ['stats-stage-tcapm', 'registre-mediation-tcapm', 'sondage-tcapm', 'ap-stats-tcapm'];
 const courses = IDS.map((id) => courseById(id));
-
-const registrySrc = readFileSync(resolve('src/lib/visualizations/registry.js'), 'utf8');
-const registeredViz = [...registrySrc.matchAll(/^\s+([a-zA-Z0-9, ]+),?\s*$/gm)]
-  .flatMap((m) => m[1].split(',').map((x) => x.trim()))
-  .filter(Boolean);
 
 // Aplatit un contenu en texte ; les fonctions (réponses/messages calculés des étiquettes de phrase)
 // sont appelées avec une valeur d'essai pour que leur texte soit contrôlé lui aussi.
@@ -72,7 +68,10 @@ describe('cours TC APM — statistique à une variable', () => {
     for (const c of courses) {
       for (const se of c.seances) {
         for (const st of se.steps) {
-          if (st.viz) expect(registeredViz, `${c.id} / ${st.t} → ${st.viz}`).toContain(st.viz);
+          if (st.viz) {
+            expect(Object.keys(VIZ), `${c.id} / ${st.t} → ${st.viz}`).toContain(st.viz);
+            expect(VIZ[st.viz]).toBeDefined();
+          }
         }
       }
     }
