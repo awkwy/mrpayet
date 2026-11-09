@@ -50,7 +50,7 @@ export const BLOCS = [
  {id:"mv-proba",cls:["2P MV2"],dom:"Statistique et probabilités",
   t:"Fluctuation d'une fréquence selon les échantillons, probabilités",
   cours:{"2P MV2":["stats-probas"]},ch:[9,10,11,12,13,14],flash:["fractions","mental","probas_bougies"],
-  appr:["Calculer une probabilité dans un cas simple ; savoir qu'elle est comprise entre 0 et 1","Dénombrer les issues de deux épreuves avec un arbre ou un tableau","Comprendre la fluctuation d'échantillonnage et la stabilisation des fréquences vers la probabilité"]},
+  appr:["Calculer une probabilité dans un cas simple ; savoir qu'elle est comprise entre 0 et 1","Dénombrer les issues de deux épreuves avec un arbre ou un tableau","Comprendre la fluctuation d'échantillonnage et la stabilisation des fréquences vers la probabilité","Contrôler un lot de pièces : savoir qu'un petit échantillon ne prouve rien"]},
  {id:"mv-degre1",cls:["2P MV2"],dom:"Algèbre et analyse",
   t:"Résolution d'un problème du premier degré",cours:{"2P MV2":["degre1-mv"]},flash:["formules","signes"],
   appr:["Résoudre une équation du type ax + b = c","Modéliser une situation par une équation du premier degré"]},
