@@ -1,4 +1,4 @@
-export default {id:"optique",classe:"TC AEPE",classes:["TC AEPE","TC APMP"],mat:"Physique-chimie",titre:"La lumière : réflexion, réfraction, couleurs",
+export default {id:"optique",classe:"TC AEPE",classes:["TC AEPE","TC APM"],mat:"Physique-chimie",titre:"La lumière : réflexion, réfraction, couleurs",
  desc:"Optique : loi de la réflexion, réfraction air-eau, décomposition de la lumière blanche, synthèse additive, dangers des UV.",
  pdf:"sciences",
  obj:["Appliquer la loi de la réflexion",

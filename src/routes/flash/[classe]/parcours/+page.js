@@ -1,14 +1,16 @@
 import { error } from '@sveltejs/kit';
 import { bunslug, bslug } from '$lib/utils/course-helpers.js';
 import { AUTO } from '$lib/data/automatismes.js';
+import { withLegacyClassEntries, redirectLegacyClass } from '$lib/utils/legacy-class.js';
 
 export const prerender = true;
 
 export function entries() {
-  return Object.keys(AUTO.c).map((cl) => ({ classe: bslug(cl) }));
+  return withLegacyClassEntries(Object.keys(AUTO.c).map((cl) => ({ classe: bslug(cl) })));
 }
 
 export function load({ params }) {
+  redirectLegacyClass(params, (slug) => `/flash/${slug}/parcours`);
   const classe = bunslug(params.classe);
   const conf = classe ? AUTO.c[classe] : null;
   if (!conf) throw error(404, 'Classe inconnue');

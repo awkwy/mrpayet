@@ -3,6 +3,7 @@
   import { blocChapters, blocLock } from '$lib/utils/course-helpers.js';
   import { done } from '$lib/stores/progress.js';
   import LockedNotice from '$lib/components/LockedNotice.svelte';
+  import { AUTO } from '$lib/data/automatismes.js';
 
   let { data } = $props();
 
@@ -10,6 +11,8 @@
   // réelle. Si verrouillé, on n'affiche rien du contenu, même en lien direct.
   let lock = $derived(blocLock(data.bloc, data.classe));
 
+  // Un bloc partagé entre classes ne propose que les thèmes flash que la classe a (ex. `freq` : TC APM seulement).
+  let flashThemes = $derived((data.bloc.flash ?? []).filter((f) => AUTO.c[data.classe]?.o.includes(f)));
   let chapters = $derived(blocChapters(data.bloc, data.classe));
   // touching $done keeps this reactive to progress changes
   let doneSet = $derived($done);
@@ -56,10 +59,10 @@
     </div>
   {/if}
 
-  {#if data.bloc.flash?.length}
+  {#if flashThemes.length}
     <div class="rtools">
-      {#each data.bloc.flash as f}
-        <a href="{base}/flash/{data.slug}/{f}">Flash · {f}</a>
+      {#each flashThemes as f}
+        <a href="{base}/flash/{data.slug}/{f}">Flash · {AUTO.t[f]?.t.split(' — ')[0] ?? f}</a>
       {/each}
     </div>
   {/if}

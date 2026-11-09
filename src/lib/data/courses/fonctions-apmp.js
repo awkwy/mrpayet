@@ -1,4 +1,4 @@
-export default {id:"fonctions-apmp",classe:"TC APMP",mat:"Maths",titre:"Suivre une évolution",
+export default {id:"fonctions-apmp",classe:"TC APM",mat:"Maths",titre:"Suivre une évolution",
  desc:"Fonctions : lire une courbe d'évolution, repérer un seuil d'alerte, reconnaître une évolution proportionnelle — les chiffres du quartier.",
  pdf:"maths",
  obj:["Lire l'image et les antécédents sur une courbe d'évolution",

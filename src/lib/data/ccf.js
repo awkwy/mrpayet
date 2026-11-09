@@ -31,7 +31,7 @@ export const CCF = {
     commA:"« Sur un petit échantillon, la fréquence de défauts varie autour des 2 % annoncés : 2 sur 50 (soit 4 %) reste normal. Il faudrait contrôler beaucoup plus de bougies pour juger le lot. »"}
   ]}
  },
- "TC APMP":{
+ "TC APM":{
   intro:"Groupement 2 : le CCF de maths porte sur la statistique, la proportionnalité, le premier degré, les fonctions et les <b>calculs commerciaux et financiers</b> (pas de géométrie).",
   format:{type:"cap",situations:[
    {mat:"Mathématiques",duree:"45 min",note:"12 points"},

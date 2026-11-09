@@ -32,6 +32,22 @@ describe('checkText', () => {
     expect(checkText('Fusible', 'fusible')).toBe(true);
   });
 
+  it('accepte la virgule ou le point pour un nombre décimal', () => {
+    expect(checkText('0.3', '0,3')).toBe(true);
+    expect(checkText('0,3', '0,3')).toBe(true);
+  });
+
+  it('ne confond pas 0,3 avec 0,35 ni 40 avec 400', () => {
+    expect(checkText('0,35', '0,3')).toBe(false);
+    expect(checkText('400', '40')).toBe(false);
+    expect(checkText('4', '40')).toBe(false);
+  });
+
+  it('accepte encore un nombre suivi d\'une unité', () => {
+    expect(checkText('120 €', '120')).toBe(true);
+    expect(checkText('x = 4', '4')).toBe(true);
+  });
+
   it('matches any answer in an array of accepted answers', () => {
     expect(checkText('lampe', ['ampoule', 'lampe'])).toBe(true);
   });

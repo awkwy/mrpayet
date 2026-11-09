@@ -1,4 +1,4 @@
-export default {id:"thermique",classe:"TC AEPE",classes:["TC AEPE","TC APMP"],mat:"Physique-chimie",titre:"La température et la chaleur",
+export default {id:"thermique",classe:"TC AEPE",classes:["TC AEPE","TC APM"],mat:"Physique-chimie",titre:"La température et la chaleur",
  desc:"Thermique : mesurer une température, échelles °C et K, équilibre thermique, palier de changement d'état — du bain à la canicule.",
  pdf:"sciences",
  obj:["Mesurer une température et convertir entre degrés Celsius et kelvins",

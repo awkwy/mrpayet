@@ -1,4 +1,4 @@
-export default {id:"acoustique-apmp",classe:"TC APMP",classes:["TC AEPE","TC APMP"],mat:"Physique-chimie",titre:"Le bruit et l'oreille",
+export default {id:"acoustique-apmp",classe:"TC APM",classes:["TC AEPE","TC APM"],mat:"Physique-chimie",titre:"Le bruit et l'oreille",
  desc:"Acoustique : fréquence et hauteur d'un son, niveau sonore en décibels, seuils, isolants — appliqué aux nuisances de voisinage.",
  pdf:"sciences",
  obj:["Caractériser un son par sa fréquence (grave / aigu) et son niveau (dB)",

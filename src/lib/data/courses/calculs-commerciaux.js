@@ -1,4 +1,4 @@
-export default {id:"calculs-commerciaux",classe:"TC APMP",mat:"Maths",titre:"Calculs commerciaux et financiers",
+export default {id:"calculs-commerciaux",classe:"TC APM",mat:"Maths",titre:"Calculs commerciaux et financiers",
  desc:"Un différend de voisinage se règle par un devis, une remise et un partage — thème prévention et médiation.",
  pdf:"maths",
  obj:["Passer du HT au TTC avec un taux de TVA",

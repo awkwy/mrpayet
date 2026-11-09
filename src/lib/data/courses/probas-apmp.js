@@ -1,4 +1,4 @@
-export default {id:"probas-apmp",classe:"TC APMP",mat:"Maths",titre:"Le hasard dans les décisions",
+export default {id:"probas-apmp",classe:"TC APM",mat:"Maths",titre:"Le hasard dans les décisions",
  desc:"Probabilités : expérience aléatoire, cas simples, deux critères croisés, fiabilité des fréquences de terrain — tirages au sort et fiches d'intervention.",
  pdf:"maths",
  obj:["Décrire une expérience aléatoire : issues, événement, probabilité",

@@ -1,0 +1,161 @@
+/* Briques communes des manipulations « statistique à une variable » du TC APM
+   (registre, fréquence, conversion, phrase, dépouillement, bâtons à dessiner,
+   erreurs de saisie). Importé par chaque composant concerné — jamais dans
+   +layout.svelte. Couleurs : uniquement var(--…) de tokens.css ; --warn/--red
+   restent des jetons d'état (statut vrai/faux), jamais des séries de données.
+   Mouvement : ressort (overshoot) sur les arrivées, jamais de saut ; coupé
+   sous prefers-reduced-motion (voir global.css). */
+
+.sv {
+  font-family: var(--sa);
+}
+.sv-h {
+  font-family: var(--sm);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim2);
+  margin: 0 0 8px;
+}
+.sv-fb {
+  margin: 12px 0 0;
+  padding: 10px 13px;
+  border-left: 2.5px solid var(--line2);
+  border-radius: 0 8px 8px 0;
+  background: color-mix(in srgb, var(--tx) 4%, transparent);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--dim);
+  transition: border-color 0.3s, background 0.3s;
+}
+.sv-fb b {
+  color: var(--tx);
+}
+.sv-fb.ok {
+  border-left-color: var(--g);
+  background: color-mix(in srgb, var(--g) 8%, transparent);
+}
+.sv-fb.no {
+  border-left-color: var(--red);
+  background: color-mix(in srgb, var(--red) 8%, transparent);
+}
+.sv-fb .ic {
+  font-family: var(--sm);
+  font-weight: 700;
+  margin-right: 6px;
+}
+.sv-fb.ok .ic {
+  color: var(--g);
+}
+.sv-fb.no .ic {
+  color: var(--red);
+}
+.sv-btn {
+  background: var(--surf3);
+  border: 1px solid var(--line2);
+  border-radius: 9px;
+  color: var(--tx);
+  font-family: var(--sm);
+  font-size: 12.5px;
+  padding: 9px 14px;
+  min-height: 42px;
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s, background 0.2s;
+}
+.sv-btn:active {
+  transform: scale(0.96);
+}
+.sv-btn.p {
+  background: var(--g);
+  border-color: var(--g);
+  color: #04120a;
+  font-weight: 700;
+}
+.sv-btn.gh {
+  background: transparent;
+  color: var(--dim);
+}
+.sv-btn[disabled] {
+  opacity: 0.45;
+  cursor: default;
+}
+.sv-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.sv-chip {
+  min-width: 46px;
+  min-height: 44px;
+  padding: 6px 13px;
+  border: 1px solid var(--line2);
+  border-bottom-width: 3px;
+  border-radius: 11px;
+  background: var(--surf3);
+  color: var(--tx);
+  font-family: var(--sm);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s, background 0.2s, opacity 0.2s;
+}
+.sv-chip:active {
+  transform: scale(0.94);
+}
+.sv-chip.picked {
+  border-color: var(--blue);
+  background: color-mix(in srgb, var(--blue) 14%, var(--surf3));
+}
+.sv-chip.used {
+  opacity: 0.35;
+}
+.sv-pop {
+  animation: sv-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.sv-shake {
+  animation: sv-shake 0.4s ease-in-out;
+}
+.sv-bump {
+  animation: sv-bump 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes sv-pop {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes sv-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px);
+  }
+  45% {
+    transform: translateX(5px);
+  }
+  70% {
+    transform: translateX(-3px);
+  }
+}
+@keyframes sv-bump {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.28);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sv-pop,
+  .sv-shake,
+  .sv-bump {
+    animation: none;
+  }
+}

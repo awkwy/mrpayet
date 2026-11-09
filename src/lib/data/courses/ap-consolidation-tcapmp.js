@@ -1,4 +1,4 @@
-export default {id:"ap-consolidation-tcapmp",classe:"TC APMP",mat:"AP",titre:"Consolidation des outils de calcul commercial",
+export default {id:"ap-consolidation-tcapmp",classe:"TC APM",mat:"AP",titre:"Consolidation des outils de calcul commercial",
  desc:"Diagnostic court puis ateliers autocorrectifs : HT/TVA/TTC, coefficient multiplicateur, remise, répartition, arrondi.",
  pdf:"ap",
  obj:["Passer du HT au TTC, et inversement, avec un taux de TVA",

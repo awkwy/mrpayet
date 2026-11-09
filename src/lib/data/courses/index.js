@@ -49,6 +49,10 @@ import suitesMcvtle from './suites-mcvtle.js';
 import poly3Mcvtle from './poly3-mcvtle.js';
 import expologMcvtle from './expolog-mcvtle.js';
 import commerceMcvtle from './commerce-mcvtle.js';
+import statsStageTcapm from './stats-stage-tcapm.js';
+import registreMediationTcapm from './registre-mediation-tcapm.js';
+import apStatsTcapm from './ap-stats-tcapm.js';
+import sondageTcapm from './sondage-tcapm.js';
 
 export const COURSES = [
   securiteElectrique,
@@ -101,7 +105,11 @@ export const COURSES = [
   suitesMcvtle,
   poly3Mcvtle,
   expologMcvtle,
-  commerceMcvtle
+  commerceMcvtle,
+  statsStageTcapm,
+  registreMediationTcapm,
+  apStatsTcapm,
+  sondageTcapm
 ];
 
 export function courseById(id) {

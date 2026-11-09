@@ -3,6 +3,7 @@
   import { blocOfCourse, bslug, chapterKey, chapterLock } from '$lib/utils/course-helpers.js';
   import { VIZ } from '$lib/visualizations/registry.js';
   import Shell from '$lib/numworks/Shell.svelte';
+  import Stat1Shell from '$lib/numworks/Stat1Shell.svelte';
   import { markDone, setLast, done } from '$lib/stores/progress.js';
   import ChapterDrawer from '$lib/components/ChapterDrawer.svelte';
   import QuizInput from '$lib/components/QuizInput.svelte';
@@ -182,7 +183,13 @@
             </div>
           {/key}
         {/if}
-        {#if st.calc}
+        {#if st.calc?.mode === 'stat1'}
+          {#key c.id + '/' + n + '/' + si}
+            <div class="calc-host">
+              <Stat1Shell calc={st.calc} />
+            </div>
+          {/key}
+        {:else if st.calc}
           {@const calcPoints = se.datasets?.[st.calc.dataset] || []}
           <div class="calc-host">
             <Shell calc={st.calc} points={calcPoints} />
