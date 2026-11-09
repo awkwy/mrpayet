@@ -28,7 +28,7 @@ export default {id:"stat-apmp",classe:"TC APMP",mat:"Maths",titre:"Compter les c
     q:[{q:"Somme des 10 délais : 5 + 7 + 6 + 8 + 5 + 9 + 7 + 6 + 40 + 7 = ?",a:100,tol:0},
        {q:"Délai moyen : 100 ÷ 10 = ? (en jours)",a:10,tol:0},
        {q:"Combien de médiations ont duré MOINS que cette moyenne ?",a:9,tol:0,sol:"9 sur 10 : une seule a dépassé la moyenne. L'annonce « 10 jours » est trompeuse."}]},
-   {t:"La médiane et l'étendue",apport:"On range la série ; la <b>médiane</b> est au milieu (moyenne des deux valeurs centrales si l'effectif est pair). L'<b>étendue</b> = max − min.",
+   {t:"La médiane et l'étendue (pour les curieux)",apport:"Hors programme du CAP, non évalué : pour les curieux. On range la série ; la <b>médiane</b> est au milieu (moyenne des deux valeurs centrales si l'effectif est pair). L'<b>étendue</b> = max − min.",
     q:[{q:"Série rangée : 5·5·6·6·7·7·7·8·9·40. Médiane = (7 + 7) ÷ 2 = ? (en jours)",a:7,tol:0},
        {q:"Étendue : 40 − 5 = ? (en jours)",a:35,tol:0}]},
    {t:"Quel chiffre annoncer",

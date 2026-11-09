@@ -214,6 +214,49 @@ pour l'enseignant équipé, sans bloquer celui qui ne l'est pas.
   ink/accent ; `--warn` y sert de câble haute tension (véhicule électrique),
   même convention que la visualisation `alternatif`.
 
+## Statistique TC APM (stage, registre, sondage, AP)
+
+- Quatre cours pour la classe `TC APMP` (clé interne ; **le libellé élève est « TC APM »** :
+  n'écrire jamais « APMP » dans un texte neuf, la clé `TC APMP` de `blocs.js` /
+  `course-helpers.js` n'est pas encore renommée — rename = slug `/r/…`, `/flash/tcapmp`,
+  clés localStorage) : `stats-stage-tcapm`, `registre-mediation-tcapm`, `sondage-tcapm`,
+  `ap-stats-tcapm`, tous dans le bloc `stat-cap` / `numeriques-cap` (AP). Programme CAP :
+  effectif total, fréquences, moyenne, bâtons, circulaire ; médiane et quartiles hors programme
+  (boîte « pour les curieux » seulement, voir `Stat1Shell`).
+- **Division : jamais ÷.** Dans `apport` / `trace` / `met` des récap (HTML via `{@html}`) on
+  écrit `fr(num, den)` de `$lib/utils/frac.js` (classe globale `.fr` dans `global.css`) ; dans
+  un libellé de question ou une option de QCM (texte brut) on dit « 8 sur 20 ». Le test
+  `courses/tcapm-stats.test.js` refuse ÷ dans ces contenus (et dans le thème `freq`).
+- Manipulations neuves (`registry.js`) : `registre`, `frequence`, `convertir`, `moissuivant`,
+  `phrase` (assembler « effectif total + effectif + pourcentage », réutilisable avec n'importe
+  quel gabarit `vd.items[].parts`), `batonsDessin`, `depouillement` (réponses → effectifs →
+  fréquences → bâtons/circulaire ; `vd.only:'tally'` s'arrête à l'effectif total),
+  `saisieErreur`. Briques communes : `$lib/styles/stat-viz.css` (importé par chaque composant,
+  jamais dans `+layout.svelte`). Svelte 5 natif (`Tween` de `svelte/motion` + `backOut`), pas
+  de D3. **Piège** : ne pas nommer une classe `.read` ou `.say` dans un composant — `viz.css` les
+  définit globalement (readout / bulle) et elles fuient dans le composant.
+- Calculatrice 1 variable : `calc:{mode:'stat1', series:[[v,n],…], start:'home'|'data'|'graph'|'stats',
+  stale?, log?, calculs?}` → `$lib/numworks/Stat1Shell.svelte` (logique pure et testée dans
+  `stat1.js`). L'onglet Stats montre ce que l'élève a RÉELLEMENT tapé (N1 oublié → effectif total 5) ;
+  le contrôle « même effectif total que mon tableau » explique l'écart. `findBadCalcRefs` ignore ce mode.
+- `QuizInput` accepte `hints:[{v, say}]` (message pour une erreur typique précise) et `hint`
+  (consigne générale), affichés après une pause de frappe : c'est le « retour sur question
+  ouverte » préféré du capitaine aux phrases à trous. `checkText` compare maintenant un nombre
+  attendu **exactement** (0,35 n'est plus accepté pour 0,3, 400 pour 40) et accepte virgule ou point.
+- Automatismes : le thème `freq` (TC APMP) est ajouté en FIN de `automatismes.js` (fichier d'une
+  seule ligne : toute autre édition entre en conflit) ; ses variantes aléatoires viennent de
+  `$lib/data/auto-freq.js` (`GENERATORS`), branchées dans `flash/[classe]/[theme]`. Un item
+  `[q, a, {bars}]` dessine un diagramme sous la question. Les thèmes d'un bloc partagé sont
+  filtrés par classe sur la page `bloc/…`.
+- Fiches PDF de ces cours (`static/fiches/{maths,ap}/`) : rendues depuis `cours/eleve/…` avec la
+  commande Chromium ci-dessus sur une COPIE temporaire de l'arbre `eleve/` (`_style.css`, `qr/`,
+  lien vers `images/`) dont on a remplacé les `&divide;` restants (via `fractions_html.py` du projet
+  `cours`, lu seulement) et le QR : les fiches sources pointent vers `/i/stats-probas` (cours 2P MV2)
+  alors que le bon cours est `/i/stats-stage-tcapm` ou `/i/ap-stats-tcapm`. Vérifier
+  `pdftotext … | grep ÷` avant de copier. Chromium de la sandbox ne charge pas les pages
+  `http://127.0.0.1` ; pour voir une manipulation à 390 px, construire un bundle IIFE à part (Vite +
+  `@sveltejs/vite-plugin-svelte`, alias `$lib`) et l'ouvrir en `file://`.
+
 ## Jeu du pendu
 
 - Route `/jeux/pendu` (page unique, lien depuis l'accueil). Mots par thème dans

@@ -4,6 +4,7 @@
   import { afterNavigate } from '$app/navigation';
   import { checkText } from '$lib/utils/answer-check.js';
   import { AUTO } from '$lib/data/automatismes.js';
+  import { GENERATORS } from '$lib/data/auto-freq.js';
   import {
     PASS_RATIO,
     isPassing,
@@ -53,7 +54,9 @@
     void data.slug;
     void data.theme;
     void restartKey;
-    pool = shuffle(data.items).slice(0, 8);
+    // thème à variantes tirées au hasard (ex. `freq`) : un nouveau tirage à chaque partie
+    const gen = GENERATORS[data.theme];
+    pool = gen ? gen(8) : shuffle(data.items).slice(0, 8);
     idx = 0;
     value = '';
     results = [];
@@ -135,6 +138,22 @@
 
     <div class="qcard">
       <div class="qt">{pool[idx][0]}</div>
+      {#if pool[idx][2]?.bars}
+        {@const bars = pool[idx][2].bars}
+        {#key idx}
+          <svg class="mini" viewBox="0 0 220 120" role="img" aria-label={`Diagramme en bâtons : ${bars.map((b) => `type ${b[0]}, ${b[1]}`).join(' ; ')}`}>
+            {#each [0, 1, 2, 3, 4, 5, 6] as g}
+              <line x1="22" x2="214" y1={100 - g * 14} y2={100 - g * 14} class="mg" />
+              <text x="16" y={103 - g * 14} text-anchor="end" class="mt">{g}</text>
+            {/each}
+            {#each bars as b, i}
+              {@const bx = 22 + (i + 0.5) * (192 / bars.length)}
+              <rect class="mb" x={bx - 12} y={100 - b[1] * 14} width="24" height={b[1] * 14} rx="3" style:animation-delay={`${i * 90}ms`} />
+              <text x={bx} y="115" text-anchor="middle" class="mt x">{b[0]}</text>
+            {/each}
+          </svg>
+        {/key}
+      {/if}
       <div class="qin">
         <input
           type="text"
@@ -224,6 +243,44 @@
     border: 1px solid var(--line);
     border-radius: var(--r);
     background: var(--surf);
+  }
+  .mini {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 14px auto 0;
+  }
+  .mg {
+    stroke: var(--line);
+  }
+  .mt {
+    fill: var(--dim2);
+    font-family: var(--sm);
+    font-size: 9px;
+  }
+  .mt.x {
+    fill: var(--tx);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .mb {
+    fill: var(--g);
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: mgrow 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  @keyframes mgrow {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mb {
+      animation: none;
+    }
   }
   .qt {
     font-size: 20px;

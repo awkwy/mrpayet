@@ -1,11 +1,28 @@
 <script>
-  import { checkAnswer } from '$lib/utils/answer-check.js';
+  import { checkAnswer, checkNumeric, checkText } from '$lib/utils/answer-check.js';
 
   let { question, onCorrect } = $props();
   let value = $state('');
   let state = $state(null); // null | 'ok' | 'no'
+  let hintVisible = $state(false);
+  let hintTimer;
+
+  // Retour sur une mauvaise réponse (question ouverte avec feedback) :
+  //   question.hints = [{ v: valeur_fausse_courante, tol?, say }]  — erreur typique reconnue ;
+  //   question.hint  = consigne générale si aucune erreur typique ne correspond.
+  // Affiché après une courte pause de frappe, pour ne pas clignoter à chaque touche.
+  let hintText = $derived.by(() => {
+    if (state !== 'no' || !hintVisible) return '';
+    for (const h of question.hints || []) {
+      const hit = question.txt ? checkText(value, h.v) : checkNumeric(value, h.v, h.tol || 0);
+      if (hit) return h.say;
+    }
+    return question.hint || '';
+  });
 
   function check() {
+    clearTimeout(hintTimer);
+    hintVisible = false;
     if (!value.trim()) {
       state = null;
       return;
@@ -14,6 +31,7 @@
     const wasOk = state === 'ok';
     state = ok ? 'ok' : 'no';
     if (ok && !wasOk && onCorrect) onCorrect();
+    if (!ok && (question.hint || question.hints)) hintTimer = setTimeout(() => (hintVisible = true), 900);
   }
 
   function toggleSign() {
@@ -23,7 +41,7 @@
 </script>
 
 <div class="qr">
-  <label class="ql">{question.q}</label>
+  <label class="ql">{#if question.qh}{@html question.qh}{:else}{question.q}{/if}</label>
   <div class="qin">
     <input
       type="text"
@@ -40,6 +58,9 @@
   </div>
   {#if question.sol}
     <div class="sol" class:visible={state === 'ok'}>{question.sol}</div>
+  {/if}
+  {#if hintText}
+    <div class="hint" role="status">{hintText}</div>
   {/if}
 </div>
 
@@ -112,5 +133,12 @@
   }
   .sol.visible {
     visibility: visible;
+  }
+  .hint {
+    margin-top: 6px;
+    padding: 6px 10px;
+    border-left: 2px solid var(--red);
+    font-size: 13px;
+    color: var(--dim);
   }
 </style>

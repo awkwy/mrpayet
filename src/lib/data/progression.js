@@ -69,7 +69,9 @@ export const PROGRESSION = [
   // ---------- TC APMP — maths (Progression_TCAPMP_maths.md) ----------
   { classe: 'TC APMP', blocId: 'commerce-cap', from: 2, to: 3, note: 'déjà fait' },
   { classe: 'TC APMP', blocId: 'commerce-cap', from: 10, to: 12 },
-  { classe: 'TC APMP', blocId: 'stat-cap', from: 13, to: 16 },
+  // Ouverture avancée au mardi 27/10 (semaine 10, choix du capitaine) : « Mon stage en chiffres »,
+  // puis le registre de la médiation et le sondage ; la fin du module reste en semaines 13-16.
+  { classe: 'TC APMP', blocId: 'stat-cap', from: 10, to: 16 },
   { classe: 'TC APMP', blocId: 'proba-cap', from: 21, to: 23 },
   { classe: 'TC APMP', blocId: 'fonctions-cap', from: 24, to: 26 },
   { classe: 'TC APMP', blocId: 'propor-cap', from: 29, to: 29 },

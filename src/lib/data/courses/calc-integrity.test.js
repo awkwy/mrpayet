@@ -21,6 +21,14 @@ describe('findBadCalcRefs', () => {
     ]);
   });
 
+  it('ignore les étapes calc en mode stat1 (série portée par calc.series)', () => {
+    const course = {
+      id: 'test-stat1',
+      seances: [{ steps: [{ t: 'x', calc: { mode: 'stat1', series: [[10, 2]] } }] }]
+    };
+    expect(findBadCalcRefs([course])).toEqual([]);
+  });
+
   it('ignore les étapes sans champ calc', () => {
     const course = { id: 'test-none', seances: [{ steps: [{ t: 'x' }] }] };
     expect(findBadCalcRefs([course])).toEqual([]);
