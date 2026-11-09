@@ -57,22 +57,33 @@ h2 {
   text-wrap: balance;
 }
 
-/* Fraction empilée (numérateur / dénominateur) — voir $lib/utils/frac.js.
-   Global car le HTML des cours est inséré par {@html}, hors du scope des
-   <style> Svelte. */
+/* Fraction empilée (numérateur / dénominateur) — voir $lib/utils/frac.js et
+   $lib/utils/fr.js. Global car le HTML des cours est inséré par {@html},
+   hors du scope des <style> Svelte. */
 .fr {
   display: inline-flex;
   flex-direction: column;
+  align-items: stretch;
   vertical-align: middle;
   text-align: center;
   margin: 0 0.18em;
   line-height: 1.15;
   font-size: 0.95em;
 }
-.fr > span:first-child {
+.fr > span:first-child,
+.fr > .fn {
   border-bottom: 1.5px solid currentColor;
   padding: 0 0.3em 0.08em;
 }
-.fr > span:last-child {
+.fr > span:last-child,
+.fr > .fd {
   padding: 0.08em 0.3em 0;
+}
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }

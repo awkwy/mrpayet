@@ -79,10 +79,15 @@ describe('gating sur les données réelles (semaine 3)', () => {
   });
 
   it('les chapitres de la partie proba de stats-probas restent verrouillés (mv-proba, from 10)', () => {
-    // mv-proba couvre ch [5,6,7,8], from 10 : hors de la fenêtre d’anticipation
-    const l = chapterLock(courseById('stats-probas'), 5, week);
+    // mv-proba couvre ch [9..14] (bac à bougies, expérience aléatoire…), from 10 :
+    // hors de la fenêtre d’anticipation
+    const l = chapterLock(courseById('stats-probas'), 9, week);
     expect(l).not.toBeNull();
     expect(l.monday.toISOString().slice(0, 10)).toBe('2026-10-26');
+  });
+
+  it('les chapitres de statistique de stats-probas (dont bilan et auto-tests) sont accessibles (mv-stat, from 4)', () => {
+    for (const n of [0, 4, 5, 6, 7, 8]) expect(chapterLock(courseById('stats-probas'), n, week)).toBeNull();
   });
 
   it('decider-sous-contrainte est accessible (degre1-cap, from 2)', () => {
@@ -94,6 +99,26 @@ describe('gating sur les données réelles (semaine 3)', () => {
     const mvSecu = BLOCS.find((b) => b.id === 'mv-pc-secu');
     expect(blocLock(mvProba, '2P MV2', week)).not.toBeNull();
     expect(blocLock(mvSecu, '2P MV2', week)).toBeNull();
+  });
+});
+
+describe('Fonctions 2P MV2 : prévu mars-avril 2027, verrouillé jusqu’à l’approche', () => {
+  const entries = progressionAt('2P MV2', 31);
+  it('mv-fonctions tombe après le devoir commun (mi-mars) et jamais pendant la PFMP1 ni le Carnaval', () => {
+    const f = entries.find((p) => p.blocId === 'mv-fonctions');
+    expect(f).toBeTruthy();
+    expect(f.from).toBeGreaterThanOrEqual(30);
+    expect(weekMonday(f.from).toISOString().slice(0, 10) >= '2027-03-08').toBe(true);
+  });
+  it('la séance « Combien coûte la réparation ? » est verrouillée en novembre (semaine 11) et le reste en janvier', () => {
+    const c = courseById('fonctions-mv');
+    expect(c.seances[0].t).toMatch(/réparation/);
+    expect(chapterLock(c, 0, 11)).not.toBeNull();
+    expect(chapterLock(c, 0, 22)).not.toBeNull();
+    expect(chapterLock(c, 0, 28)).toBeNull(); // 28 + 2 semaines d’avance = 30
+  });
+  it('aucune entrée « cette semaine » pour Fonctions avant sa fenêtre', () => {
+    expect(progressionAt('2P MV2', 11).some((p) => p.blocId === 'mv-fonctions')).toBe(false);
   });
 });
 

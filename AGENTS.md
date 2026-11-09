@@ -272,6 +272,23 @@ pour l'enseignant équipé, sans bloquer celui qui ne l'est pas.
   du clavier à l'écran en `aria-disabled` (pas `disabled`) pour garder le
   focus clavier.
 
+## Contenu 2P MV2 récent (bilan stats, bougies, lot de pièces, conversions, tarif)
+
+- **Fractions, jamais « ÷ »** dans le contenu récent : `frac(n, d)` de
+  `src/lib/utils/fr.js` (classe `.fr` dans `global.css`). `QuizInput` accepte
+  `qh`/`solh` (HTML) à côté de `q`/`sol` ; `RecapCard` accepte `exh`.
+- Séances ajoutées dans `courses/stats-probas-bilan.js`, `stats-probas-bougies.js`,
+  `fonctions-tarif.js` (entrée Fonctions, verrouillée par `mv-fonctions` 30-33
+  dans `progression.js`) et le cours `co-intervention-conversions-mv2.js`.
+  Insérer une séance décale les clés `COMP` (`competences.js`) et `ch` de
+  `blocs.js` : les renuméroter ensemble.
+- Auto-tests : `data/selftests-stats.js` (réponses CALCULÉES par
+  `utils/stats-mv.js`, testées) rendus par `autotest*.svelte`.
+- PDF : nommer `<slug>-standard.pdf` quand la source n'a pas de suffixe ;
+  libellés des boutons dans `pdfLabel()` (`course-helpers.js`).
+- Vérification visuelle : ce Chromium ne livre pas les requêtes loopback ;
+  naviguer par CDP avec interception `Fetch.fulfillRequest` du dossier `build/`.
+
 ## Maintaining this file
 
 Keep this file for knowledge useful to almost every future agent session in this project.

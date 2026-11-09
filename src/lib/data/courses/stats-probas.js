@@ -1,5 +1,8 @@
+import { SIGMA_KAHANI, BILAN, EVAL_FLASH, MINI_EVAL } from './stats-probas-bilan.js';
+import { BOUGIES, LOT_PIECES } from './stats-probas-bougies.js';
+
 export default {id:"stats-probas",classe:"2P MV2",mat:"Maths",titre:"Statistiques et probabilités",
- desc:"Décrire une série de mesures, puis passer du hasard observé à la probabilité. Le programme du devoir commun.",
+ desc:"Décrire une série de mesures (moyenne, médiane, quartiles, écart type), comparer des équipes, puis passer du hasard observé à la probabilité. Le programme du devoir commun.",
  pdf:"maths",
  obj:["Calculer et interpréter une moyenne, une médiane, une étendue",
       "Choisir l'indicateur adapté et repérer l'effet d'une valeur extrême",
@@ -145,6 +148,7 @@ export default {id:"stats-probas",classe:"2P MV2",mat:"Maths",titre:"Statistique
   quiz:[{q:"Deux apprentis mesurent la même pièce : A trouve σ = 0,02 mm, B trouve σ = 0,15 mm. Le plus régulier est :",o:["A","B","Impossible à dire"],c:0,e:"Le plus petit écart type indique la série la plus resserrée."},
         {q:"Une valeur très éloignée des autres s'ajoute à une série. Quel indicateur bouge le moins ?",o:["La moyenne","L'écart type","La médiane"],c:2,e:"La médiane ne dépend que du rang des valeurs."}],
   trace:"<b>Écart type σ</b> (à la calculatrice) : petit → série régulière, grand → série dispersée.<br>Pour décrire une série, on donne <b>un indicateur de position et un de dispersion</b>. Sans valeur extrême : moyenne et écart type. <b>Avec une valeur extrême : médiane et écart interquartile</b>, qui résistent."},
+ SIGMA_KAHANI, BILAN, EVAL_FLASH, MINI_EVAL, BOUGIES,
  {t:"Une expérience aléatoire",pdf:["probas-2pmv2-calculer-standard", "probas-2pmv2-calculer-accessible"],
   prob:"Avant de lancer le dé, on ne sait pas. Après des milliers de lancers, on sait quand même quelque chose. Comment ?",
   steps:[
@@ -185,6 +189,7 @@ export default {id:"stats-probas",classe:"2P MV2",mat:"Maths",titre:"Statistique
          o:["Une erreur de mesure","Une fluctuation normale","Que le lot a changé"],c:1,e:"C'est la fluctuation d'échantillonnage."},
         {q:"Quand n augmente, l'étendue des fréquences :",o:["Augmente","Diminue","Ne change pas"],c:1,e:"Les fréquences se resserrent autour de p."}],
   trace:"Deux échantillons de même taille prélevés dans la même population donnent en général des <b>fréquences différentes</b> : c'est la <b>fluctuation d'échantillonnage</b>.<br>On la mesure par l'<b>étendue</b> des fréquences observées.<br>Quand la <b>taille n de l'échantillon augmente</b>, cette fluctuation diminue : les fréquences se resserrent autour de la proportion p de la population."},
+ LOT_PIECES,
  {t:"La stabilisation des fréquences",pdf:["probas-2pmv2-frequence-standard", "probas-2pmv2-frequence-accessible"],
   prob:"D'où vient le nombre 1/6 ? Personne ne l'a mesuré sur un dé. Pourtant on peut le voir apparaître.",
   steps:[

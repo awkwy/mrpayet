@@ -1,3 +1,5 @@
+import { frac as F } from '../utils/fr.js';
+
 export const RECAP = {
  "securite-electrique":[
   {sig:"On te donne la puissance P (W) et la tension U (V), on demande l'intensité I",
@@ -37,7 +39,29 @@ export const RECAP = {
   {sig:"Deux contrôles du même lot ne donnent pas la même fréquence de défauts",
    met:"C'est la fluctuation d'échantillonnage : normal sur de petits échantillons. Plus n est grand, moins ça fluctue.",ex:"Lot à 2 % : sur 50 pièces on peut trouver 0,04 ; ce n'est pas une erreur.",pg:"Croire qu'un des deux contrôleurs s'est trompé."},
   {sig:"Estimer une probabilité qu'on ne connaît pas",
-   met:"Répète l'expérience un grand nombre de fois : la fréquence observée se stabilise vers la probabilité.",ex:"6000 lancers, 1023 fois le 6 → 0,171 ≈ 1/6",pg:"Conclure sur trop peu de répétitions (la fréquence saute encore)."}
+   met:"Répète l'expérience un grand nombre de fois : la fréquence observée se stabilise vers la probabilité.",ex:"6000 lancers, 1023 fois le 6 → 0,171 ≈ 1/6",pg:"Conclure sur trop peu de répétitions (la fréquence saute encore)."} ,
+  {sig:"Tu dois donner Q₁, Q₃ ou tracer une boîte à moustaches",
+   met:"Range la série. Rang de Q₁ = effectif × 0,25 ; rang de Q₃ = effectif × 0,75. Pas un entier ? Prends le rang du dessus. Lis la valeur à ce rang. Écart interquartile = Q₃ − Q₁ (la largeur de la boîte).",ex:"24 valeurs : rang de Q₁ = 6, rang de Q₃ = 18 ; Q₁ = 22, Q₃ = 25, écart interquartile 3 min",pg:"Chercher Q₁ ou Q₃ dans une série qui n'est pas rangée."},
+  {sig:"Deux équipes ou deux fournisseurs ont la même moyenne : sont-ils aussi réguliers ?",
+   met:"Pas forcément : compare la dispersion. Boîtes à moustaches sur le <b>même axe</b> (la plus étroite est la plus régulière) ou écart type σ à la calculatrice (le plus petit est le plus régulier).",ex:"Matin : boîte de 3 min, σ ≈ 2,7 min ; après-midi : boîte de 9 min, σ ≈ 6,0 min → le matin est plus régulier",pg:"Dire « elles sont pareilles » parce que la moyenne est la même."},
+  {sig:"Une valeur extrême s'ajoute à la série (boulon cassé, 60 min…)",
+   met:"La moyenne et σ explosent, la médiane et l'écart interquartile bougent à peine : décris la série avec la <b>médiane et l'écart interquartile</b>.",ex:"Madi : moyenne 20 → 23,6 min et σ 0,63 → 11,5 min, mais médiane 20 → 20 min",pg:"Décrire une série qui contient une valeur extrême avec sa moyenne et son σ."},
+  {sig:"Un client demande « en général ? » (durée, prix) et un relevé est très éloigné des autres",
+   met:"Réponds en une phrase : OUI ou NON, l'indicateur (la médiane), son nombre avec l'unité, la comparaison avec la limite du client.",ex:"« Oui : la médiane est de 23,5 min, ce qui est plus petit que 25 min. »",pg:"Prendre la moyenne malgré la valeur extrême, ou oublier l'unité."},
+  {sig:"Tu contrôles quelques pièces d'une grande caisse et tu veux conclure",
+   met:`Fréquence de l'échantillon = ${F('défectueuses','tirages')}. Un petit échantillon fluctue : annonce la fréquence de l'échantillon et contrôle plus de pièces avant de parler de toute la caisse.`,ex:"1 défectueuse sur 5 : 20 % de l'échantillon, pas forcément 20 % de la caisse de 500",pg:"Croire que 5 pièces donnent le taux de toute la caisse."},
+  {sig:"Avant de donner ta réponse à l'atelier",
+   met:"Pose-toi 5 questions : Unité ? Ordre de grandeur ? Arrondi (à la fin) ? Référence (barème, seuil) ? Phrase avec l'unité ?",ex:"25 bar pour le pneu d'une voiture : impossible, c'est 2,5 bar (virgule oubliée)",pg:"Rendre un calcul juste mais impossible dans la vraie vie."}
+ ],
+ "co-intervention-conversions-mv2":[
+  {sig:"Passer des heures aux minutes (ou l'inverse)",
+   met:`Heures → minutes : × 60. Minutes → heures : ${F('minutes',60)}.`,ex:"0,8 h = 0,8 × 60 = 48 min ; 45 min = 0,75 h",exh:`0,8 h = 0,8 × 60 = 48 min ; 45 min = ${F(45,60)} = 0,75 h`,pg:"Lire 1,3 h comme 1 h 30 : 0,3 h = 18 min, donc 1,3 h = 1 h 18 min."},
+  {sig:"Convertir une cylindrée ou une contenance (cm³, cL, L, m³)",
+   met:`1 m³ = 1 000 L ; 1 L = 100 cL = 1 000 cm³ ; 1 cL = 10 cm³. cm³ → cL : ${F('cm³',10)} ; cm³ → L : ${F('cm³','1 000')}.`,ex:"1 500 cm³ = 150 cL = 1,5 L",exh:`1 500 cm³ = ${F('1 500',10)} cL = 150 cL = ${F('1 500','1 000')} L = 1,5 L`,pg:"Écrire la cylindrée d'un moteur en m³ : le nombre est beaucoup trop petit."},
+  {sig:"Compter des véhicules et en donner la part",
+   met:`Fréquence = ${F('effectif','effectif total')} ; pourcentage = fréquence × 100. Le total des effectifs doit faire l'effectif total.`,ex:"6 scooters sur 20 : 0,30 = 30 %",exh:`6 scooters sur 20 : ${F(6,20)} = 0,30 = 30 %`,pg:"Oublier un véhicule : vérifie que les effectifs font bien 20."},
+  {sig:"Comparer une durée moyenne au panneau du garage",
+   met:`Moyenne = ${F('somme des durées','nombre de vidanges')}, convertie dans l'unité du panneau, puis comparée. Conclus par une phrase avec l'unité.`,ex:"200 min pour 10 vidanges : 20 min, soit 2 min de plus que le panneau (0,3 h = 18 min)",exh:`${F(200,10)} = 20 min, soit 2 min de plus que le panneau (0,3 h = 18 min)`,pg:"Comparer des minutes à des heures sans convertir."}
  ],
  "decider-sous-contrainte":[
   {sig:"« Combien d'adultes / d'accompagnateurs faut-il ? »",
@@ -385,7 +409,9 @@ export const RECAP = {
   {sig:"Décrire des variations et un extremum sur une courbe",
    met:"courbe qui monte → croissante ; qui descend → décroissante. Point le plus haut = maximum, le plus bas = minimum.",ex:"température : croissante jusqu'à 5 min (max 104 °C), puis décroissante",pg:"Ne regarder qu'un point au lieu de l'allure."},
   {sig:"Utiliser la fonction carré",
-   met:"f(x) = k·x² : parabole de sommet (0 ; 0). Quand x est multiplié par n, x² est multiplié par n².",ex:"v : 50 → 100 (×2) ⇒ distance de freinage ×4",pg:"Croire que doubler v double la distance de freinage."}
+   met:"f(x) = k·x² : parabole de sommet (0 ; 0). Quand x est multiplié par n, x² est multiplié par n².",ex:"v : 50 → 100 (×2) ⇒ distance de freinage ×4",pg:"Croire que doubler v double la distance de freinage."}  ,
+  {sig:"Un prix dépend du nombre d'heures (diagnostic + tarif horaire)",
+   met:"Prix = forfait + tarif × heures. L'<b>image</b> de h est le prix pour h heures ; un <b>antécédent</b> d'un prix est le nombre d'heures qui donne ce prix.",ex:"15 + 30 × 2,5 = 90 € ; l'antécédent de 105 € est 3 h",pg:"Croire que 0 h coûte 0 € : le diagnostic est payé avant."}
  ],
  "geo-mv":[
   {sig:"Calculer une aire ou un volume usuel",

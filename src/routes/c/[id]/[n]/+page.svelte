@@ -1,6 +1,6 @@
 <script>
   import { base } from '$app/paths';
-  import { blocOfCourse, bslug, chapterKey, chapterLock } from '$lib/utils/course-helpers.js';
+  import { blocOfCourse, bslug, chapterKey, chapterLock, pdfLabel } from '$lib/utils/course-helpers.js';
   import { VIZ } from '$lib/visualizations/registry.js';
   import Shell from '$lib/numworks/Shell.svelte';
   import Stat1Shell from '$lib/numworks/Stat1Shell.svelte';
@@ -114,15 +114,7 @@
       <div class="dllinks">
         {#each se.pdf as stem}
           <a class="dlbtn" href="{base}/fiches/{c.pdf}/{stem}.pdf" target="_blank" rel="noopener">
-            {stem === 'devoir-2pmv2-mediane-modele'
-              ? 'Devoir « La médiane » — énoncé modèle (PDF)'
-              : stem === 'devoir-2pmv2-mediane-30-versions'
-                ? 'Devoir « La médiane » — les 30 versions (PDF)'
-                : stem.endsWith('-accessible')
-              ? 'Version en langue accessible (PDF)'
-              : stem.endsWith('-standard')
-                ? 'Version standard (PDF)'
-                : 'Télécharger (PDF)'}
+            {pdfLabel(stem)}
           </a>
         {/each}
       </div>

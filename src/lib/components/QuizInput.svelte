@@ -41,6 +41,8 @@
 </script>
 
 <div class="qr">
+  <!-- `qh` / `solh` : variantes HTML (fractions, voir $lib/utils/fr.js) du texte
+       brut `q` / `sol` ; absentes dans les anciens exercices. -->
   <label class="ql">{#if question.qh}{@html question.qh}{:else}{question.q}{/if}</label>
   <div class="qin">
     <input
@@ -56,8 +58,8 @@
     {/if}
     <span class="mk {state}">{state === 'ok' ? '✓' : state === 'no' ? '✕' : ''}</span>
   </div>
-  {#if question.sol}
-    <div class="sol" class:visible={state === 'ok'}>{question.sol}</div>
+  {#if question.sol || question.solh}
+    <div class="sol" class:visible={state === 'ok'}>{#if question.solh}{@html question.solh}{:else}{question.sol}{/if}</div>
   {/if}
   {#if hintText}
     <div class="hint" role="status">{hintText}</div>

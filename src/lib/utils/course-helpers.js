@@ -118,3 +118,18 @@ export function blocState(bloc, classe) {
   const done = chs.filter((x) => isDone(chapterKey(x.co, x.i))).length;
   return { tot: chs.length, done };
 }
+
+/** Libellé du bouton de téléchargement d'une fiche PDF, d'après son nom de
+ * fichier (sans extension) — voir « Fiches PDF téléchargeables » dans AGENTS.md. */
+export function pdfLabel(stem) {
+  if (stem === 'devoir-2pmv2-mediane-modele') return 'Devoir « La médiane » — énoncé modèle (PDF)';
+  if (stem === 'devoir-2pmv2-mediane-30-versions') return 'Devoir « La médiane » — les 30 versions (PDF)';
+  const ver = stem.match(/-([AB])(-accessible)?$/);
+  if (ver) return `Version ${ver[1]}${ver[2] ? ' — langue accessible' : ''} (PDF)`;
+  if (stem.endsWith('-accessible')) return 'Version en langue accessible (PDF)';
+  if (stem.endsWith('-standard')) return 'Version standard (PDF)';
+  if (stem.endsWith('-mots-affiche')) return 'Mur de mots (PDF)';
+  if (stem.startsWith('affiche-')) return 'Affiche des 5 questions (PDF)';
+  if (stem.includes('releve-tirages')) return 'Relevé des tirages (PDF)';
+  return 'Télécharger (PDF)';
+}

@@ -24,3 +24,8 @@ AUTO.t.freq = {
   ]
 };
 AUTO.c['TC APM'].o.push('freq');
+
+// Thèmes 2P MV2 ajoutés (stats, conversions, probas) — voir automatismes-2pmv2.js
+import { EXTRA_2PMV2 } from "./automatismes-2pmv2.js";
+Object.assign(AUTO.t, EXTRA_2PMV2.t);
+AUTO.c["2P MV2"].o.push(...EXTRA_2PMV2.o);
