@@ -9,16 +9,18 @@
   /* « Combien coûte la réparation ? » : le prix d'une réparation (diagnostic
    * 15 € une fois + 30 € par heure) est une FONCTION du nombre d'heures.
    *
-   * 1. Je place les points : cinq pastilles (0 h, 1 h, 2 h, 3 h, 4 h) sont posées
+   * 1. Je place les points : six pastilles (0 h à 5 h, `vd.heures`) sont posées
    *    sur l'axe des heures, au prix 0. L'élève les tire vers le haut jusqu'au
    *    bon prix (pas de 5 €) ; près de la bonne valeur la pastille s'aimante
-   *    en ressort et s'allume. Quand les cinq sont posées, la droite se trace
+   *    en ressort et s'allume. Quand toutes sont posées, la droite se trace
    *    d'un trait (stroke-dashoffset) et la marche « + 30 € par heure » apparaît.
    * 2. Je lis le graphique : un curseur glisse sur la droite. Mode « image »
    *    (je donne les heures, je lis le prix) ou « antécédent » (je donne le
    *    prix, je lis les heures), avec les traits de lecture en pointillé.
    * 3. ★ L'autre garage (40 € par heure, sans diagnostic) : deuxième droite,
-   *    point de croisement à 1,5 h = 60 €.
+   *    point de croisement à 1,5 h = 60 € (masqué avec `vd.sansAutre` : la
+   *    comparaison est l'objet de la manipulation `garages`).
+   * `vd.pose` : le graphique démarre déjà tracé (lecture seule, séance 2).
    *
    * Couleur : garage de Kahani (série) = --g ; autre garage = --blue (paire
    * série / accent validée, libellés directs au bout des droites) ; traits de
@@ -34,7 +36,11 @@
   const HOUR = vd?.heure ?? 30;
   const OTHER = vd?.autre ?? 40; // € par heure, sans diagnostic
   const price = (h) => FIXE + HOUR * h;
-  const HS = [0, 1, 2, 3, 4];
+  const HS = vd?.heures ?? [0, 1, 2, 3, 4, 5];
+  const N = HS.length;
+  const HMAX = Math.max(...HS);
+  const POSE = !!vd?.pose; // graphique déjà tracé (séance « Le prix sur la courbe »)
+  const SANS_AUTRE = !!vd?.sansAutre; // l'autre garage est découvert plus tard (séance 3)
 
   onMount(() => {
     const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -45,8 +51,8 @@
     const R = W - 14;
     const T = 16;
     const B = H - 36;
-    const XM = 4.5;
-    const YM = 150;
+    const XM = HMAX + 0.5;
+    const YM = Math.ceil(price(XM) / 30) * 30;
     const x = linScale([0, XM], [L, R]);
     const y = linScale([0, YM], [B, T]);
 
@@ -79,7 +85,7 @@
     grid.append('text').attr('x', 6).attr('y', 10).attr('fill', 'var(--dim2)').attr('font-size', 10).attr('font-family', 'var(--sm)').text('prix (€)');
 
     // droite de l'autre garage (sous la droite de Kahani)
-    const oLine = svg.append('line').attr('x1', x(0)).attr('y1', y(0)).attr('x2', x(XM)).attr('y2', y(OTHER * XM)).attr('stroke', 'var(--blue)').attr('stroke-width', 2.4).attr('stroke-linecap', 'round').attr('opacity', 0);
+    const oLine = svg.append('line').attr('x1', x(0)).attr('y1', y(0)).attr('x2', x(Math.min(XM, YM / OTHER))).attr('y2', y(Math.min(OTHER * XM, YM))).attr('stroke', 'var(--blue)').attr('stroke-width', 2.4).attr('stroke-linecap', 'round').attr('opacity', 0);
     const oLab = svg.append('text').attr('x', x(3.15)).attr('y', y(OTHER * 3.15) + 14).attr('fill', 'var(--blue)').attr('font-size', 10).attr('font-weight', 'bold').attr('font-family', 'var(--sm)').attr('opacity', 0).text(`autre garage : ${OTHER} € par heure`);
     const cross = svg.append('circle').attr('cx', x(1.5)).attr('cy', y(60)).attr('r', 6).attr('fill', 'none').attr('stroke', 'var(--tx)').attr('stroke-width', 2).attr('opacity', 0);
     const crossT = svg.append('text').attr('x', x(1.5) + 9).attr('y', y(60) + 16).attr('fill', 'var(--tx)').attr('font-size', 10).attr('font-family', 'var(--sm)').attr('opacity', 0).text('même prix : 1,5 h, 60 €');
@@ -88,7 +94,7 @@
     const kLine = svg.append('line').attr('x1', x(0)).attr('y1', y(price(0))).attr('x2', x(XM)).attr('y2', y(price(XM))).attr('stroke', 'var(--g)').attr('stroke-width', 2.8).attr('stroke-linecap', 'round');
     const kLen = Math.hypot(x(XM) - x(0), y(price(XM)) - y(price(0)));
     kLine.attr('stroke-dasharray', kLen).attr('stroke-dashoffset', kLen);
-    const kLab = svg.append('text').attr('x', L + 8).attr('y', T + 14).attr('fill', 'var(--g)').attr('font-size', 10).attr('font-weight', 'bold').attr('font-family', 'var(--sm)').attr('opacity', 0).text(`garage de Kahani : ${FIXE} € + ${HOUR} € par heure`);
+    const kLab = svg.append('text').attr('x', L + 8).attr('y', T + 30).attr('fill', 'var(--g)').attr('font-size', 10).attr('font-weight', 'bold').attr('font-family', 'var(--sm)').attr('opacity', 0).text(`Kahani : ${FIXE} € + ${HOUR} € par heure`);
     // marche « + 30 € par heure »
     const stair = svg.append('g').attr('opacity', 0);
     stair.append('path').attr('d', `M${x(2)},${y(75)} H${x(3)} V${y(105)}`).attr('fill', 'none').attr('stroke', 'var(--dim)').attr('stroke-width', 1.6).attr('stroke-dasharray', '4 3');
@@ -137,6 +143,11 @@
     dv.innerHTML = '<details><summary>Voir le tableau de valeurs</summary><table><thead><tr><th>Heures</th>' + HS.map((h) => `<th>${h} h</th>`).join('') + '</tr></thead><tbody><tr><th>Prix (€)</th>' + HS.map((h) => `<td>${price(h)}</td>`).join('') + '</tr></tbody></table></details>';
     host.append(ctl, say, dv);
     const btn = (a) => ctl.querySelector(`[data-a=${a}]`);
+    if (SANS_AUTRE) btn('oth').remove();
+    if (POSE) {
+      btn('help').remove();
+      btn('rz').remove();
+    }
 
     function posPins(animate) {
       pins.forEach((p, i) => {
@@ -193,8 +204,8 @@
           posPins(true);
           p.dot.transition().duration(RM ? 0 : 200).attr('r', 13).transition().duration(RM ? 0 : 400).ease(spring).attr('r', 8.5);
           const n = placed.filter(Boolean).length;
-          say.textContent = n === 5 ? '' : `${n} point${n > 1 ? 's' : ''} sur 5 bien placé${n > 1 ? 's' : ''}.`;
-          if (n === 5) enableReading();
+          say.textContent = n === N ? '' : `${n} point${n > 1 ? 's' : ''} sur ${N} bien placé${n > 1 ? 's' : ''}.`;
+          if (n === N) enableReading();
           return;
         }
         val[i] = v;
@@ -251,20 +262,20 @@
       if (allPlaced) updateCursor(true);
     };
     btn('img').onclick = () => {
-      if (!allPlaced) return void (say.textContent = "Place d'abord les 5 points : la droite apparaîtra, puis tu pourras lire le graphique.");
+      if (!allPlaced) return void (say.textContent = `Place d'abord les ${N} points : la droite apparaîtra, puis tu pourras lire le graphique.`);
       setMode('image');
     };
     btn('ant').onclick = () => {
-      if (!allPlaced) return void (say.textContent = "Place d'abord les 5 points : la droite apparaîtra, puis tu pourras lire le graphique.");
+      if (!allPlaced) return void (say.textContent = `Place d'abord les ${N} points : la droite apparaîtra, puis tu pourras lire le graphique.`);
       setMode('ante');
     };
-    btn('oth').onclick = () => {
+    if (!SANS_AUTRE) btn('oth').onclick = () => {
       showOther = !showOther;
       btn('oth').classList.toggle('on', showOther);
       [oLine, oLab, cross, crossT].forEach((s) => s.transition().duration(RM ? 0 : 500).attr('opacity', showOther ? 1 : 0));
       if (showOther) say.innerHTML = `Autre garage : ${OTHER} € par heure, sans diagnostic. Pour 1 h il est moins cher (${OTHER} € contre ${price(1)} €), mais à partir de <b>1,5 h</b> (60 € dans les deux garages) le garage de Kahani est moins cher : le garage de Kahani n'est pas « toujours » moins cher.`;
     };
-    btn('help').onclick = () => {
+    if (!POSE) btn('help').onclick = () => {
       HS.forEach((h, i) => {
         val[i] = price(h);
         placed[i] = true;
@@ -272,7 +283,7 @@
       posPins(true);
       if (!allPlaced) enableReading();
     };
-    btn('rz').onclick = () => {
+    if (!POSE) btn('rz').onclick = () => {
       HS.forEach((h, i) => {
         val[i] = 0;
         placed[i] = false;
@@ -281,7 +292,7 @@
       kLine.interrupt('draw').attr('stroke-dashoffset', kLen);
       [kLab, stair, gx, gy, cur, lx, ly].forEach((s) => s.interrupt().attr('opacity', 0));
       posPins(true);
-      say.textContent = 'Les cinq points sont revenus sur l’axe. Calcule les prix du tableau et tire chaque point à sa hauteur.';
+      say.textContent = 'Les points sont revenus sur l’axe. Calcule les prix du tableau et tire chaque point à sa hauteur.';
     };
 
     say.textContent = 'Tire chaque point vers le haut jusqu’au bon prix : 15 € de diagnostic + 30 € par heure.';
@@ -290,6 +301,18 @@
       pins.forEach((p, i) => p.g.attr('transform', `translate(${x(HS[i])},${y(0) + 24})`).transition('mv').delay(i * 70).duration(700).ease(spring).attr('transform', `translate(${x(HS[i])},${y(0)})`));
     }
     btn('img').classList.add('on');
+    if (POSE) {
+      HS.forEach((h, i) => {
+        val[i] = price(h);
+        placed[i] = true;
+      });
+      posPins(false);
+      pins.forEach((p) => p.g.attr('tabindex', -1).style('cursor', 'default'));
+      kLine.attr('stroke-dashoffset', kLen).transition('draw').duration(RM ? 0 : 900).ease(spring).attr('stroke-dashoffset', 0);
+      enableReading();
+      say.textContent = '';
+      updateCursor(false);
+    }
 
     cleanup = () => {
       svg.selectAll('*').interrupt();

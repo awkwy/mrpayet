@@ -289,6 +289,26 @@ pour l'enseignant équipé, sans bloquer celui qui ne l'est pas.
 - Vérification visuelle : ce Chromium ne livre pas les requêtes loopback ;
   naviguer par CDP avec interception `Fetch.fulfillRequest` du dossier `build/`.
 
+## Module « Fonctions » 2P MV2 (séquence du garage de Kahani)
+
+- Deux blocs pour le module du BO « Fonctions » : `mv-fonctions` (cours
+  `fonctions-garage-mv`, la séquence « Les fonctions » du projet `cours`,
+  datée : séance 1 le mer. 18/11/2026 = semaine 13 ; une séance sans date
+  connue ne reçoit PAS de fenêtre dans `progression.js`) et
+  `mv-fonctions-suite` (cours `fonctions-mv`, variations/extremums/fonction
+  carré, mars-avril). Le verrou est par bloc : deux blocs = deux dates.
+- Chaque séance s'ouvre par le **rituel oral** du déroulé prof (étape
+  « Rituel d'ouverture », questions courtes sans calculatrice) ; le déroulé et
+  le corrigé prof restent dans `cours` (« NE PAS DISTRIBUER »), jamais publiés
+  ici : seuls les PDF élève standard/accessible vont dans `static/fiches/maths/`.
+- Prix et corrigés viennent de `$lib/utils/garages.js` (testé) ; la
+  manipulation `tarif` se règle par `vd` (`heures`, `pose`, `sansAutre`).
+  Piège : `btn(...).remove()` dans une manipulation impérative exige de ne pas
+  brancher `onclick` ensuite (TypeError silencieux qui laisse la figure vide).
+- Vérification visuelle : `vite preview` garde l'ancien build en mémoire après
+  un `npm run build` → relancer le serveur ; ne pas utiliser `pkill -f "vite
+  preview"` dans la même commande shell (il tue le shell).
+
 ## Maintaining this file
 
 Keep this file for knowledge useful to almost every future agent session in this project.

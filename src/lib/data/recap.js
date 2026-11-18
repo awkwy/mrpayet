@@ -399,6 +399,14 @@ export const RECAP = {
   {sig:"Vérifier une solution",
    met:"remplacer l'inconnue par sa valeur dans l'énoncé.",ex:"38 × 4 + 45 = 197 ✓",pg:"Ne pas vérifier."}
  ],
+ "fonctions-garage-mv":[
+  {sig:"Un prix dépend du nombre d'heures (diagnostic + tarif horaire)",
+   met:"Prix = diagnostic + tarif × heures. Je multiplie d'abord, j'ajoute ensuite. Chaque ligne du tableau donne un point (heures ; prix).",ex:"15 + 30 × 3 = 105 € ; pour 0 h, le prix est 15 €, pas 0 €",pg:"Croire que 0 h coûte 0 € : le diagnostic est payé avant."},
+  {sig:"Lire une image ou un antécédent",
+   met:"Image de h (le prix) : je pars de l'axe des heures, je monte jusqu'à la droite, je lis le prix. Antécédent d'un prix : je pars de l'axe des prix, je vais jusqu'à la droite, je descends lire les heures. Un antécédent peut ne pas exister.",ex:"105 € est l'image de 3 h ; 3 h est un antécédent de 105 € ; 10 € n'a pas d'antécédent",pg:"Confondre image et antécédent."},
+  {sig:"Calculer un prix avec la formule P(h)",
+   met:"Je remplace h par le nombre, je multiplie, j'ajoute le diagnostic.",ex:"P(6) = 15 + 30 × 6 = 195 €",pg:"Additionner 15 + 30 avant de multiplier."}
+ ],
  "fonctions-mv":[
   {sig:"Lire une image / un antécédent",
    met:"image de a : je monte de a jusqu'à la courbe, je lis l'ordonnée. Antécédent de b : je pars de b, je vais jusqu'à la courbe, je lis l'abscisse.",ex:"P(3) ≈ 5 mm ; antécédent de 1,6 ≈ 6,4",pg:"Confondre image et antécédent."},
@@ -409,9 +417,7 @@ export const RECAP = {
   {sig:"Décrire des variations et un extremum sur une courbe",
    met:"courbe qui monte → croissante ; qui descend → décroissante. Point le plus haut = maximum, le plus bas = minimum.",ex:"température : croissante jusqu'à 5 min (max 104 °C), puis décroissante",pg:"Ne regarder qu'un point au lieu de l'allure."},
   {sig:"Utiliser la fonction carré",
-   met:"f(x) = k·x² : parabole de sommet (0 ; 0). Quand x est multiplié par n, x² est multiplié par n².",ex:"v : 50 → 100 (×2) ⇒ distance de freinage ×4",pg:"Croire que doubler v double la distance de freinage."}  ,
-  {sig:"Un prix dépend du nombre d'heures (diagnostic + tarif horaire)",
-   met:"Prix = forfait + tarif × heures. L'<b>image</b> de h est le prix pour h heures ; un <b>antécédent</b> d'un prix est le nombre d'heures qui donne ce prix.",ex:"15 + 30 × 2,5 = 90 € ; l'antécédent de 105 € est 3 h",pg:"Croire que 0 h coûte 0 € : le diagnostic est payé avant."}
+   met:"f(x) = k·x² : parabole de sommet (0 ; 0). Quand x est multiplié par n, x² est multiplié par n².",ex:"v : 50 → 100 (×2) ⇒ distance de freinage ×4",pg:"Croire que doubler v double la distance de freinage."}  
  ],
  "geo-mv":[
   {sig:"Calculer une aire ou un volume usuel",
