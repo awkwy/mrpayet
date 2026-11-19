@@ -9,7 +9,7 @@ import { BLOCS } from '../blocs.js';
 import { AUTO } from '../automatismes.js';
 import { VIZ } from '../../visualizations/registry.js';
 import { blocOfCourse } from '../../utils/course-helpers.js';
-import { KAHANI, price, table, hoursFor } from '../../utils/garages.js';
+import { KAHANI, price, table } from '../../utils/garages.js';
 
 // Intégrité de la séquence « Les fonctions » (2P MV2, devis du garage de Kahani) :
 // 4 séances en tutoriel « comment faire », câblage (bloc, récap, compétences, automatismes),
@@ -119,21 +119,20 @@ describe('corrigés cohérents avec les prix', () => {
   it('séance 1 : prix pour 2 h à 5 h, lectures 2 h 30 / 105 € / 150 €', () => {
     expect([ans('Prix pour 2 h')[0], ans('Prix pour 3 h')[0], ans('Prix pour 4 h')[0], ans('Prix pour 5 h')[0]]).toEqual([75, 105, 135, 165]);
     expect(ans('a) Combien paie')[0]).toBe(price(KAHANI, 2.5));
-    expect(ans('b) Il n’a que 105')[0]).toBe(hoursFor(KAHANI, 105));
-    expect(ans('c) Et s’il a 150')[0]).toBe(hoursFor(KAHANI, 150));
+    expect(ans('b) Il n’a que 105')[0]).toBe(3);
+    expect(ans('c) Et s’il a 150')[0]).toBe(4.5);
     expect(ans('★ Un deuxième scooter')[0]).toBe(price(KAHANI, 3.5));
   });
 
   it('séance 2 : images, antécédents et formule P(h)', () => {
     expect(ans('Quelle est l’image de 4 h')[0]).toBe(price(KAHANI, 4));
     expect(ans('Quelle est l’image de 0 h')[0]).toBe(15);
-    expect(ans('Quel est l’antécédent de 75')[0]).toBe(hoursFor(KAHANI, 75));
-    expect(ans('Quel est l’antécédent de 150')[0]).toBe(hoursFor(KAHANI, 150));
-    expect(hoursFor(KAHANI, 10)).toBeNull(); // pas d’antécédent de 10 €
+    expect(ans('Quel est l’antécédent de 75')[0]).toBe(2);
+    expect(ans('Quel est l’antécédent de 150')[0]).toBe(4.5);
     expect(ans('P(2)')[0]).toBe(price(KAHANI, 2));
     expect(ans('P(6)')[0]).toBe(price(KAHANI, 6));
     expect(ans('P(10)')[0]).toBe(price(KAHANI, 10));
-    expect(ans('Un client a 195')[0]).toBe(hoursFor(KAHANI, 195));
+    expect(ans('Un client a 195')[0]).toBe(6);
   });
 });
 
@@ -159,7 +158,7 @@ describe('câblage du module Fonctions (2P MV2)', () => {
       'Prix pour 4 h': price(KAHANI, 4),
       'Calcule P(3)': price(KAHANI, 3),
       'Calcule P(10)': price(KAHANI, 10),
-      'Antécédent de 105': hoursFor(KAHANI, 105)
+      'Antécédent de 105': 3
     };
     const items = AUTO.t.fonctions_garage.i;
     for (const [k, v] of Object.entries(exp)) {
