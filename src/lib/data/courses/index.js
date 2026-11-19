@@ -29,6 +29,7 @@ import proporApmp from './propor-apmp.js';
 import degre1Apmp from './degre1-apmp.js';
 import degre1Mv from './degre1-mv.js';
 import fonctionsMv from './fonctions-mv.js';
+import fonctionsGarageMv from './fonctions-garage-mv.js';
 import geoMv from './geo-mv.js';
 import stat2varMs from './stat2var-ms.js';
 import probaMs from './proba-ms.js';
@@ -86,6 +87,7 @@ export const COURSES = [
   proporApmp,
   degre1Apmp,
   degre1Mv,
+  fonctionsGarageMv,
   fonctionsMv,
   geoMv,
   stat2varMs,
