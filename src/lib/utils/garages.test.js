@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { KAHANI, price, table } from './garages.js';
 
 describe('devis du garage de Kahani : 15 € + 30 € par heure', () => {
