@@ -272,14 +272,13 @@ pour l'enseignant équipé, sans bloquer celui qui ne l'est pas.
   du clavier à l'écran en `aria-disabled` (pas `disabled`) pour garder le
   focus clavier.
 
-## Contenu 2P MV2 récent (bilan stats, bougies, lot de pièces, conversions, tarif)
+## Contenu 2P MV2 récent (bilan stats, bougies, lot de pièces, conversions)
 
 - **Fractions, jamais « ÷ »** dans le contenu récent : `frac(n, d)` de
   `src/lib/utils/fr.js` (classe `.fr` dans `global.css`). `QuizInput` accepte
   `qh`/`solh` (HTML) à côté de `q`/`sol` ; `RecapCard` accepte `exh`.
-- Séances ajoutées dans `courses/stats-probas-bilan.js`, `stats-probas-bougies.js`,
-  `fonctions-tarif.js` (entrée Fonctions, verrouillée par `mv-fonctions` 30-33
-  dans `progression.js`) et le cours `co-intervention-conversions-mv2.js`.
+- Séances ajoutées dans `courses/stats-probas-bilan.js`, `stats-probas-bougies.js`
+  et le cours `co-intervention-conversions-mv2.js`.
   Insérer une séance décale les clés `COMP` (`competences.js`) et `ch` de
   `blocs.js` : les renuméroter ensemble.
 - Auto-tests : `data/selftests-stats.js` (réponses CALCULÉES par
