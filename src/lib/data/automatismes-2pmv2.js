@@ -10,10 +10,13 @@
  *   « Au garage de Kahani : minutes, heures et litres »).
  * - probas_bougies : probabilité d'un événement, événement contraire, certain /
  *   impossible, fréquence d'un échantillon (bac à bougies, lot de pièces).
+ * - fonctions_garage : image, antécédent, formule P(h) = 15 + 30 × h (séances 1
+ *   et 2 de la séquence « Les fonctions », devis du garage de Kahani ; prix
+ *   inventés), sans calculatrice.
  * Jamais de signe « ÷ » dans les questions. Ces thèmes ne dépendent d'aucune
  * semaine de PROGRESSION (comme tous les automatismes : jamais verrouillés). */
 export const EXTRA_2PMV2 = {
-  o: ['stats_rituel', 'unites_garage', 'probas_bougies'],
+  o: ['stats_rituel', 'unites_garage', 'probas_bougies', 'fonctions_garage'],
   t: {
     stats_rituel: {
       t: 'Rituel statistique — étendue, médiane, moyenne, valeur extrême',
@@ -47,6 +50,21 @@ export const EXTRA_2PMV2 = {
         ['125 cm³ en centilitres', '12,5'],
         ['5 L en centilitres', '500'],
         ['2 m³ en litres', '2000']
+      ]
+    },
+    fonctions_garage: {
+      t: 'Fonctions au garage — image, antécédent, formule',
+      i: [
+        ['Devis : 15 € + 30 € par heure. Prix pour 2 h ?', '75'],
+        ['Même devis. Prix pour 0 h ?', '15'],
+        ['Même devis. Prix pour 4 h ?', '135'],
+        ['P(h) = 15 + 30 × h. Calcule P(3)', '105'],
+        ['P(h) = 15 + 30 × h. Calcule P(10)', '315'],
+        ['Tableau : 0 h → 15 €, 1 h → 45 €, 2 h → 75 €. L’image de 2 h ?', '75'],
+        ['Même tableau : un antécédent de 45 € ?', '1'],
+        ['Même tableau : existe-t-il un antécédent de 10 € ? (oui ou non)', 'non'],
+        ['105 € est l’image de 3 h. Par rapport à 105 €, le nombre 3 h est une image ou un antécédent ?', 'antécédent'],
+        ['Devis : 15 € + 30 € par heure. Antécédent de 105 € (nombre d’heures) ?', '3']
       ]
     },
     probas_bougies: {

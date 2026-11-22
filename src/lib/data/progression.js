@@ -37,11 +37,16 @@ export const PROGRESSION = [
   { classe: '2P MV2', blocId: 'mv-stat', from: 4, to: 9 },
   { classe: '2P MV2', blocId: 'mv-proba', from: 10, to: 16 },
   { classe: '2P MV2', blocId: 'mv-degre1', from: 21, to: 23 },
-  // Fonctions : « mars-avril, après le devoir commun » (Progression_2PMV2_maths.md,
-  // mise à jour du 7 nov. 2026). Les semaines 24-26 sont la PFMP1 et 27-28 les
-  // vacances de Carnaval : le module ne peut pas y être. Semaine 30 = lundi
+  // Fonctions, séquence « Les fonctions » (devis du garage de Kahani, 4 séances),
+  // avancée à la demande du capitaine : séances 1 et 2 le mercredi 18/11/2026
+  // (semaine 13) ; séances 3 et 4 à placer (semaines 14 à 16 actives) : seule la
+  // date connue est écrite ici, la fenêtre sera étendue quand elles seront datées.
+  { classe: '2P MV2', blocId: 'mv-fonctions', from: 13, to: 13 },
+  // Suite du module (variations, extremums, fonction carré) : « mars-avril, après le
+  // devoir commun » (Progression_2PMV2_maths.md). Les semaines 24-26 sont la PFMP1 et
+  // 27-28 les vacances de Carnaval : le module ne peut pas y être. Semaine 30 = lundi
   // 15 mars 2027 (devoir commun mi-mars) ; 33 = lundi 5 avril.
-  { classe: '2P MV2', blocId: 'mv-fonctions', from: 30, to: 33 },
+  { classe: '2P MV2', blocId: 'mv-fonctions-suite', from: 30, to: 33 },
   { classe: '2P MV2', blocId: 'mv-geo', from: 34, to: 38 },
 
   // ---------- 2P MV2 — physique-chimie ----------

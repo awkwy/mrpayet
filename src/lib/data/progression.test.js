@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { weekMonday, futureLock, progressionAt, LOOKAHEAD_WEEKS } from './progression.js';
+import { weekMonday, weekOf, futureLock, progressionAt, LOOKAHEAD_WEEKS, PROGRESSION } from './progression.js';
 import {
   blocLock,
   courseLock,
@@ -102,23 +102,36 @@ describe('gating sur les données réelles (semaine 3)', () => {
   });
 });
 
-describe('Fonctions 2P MV2 : prévu mars-avril 2027, verrouillé jusqu’à l’approche', () => {
-  const entries = progressionAt('2P MV2', 31);
-  it('mv-fonctions tombe après le devoir commun (mi-mars) et jamais pendant la PFMP1 ni le Carnaval', () => {
-    const f = entries.find((p) => p.blocId === 'mv-fonctions');
+describe('Fonctions 2P MV2 : séquence « Les fonctions » (novembre) puis suite en mars-avril 2027', () => {
+  it('la séquence du garage de Kahani démarre le mercredi 18/11/2026 (semaine 13)', () => {
+    const f = progressionAt('2P MV2', 13).find((p) => p.blocId === 'mv-fonctions');
+    expect(f).toBeTruthy();
+    expect(f.from).toBe(13);
+    expect(weekMonday(f.from).toISOString().slice(0, 10)).toBe('2026-11-16');
+    expect(weekOf(new Date('2026-11-18T10:00:00'))).toBe(13);
+  });
+  it('aucune date n’est inventée au-delà des séances 1 et 2 : une seule fenêtre, sans verrou propre à une séance', () => {
+    expect(PROGRESSION.filter((p) => p.blocId === 'mv-fonctions')).toHaveLength(1);
+    const c = courseById('fonctions-garage-mv');
+    for (let n = 0; n < c.seances.length; n++) expect(chapterLock(c, n, 13)).toBeNull();
+  });
+  it('la séquence est encore verrouillée en septembre (semaine 2), pas en novembre', () => {
+    const c = courseById('fonctions-garage-mv');
+    expect(courseLock(c, 2)).not.toBeNull();
+    expect(courseLock(c, 11)).toBeNull(); // 11 + 2 semaines d’avance = 13
+  });
+  it('la suite du module tombe après le devoir commun (mi-mars) et jamais pendant la PFMP1 ni le Carnaval', () => {
+    const f = PROGRESSION.find((p) => p.blocId === 'mv-fonctions-suite');
     expect(f).toBeTruthy();
     expect(f.from).toBeGreaterThanOrEqual(30);
     expect(weekMonday(f.from).toISOString().slice(0, 10) >= '2027-03-08').toBe(true);
   });
-  it('la séance « Combien coûte la réparation ? » est verrouillée en novembre (semaine 11) et le reste en janvier', () => {
+  it('la suite (variations, extremums, fonction carré) reste verrouillée en novembre et en janvier', () => {
     const c = courseById('fonctions-mv');
-    expect(c.seances[0].t).toMatch(/réparation/);
-    expect(chapterLock(c, 0, 11)).not.toBeNull();
+    expect(c.seances.map((s) => s.t)).not.toContain('Combien coûte la réparation ?');
+    expect(chapterLock(c, 0, 13)).not.toBeNull();
     expect(chapterLock(c, 0, 22)).not.toBeNull();
     expect(chapterLock(c, 0, 28)).toBeNull(); // 28 + 2 semaines d’avance = 30
-  });
-  it('aucune entrée « cette semaine » pour Fonctions avant sa fenêtre', () => {
-    expect(progressionAt('2P MV2', 11).some((p) => p.blocId === 'mv-fonctions')).toBe(false);
   });
 });
 
