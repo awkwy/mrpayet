@@ -298,7 +298,8 @@ pour l'enseignant équipé, sans bloquer celui qui ne l'est pas.
 
 - Deux blocs pour le module du BO « Fonctions » : `mv-fonctions` (cours
   `fonctions-garage-mv`, la séquence « Les fonctions » du projet `cours`,
-  datée : séance 1 le mer. 18/11/2026 = semaine 13 ; une séance sans date
+  datée : séances 1-2 le mer. 18/11/2026 = semaine 13, séances 3-4 le
+  25/11/2026 = semaine 14 ; une séance sans date
   connue ne reçoit PAS de fenêtre dans `progression.js`) et
   `mv-fonctions-suite` (cours `fonctions-mv`, variations/extremums/fonction
   carré, mars-avril). Le verrou est par bloc : deux blocs = deux dates.
@@ -307,7 +308,7 @@ pour l'enseignant équipé, sans bloquer celui qui ne l'est pas.
   le corrigé prof restent dans `cours` (« NE PAS DISTRIBUER »), jamais publiés
   ici : seuls les PDF élève standard/accessible vont dans `static/fiches/maths/`.
 - Prix et corrigés viennent de `$lib/utils/garages.js` (testé) ; la
-  manipulation `tarif` se règle par `vd` (`heures`, `pose`, `sansAutre`).
+  manipulation `tarif` se règle par `vd` (`heures`, `pose`, `autre`, `sansAutre`).
   Piège : `btn(...).remove()` dans une manipulation impérative exige de ne pas
   brancher `onclick` ensuite (TypeError silencieux qui laisse la figure vide).
 - Vérification visuelle : `vite preview` garde l'ancien build en mémoire après

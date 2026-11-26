@@ -1,12 +1,12 @@
 /* Séquence « Les fonctions » (2P MV2) : le devis du garage de Kahani, en 4 séances
- * (LOT 1 : séances 1 et 2 du mercredi 18/11/2026 ; les séances 3 « Deux garages,
- * deux droites » et 4 « Quel garage choisir ? » arrivent dans un second lot).
+ * (séances 1 et 2 du mercredi 18/11/2026 ; séances 3 « Deux garages, deux
+ * droites » et 4 « Quel garage choisir ? » du mercredi 25/11/2026).
  *
  * Source : fonctions-s1…s4-2pmv2 (standard + accessible) du projet frère `cours`
  * (plan de séquence : eleve/maths/fonctions-plan-sequence-2pmv2). Les séances 1
- * et 2 ont lieu le mercredi 18/11/2026 ; les dates des séances 3 et 4 ne sont
- * pas fixées : la fenêtre de progression du bloc `mv-fonctions` (voir
- * $lib/data/progression.js) ne porte donc que ce qui est connu.
+ * et 2 ont lieu le mercredi 18/11/2026, les séances 3 et 4 le mercredi
+ * 25/11/2026 (semaines 13 et 14 de la fenêtre `mv-fonctions`, voir
+ * $lib/data/progression.js).
  * Fil rouge : diagnostic 15 € payé une seule fois + 30 € par heure. NOMBRES
  * INVENTÉS pour l'exercice (dit dans chaque situation). Les deux garages sont
  * fictifs. Le « garage B » demande 40 € par heure, sans diagnostic.
@@ -20,11 +20,15 @@
  * Les prix et lectures sont contrôlés par `fonctions-garage.test.js` à partir
  * de $lib/utils/garages.js. */
 import { frac as F } from '../../utils/fr.js';
-import { KAHANI, price, table } from '../../utils/garages.js';
+import { KAHANI, GARAGE_B, price, table, fromPoints } from '../../utils/garages.js';
 
 // Séance 2 : le tableau de valeurs à saisir dans la calculatrice (0 h à 6 h).
 const TAB_0_6 = table(KAHANI, [0, 1, 2, 3, 4, 5, 6]);
 export const DATASET_KAHANI = TAB_0_6;
+// Séances 3 et 4 : garage C = deux points donnés (0 h ; 20 €) et (1 h ; 45 €), puis (0 h ; 30 €) et (1 h ; 50 €).
+export const GARAGE_C3 = fromPoints([0, 20], [1, 45]);
+export const GARAGE_C4 = fromPoints([0, 30], [1, 50]);
+const R4 = (h) => GARAGE_C4.fixe + GARAGE_C4.heure * h;
 
 export default {
   id: 'fonctions-garage-mv',
@@ -42,6 +46,7 @@ export default {
     {
       t: 'Combien coûte la réparation ?',
       pdf: ['fonctions-s1-2pmv2-standard', 'fonctions-s1-2pmv2-accessible'],
+      datasets: { d1: DATASET_KAHANI },
       prob: 'Un client apporte son scooter au garage de Kahani et demande : « Combien je vais payer, selon le nombre d’heures de réparation ? » Comment répondre avec un tableau, puis un graphique ?',
       steps: [
         {
@@ -148,6 +153,17 @@ export default {
               sol: '15 + 3,5 × 30 = 120 €. Le graphique et le calcul donnent le même résultat : c’est un bon contrôle.'
             }
           ]
+        },
+        {
+          t: 'Étape 5 : je contrôle mon tableau avec la calculatrice',
+          apport:
+            'La calculatrice sert à <b>contrôler</b> ton tableau, pas à le remplacer. Sur ta vraie NumWorks : application <i>Statistiques</i> (ou <i>Régressions</i>), onglet <i>Données</i>. Entre toi-même les 7 lignes du tableau, de 0 h à 6 h : les heures dans la première colonne, les prix dans la deuxième. Compare avec ton tableau papier : si une ligne est différente, c’est ton calcul ou ta saisie à revoir. Ensuite ouvre l’onglet <i>Graphique</i> : les points sont alignés, comme sur ta feuille. Si un menu n’a pas le même nom sur ta calculatrice, demande à ton professeur.',
+          calc: { dataset: 'd1', cols: ['Heures', 'Prix (€)'], reg: 'affine' },
+          q: [
+            { q: 'Dans la première ligne du tableau (0 h), quel prix lis-tu ? (€)', a: price(KAHANI, 0), tol: 0, sol: '15 € : c’est le diagnostic, payé même pour 0 heure.' },
+            { q: 'Pour 4 h, ta calculatrice affiche quel prix ? Il doit être le même que sur ta feuille. (€)', a: price(KAHANI, 4), tol: 0 },
+            { q: 'Le tableau de la calculatrice va jusqu’à 6 h. Quel prix pour 6 h ? (€)', a: price(KAHANI, 6), tol: 0, sol: '15 + 6 × 30 = 195 €. Ton tableau papier s’arrêtait à 5 h : la calculatrice va plus loin.' }
+          ]
         }
       ],
       quiz: [
@@ -241,6 +257,233 @@ export default {
       ],
       trace:
         'Pour un nombre d’heures donné, le prix est son <b>image</b> ; pour un prix donné, le nombre d’heures est un <b>antécédent</b> (il peut ne pas exister : pas d’antécédent de 10 €).<br>On lit une image en partant de l’axe des heures, un antécédent en partant de l’axe des prix.<br>La <b>formule</b> <b>P(h) = 15 + 30 × h</b> donne le prix pour n’importe quel nombre d’heures : P(6) = 195 €.<br>La calculatrice fait le <b>tableau de valeurs</b> à notre place (application <i>Fonctions</i>, onglet <i>Tableau</i>).'
+    },
+    /* ---------------------------------------------------------------- 3 */
+    {
+      t: 'Deux garages, deux droites',
+      pdf: ['fonctions-s3-2pmv2-standard', 'fonctions-s3-2pmv2-accessible'],
+      prob: 'Un scooter est en panne près de Kahani, et deux garages font un devis : le garage de Kahani (15 € une fois, puis 30 € par heure) et un garage B (40 € par heure, sans diagnostic). Lequel est le moins cher ? Comment le voir sur un graphique ?',
+      steps: [
+        {
+          t: 'Rituel d’ouverture (4 minutes, sans calculatrice)',
+          apport:
+            'On repart du devis de Kahani (séance 2) et on ajoute le garage B. Réponds de tête, sans calculatrice, puis tape ta réponse. Rappel : on calcule la multiplication avant l’addition.',
+          q: [
+            { q: '40 fois 3 ? (40 × 3)', a: price(GARAGE_B, 3), tol: 0 },
+            { q: '15 + 30 × 2 = ? (on multiplie d’abord)', a: price(KAHANI, 2), tol: 0 },
+            { q: 'Kahani : P(h) = 15 + 30 × h. Prix pour 4 h ? (€)', a: price(KAHANI, 4), tol: 0 },
+            { q: 'Kahani : le prix est 105 €. Combien d’heures ? (h)', a: 3, tol: 0, sol: 'C’est l’antécédent de 105 € : 3 h.' },
+            { q: '40 fois 5 ? (40 × 5)', a: price(GARAGE_B, 5), tol: 0 }
+          ]
+        },
+        {
+          t: 'La situation',
+          txt: 'Un scooter est en panne près de Kahani. Deux garages font un devis. Le garage de Kahani : diagnostic de 15 € (payé une seule fois), puis 30 € par heure. Un garage B, sur la route du littoral : pas de diagnostic, mais 40 € par heure. Prix inventés pour l’exercice ; les deux garages sont fictifs.',
+          q: [
+            {
+              q: 'Avant de calculer, donne ton idée : pour 1 heure, quel garage est le moins cher ? (Kahani ou B)',
+              a: ['b', 'garage b'],
+              txt: true,
+              sol: 'Le garage B : 40 € contre 45 €. Et pour 4 heures ? On le calcule dans l’étape 1.',
+              hint: 'Pour 1 heure, Kahani demande le diagnostic et l’heure. Le garage B demande seulement l’heure.'
+            }
+          ]
+        },
+        {
+          t: 'Étape 1 : le tableau de valeurs des deux garages',
+          doc: {
+            h: ['Nombre d’heures', 'Garage de Kahani (€)', 'Garage B (€)'],
+            r: [
+              ['0 h', '15', '0 (exemple)'],
+              ['1 h', '45', ''],
+              ['2 h', '75', ''],
+              ['3 h', '105', ''],
+              ['4 h', '135', ''],
+              ['5 h', '165', '']
+            ]
+          },
+          apport:
+            'Pour compléter la colonne du garage B : <b>prix = 40 × nombre d’heures</b> (pas de diagnostic, donc pour 0 h on paie 0 €). Avec la calculatrice : application <i>Calculs</i>, taper <b>40 × 3</b>, puis OK. Ensuite tu compares les deux colonnes ligne par ligne.',
+          q: [
+            { q: 'Garage B, prix pour 1 h : ? (€)', a: price(GARAGE_B, 1), tol: 0 },
+            { q: 'Garage B, prix pour 2 h : ? (€)', a: price(GARAGE_B, 2), tol: 0 },
+            { q: 'Garage B, prix pour 3 h : ? (€)', a: price(GARAGE_B, 3), tol: 0 },
+            { q: 'Garage B, prix pour 4 h : ? (€)', a: price(GARAGE_B, 4), tol: 0 },
+            { q: 'Garage B, prix pour 5 h : ? (€)', a: price(GARAGE_B, 5), tol: 0 }
+          ]
+        },
+        {
+          t: 'Étape 2 : deux mots pour décrire une droite',
+          apport:
+            'Deux mots pour décrire une droite de prix. Le <b>coefficient directeur</b> : de combien le prix monte quand on ajoute 1 heure. L’<b>ordonnée à l’origine</b> : le prix pour 0 heure (là où la droite coupe l’axe des prix, celui de gauche). Une fonction dont la droite s’écrit <b>a × h + b</b> est une <b>fonction affine</b> : <b>a</b> est le coefficient directeur, <b>b</b> l’ordonnée à l’origine. Pour les trouver dans un tableau : le coefficient directeur est la <b>différence entre deux lignes qui se suivent</b> ; l’ordonnée à l’origine est la <b>ligne 0 h</b>.',
+          q: [
+            { q: 'Garage de Kahani : coefficient directeur ? (€ par heure)', a: KAHANI.heure, tol: 0, sol: '45 → 75 → 105 : le prix monte de 30 € à chaque heure en plus.' },
+            { q: 'Garage de Kahani : ordonnée à l’origine ? (€)', a: KAHANI.fixe, tol: 0, sol: 'C’est le prix pour 0 h : le diagnostic, 15 €.' },
+            { q: 'Garage B : coefficient directeur ? (€ par heure)', a: GARAGE_B.heure, tol: 0 },
+            { q: 'Garage B : ordonnée à l’origine ? (€)', a: GARAGE_B.fixe, tol: 0, sol: 'Pour 0 h, le garage B demande 0 € : pas de diagnostic.' }
+          ]
+        },
+        {
+          t: 'Étape 3 : les deux droites sur le même graphique',
+          viz: 'tarif',
+          vd: { pose: true },
+          apport:
+            'La droite du garage de Kahani est déjà tracée. Appuie sur le bouton de l’autre garage : sa droite (40 € par heure) s’ajoute en bleu. Pour la tracer sur ta feuille : place les points (heures ; prix) du tableau avec des ronds blancs, puis relie-les à la règle en tirets. Regarde : les deux droites <b>montent</b> quand le nombre d’heures augmente, mais pas aussi vite l’une que l’autre.',
+          q: [
+            { q: 'Les deux droites montent-elles quand le nombre d’heures augmente ? (oui ou non)', a: ['oui'], txt: true },
+            {
+              q: 'Quelle droite monte le plus vite : Kahani ou B ?',
+              a: ['b', 'garage b'],
+              txt: true,
+              sol: 'Le garage B : il monte de 40 € par heure, contre 30 € pour Kahani. Dans le tableau, on le voit à l’écart entre deux lignes qui se suivent.',
+              hint: 'Regarde de combien chaque prix monte quand on ajoute 1 heure.'
+            }
+          ]
+        },
+        {
+          t: 'Étape 4 : je relie droite, tableau et expression',
+          apport:
+            'Quand le coefficient directeur est <b>positif</b>, la droite monte : la fonction est <b>croissante</b> (plus les heures augmentent, plus le prix augmente). Pour écrire l’expression d’un garage : coefficient directeur × h + ordonnée à l’origine. Kahani : <b>P(h) = 15 + 30 × h</b>. Garage B : pas de nombre ajouté, donc <b>Q(h) = 40 × h</b>.',
+          q: [
+            { q: 'Dans P(h) = 15 + 30 × h, que représente le nombre 30 ? (coefficient directeur ou ordonnée à l’origine)', a: ['coefficient directeur', 'le coefficient directeur'], txt: true, sol: '30 est le coefficient directeur : le prix gagné pour 1 h de plus. 15 est l’ordonnée à l’origine : le prix à 0 h.' },
+            { q: 'Garage B : Q(h) = 40 × h. Calcule Q(3). (€)', a: price(GARAGE_B, 3), tol: 0 },
+            {
+              q: 'Un client veut 3 heures de réparation. Quel garage est le moins cher ? (Kahani ou B)',
+              a: ['kahani', 'garage de kahani'],
+              txt: true,
+              sol: '3 h : Kahani 105 €, garage B 120 €. Pour 1 h, c’était B (40 € contre 45 €) : ton idée de départ était juste pour 1 h, mais pas pour 3 h. Les droites se croisent entre 1 h et 2 h.'
+            },
+            {
+              q: 'Entre les deux garages, pour combien d’heures le prix est-il à peu près le même ? Regarde le graphique : les droites se croisent entre 1 h et 2 h. Quelle est ton idée ? (h)',
+              a: 1.5,
+              tol: 0.3,
+              sol: 'Vers 1,5 h : 60 € dans les deux garages. On le vérifie par le calcul à la séance suivante.'
+            }
+          ]
+        },
+        {
+          t: '★ Pour aller plus loin : un garage C',
+          apport:
+            'Pour trouver la droite d’un garage à partir de <b>deux prix donnés</b> : l’ordonnée à l’origine est le prix pour 0 h ; le coefficient directeur est la différence entre le prix pour 1 h et le prix pour 0 h.',
+          q: [
+            { q: 'Un garage C annonce : 0 h → 20 €, 1 h → 45 €. Son coefficient directeur ? (€ par heure)', a: GARAGE_C3.heure, tol: 0, sol: '45 − 20 = 25 € de plus par heure.' },
+            { q: 'Son ordonnée à l’origine ? (€)', a: GARAGE_C3.fixe, tol: 0 }
+          ]
+        }
+      ],
+      quiz: [
+        { q: 'Dans P(h) = 15 + 30 × h, l’ordonnée à l’origine est :', o: ['30', '15', '45'], c: 1, e: 'C’est le prix pour 0 h : 15 €, le diagnostic.' },
+        { q: 'Une droite dont le coefficient directeur est positif :', o: ['monte : fonction croissante', 'descend : fonction décroissante', 'est plate'], c: 0, e: 'Positif = elle monte : la fonction est croissante.' }
+      ],
+      trace:
+        'Une fonction dont la droite s’écrit <b>a × h + b</b> est une <b>fonction affine</b>. Le <b>coefficient directeur a</b> est ce que le prix gagne pour 1 h de plus. L’<b>ordonnée à l’origine b</b> est le prix pour 0 h.<br>Exemple : Kahani P(h) = 15 + 30 × h (a = 30, b = 15) ; garage B Q(h) = 40 × h (a = 40, b = 0).<br>Quand a est <b>positif</b>, la droite monte : la fonction est <b>croissante</b>. Le garage B monte plus vite que Kahani, mais il part de 0 € : les deux droites se croisent.'
+    },
+    /* ---------------------------------------------------------------- 4 */
+    {
+      t: 'Quel garage choisir ?',
+      pdf: ['fonctions-s4-2pmv2-standard', 'fonctions-s4-2pmv2-accessible'],
+      prob: 'Le scooter est en panne : Kahani (15 € + 30 € par heure) ou garage B (40 € par heure) ? Ça dépend de quoi ? Comment décider avec les deux droites, puis le vérifier par le calcul ?',
+      steps: [
+        {
+          t: 'Rituel d’ouverture (3 minutes, sans calculatrice)',
+          apport:
+            'Reprise éclair des deux garages de la séance 3. Réponds de tête, sans calculatrice, puis tape ta réponse.',
+          q: [
+            { q: 'Garage B : Q(h) = 40 × h. Coefficient directeur ? (€ par heure)', a: GARAGE_B.heure, tol: 0 },
+            { q: 'Garage de Kahani : P(h) = 15 + 30 × h. Ordonnée à l’origine ? (€)', a: KAHANI.fixe, tol: 0 },
+            { q: 'Garage B : Q(2) = 40 × 2 = ? (€)', a: price(GARAGE_B, 2), tol: 0 },
+            { q: 'La droite monte. La fonction est… ? (un mot)', a: ['croissante'], txt: true, sol: 'Croissante : quand h augmente, le prix augmente.' }
+          ]
+        },
+        {
+          t: 'La situation',
+          viz: 'tarif',
+          vd: { pose: true },
+          txt: 'Le scooter est en panne. Deux garages : celui de Kahani (15 € de diagnostic, puis 30 € par heure : P(h) = 15 + 30 × h) et un garage B sur la route (40 € par heure, sans diagnostic : Q(h) = 40 × h). Prix inventés pour l’exercice ; les deux garages sont fictifs. Appuie sur le bouton de l’autre garage pour voir les deux droites.',
+          doc: {
+            h: ['Heures', '0', '1', '2', '3', '4', '5'],
+            r: [
+              ['Kahani (€)', '15', '45', '75', '105', '135', '165'],
+              ['Garage B (€)', '0', '40', '80', '120', '160', '200']
+            ]
+          },
+          q: [
+            {
+              q: 'Avant de chercher : quel garage choisir ? Dis ton idée (Kahani, B ou ça dépend)',
+              a: ['ça dépend', 'ca depend', 'dépend', 'depend', 'ça dépend du nombre d’heures', 'ça dépend des heures'],
+              txt: true,
+              sol: 'Ça dépend du nombre d’heures : on le voit avec les deux droites, qui se croisent.',
+              hint: 'Regarde le tableau : pour 1 h puis pour 4 h, c’est le même garage le moins cher ?'
+            }
+          ]
+        },
+        {
+          t: 'Étape 1 : je lis le point de croisement',
+          apport:
+            'Sur le graphique, les deux droites <b>se croisent</b> en un point : c’est le <b>point d’intersection</b>. Ses deux coordonnées te disent : à combien d’heures les deux garages ont le <b>même prix</b>, et quel est ce prix. Avant le point, une droite est plus basse que l’autre ; après, c’est l’inverse. La droite la plus <b>basse</b> est le garage le <b>moins cher</b>.',
+          q: [
+            { q: 'Lis à peu près le point de croisement : combien d’heures ? (h, avec la virgule)', a: 1.5, tol: 0.25, sol: 'Vers 1,5 h : c’est une valeur lue sur le graphique, donc approchée. On la vérifie dans l’étape suivante.' },
+            { q: 'Et quel prix à peu près ? (€)', a: 60, tol: 8, sol: 'Vers 60 €.' },
+            { q: 'Avant ce point (1 h par exemple), quel garage est le moins cher ? (Kahani ou B)', a: ['b', 'garage b'], txt: true, sol: 'Le garage B : sa droite est plus basse (40 € contre 45 € à 1 h).' },
+            { q: 'Après ce point (3 h par exemple), quel garage est le moins cher ? (Kahani ou B)', a: ['kahani', 'garage de kahani'], txt: true, sol: 'Kahani : sa droite est plus basse (105 € contre 120 € à 3 h).' }
+          ]
+        },
+        {
+          t: 'Étape 2 : je vérifie par le calcul',
+          apport:
+            'Un graphique donne une valeur <b>approchée</b> : on vérifie par le calcul. Pour tester h = 1,5 : <b>P(1,5) = 15 + 30 × 1,5</b> et <b>Q(1,5) = 40 × 1,5</b>. On calcule la multiplication d’abord, puis on ajoute 15 pour Kahani. Si les deux résultats sont égaux, ta lecture du graphique est bonne.',
+          q: [
+            { q: 'Calcule P(1,5) = 15 + 30 × 1,5 (€)', a: price(KAHANI, 1.5), tol: 0 },
+            { q: 'Calcule Q(1,5) = 40 × 1,5 (€)', a: price(GARAGE_B, 1.5), tol: 0 },
+            { q: 'P(1,5) et Q(1,5) sont-ils égaux ? (oui ou non)', a: ['oui'], txt: true, sol: 'Oui : 60 € des deux côtés. Ta lecture du graphique (vers 1,5 h) était bonne, et le calcul le prouve.' }
+          ]
+        },
+        {
+          t: 'Étape 3 : je cherche quand les deux prix sont égaux (calculatrice)',
+          doc: {
+            h: ['Heures h', '0,5', '1', '1,5', '2', '2,5', '3'],
+            r: [
+              ['f1(x) = 15 + 30x (Kahani)', '30', '45', '60', '75', '90', '105'],
+              ['f2(x) = 40x (garage B)', '20', '40', '60', '80', '100', '120']
+            ]
+          },
+          apport:
+            'Sur ta vraie NumWorks : application <i>Fonctions</i>, taper <b>15+30x</b> dans f1(x)= et <b>40x</b> dans f2(x)=. Onglet <i>Tableau</i> : tu lis x (les heures), puis les prix de f1 et de f2. Pour avancer de 0,5 en 0,5, règle le pas du tableau à 0,5 (menu de réglage de l’intervalle). Si un menu n’a pas le même nom sur ta calculatrice, demande à ton professeur. On cherche la ligne où les deux prix sont <b>égaux</b> : c’est résoudre <b>15 + 30 × h = 40 × h</b>. Ici, le tableau ci-dessus est ce que tu lis sur la calculatrice.',
+          q: [
+            { q: 'Pour quelle valeur de h les deux prix sont-ils égaux ? (h, avec la virgule)', a: 1.5, tol: 0, sol: 'À 1,5 h les deux garages coûtent 60 € : 15 + 30 × 1,5 = 40 × 1,5.' },
+            { q: 'Pour 1 h, quel prix à Kahani, quel prix au garage B : combien de plus à Kahani ? (€)', a: 5, tol: 0, sol: '45 − 40 = 5 € de plus à Kahani pour 1 h.' }
+          ]
+        },
+        {
+          t: 'Étape 4 : je décide',
+          apport:
+            'Pour conseiller un client, je compare le <b>nombre d’heures de sa réparation</b> avec <b>1,5 h</b> et je donne les prix des deux garages. Moins de 1,5 h : garage B ; plus de 1,5 h : Kahani ; juste 1,5 h : c’est pareil (60 €). Une bonne phrase de conseil donne le garage, <b>les deux prix</b> et la raison.',
+          q: [
+            { q: 'Client 1 : 1 h de réparation. Quel garage conseilles-tu ? (Kahani ou B)', a: ['b', 'garage b'], txt: true, sol: 'Garage B : 40 € contre 45 €.' },
+            { q: 'Client 2 : 1 h 30 de réparation. Quel est le prix dans chaque garage ? (€)', a: 60, tol: 0, sol: 'Les deux coûtent 60 € : c’est le même prix, tu peux choisir l’un ou l’autre.' },
+            { q: 'Client 3 : 3 h de réparation. Quel garage conseilles-tu ? (Kahani ou B)', a: ['kahani', 'garage de kahani'], txt: true, sol: 'Kahani : 105 € contre 120 €. Exemple de phrase : « Pour 3 h, je te conseille Kahani : 105 € au lieu de 120 € au garage B. »' },
+            { q: 'Combien le client 3 économise-t-il en choisissant le bon garage ? (€)', a: price(GARAGE_B, 3) - price(KAHANI, 3), tol: 0 }
+          ]
+        },
+        {
+          t: 'Bilan de la séquence : je m’évalue (15 minutes)',
+          apport:
+            'Sans regarder tes fiches ; la calculatrice est autorisée. Un garage C annonce : prix pour 0 h = 30 €, prix pour 1 h = 50 €. Rappel : le coefficient directeur est la différence entre les deux prix ; l’ordonnée à l’origine est le prix pour 0 h ; l’expression s’écrit a × h + b.',
+          q: [
+            { q: 'Garage C : coefficient directeur ? (€ par heure)', a: GARAGE_C4.heure, tol: 0, sol: '50 − 30 = 20 € de plus par heure.' },
+            { q: 'Garage C : ordonnée à l’origine ? (€)', a: GARAGE_C4.fixe, tol: 0 },
+            { q: 'Écris l’expression R(h) = … puis calcule l’image de 4 par R. (€)', a: R4(4), tol: 0, sol: 'R(h) = 30 + 20 × h, donc R(4) = 30 + 20 × 4 = 110 €.' },
+            { q: 'La fonction R est-elle croissante ? (oui ou non)', a: ['oui'], txt: true, sol: 'Oui : son coefficient directeur 20 est positif, la droite monte.' },
+            { q: 'Un client a 130 € : combien d’heures peut-il payer au garage C ? (h)', a: 5, tol: 0, sol: '30 + 20 × 5 = 130 € : 5 h est l’antécédent de 130 €. Phrase : « Avec 130 €, le client peut payer 5 heures au garage C. »' }
+          ]
+        }
+      ],
+      quiz: [
+        { q: 'Au point de croisement des deux droites, les deux garages ont :', o: ['le même prix', 'le même coefficient directeur', 'le même diagnostic'], c: 0, e: 'Les droites se croisent là où les prix sont égaux : ici 60 € pour 1,5 h.' },
+        { q: 'Pour 3 h de réparation, le garage le moins cher est :', o: ['le garage B (120 €)', 'Kahani (105 €)', 'les deux, au même prix'], c: 1, e: '15 + 30 × 3 = 105 € contre 40 × 3 = 120 €.' }
+      ],
+      trace:
+        'Une <b>fonction</b> associe à chaque nombre d’heures (la variable) un seul prix : l’<b>image</b> ; le nombre d’heures qui donne un prix est un <b>antécédent</b>.<br>Une <b>fonction affine</b> s’écrit <b>a × h + b</b> : <b>a</b> = coefficient directeur (ce que le prix gagne pour 1 h de plus), <b>b</b> = ordonnée à l’origine (le prix pour 0 h). Si a est positif, la droite monte : la fonction est <b>croissante</b>.<br>Pour choisir entre deux garages : on cherche le <b>point de croisement</b> des deux droites (même prix). Ici : 1,5 h et 60 €, vérifié par le calcul. Avant 1,5 h le garage B est moins cher ; après, c’est Kahani.'
     }
   ]
 };

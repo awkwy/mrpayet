@@ -21,7 +21,9 @@ export const RECAP = {
   {sig:"Calculer une vitesse moyenne et convertir km/h ↔ m/s",
    met:"v = d ÷ t (m et s → m/s). km/h → m/s : ÷ 3,6. m/s → km/h : × 3,6.",ex:"250 m en 12 s → 20,8 m/s → 20,8 × 3,6 ≈ 75 km/h",pg:"Mélanger les unités, ou multiplier au lieu de diviser par 3,6."},
   {sig:"Donner un résultat unique à partir de plusieurs mesures",
-   met:"Calculer la moyenne, l'arrondir avec un nombre de chiffres cohérent avec la précision de l'instrument, puis comparer à une valeur de référence.",ex:"23,9 ; 24,0 ; 24,1 mm → moyenne 24,0 mm, compatible avec la référence constructeur 24,0 mm.",pg:"Se fier à une seule mesure, ou garder trop de chiffres après la virgule."}
+   met:"Calculer la moyenne, l'arrondir avec un nombre de chiffres cohérent avec la précision de l'instrument, puis comparer à une valeur de référence.",ex:"23,9 ; 24,0 ; 24,1 mm → moyenne 24,0 mm, compatible avec la référence constructeur 24,0 mm.",pg:"Se fier à une seule mesure, ou garder trop de chiffres après la virgule."},
+  {sig:"Calculer la distance d'arrêt",
+   met:"Distance d'arrêt = distance de réaction + distance de freinage. Réaction : d = v × t (v en m/s : km/h divisé par 3,6 ; t = 1 s). Freinage : lu dans le tableau.",ex:"72 km/h = 20 m/s ; 20 + 29 = 49 m. Route mouillée : 20 + 44 = 64 m",pg:"Oublier la distance de réaction, ou croire que doubler la vitesse double la distance d'arrêt."}
  ],
  "stats-probas":[
   {sig:"Résumer une série de mesures par un seul nombre",
@@ -437,7 +439,11 @@ export const RECAP = {
   {sig:"Lire une image ou un antécédent",
    met:"Image de h (le prix) : je pars de l'axe des heures, je monte jusqu'à la droite, je lis le prix. Antécédent d'un prix : je pars de l'axe des prix, je vais jusqu'à la droite, je descends lire les heures. Un antécédent peut ne pas exister.",ex:"105 € est l'image de 3 h ; 3 h est un antécédent de 105 € ; 10 € n'a pas d'antécédent",pg:"Confondre image et antécédent."},
   {sig:"Calculer un prix avec la formule P(h)",
-   met:"Je remplace h par le nombre, je multiplie, j'ajoute le diagnostic.",ex:"P(6) = 15 + 30 × 6 = 195 €",pg:"Additionner 15 + 30 avant de multiplier."}
+   met:"Je remplace h par le nombre, je multiplie, j'ajoute le diagnostic.",ex:"P(6) = 15 + 30 × 6 = 195 €",pg:"Additionner 15 + 30 avant de multiplier."},
+  {sig:"Lire coefficient directeur et ordonnée à l'origine d'un garage",
+   met:"P(h) = a × h + b : a = ce que le prix gagne pour 1 h de plus ; b = le prix pour 0 h. a positif : la droite monte, la fonction est croissante.",ex:"Kahani 15 + 30 × h : a = 30, b = 15 ; garage B 40 × h : a = 40, b = 0",pg:"Prendre le diagnostic pour le coefficient directeur."},
+  {sig:"Choisir entre deux garages",
+   met:"Je cherche le point de croisement des deux droites (même prix), je vérifie par le calcul, puis je compare le nombre d'heures du client avec ce point.",ex:"15 + 30 × 1,5 = 60 et 40 × 1,5 = 60 : avant 1,5 h garage B, après Kahani",pg:"Se fier à la lecture du graphique sans vérifier par le calcul."}
  ],
  "fonctions-mv":[
   {sig:"Lire une image / un antécédent",

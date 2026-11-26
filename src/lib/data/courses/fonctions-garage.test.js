@@ -2,14 +2,14 @@ import { describe, it, expect } from 'vitest';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { courseById } from './index.js';
-import { DATASET_KAHANI } from './fonctions-garage-mv.js';
+import { DATASET_KAHANI, GARAGE_C3, GARAGE_C4 } from './fonctions-garage-mv.js';
 import { RECAP } from '../recap.js';
 import { COMP } from '../competences.js';
 import { BLOCS } from '../blocs.js';
 import { AUTO } from '../automatismes.js';
 import { VIZ } from '../../visualizations/registry.js';
 import { blocOfCourse } from '../../utils/course-helpers.js';
-import { KAHANI, price, table } from '../../utils/garages.js';
+import { KAHANI, GARAGE_B, price, table, crossing, cheaper, fromPoints } from '../../utils/garages.js';
 
 // Intégrité de la séquence « Les fonctions » (2P MV2, devis du garage de Kahani) :
 // 4 séances en tutoriel « comment faire », câblage (bloc, récap, compétences, automatismes),
@@ -20,12 +20,14 @@ const questions = steps.flatMap((st) => (st.q || []).map((q) => ({ ...q, step: s
 const textOf = (x) => JSON.stringify(x);
 
 describe('cours « Les fonctions » 2P MV2', () => {
-  it('lot 1 : existe pour la classe 2P MV2, avec les séances 1 et 2 du plan de séquence', () => {
+  it('existe pour la classe 2P MV2, avec les 4 séances du plan de séquence', () => {
     expect(c).toBeTruthy();
     expect(c.classe).toBe('2P MV2');
     expect(c.seances.map((s) => s.t)).toEqual([
       'Combien coûte la réparation ?',
-      'Le prix sur la courbe'
+      'Le prix sur la courbe',
+      'Deux garages, deux droites',
+      'Quel garage choisir ?'
     ]);
   });
 
@@ -56,8 +58,10 @@ describe('cours « Les fonctions » 2P MV2', () => {
     for (const st of steps.filter((s) => /^Étape \d/.test(s.t) || /^★/.test(s.t))) {
       expect(st.apport, `${st.se.t} / ${st.t}`).toBeTruthy();
     }
-    expect(c.seances[0].steps.filter((s) => /^Étape/.test(s.t))).toHaveLength(4);
+    expect(c.seances[0].steps.filter((s) => /^Étape/.test(s.t))).toHaveLength(5);
     expect(c.seances[1].steps.filter((s) => /^Étape/.test(s.t))).toHaveLength(3);
+    expect(c.seances[2].steps.filter((s) => /^Étape/.test(s.t))).toHaveLength(4);
+    expect(c.seances[3].steps.filter((s) => /^Étape/.test(s.t))).toHaveLength(4);
   });
 
   it('questions ouvertes : réponses courtes bien formées, jamais de texte à trous', () => {
@@ -136,6 +140,73 @@ describe('corrigés cohérents avec les prix', () => {
   });
 });
 
+describe('séances 3 et 4 : deux garages, deux droites', () => {
+  const ans = (start) => {
+    const found = questions.filter((q) => q.n >= 2 && q.q.startsWith(start));
+    expect(found.length, start).toBeGreaterThan(0);
+    return found.map((q) => q.a);
+  };
+  it('garage B : 40 € par heure sans diagnostic ; point de croisement 1,5 h = 60 €', () => {
+    expect(GARAGE_B).toMatchObject({ fixe: 0, heure: 40 });
+    expect(table(GARAGE_B, [0, 1, 2, 3, 4, 5]).map(([, p]) => p)).toEqual([0, 40, 80, 120, 160, 200]);
+    expect(crossing(KAHANI, GARAGE_B)).toBe(1.5);
+    expect(price(KAHANI, 1.5)).toBe(60);
+    expect(price(GARAGE_B, 1.5)).toBe(60);
+    expect(cheaper(KAHANI, GARAGE_B, 1)).toBe(GARAGE_B);
+    expect(cheaper(KAHANI, GARAGE_B, 3)).toBe(KAHANI);
+    expect(cheaper(KAHANI, GARAGE_B, 1.5)).toBe('egal');
+  });
+  it('séance 3 : tableau du garage B, coefficient directeur, ordonnée à l’origine', () => {
+    expect([1, 2, 3, 4, 5].map((h) => ans(`Garage B, prix pour ${h} h`)[0])).toEqual([40, 80, 120, 160, 200]);
+    expect(ans('Garage de Kahani : coefficient directeur')[0]).toBe(30);
+    expect(ans('Garage de Kahani : ordonnée')[0]).toBe(15);
+    expect(ans('Garage B : coefficient directeur')[0]).toBe(40);
+    expect(ans('Garage B : ordonnée')[0]).toBe(0);
+    expect(ans('Garage B : Q(h) = 40 × h. Calcule Q(3)')[0]).toBe(120);
+  });
+  it('séance 3 : garage C (0 h → 20 €, 1 h → 45 €)', () => {
+    expect(GARAGE_C3).toEqual({ fixe: 20, heure: 25 });
+    expect(ans('Un garage C annonce')[0]).toBe(25);
+    expect(ans('Son ordonnée')[0]).toBe(20);
+  });
+  it('séance 3 : les choix de garage suivent les prix (1 h → B, 3 h → Kahani)', () => {
+    const q1 = questions.find((q) => q.q.startsWith('Avant de calculer, donne ton idée : pour 1 heure'));
+    expect(q1.a).toContain('b');
+    const q3 = questions.find((q) => q.q.startsWith('Un client veut 3 heures'));
+    expect(q3.a).toContain('kahani');
+    const near = questions.find((q) => q.q.startsWith('Entre les deux garages'));
+    expect(Math.abs(near.a - crossing(KAHANI, GARAGE_B))).toBeLessThanOrEqual(near.tol);
+  });
+  it('séance 4 : lecture du croisement, vérification, décision et bilan du garage C', () => {
+    expect(ans('Lis à peu près le point de croisement')[0]).toBe(crossing(KAHANI, GARAGE_B));
+    expect(ans('Et quel prix à peu près')[0]).toBe(price(KAHANI, 1.5));
+    expect(ans('Calcule P(1,5)')[0]).toBe(60);
+    expect(ans('Calcule Q(1,5)')[0]).toBe(60);
+    expect(ans('Pour quelle valeur de h')[0]).toBe(crossing(KAHANI, GARAGE_B));
+    expect(ans('Client 2')[0]).toBe(60);
+    expect(ans('Combien le client 3 économise')[0]).toBe(price(GARAGE_B, 3) - price(KAHANI, 3));
+    expect(GARAGE_C4).toEqual({ fixe: 30, heure: 20 });
+    expect(fromPoints([0, 30], [1, 50])).toEqual(GARAGE_C4);
+    expect(ans('Garage C : coefficient directeur')[0]).toBe(20);
+    expect(ans('Garage C : ordonnée')[0]).toBe(30);
+    expect(ans('Écris l’expression R(h)')[0]).toBe(110);
+    expect(ans('Un client a 130')[0]).toBe(5);
+  });
+  it('le tableau de la calculatrice de l’étape 3 de la séance 4 est exact', () => {
+    const st = c.seances[3].steps.find((s) => /^Étape 3/.test(s.t));
+    const hs = [0.5, 1, 1.5, 2, 2.5, 3];
+    expect(st.doc.r[0].slice(1)).toEqual(hs.map((h) => String(price(KAHANI, h))));
+    expect(st.doc.r[1].slice(1)).toEqual(hs.map((h) => String(price(GARAGE_B, h))));
+  });
+  it('la figure du tarif affiche les deux garages (vd.sansAutre absent)', () => {
+    for (const n of [2, 3]) {
+      const v = c.seances[n].steps.find((s) => s.viz === 'tarif');
+      expect(v, c.seances[n].t).toBeTruthy();
+      expect(v.vd?.sansAutre).toBeFalsy();
+    }
+  });
+});
+
 describe('câblage du module Fonctions (2P MV2)', () => {
   it('le bloc mv-fonctions porte la séquence ; la suite a son propre bloc', () => {
     const b = BLOCS.find((x) => x.id === 'mv-fonctions');
@@ -175,7 +246,7 @@ describe('câblage du module Fonctions (2P MV2)', () => {
       expect(k.c.length).toBeGreaterThan(0);
       expect(k.comm && k.commA).toBeTruthy();
     });
-    expect(RECAP['fonctions-garage-mv'].length).toBeGreaterThanOrEqual(3);
+    expect(RECAP['fonctions-garage-mv'].length).toBeGreaterThanOrEqual(5);
   });
 
   it('la suite du module garde des compétences alignées sur ses 4 séances (pneu, affine, variations, carré)', () => {
