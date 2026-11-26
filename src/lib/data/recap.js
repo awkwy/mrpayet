@@ -239,6 +239,12 @@ export const RECAP = {
   {sig:"Écrire la phrase récap d'une série",
    met:"Une phrase qui dit l'<b>effectif total</b>, l'<b>effectif</b> et le <b>pourcentage</b>.",ex:"Sur 20 situations, 8 sont des disputes : cela fait 40 % des situations.",pg:"Donner un pourcentage sans dire sur combien de situations."}
  ],
+ "ap-chances-aepe":[
+  {sig:"Dire une chance de trois façons",
+   met:"fraction → nombre décimal → pourcentage (× 100). 50 % = 1 sur 2, 25 % = 1 sur 4, 10 % = 1 sur 10.",ex:"3 sur 5 = 0,6 = 60 %",pg:"Oublier de multiplier par 100, ou donner 0,6 % pour 0,6."},
+  {sig:"Arrondir au centième et comparer des chances",
+   met:"Garder 2 chiffres après la virgule : le 3<sup>e</sup> décide. Comparer les pourcentages ; écart = grand nombre − petit nombre.",ex:"1 sur 6 = 0,1666… ≈ 0,17 = 17 %",pg:"Arrondir vers le bas quand le 3<sup>e</sup> chiffre est 5 ou plus."}
+ ],
  "ap-stats-tcapm":[
   {sig:"Calculer une moyenne",
    met:"Moyenne = <span class='fr'><span>somme des nombres</span><span>nombre de nombres</span></span>. Avec des effectifs : multiplier chaque nombre par son effectif avant d'additionner.",ex:"10 min (2 fois), 20 min (2 fois), 30 min (1 fois) : 90 sur 5 rendez-vous = 18 min.",pg:"Une moyenne hors de l'intervalle entre le plus petit et le plus grand nombre est forcément fausse."},
@@ -327,7 +333,11 @@ export const RECAP = {
   {sig:"Compter les issues de deux tirages",
    met:"arbre ou tableau à double entrée ; nombre total = produit des possibilités.",ex:"3 activités × 6 faces = 18",pg:"Additionner (3 + 6) au lieu de multiplier."},
   {sig:"Estimer une probabilité à partir de lancers",
-   met:"répéter un grand nombre de fois ; la fréquence se stabilise vers la probabilité.",ex:"2000 lancers, 1010 face → 0,505 ≈ 0,5",pg:"Conclure sur 20 lancers (la fréquence fluctue encore beaucoup)."}
+   met:"répéter un grand nombre de fois ; la fréquence se stabilise vers la probabilité.",ex:"2000 lancers, 1010 face → 0,505 ≈ 0,5",pg:"Conclure sur 20 lancers (la fréquence fluctue encore beaucoup)."},
+  {sig:"Simuler avec la calculatrice (deux lancers)",
+   met:"Taper <b>randint(1,2)</b> (1 = soleil, 2 = lune), EXE deux fois pour une paire ; noter, compter, puis calculer les fréquences. Beaucoup de paires : la fréquence se calme près de la probabilité.",ex:"20 paires : 4 « deux soleils » → 4 sur 20 = 0,2 ; avec 1000 paires, près de 0,25.",pg:"Conclure sur 20 paires seulement."},
+  {sig:"Lister les résultats de deux lancers",
+   met:"Tableau à double entrée : un lancer par ligne, un par colonne. Probabilité = <span class='fr'><span>cas gagnants</span><span>cas possibles</span></span>.",ex:"Deux lancers de jeton : 4 paires, P(SS) = 1 sur 4 = 0,25 ; au moins un soleil : 3 sur 4 = 0,75.",pg:"Compter SL et LS comme une seule paire."}
  ],
  "probas-apmp":[
   {sig:"Calculer une probabilité (tirage au sort)",

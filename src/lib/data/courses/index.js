@@ -54,6 +54,7 @@ import commerceMcvtle from './commerce-mcvtle.js';
 import statsStageTcapm from './stats-stage-tcapm.js';
 import registreMediationTcapm from './registre-mediation-tcapm.js';
 import apStatsTcapm from './ap-stats-tcapm.js';
+import apChancesAepe from './ap-chances-aepe.js';
 import sondageTcapm from './sondage-tcapm.js';
 import moyenneTcapm from './moyenne-tcapm.js';
 import bilanStatsTcapm from './bilan-stats-tcapm.js';
@@ -119,7 +120,8 @@ export const COURSES = [
   sondageTcapm,
   moyenneTcapm,
   bilanStatsTcapm,
-  apDefisTcapm
+  apDefisTcapm,
+  apChancesAepe
 ];
 
 export function courseById(id) {
