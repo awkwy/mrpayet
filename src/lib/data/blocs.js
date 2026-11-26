@@ -1,7 +1,7 @@
 export const BLOCS = [
  // ---------- TC AEPE / TC APM — mathématiques ----------
  {id:"stat-cap",cls:["TC AEPE","TC APM"],dom:"Statistique et probabilités",
-  t:"Statistique à une variable",cours:{"TC AEPE":["stat-aepe"],"TC APM":["stats-stage-tcapm","registre-mediation-tcapm","sondage-tcapm","stat-apmp"]},
+  t:"Statistique à une variable",cours:{"TC AEPE":["stat-aepe"],"TC APM":["stats-stage-tcapm","registre-mediation-tcapm","sondage-tcapm","moyenne-tcapm","bilan-stats-tcapm","stat-apmp"]},
   flash:["mental","fractions","freq"]},
  {id:"proba-cap",cls:["TC AEPE","TC APM"],dom:"Statistique et probabilités",
   t:"Probabilités",cours:{"TC AEPE":["probas-aepe"],"TC APM":["probas-apmp"]},
@@ -24,7 +24,7 @@ export const BLOCS = [
   cours:{"TC APM":["calculs-commerciaux","interet-apmp"]},flash:["commerce","propor","mental"]},
  {id:"numeriques-cap",cls:["TC AEPE","TC APM"],dom:"Calculs numériques et automatismes",
   t:"Calculs numériques, automatismes",
-  cours:{"TC AEPE":["ap-consolidation","ap-fractions","ap-signes","fiche-outils"],"TC APM":["ap-consolidation-tcapmp","ap-fractions","ap-signes","ap-stats-tcapm"]},
+  cours:{"TC AEPE":["ap-consolidation","ap-fractions","ap-signes","fiche-outils"],"TC APM":["ap-consolidation-tcapmp","ap-fractions","ap-signes","ap-stats-tcapm","ap-defis-tcapm"]},
   flash:["mental","signes","fractions","propor"],transversal:true},
 
  // ---------- TC AEPE / TC APM — physique-chimie (programme commun) ----------

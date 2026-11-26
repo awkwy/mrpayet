@@ -55,6 +55,9 @@ import statsStageTcapm from './stats-stage-tcapm.js';
 import registreMediationTcapm from './registre-mediation-tcapm.js';
 import apStatsTcapm from './ap-stats-tcapm.js';
 import sondageTcapm from './sondage-tcapm.js';
+import moyenneTcapm from './moyenne-tcapm.js';
+import bilanStatsTcapm from './bilan-stats-tcapm.js';
+import apDefisTcapm from './ap-defis-tcapm.js';
 
 export const COURSES = [
   securiteElectrique,
@@ -113,7 +116,10 @@ export const COURSES = [
   statsStageTcapm,
   registreMediationTcapm,
   apStatsTcapm,
-  sondageTcapm
+  sondageTcapm,
+  moyenneTcapm,
+  bilanStatsTcapm,
+  apDefisTcapm
 ];
 
 export function courseById(id) {
