@@ -110,8 +110,11 @@ describe('Fonctions 2P MV2 : séquence « Les fonctions » (novembre) puis suite
     expect(weekMonday(f.from).toISOString().slice(0, 10)).toBe('2026-11-16');
     expect(weekOf(new Date('2026-11-18T10:00:00'))).toBe(13);
   });
-  it('aucune date n’est inventée au-delà des séances 1 et 2 : une seule fenêtre, sans verrou propre à une séance', () => {
-    expect(PROGRESSION.filter((p) => p.blocId === 'mv-fonctions')).toHaveLength(1);
+  it('les séances 3 et 4 (mercredi 25/11/2026) tombent en semaine 14 : une seule fenêtre 13-14, sans verrou propre à une séance', () => {
+    const f = PROGRESSION.filter((p) => p.blocId === 'mv-fonctions');
+    expect(f).toHaveLength(1);
+    expect(f[0].to).toBe(14);
+    expect(weekOf(new Date('2026-11-25T10:00:00'))).toBe(14);
     const c = courseById('fonctions-garage-mv');
     for (let n = 0; n < c.seances.length; n++) expect(chapterLock(c, n, 13)).toBeNull();
   });

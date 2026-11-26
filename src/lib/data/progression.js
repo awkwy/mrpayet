@@ -37,11 +37,10 @@ export const PROGRESSION = [
   { classe: '2P MV2', blocId: 'mv-stat', from: 4, to: 9 },
   { classe: '2P MV2', blocId: 'mv-proba', from: 10, to: 16 },
   { classe: '2P MV2', blocId: 'mv-degre1', from: 21, to: 23 },
-  // Fonctions, séquence « Les fonctions » (devis du garage de Kahani, 4 séances),
-  // avancée à la demande du capitaine : séances 1 et 2 le mercredi 18/11/2026
-  // (semaine 13) ; séances 3 et 4 à placer (semaines 14 à 16 actives) : seule la
-  // date connue est écrite ici, la fenêtre sera étendue quand elles seront datées.
-  { classe: '2P MV2', blocId: 'mv-fonctions', from: 13, to: 13 },
+  // Fonctions, séquence « Les fonctions » (devis du garage de Kahani, 4 séances) :
+  // séances 1 et 2 le mercredi 18/11/2026 (semaine 13), séances 3 et 4 le
+  // mercredi 25/11/2026 (semaine 14).
+  { classe: '2P MV2', blocId: 'mv-fonctions', from: 13, to: 14 },
   // Suite du module (variations, extremums, fonction carré) : « mars-avril, après le
   // devoir commun » (Progression_2PMV2_maths.md). Les semaines 24-26 sont la PFMP1 et
   // 27-28 les vacances de Carnaval : le module ne peut pas y être. Semaine 30 = lundi
@@ -51,12 +50,13 @@ export const PROGRESSION = [
 
   // ---------- 2P MV2 — physique-chimie ----------
   // Physique_2PMV2_progression_BO2019.md prévoit Mécanique, Thermique,
-  // Chimie, Acoustique, Optique — mais ces modules n'ont pas encore de
-  // cours ni de bloc en ligne pour 2P MV2 (seul « Sécurité électrique »,
-  // mv-pc-secu, est porté ; les blocs pc-* du programme BO2019 CAP
-  // couvrent TC AEPE/TC APM, pas 2P MV2, qui suit le programme bac pro).
-  // Pas d'entrée ici tant que ce contenu n'existe pas côté site — mieux
-  // vaut ne rien afficher qu'un lien mort.
+  // Chimie, Acoustique, Optique. Portés en ligne pour 2P MV2 : « Sécurité
+  // électrique » (mv-pc-secu, sans entrée ici) et « Décrire le mouvement »
+  // (mv-pc-meca, séances du 12/11 au 05/12/2026 = semaines 12 à 15 ; la séance
+  // « distance d'arrêt » est la dernière, le 05/12). Les autres modules n'ont
+  // pas encore de cours : pas d'entrée tant que ce contenu n'existe pas côté
+  // site — mieux vaut ne rien afficher qu'un lien mort.
+  { classe: '2P MV2', blocId: 'mv-pc-meca', from: 12, to: 15 },
 
   // ---------- TC AEPE — maths (Progression_TCAEPE_maths.md) ----------
   { classe: 'TC AEPE', blocId: 'degre1-cap', from: 2, to: 3, note: 'déjà fait — « décider sous contrainte »' },
