@@ -80,6 +80,10 @@ export const PROGRESSION = [
   { classe: 'TC APM', blocId: 'commerce-cap', from: 10, to: 12 },
   // Ouverture avancée au mardi 27/10 (semaine 10, choix du capitaine) : « Mon stage en chiffres »,
   // puis le registre de la médiation et le sondage ; la fin du module reste en semaines 13-16.
+  // Semaine 15 (lundi 30/11/2026) : séance 5 « la moyenne » (liste puis tableau d'effectifs, mardi
+  // 1/12, 2 heures), séance 6 « bilan sur 20 + trace écrite » (jeudi 3/12) et l'AP « trois défis
+  // chiffrés » (samedi 5/12) ; la semaine 16 reste réservée à la reprise. Le contenu s'ouvre
+  // deux semaines avant `from`, donc dès la semaine 8 : une seule fenêtre pour tout le bloc.
   { classe: 'TC APM', blocId: 'stat-cap', from: 10, to: 16 },
   { classe: 'TC APM', blocId: 'proba-cap', from: 21, to: 23 },
   { classe: 'TC APM', blocId: 'fonctions-cap', from: 24, to: 26 },

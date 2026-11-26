@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300" font-family="Helvetica, Arial, sans-serif" font-size="14" role="img" aria-labelledby="t d"><title id="t">Comment les élèves rentrent ?</title><desc id="d">20 élèves interrogés : le bus 180°, à pied 108°, en voiture (déposé) 72°.</desc><rect width="300" height="300" fill="#fff"/>
+<path d="M150,150 L150.0,30.0 A120,120 0 0 1 150.0,270.0 Z" fill="#cfe9d9" stroke="#222" stroke-width="2"/>
+<text x="219.6" y="146.0" text-anchor="middle" font-weight="bold" fill="#111">180°</text><text x="219.6" y="163.0" text-anchor="middle" font-size="12" fill="#111">le bus</text>
+<path d="M150,150 L150.0,270.0 A120,120 0 0 1 35.9,112.9 Z" fill="#fff" stroke="#222" stroke-width="2"/>
+<text x="93.7" y="186.9" text-anchor="middle" font-weight="bold" fill="#111">108°</text><text x="93.7" y="203.9" text-anchor="middle" font-size="12" fill="#111">à pied</text>
+<path d="M150,150 L35.9,112.9 A120,120 0 0 1 150.0,30.0 Z" fill="#e0e0e0" stroke="#222" stroke-width="2"/>
+<text x="109.1" y="89.7" text-anchor="middle" font-weight="bold" fill="#111">72°</text><text x="109.1" y="106.7" text-anchor="middle" font-size="12" fill="#111">voiture</text>
+</svg>

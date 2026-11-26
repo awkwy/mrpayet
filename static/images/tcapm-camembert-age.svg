@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300" font-family="Helvetica, Arial, sans-serif" font-size="14" role="img" aria-labelledby="t d"><title id="t">Les visiteurs de la mairie par âge</title><desc id="d">40 visiteurs : moins de 25 ans 90°, 25 à 60 ans 180°, plus de 60 ans 90°.</desc><rect width="300" height="300" fill="#fff"/>
+<path d="M150,150 L150.0,30.0 A120,120 0 0 1 270.0,150.0 Z" fill="#cfe9d9" stroke="#222" stroke-width="2"/>
+<text x="199.2" y="96.8" text-anchor="middle" font-weight="bold" fill="#111">90°</text><text x="199.2" y="113.8" text-anchor="middle" font-size="12" fill="#111">moins de 25 ans</text>
+<path d="M150,150 L270.0,150.0 A120,120 0 0 1 30.0,150.0 Z" fill="#fff" stroke="#222" stroke-width="2"/>
+<text x="150.0" y="215.6" text-anchor="middle" font-weight="bold" fill="#111">180°</text><text x="150.0" y="232.6" text-anchor="middle" font-size="12" fill="#111">25 à 60 ans</text>
+<path d="M150,150 L30.0,150.0 A120,120 0 0 1 150.0,30.0 Z" fill="#e0e0e0" stroke="#222" stroke-width="2"/>
+<text x="100.8" y="96.8" text-anchor="middle" font-weight="bold" fill="#111">90°</text><text x="100.8" y="113.8" text-anchor="middle" font-size="12" fill="#111">plus de 60 ans</text>
+</svg>

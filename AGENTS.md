@@ -262,6 +262,12 @@ pour l'enseignant équipé, sans bloquer celui qui ne l'est pas.
   `http://127.0.0.1` ; pour voir une manipulation à 390 px, construire un bundle IIFE à part (Vite +
   `@sveltejs/vite-plugin-svelte`, alias `$lib`) et l'ouvrir en `file://`.
 
+- Semaines 15 (déc. 2026) : `moyenne-tcapm` (séance 5, liste puis tableau d'effectifs +
+  NumWorks), `bilan-stats-tcapm` (séance 6, bilan sur 20 + trace) et `ap-defis-tcapm` (AP,
+  bloc `numeriques-cap`) ; camemberts en SVG statiques `static/images/tcapm-camembert-*.svg`.
+  **Piège** : les champs `txt` d'une étape sont du texte brut (un `<b>` s'y affiche tel quel) ;
+  seuls `apport`, `trace` et `doc` acceptent du HTML.
+
 ## Jeu du pendu
 
 - Route `/jeux/pendu` (page unique, lien depuis l'accueil). Mots par thème dans

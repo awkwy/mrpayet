@@ -261,6 +261,38 @@ export const RECAP = {
   {sig:"Conclure un sondage",
    met:"Réponse chiffrée à la question de départ, <b>limites</b> du sondage, action de prévention proposée.",ex:"60 % participeraient à une journée de nettoyage : une journée de découverte de la mangrove.",pg:"Oublier de dire ce que le sondage ne prouve pas."}
  ],
+ "moyenne-tcapm":[
+  {sig:"Calculer la moyenne d'une liste de nombres (jours, situations…)",
+   met:"1) j'additionne tous les nombres (le <b>total</b>) ; 2) je compte les jours (l'<b>effectif total</b>) ; 3) <span class='fr'><span>total</span><span>effectif total</span></span>.",ex:"6 + 4 + 8 + 5 + 7 = 30 ; 30 sur 5 jours = 6 situations par jour.",pg:"Prendre le total pour la moyenne, ou compter 35 (30 + 5) au lieu de partager."},
+  {sig:"Contrôler une moyenne",
+   met:"Une moyenne est toujours <b>entre le plus petit et le plus grand</b> nombre de la liste.",ex:"Nombres 3, 5 et 9 : une moyenne de 10 est impossible.",pg:"Ne pas vérifier : une moyenne hors de l'intervalle signale une erreur de calcul."},
+  {sig:"Calculer le total avec un tableau d'effectifs",
+   met:"Sur chaque ligne : <b>valeur × effectif</b>. Puis j'additionne toutes les lignes. L'effectif total est l'addition de la colonne des effectifs.",ex:"0 × 4 + 1 × 6 + 2 × 7 + 3 × 3 = 0 + 6 + 14 + 9 = 29 situations en 20 jours.",pg:"Additionner les valeurs sans les multiplier par leurs effectifs."},
+  {sig:"Calculer la moyenne d'un tableau d'effectifs, avec la NumWorks",
+   met:"Moyenne = <span class='fr'><span>total (valeur × effectif)</span><span>effectif total</span></span>. NumWorks, Statistiques : valeurs en V1, effectifs en N1 ; onglet Stats : effectif total et moyenne. Comparer l'effectif total à mon tableau.",ex:"29 sur 20 jours = 1,45 situation par jour (la NumWorks écrit 1.45).",pg:"N1 resté à 1 : la moyenne est celle des valeurs sans leurs effectifs."},
+  {sig:"Écrire une phrase avec la moyenne",
+   met:"« En moyenne, il y a … par jour … » : le nombre, l'unité, le lieu. La moyenne est un résumé, pas un vrai jour.",ex:"En moyenne, il y a 1,45 situation par jour au CDI.",pg:"Dire « chaque jour, il y a exactement 1,45 situation »."}
+ ],
+ "bilan-stats-tcapm":[
+  {sig:"Calculer un pourcentage à partir d'un effectif et d'un effectif total",
+   met:"<span class='fr'><span>partie</span><span>total</span></span> puis sur 100. Si le total divise 100 (25 × 4 = 100), je multiplie la partie par le même nombre.",ex:"12 sur 25 : 12 × 4 = 48, donc 48 %.",pg:"Écrire la fréquence (0,48) au lieu du pourcentage (48 %)."},
+  {sig:"Lire un diagramme circulaire (camembert)",
+   met:"Un tour = 360°. 180° = la moitié = 50 %, 90° = un quart = 25 %, 36° = 10 %. Nombre de personnes = pourcentage du total.",ex:"72° = 20 % ; 30 % de 20 élèves = 6 élèves.",pg:"Confondre l'angle (72) avec le pourcentage."},
+  {sig:"Calculer la moyenne de cinq jours et la contrôler",
+   met:"<span class='fr'><span>total</span><span>effectif total</span></span> ; elle est entre le plus petit et le plus grand nombre.",ex:"12 + 8 + 10 + 15 + 5 = 50 ; 50 sur 5 = 10 élèves par jour.",pg:"Croire que la moyenne est le plus grand nombre."},
+  {sig:"Décider avec une phrase qui contient le nombre qui prouve",
+   met:"Un choix, le nombre qui le prouve, la raison.",ex:"Surveillant à la pause de midi, car 12 situations sur 25 (48 %) ont lieu là.",pg:"Répondre sans le nombre."}
+ ],
+ "ap-defis-tcapm":[
+  {sig:"Trouver les pourcentages d'un tableau dont le total divise 100",
+   met:"Je cherche par combien multiplier le total pour arriver à 100, puis je multiplie chaque partie par ce nombre. Le dernier pourcentage se trouve aussi par 100 − les autres.",ex:"25 × 4 = 100 : 10 × 4 = 40 %, 8 × 4 = 32 %, et 100 − 40 − 32 = 28 %.",pg:"Ne pas vérifier que les pourcentages font 100 % ensemble."},
+  {sig:"Calculer une moyenne et la comparer à un jour",
+   met:"<span class='fr'><span>total</span><span>effectif total</span></span> ; l'écart avec un jour est une soustraction.",ex:"60 sur 5 = 12 visiteurs par jour ; jeudi 16 − 12 = 4 de plus.",pg:"Soustraire dans le mauvais sens."},
+  {sig:"Calculer la moyenne d'un tableau d'effectifs et la vérifier",
+   met:"Total = valeur × effectif sur chaque ligne, puis j'additionne ; moyenne = total sur effectif total. NumWorks : V1 = valeurs, N1 = effectifs.",ex:"100 minutes pour 10 personnes : 10 minutes d'attente en moyenne.",pg:"N1 resté à 1 : l'effectif total de la NumWorks n'est pas celui du tableau."},
+  {sig:"Lire un camembert pour trouver un pourcentage et un nombre de visiteurs",
+   met:"Un tour = 360° ; 90° = 25 %, 180° = 50 %. Nombre de visiteurs = pourcentage du total.",ex:"50 % de 40 visiteurs = 20 visiteurs.",pg:"Prendre l'angle pour un nombre de visiteurs."}
+ ],
  "stat-apmp":[
   {sig:"Calculer une fréquence",
    met:"fréquence = effectif de la catégorie ÷ effectif total.",ex:"21 interventions sur 60 → 21 ÷ 60 = 0,35 = 35 %",pg:"Diviser par le mauvais total, ou oublier de convertir en %."},
