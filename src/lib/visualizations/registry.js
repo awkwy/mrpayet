@@ -61,6 +61,7 @@ import phrase from './phrase.svelte';
 import batonsDessin from './batons-dessin.svelte';
 import depouillement from './depouillement.svelte';
 import saisieErreur from './saisie-erreur.svelte';
+import deuxlancers from './deuxlancers.svelte';
 
 export const VIZ = {
   triSerie, bilanTableau, boitesEquipes, phraseMv, autotest, sigma, convertisseur, registreMv, bac,
@@ -70,5 +71,6 @@ export const VIZ = {
   stabilisation, batons, moypond, ph, interet, onde, propor, courbe, geo, pyth,
   db, chauffe, force, refraction, rgb, interval, affine, parabole, agrandir, poly2, ensembles,
   multimetre, arrondiDecision,
-  registre, frequence, convertir, moissuivant, phrase, batonsDessin, depouillement, saisieErreur
+  registre, frequence, convertir, moissuivant, phrase, batonsDessin, depouillement, saisieErreur,
+  deuxlancers
 };

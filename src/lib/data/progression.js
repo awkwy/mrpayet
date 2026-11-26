@@ -61,7 +61,9 @@ export const PROGRESSION = [
   // ---------- TC AEPE — maths (Progression_TCAEPE_maths.md) ----------
   { classe: 'TC AEPE', blocId: 'degre1-cap', from: 2, to: 3, note: 'déjà fait — « décider sous contrainte »' },
   { classe: 'TC AEPE', blocId: 'stat-cap', from: 4, to: 7 },
-  { classe: 'TC AEPE', blocId: 'proba-cap', from: 13, to: 16 },
+  // Séquence « Les probabilités » : séances 1-2 semaine 13 (16-20/11), séance 3 (mar. 01/12)
+  // et séance 4 bilan (jeu. 03/12) semaine 15 (30/11 = 24/08 + 14 semaines).
+  { classe: 'TC AEPE', blocId: 'proba-cap', from: 13, to: 15 },
   { classe: 'TC AEPE', blocId: 'propor-cap', from: 21, to: 23 },
   { classe: 'TC AEPE', blocId: 'fonctions-cap', from: 24, to: 26 },
   { classe: 'TC AEPE', blocId: 'geo-cap', from: 29, to: 29 },

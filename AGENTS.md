@@ -315,6 +315,15 @@ pour l'enseignant équipé, sans bloquer celui qui ne l'est pas.
   un `npm run build` → relancer le serveur ; ne pas utiliser `pkill -f "vite
   preview"` dans la même commande shell (il tue le shell).
 
+## Probabilités TC AEPE (séances 4-5 de `probas-aepe`, AP `ap-chances-aepe`)
+
+- Les séances 3-4 de la séquence du projet `cours` (jeton soleil-lune, bilan) sont les séances 4 et 5 du
+  cours `probas-aepe` ; la manipulation `deuxlancers` (logique pure testée dans `utils/deux-lancers.js`)
+  remplace la NumWorks `randint(1,2)` pour qui n'a pas de calculatrice (pattern « Avec / Sans matériel »).
+  Pas d'écran NumWorks `randint` dans `lib/numworks/` : le menu est décrit dans l'`apport`, « à confirmer ».
+- Vérification visuelle sans loopback : script CDP qui sert `build/` sous un faux hôte via
+  `Fetch.fulfillRequest` (voir « Contenu 2P MV2 récent »).
+
 ## Maintaining this file
 
 Keep this file for knowledge useful to almost every future agent session in this project.
